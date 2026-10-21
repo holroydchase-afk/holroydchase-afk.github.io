@@ -14,6 +14,7 @@ GITHUB = "https://github.com/holroydchase-afk"
 NAV = [
     ("index.html", "Work"),
     ("pm-tools.html", "How I work"),
+    ("resume.html", "Resume"),
     ("about.html", "About"),
 ]
 
@@ -252,6 +253,65 @@ about = f"""<div class="read">
 <p>I'm looking for a senior or staff product role, remote. The best way to reach me is <a href="{LINKEDIN}">LinkedIn</a>.</p>
 </div>"""
 
+# Resume: mirrors pmo/story/resume-2026-10.md (Oct 2026). Never add phone or email; LinkedIn is the contact route.
+JOBS = [
+    ("Staff Product Manager", "Patter AI", "Jan 2023 – Jan 2026 · Remote", [
+        "Real-time pricing engine across loans, leases and PPAs for 4 clients.",
+        "Rep-guided checkout showing the payment impact of each add-on.",
+        "AI conversation analysis found 40% of a client's reps deviating from scripts; coaching went from about 4 a month to about 1 a day.",
+        # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
+        "Lender onboarding cut from about a month to about a week with a rules engine; 5 lenders integrated.",
+    ]),
+    ("Senior Product Manager", "ADT", "Nov 2021 – Jan 2023", [
+        "Credit-check and offer engine across 5 lenders, 12,000+ applications a month, during 110% YoY sales growth.",
+        "Lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) used to cut dealer fees 3–5 points.",
+        "Channel-partner platform with redline and tiered pricing, Power BI reporting, 4+ partners.",
+        "Technical lead for the Lowe's in-store solar and security program.",
+        "Post-merger integration scaling to 400,000+ consultations a year, with releases to about 5,000 reps' iPads.",
+    ]),
+    ("Product Manager", "ADT", "Oct 2020 – Nov 2021", [
+        "Rep-guided checkout for complex solar products that cut contract review about 60%.",
+        "First PM for the 3,000-person solar division.",
+    ]),
+    ("Product Owner", "AGDATA", "Jun – Oct 2020", [
+        "Discovery for an MDM platform to consolidate 8+ legacy pricing and rebate systems (Bayer, among others).",
+    ]),
+    ("Founder", "Bigfoot Energy", "Oct 2019 – Jun 2020 · Charleston, WV", [
+        "Smart-home and clean-energy company.",
+    ]),
+    ("Director of Product", "Palmetto", "Jan – Jun 2019", [
+        "Machine-learning lead marketplace on about 300 data points, 11,500+ consultations a month.",
+    ]),
+    ("Senior Product Manager", "Palmetto", "Feb 2018 – Jan 2019", [
+        "Built Alchemy (design, point of sale and project management), integrating GoodLeap and Sunlight into real-time credit.",
+        "Supported a $6M venture round.",
+    ]),
+    ("Product Manager", "Palmetto", "Jun 2017 – Feb 2018", [
+        "First PM: sales enablement platform; digitized pricing models.",
+    ]),
+    ("Senior Solar Engineer", "Palmetto", "Feb 2016 – Jun 2017", [
+        "Designed 2,000+ PV systems; virtual surveys replaced 75% of site visits, saving $80K a year.",
+    ]),
+]
+
+resume = f"""<div class="read resume">
+<p class="eyebrow">Resume · Charlotte, NC · open to remote roles</p>
+<h1>Chase Holroyd</h1>
+<p class="lede">Staff Product Manager · Pricing, Payments &amp; Point-of-Sale Lending</p>
+<p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 13+ lender integrations; a credit and offer engine at 12,000+ applications a month; lender allocation that cut dealer fees 3–5 points.</p>
+<p class="contact">Contact: <a href="{LINKEDIN}">linkedin.com/in/chase-holroyd</a> · Site: chaseholroyd.com</p>
+<h2>Experience</h2>
+""" + "".join(
+    f'<section class="job"><h3>{t}, {c}</h3><p class="when">{d}</p><ul class="clean">'
+    + "".join(f"<li>{b}</li>" for b in bullets) + "</ul></section>"
+    for t, c, d, bullets in JOBS
+) + """
+<h2>Education</h2>
+<p>B.A., Sustainable Design, West Virginia University, 2014.</p>
+<h2>Skills</h2>
+<p>Pricing and payments, lending, product strategy, AI/ML (LLMs, RAG, multi-agent orchestration, conversation intelligence), APIs, rules engines, SQL, Figma.</p>
+</div>"""
+
 notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't here.</h1>
 <p class="lede">It may have moved. The <a href="index.html">work page</a> lists everything.</p></div>"""
 
@@ -262,6 +322,7 @@ PAGES = [
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with a playful energy scan.", energy),
     ("pm-tools.html", "How I work", "The tools and rituals behind a one-person product studio.", pm_tools),
+    ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
     ("about.html", "About", "Chase Holroyd's path from solar design to product management and AI.", about),
     ("404.html", "Not found", "Page not found.", notfound),
 ]
