@@ -147,7 +147,7 @@ role_radar = product(
 )
 
 ccwatts = product(
-    "Developer tool · in development",
+    "Developer tool · playground live",
     "ccwatts",
     "AI use has an electricity cost, and almost nobody can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.",
     [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
@@ -160,7 +160,7 @@ ccwatts = product(
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
         ("Stack", "<p>A TypeScript monorepo with one shared core used by both the CLI (<code>npx ccwatts</code>) and an offline HTML dashboard.</p>"),
     ],
-    links=[("View on GitHub", f"{GITHUB}/ccwatts")],
+    links=[("Try the playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
 )
 
 energy = product(

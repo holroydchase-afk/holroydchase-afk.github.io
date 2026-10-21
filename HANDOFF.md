@@ -2,11 +2,12 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21
+Last updated: 2026-10-21 (repo renamed to holroydchase-afk.github.io)
 
 ## Current state
-- **Live** on GitHub Pages at https://holroydchase-afk.github.io/portfolio/ (deploys on every push to `main` via `.github/workflows/pages.yml`).
-- **Custom domain:** DNS is set at Porkbun (Chase, Oct 21). Still waiting on Chase to type `chaseholroyd.com` under Settings → Pages → Custom domain and tick Enforce HTTPS. Actions deploys ignore the `CNAME` file, so the domain must be set there.
+- **Live** at https://chaseholroyd.com. The repo is `holroydchase-afk/holroydchase-afk.github.io` (renamed from `portfolio` on Oct 21), so it is the account's user site and other repos' Pages sites appear at chaseholroyd.com/<repo>, e.g. the ccwatts playground at /ccwatts/. Deploys run on every push to `main` via `.github/workflows/pages.yml`.
+- Don't add a top-level folder named after another repo with Pages on (e.g. `ccwatts/`); it would hide that repo's site.
+- **Custom domain:** DNS at Porkbun and the Pages custom domain are set (Chase, Oct 21). Actions deploys ignore the `CNAME` file; the domain lives in Settings → Pages.
 - **Pages:** Work (home), the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
 - **Demos** under `demo/`: Build Slate, Near-Term Roadmap, Role Radar and Energy Scanner, each running the real app on sample data saved only in the visitor's browser (`demo/fake-db.js` stands in for the artifact database).
 
@@ -30,6 +31,6 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
-- Chase: set the custom domain (above), then a single review pass of the pages.
+- Chase: a single review pass of the pages.
 - Hearth rename, then update `family-photos.html` copy.
 - Optional: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate.
