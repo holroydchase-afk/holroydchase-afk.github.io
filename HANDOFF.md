@@ -2,7 +2,9 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (WEB-M2.5 resume page merged in PR #6)
+Last updated: 2026-10-21 (studio status file; Energy Scanner app is live)
+
+Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
 ## Current state
 - 2026-10-21: studio session rules installed: `.claude/settings.json` SessionStart hook prints this file into every Claude Code session, `.github/workflows/handoff-check.yml` fails a PR that changes files without updating this file, and CLAUDE.md has a "Session rules" section.
@@ -48,6 +50,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
+- ES-M2.3: the Energy Scanner app is live at chaseholroyd.com/energy-scanner/ (deployed Oct 21 23:32 UTC); point `energy-scanner.html` there instead of /demo/energy-scanner/.
 - Case studies (WEB-M2.3, M2.4) wait for Chase's [check] pass on Oct 22. Next without Chase: WEB-M3.1.
 - Removed a stray `shots/` folder of screenshots that PR #5 committed by mistake.
 - Chase: a single review pass of the pages.
