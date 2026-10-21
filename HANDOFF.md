@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (WEB-M2.5 resume page merged in PR #6)
+Last updated: 2026-10-21 (ES-M2.3 merged in PR #8)
 
 ## Current state
 - 2026-10-21: studio session rules installed: `.claude/settings.json` SessionStart hook prints this file into every Claude Code session, `.github/workflows/handoff-check.yml` fails a PR that changes files without updating this file, and CLAUDE.md has a "Session rules" section.
@@ -28,6 +28,7 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M3.1 | Outcomes and "what I'd do differently" on Role Radar and ccwatts pages | todo |
 | WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
 | WEB-M3.3 | Visit counter | dropped (no-analytics rule) |
+| ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | done (PR #8, Oct 21) |
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
@@ -39,8 +40,8 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 
 | Demo | Artifact | Snapshot version |
 |---|---|---|
-| energy-scanner | https://claude.ai/artifact/VphgM8fKNVhcDc31RVdBJr | 1792454453-b0d3 |
-| role-radar | https://claude.ai/artifact/YQFGobfPX9BKkv4yibcnsr | 1792568778-859e |
+| energy-scanner (legacy, unlinked since ES-M2.3; remove next release) | link in project memory | 1792454453-b0d3 |
+| role-radar | link in project memory | 1792568778-859e |
 
 ## Rules
 - Never publish Chase's phone or email. LinkedIn is the contact route.
@@ -48,6 +49,8 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
+- Who does what (Chase, Oct 21): the thread that owns a repo makes its changes. Product threads send the portfolio thread an intake for portfolio-repo changes; every portfolio change that touches a product gets a dated line in that product's HANDOFF.md, written by that product's thread.
+- After ES-M2.3 merges and one release passes: delete `demo/energy-scanner/` and `tools/demo-src/energy-scanner.html`.
 - Case studies (WEB-M2.3, M2.4) wait for Chase's [check] pass on Oct 22. Next without Chase: WEB-M3.1.
 - Removed a stray `shots/` folder of screenshots that PR #5 committed by mistake.
 - Chase: a single review pass of the pages.
