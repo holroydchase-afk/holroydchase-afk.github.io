@@ -1,7 +1,7 @@
 /* Layout: single reading column (max ~72ch) with a wider grid for product cards; sticky slim header. */
 :root{
   --bg:#F7F6F1; --surface:#FFFFFF; --ink:#16231D; --muted:#56645C; --line:#DCDFD6;
-  --accent:#1F5C44; --accent-ink:#FFFFFF; --sun:#D98A1E; --sun-soft:#FBEBD2;
+  --accent:#1F5C44; --accent-ink:#FFFFFF; --sun:#9A5B0B; --sun-soft:#FBEBD2;
   --f-display:"Fraunces", Georgia, serif;
   --f-body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -17,6 +17,9 @@
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--f-body)}
 a{color:var(--accent);text-underline-offset:3px}
+/* --sun is darkened in light mode so eyebrow text meets WCAG AA (5:1). */
+.skip{position:absolute;left:-999px;top:8px;z-index:10;padding:8px 14px;background:var(--surface);color:var(--ink);border-radius:6px}
+.skip:focus{left:16px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--sun);outline-offset:3px;border-radius:2px}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
 .read{max-width:72ch}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chaseholroyd.com/sitemap.xml
