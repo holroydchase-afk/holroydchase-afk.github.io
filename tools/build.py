@@ -20,6 +20,17 @@ NAV = [
 FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600"
          "&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap")
 
+# Person markup so a search for the name can show the right profile. No email or phone, by rule.
+JSONLD = """<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
+"jobTitle":"Senior Product Manager","description":"Senior product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
+"url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/share-card.png",
+"address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
+"alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
+"sameAs":["https://www.linkedin.com/in/chase-holroyd","https://github.com/holroydchase-afk"]}}
+</script>
+"""
+
 
 def page(slug, title, description, body):
     nav = "".join(
@@ -37,19 +48,26 @@ def page(slug, title, description, body):
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE}/{'' if slug == 'index.html' else slug}">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta property="og:type" content="{'profile' if slug == 'about.html' else 'website'}">
+<meta property="og:image" content="{SITE}/assets/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chase Holroyd, senior product manager: pricing, payments and lending">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{SITE}/{'' if slug == 'index.html' else slug}">
+{JSONLD if slug in ('index.html', 'about.html') else ''}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
 <nav class="top" aria-label="Main">{nav}</nav>
 </div></header>
-<main class="wrap">
+<main class="wrap" id="main">
 {body}
 </main>
 <footer class="site"><div class="wrap">
@@ -239,4 +257,10 @@ PAGES = [
 if __name__ == "__main__":
     for slug, title, desc, body in PAGES:
         (ROOT / slug).write_text(page(slug, title, desc, body), encoding="utf-8")
+    urls = "".join(f"<url><loc>{SITE}/{'' if s == 'index.html' else s}</loc></url>\n"
+                   for s, *_ in PAGES if s != "404.html")
+    (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                      f"{urls}</urlset>\n", encoding="utf-8")
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     print(f"Wrote {len(PAGES)} pages to {ROOT}")

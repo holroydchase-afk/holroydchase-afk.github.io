@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (Build Slate and roadmap demos moved to the pm-tools repo)
+Last updated: 2026-10-21 (WEB-M2.1: share card, SEO and accessibility fixes)
 
 ## Current state
 - **Live** at https://chaseholroyd.com. The repo is `holroydchase-afk/holroydchase-afk.github.io` (renamed from `portfolio` on Oct 21), so it is the account's user site and other repos' Pages sites appear at chaseholroyd.com/<repo>, e.g. the ccwatts playground at /ccwatts/. Deploys run on every push to `main` via `.github/workflows/pages.yml`.
@@ -13,6 +13,12 @@ Last updated: 2026-10-21 (Build Slate and roadmap demos moved to the pm-tools re
 - **Build Slate and the Near-Term Roadmap** demos live in the `pm-tools` repo, served at chaseholroyd.com/pm-tools/build-slate/ and /pm-tools/roadmap/. "How I work" links there. Sync those apps in pm-tools (its HANDOFF.md), not here.
 
 - License audit (2026-10-21): added `LICENSE` (site content all rights reserved; demo apps MIT from their source repos; Google Fonts are OFL and linked, not stored) and a © line in the footer. No takedown needed.
+
+## Plan: WEB-M2 "recruiter-ready"
+The research, audit and ranked plan from the "Portfolio research and upgrade plan" thread (Oct 21) are summarized here; WEB-M1 was the launch (done Oct 21).
+| ID | Task | Status |
+|---|---|---|
+| WEB-M2.1 | Link preview card (`assets/share-card.png`, source `tools/share-card.html`, render with `node tools/make_share_card.mjs`), canonical URLs, sitemap.xml and robots.txt (written by build.py), Person JSON-LD (no email or phone), skip link, eyebrow contrast to WCAG AA | doing (PR open, needs Chase's OK to merge) |
 
 ## Keeping the demos in sync with the real apps
 The real apps are Claude artifacts. The demos are snapshots of them, so they drift when an app changes.
@@ -31,6 +37,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
+- Merge WEB-M2.1 once Chase OKs it; then the rest of WEB-M2 per the plan.
 - Chase: a single review pass of the pages.
 - Hearth rename, then update `family-photos.html` copy.
 - Optional: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate (tracked in pm-tools PLAN.md).
