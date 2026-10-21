@@ -1,0 +1,206 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="robots" content="noindex"><link rel="icon" href="../../assets/favicon.svg"></head><body>
+<script src="seed.js"></script><script src="../fake-db.js"></script>
+
+<title>Energy Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&family=Share+Tech+Mono&display=swap">
+<style>
+/* Layout: one night-sky screen. Bedtime checklist up top, big palm pad in the middle, reading card below. Single dark theme on purpose: it's a bedtime device. */
+:root{
+  --sky:#0F1430; --sky2:#1B2250; --ink:#EEF0FF; --muted:#A3A9D6; --line:#2E3670;
+  --glow:#7CF2E0; --moon:#FFE7A3;
+  --f-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Nunito",system-ui,-apple-system,sans-serif;
+  --f-mono:"Share Tech Mono",ui-monospace,Menlo,monospace;
+  --energy:var(--glow);
+  color-scheme:dark;
+}
+html,body{min-height:100%}
+body{background:radial-gradient(120% 70% at 50% 0%,var(--sky2),var(--sky) 70%) fixed,var(--sky);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45}
+.wrap{max-width:520px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px;position:relative}
+#stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.wrap>*{position:relative;z-index:1}
+
+header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{font-family:var(--f-display);font-weight:800;font-size:32px;line-height:1;margin:0;letter-spacing:-.01em}
+h1 span{color:var(--glow)}
+.clock{font-family:var(--f-mono);font-size:14px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.clock b{display:block;color:var(--moon);font-size:22px;font-weight:400}
+
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.step{background:transparent;border:2px solid var(--line);border-radius:14px;color:var(--muted);font:700 12px var(--f-body);padding:10px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;min-width:0;transition:border-color .2s,color .2s,background .2s}
+.step .ic{font-size:24px;line-height:1;filter:grayscale(1);opacity:.55;transition:filter .2s,opacity .2s}
+.step[aria-pressed="true"]{border-color:var(--glow);color:var(--ink);background:rgba(124,242,224,.08)}
+.step[aria-pressed="true"] .ic{filter:none;opacity:1}
+.steplbl{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+
+.pad-zone{display:flex;flex-direction:column;align-items:center;gap:12px;padding-block:6px}
+.pad{position:relative;width:min(72vw,280px);aspect-ratio:1;max-width:100%;border-radius:50%;border:none;background:radial-gradient(circle at 50% 45%,#232B63,#141a40 70%);box-shadow:0 0 0 2px var(--line),0 0 40px rgba(124,242,224,.12) inset;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow:hidden;color:var(--ink)}
+.pad svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pad .hand{position:absolute;inset:0;display:grid;place-items:center;font-size:84px;opacity:.85;transition:transform .3s}
+.pad.scanning .hand{transform:scale(1.06)}
+.pad .beam{position:absolute;left:8%;right:8%;height:3px;top:20%;background:var(--energy);box-shadow:0 0 18px 4px var(--energy);border-radius:3px;opacity:0}
+.pad.scanning .beam{opacity:1;animation:beam 1.1s ease-in-out infinite alternate}
+@keyframes beam{from{top:18%}to{top:80%}}
+.pad.done{box-shadow:0 0 0 3px var(--energy),0 0 60px var(--energy)}
+.hint{font-family:var(--f-display);font-weight:600;font-size:20px;text-align:center;min-height:1.5em}
+.pad:focus-visible,.step:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--moon);outline-offset:3px}
+
+.reading{border:2px solid var(--energy);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px;background:rgba(15,20,48,.75);backdrop-filter:blur(4px)}
+.reading .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.reading .name{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1.05;margin:0;background:var(--swatch,var(--energy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.batt{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.batt .cell{width:44px;height:20px;border:2px solid var(--ink);border-radius:4px;position:relative;padding:2px}
+.batt .cell::after{content:"";position:absolute;right:-6px;top:5px;width:3px;height:7px;background:var(--ink);border-radius:1px}
+.batt .fill{height:100%;background:var(--energy);border-radius:1px}
+.reading p{margin:0;font-size:17px}
+.todo{font-weight:800;color:var(--moon)}
+.again{align-self:flex-start;background:transparent;border:2px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 16px;font:700 14px var(--f-body);cursor:pointer}
+
+details{border-top:1px dashed var(--line);padding-top:12px;color:var(--muted);font-size:14px}
+summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.parent{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.parent label{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.parent input[type=time]{background:var(--sky2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:15px var(--f-body)}
+.parent input[type=range]{flex:1;min-width:0}
+.parent .row{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.parent button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 10px;font:600 13px var(--f-body);cursor:pointer}
+@media (prefers-reduced-motion:reduce){.pad.scanning .beam{animation:none;top:50%}*{transition:none!important}}
+</style>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="wrap">
+  <header>
+    <h1>Energy<br><span>Scanner</span></h1>
+    <div class="clock"><b id="now">--:--</b>bedtime <span id="bedLbl">8:00 PM</span></div>
+  </header>
+
+  <section>
+    <div class="steplbl"><span>Bedtime steps</span><span id="stepCount">0 of 5</span></div>
+    <div class="steps" id="steps"></div>
+  </section>
+
+  <section class="pad-zone">
+    <button class="pad" id="pad" type="button" aria-label="Press and hold to scan your energy">
+      <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#2E3670" stroke-width="3"/>
+        <circle id="prog" cx="50" cy="50" r="47" fill="none" stroke="var(--energy)" stroke-width="3" stroke-linecap="round" stroke-dasharray="295.3" stroke-dashoffset="295.3"/>
+      </svg>
+      <div class="beam"></div>
+      <div class="hand" aria-hidden="true">✋</div>
+    </button>
+    <div class="hint" id="hint">Put your hand on the scanner and hold</div>
+  </section>
+
+  <section class="reading" id="reading" hidden aria-live="polite">
+    <div class="top">
+      <h2 class="name" id="rName">Grey Energy</h2>
+      <div class="batt"><div class="cell"><div class="fill" id="rFill"></div></div><span id="rPct">8%</span></div>
+    </div>
+    <p id="rText"></p>
+    <p class="todo" id="rTodo"></p>
+    <button class="again" id="again" type="button">Scan again</button>
+  </section>
+
+  <details>
+    <summary>Grown-ups</summary>
+    <div class="parent">
+      <label for="bed">Bedtime <input type="time" id="bed" value="20:00"></label>
+      <div>Pretend it's a different time (for testing)</div>
+      <div class="row"><input type="range" id="fake" min="-180" max="60" step="5" value="0" aria-label="Time offset in minutes"><span id="fakeLbl">real time</span></div>
+      <label for="always">Always read Grey Energy <input type="checkbox" id="always" checked></label>
+      <div class="row"><button type="button" id="reset">Clear tonight's steps</button></div>
+      <div>With Always Grey on, every scan comes back Grey. Turn it off and it reads by the clock instead: the closer to bedtime and the more steps done, the sleepier the color. There's a little randomness so it doesn't feel canned, but it never says Rainbow once all five steps are done.</div>
+    </div>
+  </details>
+</div>
+
+<script>
+const STEPS=[{id:"bath",ic:"🛁",l:"Bath"},{id:"pjs",ic:"👕",l:"PJs"},{id:"teeth",ic:"🪥",l:"Teeth"},{id:"potty",ic:"🚽",l:"Potty"},{id:"book",ic:"📖",l:"Book"}];
+const LEVELS=[
+ {min:85,name:"Rainbow Energy",c:"#FF6B9A",sw:"linear-gradient(90deg,#FF6B6B,#FFB84D,#FFE66B,#6BE38C,#5BC8FF,#B98BFF)",
+  t:["Whoa! Every color at once. Your body is a fireworks show right now.","Rainbow! The scanner can barely keep up. That's way too much sparkle for sleeping."]},
+ {min:65,name:"Red Rocket Energy",c:"#FF7A5C",
+  t:["Red rocket! You're zooming. Rockets need a cooldown before they land.","Hot red energy. The engines are still running."]},
+ {min:45,name:"Yellow Energy",c:"#FFD95C",
+  t:["Yellow, like an afternoon sun. Still bright, starting to set.","Sunny yellow. Your battery is about half full and dropping."]},
+ {min:28,name:"Green Glow Energy",c:"#6BE38C",
+  t:["A soft green glow, like a firefly. You're slowing down nicely.","Green glow. The scanner sees calm coming."]},
+ {min:12,name:"Blue Moon Energy",c:"#6FB4FF",
+  t:["Blue moon. The scanner picked up a yawn hiding in there.","Deep blue, like the sky right outside. Sleep is on its way."]},
+ {min:0,name:"Grey Energy",c:"#B8BCD6",
+  t:["Grey. Battery almost empty. Time to plug in to your pillow and recharge.","Grey energy. The scanner says your body is ready to power down for the night."]}
+];
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const dayKey=()=>{const d=new Date(Date.now()-5*3600e3);return "steps-"+d.toISOString().slice(0,10)};
+let done=new Set(store.get(dayKey(),[]));
+let bed=store.get("bed","20:00"); $("bed").value=bed;
+let offset=0;
+
+const now=()=>new Date(Date.now()+offset*60e3);
+const fmt=d=>d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
+function bedDate(){const [h,m]=bed.split(":").map(Number);const d=now();const b=new Date(d);b.setHours(h,m,0,0);if(d-b>8*3600e3)b.setDate(b.getDate()+1);return b}
+
+function renderSteps(){
+  $("steps").innerHTML=STEPS.map(s=>`<button class="step" type="button" data-id="${s.id}" aria-pressed="${done.has(s.id)}"><span class="ic">${s.ic}</span>${s.l}</button>`).join("");
+  $("stepCount").textContent=`${done.size} of ${STEPS.length}`;
+}
+$("steps").addEventListener("click",e=>{const b=e.target.closest(".step");if(!b)return;const id=b.dataset.id;done.has(id)?done.delete(id):done.add(id);store.set(dayKey(),[...done]);renderSteps()});
+function tick(){$("now").textContent=fmt(now());$("bedLbl").textContent=fmt(bedDate())}
+
+let alwaysGrey=store.get("alwaysGrey",false); $("always").checked=alwaysGrey;
+$("always").addEventListener("change",e=>{alwaysGrey=e.target.checked;store.set("alwaysGrey",alwaysGrey)});
+function reading(){
+  if(alwaysGrey) return Math.round(3+Math.random()*8);
+  const mins=(bedDate()-now())/60e3;            // minutes until bedtime (negative = past)
+  const timePart=Math.max(0,Math.min(1,(mins+30)/150)); // 2h before → ~1, 30m past → 0
+  const stepPart=1-done.size/STEPS.length;
+  let e=100*(0.55*timePart+0.45*stepPart)+ (Math.random()*16-8);
+  if(done.size===STEPS.length) e=Math.min(e,40);
+  e=Math.round(Math.max(3,Math.min(99,e)));
+  return e;
+}
+function show(e){
+  const L=LEVELS.find(l=>e>=l.min);
+  document.documentElement.style.setProperty("--energy",L.c);
+  $("reading").style.setProperty("--swatch",L.sw||L.c);
+  $("rName").textContent=L.name;
+  $("rPct").textContent=e+"%";
+  $("rFill").style.width=e+"%";
+  $("rText").textContent=L.t[Math.floor(Math.random()*L.t.length)];
+  const left=STEPS.filter(s=>!done.has(s.id)).map(s=>s.l);
+  $("rTodo").textContent=left.length?`To drain the battery: ${left.join(", ")}. Then scan again.`:"All steps done. Lights out, recharge all night. ⭐";
+  $("reading").hidden=false;
+  $("hint").textContent=L.name+" detected";
+}
+
+// press and hold
+const HOLD=2600, C=295.3; let t0=0,raf=0,holding=false;
+const pad=$("pad"), prog=$("prog");
+function start(e){if(e)e.preventDefault();if(holding)return;holding=true;t0=performance.now();pad.classList.remove("done");pad.classList.add("scanning");document.documentElement.style.setProperty("--energy","#7CF2E0");$("hint").textContent="Scanning… keep holding";$("reading").hidden=true;loop()}
+function loop(){const p=Math.min(1,(performance.now()-t0)/HOLD);prog.style.strokeDashoffset=C*(1-p);if(p>=1){finish();return}raf=requestAnimationFrame(loop)}
+function stop(){if(!holding)return;holding=false;cancelAnimationFrame(raf);pad.classList.remove("scanning");prog.style.strokeDashoffset=C;$("hint").textContent="Too fast! Hold until the circle fills"}
+function finish(){holding=false;pad.classList.remove("scanning");pad.classList.add("done");prog.style.strokeDashoffset=0;try{navigator.vibrate&&navigator.vibrate([40,40,80])}catch{}show(reading())}
+pad.addEventListener("pointerdown",start);
+["pointerup","pointerleave","pointercancel"].forEach(ev=>pad.addEventListener(ev,stop));
+pad.addEventListener("contextmenu",e=>e.preventDefault());
+pad.addEventListener("keydown",e=>{if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();start()}});
+pad.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter")stop()});
+$("again").addEventListener("click",()=>{$("reading").hidden=true;pad.classList.remove("done");prog.style.strokeDashoffset=C;document.documentElement.style.setProperty("--energy","#7CF2E0");$("hint").textContent="Put your hand on the scanner and hold";pad.focus()});
+
+// grown-ups
+$("bed").addEventListener("change",e=>{bed=e.target.value||"20:00";store.set("bed",bed);tick()});
+$("fake").addEventListener("input",e=>{offset=+e.target.value;$("fakeLbl").textContent=offset===0?"real time":(offset>0?"+":"")+offset+" min";tick()});
+$("reset").addEventListener("click",()=>{done.clear();store.set(dayKey(),[]);renderSteps()});
+
+// stars
+(function(){const c=$("stars"),x=c.getContext("2d");let s=[];function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;s=Array.from({length:70},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:(Math.random()*1.4+.3)*devicePixelRatio,p:Math.random()*6}))}
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function draw(t){x.clearRect(0,0,c.width,c.height);for(const a of s){x.globalAlpha=.35+.35*Math.sin(t/900+a.p);x.fillStyle="#EEF0FF";x.beginPath();x.arc(a.x,a.y,a.r,0,7);x.fill()}if(!still)requestAnimationFrame(draw)}
+addEventListener("resize",size);size();requestAnimationFrame(draw)})();
+
+renderSteps();tick();setInterval(tick,15000);
+</script>
+
+</body></html>

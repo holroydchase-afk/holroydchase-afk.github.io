@@ -142,7 +142,8 @@ role_radar = product(
          "<li><b>Built to be shared.</b> Filters and profile live in config, so other job seekers can copy it.</li></ul>"),
         ("Stack", "<p>A Claude artifact with a saved database, a weekday scheduled agent, Gmail (read-only) and ZipRecruiter connectors, and a resume-intake skill that fills a Google Docs template.</p>"),
     ],
-    status_note="Screenshots on this page use sample data, never real applications.",
+    status_note="The demo uses made-up jobs, companies and people, never real applications. Changes you make stay in your browser.",
+    links=[("Try the demo", "demo/role-radar/")],
 )
 
 ccwatts = product(
@@ -166,7 +167,7 @@ energy = product(
     "Family app · prototype",
     "Energy Scanner",
     "Bedtime was a nightly negotiation. What if a neutral machine said it was time, instead of me?",
-    [("Routine", "steps first, scan as the finale"), ("Colors", "each energy level has its own summary"), ("Grey", "the default, so bedtime wins")],
+    [("Routine", "steps first, scan as the finale"), ("Colors", "each energy level has its own summary"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
         ("The idea", "<p>Kids work through their bedtime routine, then step up for an energy scan that returns a color, like grey, yellow or rainbow, with a fun summary. "
          "A neutral \"machine says so\" authority takes the argument off the parent.</p>"),
@@ -174,16 +175,19 @@ energy = product(
          "<li><b>Privacy before camera.</b> Kids' faces shouldn't go to a cloud model, so the camera waits until on-device or no-storage options are settled.</li></ul>"),
         ("Status", "<p>A working prototype my kids are testing at bedtime. The vision-model version gets built only if the novelty holds.</p>"),
     ],
+    links=[("Try the demo", "demo/energy-scanner/")],
 )
 
 pm_tools = """<div class="read">
 <p class="eyebrow">How I work</p>
 <h1>A product studio of one, run like a team.</h1>
-<p class="lede">I have about an hour a night. These are the tools and rituals that let me ship several products at once without losing the thread.</p>
+<p class="lede">I have about an hour a night. These are the tools and rituals that let me ship several products at once without losing the thread. The two apps below are live demos with my real slate and roadmap as of October 2026; anything you change stays in your browser.</p>
 <h2>Build Slate</h2>
 <p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps me at five live projects so I go deep, not wide.</p>
+<div class="cta"><a class="btn primary" href="demo/build-slate/">Try Build Slate</a></div>
 <h2>Near-term roadmap</h2>
 <p>Now, Next, Later and Done lanes with a board per product, owners, session-size estimates and a blocked flag. Any AI session can read and update it by link, so the roadmap stays current without me retyping it.</p>
+<div class="cta"><a class="btn primary" href="demo/roadmap/">Try the roadmap</a></div>
 <h2>Decisions that leave a trail</h2>
 <ul class="clean"><li><b>Decision log:</b> every call records why, and what it beat.</li>
 <li><b>Persona check:</b> before a product decision is final, each persona gets a green or red with a one-line reason. CI fails if a decision file skips it.</li>
