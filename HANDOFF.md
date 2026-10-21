@@ -5,6 +5,7 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-10-21
 
 ## Current state
+- 2026-10-21: studio session rules installed: `.claude/settings.json` SessionStart hook prints this file into every Claude Code session, `.github/workflows/handoff-check.yml` fails a PR that changes files without updating this file, and CLAUDE.md has a "Session rules" section.
 - **Live** on GitHub Pages at https://holroydchase-afk.github.io/portfolio/ (deploys on every push to `main` via `.github/workflows/pages.yml`).
 - **Custom domain:** DNS is set at Porkbun (Chase, Oct 21). Still waiting on Chase to type `chaseholroyd.com` under Settings → Pages → Custom domain and tick Enforce HTTPS. Actions deploys ignore the `CNAME` file, so the domain must be set there.
 - **Pages:** Work (home), the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
