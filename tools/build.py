@@ -23,7 +23,7 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
-"jobTitle":"Senior Product Manager","description":"Senior product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
+"jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
 "url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/share-card.png",
 "address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
 "alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
@@ -52,7 +52,7 @@ def page(slug, title, description, body):
 <meta property="og:image" content="{SITE}/assets/share-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chase Holroyd, senior product manager: pricing, payments and lending">
+<meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/{'' if slug == 'index.html' else slug}">
 {JSONLD if slug in ('index.html', 'about.html') else ''}<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Senior product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Product manager · Charlotte, NC</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
@@ -100,25 +100,37 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None):
 
 
 CARDS = [
-    ("family-photos.html", "Building", "Family photo app",
-     "Private photo sharing for split families and grandparents who avoid social media. Every post has a visible audience."),
-    ("role-radar.html", "Beta", "Role Radar",
+    ("role-radar.html", "Live demo", "Role Radar",
      "A job-search radar that scans about 110 company boards each weekday and turns a good match into a tailored resume in one tap."),
-    ("ccwatts.html", "In development", "ccwatts",
+    ("ccwatts.html", "Live playground", "ccwatts",
      "How much electricity does your AI coding agent use? A local tool that answers as an honest range, with every assumption sourced."),
-    ("energy-scanner.html", "Prototype", "Energy Scanner",
-     "A bedtime routine for kids that ends in a playful energy scan, so the machine says it's time for bed instead of the parent."),
-    ("pm-tools.html", "How I work", "A one-person product studio",
+    ("pm-tools.html", "Live demos", "How I run product work",
      "Build Slate, a multi-board roadmap, persona checks enforced in CI, a decision log, and a team of AI agents with defined lanes."),
+    ("energy-scanner.html", "Live demo", "Energy Scanner",
+     "A bedtime routine for kids that ends in a playful energy scan, so the machine says it's time for bed instead of the parent."),
+    ("family-photos.html", "Private beta soon", "Family photo app",
+     "Private photo sharing for split families and grandparents who avoid social media. Every post has a visible audience."),
+]
+
+# Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
+PROOF = [
+    ("12,000+", "credit applications a month through the offer engine I led"),
+    ("3–5 pts", "dealer fees cut with lender allocation"),
+    ("13+", "lender integrations shipped"),
+    ("1 mo → 1 wk", "to onboard a new lender, with a rules engine"),
 ]
 
 home = f"""<div class="read">
-<p class="eyebrow">Product manager · builder</p>
-<h1>I turn messy, real problems into products people actually use.</h1>
-<p class="lede">I'm Chase, a senior product manager with 8+ years in pricing, payments and point-of-sale lending, from solar to AI. These days I run a small product studio of one, building with a team of AI agents.</p>
-<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="about.html">My story</a></div>
+<p class="eyebrow">Open to remote senior and staff PM roles</p>
+<h1>Staff PM for pricing, payments and point-of-sale lending.</h1>
+<p class="lede">8+ years building credit, offer and pricing engines for lenders, dealers and about 5,000 sales reps. Staff PM at Patter AI; before that ADT and Palmetto.</p>
+<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="about.html">My path</a></div>
 </div>
-<h2>Current work</h2>
+<div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
+<div class="read">
+<h2>Since Jan 2026: independent product work</h2>
+<p>Between roles, I'm building AI-agent tools in public to stay sharp on how LLM products ship. Not raising, not selling; ready for a full-time role. Each one runs on sample data, right in your browser.</p>
+</div>
 <div class="grid">""" + "".join(
     f'<a class="card" href="{h}"><span class="tag">{s}</span><h3>{n}</h3><p>{d}</p></a>' for h, s, n, d in CARDS
 ) + "</div>"
@@ -229,7 +241,7 @@ about = f"""<div class="read">
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
 <li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (12,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from about a month to a week.</li>
-<li><b>Now: a product studio of one.</b> Building the products on this site with a team of AI agents.</li>
+<li><b>Since Jan 2026: independent product work.</b> Between roles, I'm building AI-agent tools in public (job search, AI energy, PM operations) to stay sharp on how LLM products ship. Not raising, not selling; ready for a full-time role.</li>
 </ol>
 <h2>What I care about</h2>
 <ul class="clean"><li>Checkout, pricing and payments that feel simple to the person at the kitchen table.</li>
@@ -244,7 +256,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 <p class="lede">It may have moved. The <a href="index.html">work page</a> lists everything.</p></div>"""
 
 PAGES = [
-    ("index.html", "Work", "Chase Holroyd, product manager. Products built with a team of AI agents: family photos, job search, AI energy and more.", home),
+    ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
     ("family-photos.html", "Family photo app", "A private family photo app for split families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
