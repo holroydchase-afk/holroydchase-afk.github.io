@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (WEB-M2.5 resume page in a PR)
+Last updated: 2026-10-21 (WEB-M2.5 resume page merged in PR #6)
 
 ## Current state
 - 2026-10-21: studio session rules installed: `.claude/settings.json` SessionStart hook prints this file into every Claude Code session, `.github/workflows/handoff-check.yml` fails a PR that changes files without updating this file, and CLAUDE.md has a "Session rules" section.
@@ -23,7 +23,7 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M2.2 | Hero: "Staff PM for pricing, payments and point-of-sale lending", proof bar of 4 resume numbers, "Since Jan 2026: independent product work" replaces "studio of one" on home and About, cards reordered with live demos first | done (PR #5, Oct 21; leads with Staff, Chase can still switch to Senior) |
 | WEB-M2.3 | Case study: ADT credit and offer engine plus lender allocation (context / my role / decisions / outcome / what I'd change; every claim I or we) | blocked (Chase reviews the [check] questions Oct 22) |
 | WEB-M2.4 | Case study: Patter real-time pricing engine plus lender rules engine | blocked (Chase reviews the [check] questions Oct 22) |
-| WEB-M2.5 | Resume page (`resume.html`, in the nav) mirroring pmo/story/resume-2026-10.md, print CSS (2 Letter pages), no phone or email. Patter's B2B dollar figures left off until Chase OKs them | doing (PR open, needs Chase's OK to merge) |
+| WEB-M2.5 | Resume page (`resume.html`, in the nav) mirroring pmo/story/resume-2026-10.md, print CSS (2 Letter pages), no phone or email. Patter's B2B dollar figures left off until Chase OKs them | done (PR #6, Oct 21) |
 | WEB-M2.6 | Chase: headshot, LinkedIn Featured link and headline, LinkedIn Post Inspector | todo |
 | WEB-M3.1 | Outcomes and "what I'd do differently" on Role Radar and ccwatts pages | todo |
 | WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
@@ -48,7 +48,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
-- Merge the WEB-M2.5 PR once Chase OKs it. Case studies (WEB-M2.3, M2.4) wait for Chase's [check] pass on Oct 22. Next without Chase: WEB-M3.1.
+- Case studies (WEB-M2.3, M2.4) wait for Chase's [check] pass on Oct 22. Next without Chase: WEB-M3.1.
 - Removed a stray `shots/` folder of screenshots that PR #5 committed by mistake.
 - Chase: a single review pass of the pages.
 - Hearth rename, then update `family-photos.html` copy.
