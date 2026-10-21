@@ -29,7 +29,18 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - Build Slate and roadmap seeds are snapshots of the real slate with private links and notes removed.
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
-## Next
-- Chase: set the custom domain (above), then a single review pass of the pages.
-- Hearth rename, then update `family-photos.html` copy.
-- Optional: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate.
+## Plan
+IDs follow the studio standard (`docs/planning-ids.md` in holroydchase-afk/studio-agents): milestone `M1`, task `M1.1`, step `M1.1.1`; product code `WEB` across products. Status is todo, doing, blocked, done or dropped. This repo had no earlier labels, so there is no old-to-new table.
+
+### WEB-M1: Portfolio live at chaseholroyd.com
+| ID | Task | Status |
+|---|---|---|
+| M1.1 | Static site on GitHub Pages (Work, product pages, How I work, About, 404) | done |
+| M1.2 | Demos with sample data: Build Slate, roadmap, Role Radar, Energy Scanner | done |
+| M1.3 | Custom domain and HTTPS (Chase: Settings → Pages → Custom domain, Enforce HTTPS) | blocked (Chase) |
+| M1.4 | Chase's review pass of the pages | todo (Chase) |
+| M1.5 | Family photo app copy after the Hearth rename | blocked (rename) |
+
+Later, unnumbered: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate.
+
+Note: the roadmap demo seed uses the new ccwatts IDs (`CCW-M1.1` and so on), matching the real roadmap board as of Oct 21.
