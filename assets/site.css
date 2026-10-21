@@ -60,3 +60,16 @@ ul.clean li{margin-top:6px}
 footer.site{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14.5px}
 footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.resume .job{margin-top:22px}
+.resume .when{margin:2px 0 0;font:500 13px var(--f-mono);color:var(--muted)}
+.resume .contact{font-size:15px;color:var(--muted)}
+/* Print: the resume (or any page) prints as plain black-on-white without the site chrome. */
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#333;--line:#ccc;--accent:#000;--sun:#333}
+  header.site,footer.site,.cta,.skip{display:none}
+  main{padding:0}
+  body{font-size:11pt;line-height:1.4}
+  h1{font-size:22pt} h2{font-size:14pt;margin-top:14pt} h3{font-size:11.5pt}
+  .resume .job{margin-top:8pt;break-inside:avoid}
+  a{color:#000;text-decoration:none}
+}
