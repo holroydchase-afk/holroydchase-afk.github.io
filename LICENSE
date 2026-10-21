@@ -1,0 +1,15 @@
+Copyright (c) 2026 Chase Holroyd. All rights reserved.
+
+The text, career history, case studies and design of this site (chaseholroyd.com)
+may not be copied or republished without permission.
+
+Exceptions:
+- The demo app code under demo/ is by the same author and is available under the
+  MIT License (same text as github.com/holroydchase-afk/pm-tools/blob/main/LICENSE).
+  Source repositories:
+    demo/build-slate, demo/roadmap, demo/fake-db.js  -> github.com/holroydchase-afk/pm-tools
+    demo/role-radar                                   -> github.com/holroydchase-afk/role-radar
+    demo/energy-scanner                               -> bedtime prototype (not yet in a repo)
+  Demo data is sample data: Role Radar's jobs, companies and people are fictional.
+- Fonts (Fraunces, Public Sans, IBM Plex Mono) are loaded from Google Fonts under
+  the SIL Open Font License 1.1 and are not stored in this repository.

@@ -11,6 +11,8 @@ Last updated: 2026-10-21 (repo renamed to holroydchase-afk.github.io)
 - **Pages:** Work (home), the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
 - **Demos** under `demo/`: Build Slate, Near-Term Roadmap, Role Radar and Energy Scanner, each running the real app on sample data saved only in the visitor's browser (`demo/fake-db.js` stands in for the artifact database).
 
+- License audit (2026-10-21): added `LICENSE` (site content all rights reserved; demo apps MIT from their source repos; Google Fonts are OFL and linked, not stored) and a © line in the footer. No takedown needed.
+
 ## Keeping the demos in sync with the real apps
 The real apps are Claude artifacts. The demos are snapshots of them, so they drift when an app changes.
 1. Save the app's current artifact page over `tools/demo-src/<name>.html` (Claude: Artifact tool, read with `path: "index.html"`).
