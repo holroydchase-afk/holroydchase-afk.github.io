@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (WEB-M2.1: share card, SEO and accessibility fixes)
+Last updated: 2026-10-21 (WEB-M2 plan; M2.1 and M2.2 in draft PR #5)
 
 ## Current state
 - **Live** at https://chaseholroyd.com. The repo is `holroydchase-afk/holroydchase-afk.github.io` (renamed from `portfolio` on Oct 21), so it is the account's user site and other repos' Pages sites appear at chaseholroyd.com/<repo>, e.g. the ccwatts playground at /ccwatts/. Deploys run on every push to `main` via `.github/workflows/pages.yml`.
@@ -18,7 +18,17 @@ Last updated: 2026-10-21 (WEB-M2.1: share card, SEO and accessibility fixes)
 The research, audit and ranked plan from the "Portfolio research and upgrade plan" thread (Oct 21) are summarized here; WEB-M1 was the launch (done Oct 21).
 | ID | Task | Status |
 |---|---|---|
-| WEB-M2.1 | Link preview card (`assets/share-card.png`, source `tools/share-card.html`, render with `node tools/make_share_card.mjs`), canonical URLs, sitemap.xml and robots.txt (written by build.py), Person JSON-LD (no email or phone), skip link, eyebrow contrast to WCAG AA | doing (PR open, needs Chase's OK to merge) |
+| WEB-M2.1 | Link preview card (`assets/share-card.png`, source `tools/share-card.html`, render with `node tools/make_share_card.mjs`), canonical URLs, sitemap.xml and robots.txt (written by build.py), Person JSON-LD (no email or phone), skip link, eyebrow contrast to WCAG AA | doing (PR #5, needs Chase's OK to merge) |
+| WEB-M2.2 | Hero: "Staff PM for pricing, payments and point-of-sale lending", proof bar of 4 resume numbers, "Since Jan 2026: independent product work" replaces "studio of one" on home and About, cards reordered with live demos first | doing (PR #5, Chase confirms Staff vs Senior) |
+| WEB-M2.3 | Case study: ADT credit and offer engine plus lender allocation (context / my role / decisions / outcome / what I'd change; every claim I or we) | doing (draft for Chase's [check] pass) |
+| WEB-M2.4 | Case study: Patter real-time pricing engine plus lender rules engine | doing (draft for Chase's [check] pass) |
+| WEB-M2.5 | Resume page with print CSS, no phone or email | todo |
+| WEB-M2.6 | Chase: headshot, LinkedIn Featured link and headline, LinkedIn Post Inspector | todo |
+| WEB-M3.1 | Outcomes and "what I'd do differently" on Role Radar and ccwatts pages | todo |
+| WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
+| WEB-M3.3 | Visit counter | dropped (no-analytics rule) |
+
+Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Keeping the demos in sync with the real apps
 The real apps are Claude artifacts. The demos are snapshots of them, so they drift when an app changes.
@@ -37,7 +47,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
-- Merge WEB-M2.1 once Chase OKs it; then the rest of WEB-M2 per the plan.
+- Merge PR #5 (WEB-M2.1, M2.2) once Chase OKs it; build the case-study pages once Chase clears the [check] marks.
 - Chase: a single review pass of the pages.
 - Hearth rename, then update `family-photos.html` copy.
 - Optional: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate (tracked in pm-tools PLAN.md).
