@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ccwatts · Chase Holroyd</title>
+<meta name="description" content="Estimate the electricity your Claude Code usage consumes, as an honest range.">
+<meta property="og:title" content="ccwatts · Chase Holroyd">
+<meta property="og:description" content="Estimate the electricity your Claude Code usage consumes, as an honest range.">
+<meta property="og:url" content="https://chaseholroyd.com/ccwatts.html">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
+<nav class="top" aria-label="Main"><a href="index.html">Work</a><a href="pm-tools.html">How I work</a><a href="about.html">About</a></nav>
+</div></header>
+<main class="wrap">
+<div class="read">
+<p class="eyebrow">Developer tool · in development</p>
+<h1>ccwatts</h1>
+<p class="lede">AI use has an electricity cost, and almost nobody can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/holroydchase-afk/ccwatts">View on GitHub</a></div>
+</div>
+<div class="facts"><div class="fact"><b>Range</b><span>low / central / high, never one number</span></div><div class="fact"><b>Local</b><span>logs never leave your machine</span></div><div class="fact"><b>Sourced</b><span>every assumption cited</span></div><div class="fact"><b>Open</b><span>source on GitHub</span></div></div>
+<div class="read"><h2>Why it exists</h2><p>In 2026 climate scientist Zeke Hausfather estimated his own Claude Code use by hand, at about 170 kWh over eight weeks. Tools already counted tokens and cost. Nobody had packaged the energy side, so I did.</p><h2>Product calls</h2><ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li><li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li><li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul><h2>Stack</h2><p>A TypeScript monorepo with one shared core used by both the CLI (<code>npx ccwatts</code>) and an offline HTML dashboard.</p>
+<p style="margin-top:40px"><a href="index.html">← All work</a></p></div>
+</main>
+<footer class="site"><div class="wrap">
+<span>Chase Holroyd · Senior product manager · Charlotte, NC</span>
+<span><a href="https://www.linkedin.com/in/chase-holroyd">LinkedIn</a> · <a href="https://github.com/holroydchase-afk">GitHub</a></span>
+</div></footer>
+</body>
+</html>
