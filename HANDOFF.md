@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (ES-M2.3: Energy Scanner page points at the live app)
+Last updated: 2026-10-21 (ES-M2.3 merged in PR #8)
 
 ## Current state
 - 2026-10-21: studio session rules installed: `.claude/settings.json` SessionStart hook prints this file into every Claude Code session, `.github/workflows/handoff-check.yml` fails a PR that changes files without updating this file, and CLAUDE.md has a "Session rules" section.
@@ -28,7 +28,7 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M3.1 | Outcomes and "what I'd do differently" on Role Radar and ccwatts pages | todo |
 | WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
 | WEB-M3.3 | Visit counter | dropped (no-analytics rule) |
-| ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | doing (draft PR, needs Chase's OK to merge) |
+| ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | done (PR #8, Oct 21) |
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
