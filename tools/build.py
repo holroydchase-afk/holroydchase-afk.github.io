@@ -108,7 +108,7 @@ CARDS = [
     ("pm-tools.html", "Live demos", "How I run product work",
      "Build Slate, a multi-board roadmap, persona checks enforced in CI, a decision log, and a team of AI agents with defined lanes."),
     ("energy-scanner.html", "Live demo", "Energy Scanner",
-     "A bedtime routine for kids that ends in a playful energy scan, so the machine says it's time for bed instead of the parent."),
+     "A bedtime routine for kids that ends in an energy scan, by palm or by photo with an on-device aura, so the machine says it's bedtime instead of the parent."),
     ("family-photos.html", "Private beta soon", "Family photo app",
      "Private photo sharing for split families and grandparents who avoid social media. Every post has a visible audience."),
 ]
@@ -195,18 +195,21 @@ ccwatts = product(
 )
 
 energy = product(
-    "Family app · prototype",
+    "Family app · live",
     "Energy Scanner",
     "Bedtime was a nightly negotiation. What if a neutral machine said it was time, instead of me?",
-    [("Routine", "steps first, scan as the finale"), ("Colors", "each energy level has its own summary"), ("Grey", "a grown-up switch makes every scan read sleepy")],
+    [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
+     ("On-device", "photos never leave the phone"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
-        ("The idea", "<p>Kids work through their bedtime routine, then step up for an energy scan that returns a color, like grey, yellow or rainbow, with a fun summary. "
+        ("The idea", "<p>Kids tick off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (way too much sparkle for sleeping) down to Grey (battery empty, time to recharge). "
          "A neutral \"machine says so\" authority takes the argument off the parent.</p>"),
-        ("Decisions so far", '<ul class="clean"><li><b>Routine first.</b> A fake scan alone wears off, so the scan is the reward at the end of real steps.</li>'
-         "<li><b>Privacy before camera.</b> Kids' faces shouldn't go to a cloud model, so the camera waits until on-device or no-storage options are settled.</li></ul>"),
-        ("Status", "<p>A working prototype my kids are testing at bedtime. The vision-model version gets built only if the novelty holds.</p>"),
+        ("Two ways to scan", '<ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>'
+         "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, blazing at Rainbow. Grown-ups can save or share it.</li></ul>"),
+        ("Decisions", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps, and it never reads Rainbow once every step is done.</li>'
+         "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul>"),
+        ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
     ],
-    links=[("Try the demo", "demo/energy-scanner/")],
+    links=[("Try it", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
 )
 
 pm_tools = """<div class="read">
@@ -320,7 +323,7 @@ PAGES = [
     ("family-photos.html", "Family photo app", "A private family photo app for split families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
-    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with a playful energy scan.", energy),
+    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
     ("pm-tools.html", "How I work", "The tools and rituals behind a one-person product studio.", pm_tools),
     ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
     ("about.html", "About", "Chase Holroyd's path from solar design to product management and AI.", about),

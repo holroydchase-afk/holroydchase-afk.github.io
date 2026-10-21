@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Energy Scanner · Chase Holroyd</title>
-<meta name="description" content="A bedtime routine for kids that ends with a playful energy scan.">
+<meta name="description" content="A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.">
 <meta property="og:title" content="Energy Scanner · Chase Holroyd">
-<meta property="og:description" content="A bedtime routine for kids that ends with a playful energy scan.">
+<meta property="og:description" content="A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.">
 <meta property="og:url" content="https://chaseholroyd.com/energy-scanner.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://chaseholroyd.com/assets/share-card.png">
@@ -29,13 +29,13 @@
 </div></header>
 <main class="wrap" id="main">
 <div class="read">
-<p class="eyebrow">Family app · prototype</p>
+<p class="eyebrow">Family app · live</p>
 <h1>Energy Scanner</h1>
 <p class="lede">Bedtime was a nightly negotiation. What if a neutral machine said it was time, instead of me?</p>
-<div class="cta"><a class="btn primary" href="demo/energy-scanner/">Try the demo</a></div>
+<div class="cta"><a class="btn primary" href="/energy-scanner/">Try it</a><a class="btn" href="https://github.com/holroydchase-afk/energy-scanner">View on GitHub</a></div>
 </div>
-<div class="facts"><div class="fact"><b>Routine</b><span>steps first, scan as the finale</span></div><div class="fact"><b>Colors</b><span>each energy level has its own summary</span></div><div class="fact"><b>Grey</b><span>a grown-up switch makes every scan read sleepy</span></div></div>
-<div class="read"><h2>The idea</h2><p>Kids work through their bedtime routine, then step up for an energy scan that returns a color, like grey, yellow or rainbow, with a fun summary. A neutral "machine says so" authority takes the argument off the parent.</p><h2>Decisions so far</h2><ul class="clean"><li><b>Routine first.</b> A fake scan alone wears off, so the scan is the reward at the end of real steps.</li><li><b>Privacy before camera.</b> Kids' faces shouldn't go to a cloud model, so the camera waits until on-device or no-storage options are settled.</li></ul><h2>Status</h2><p>A working prototype my kids are testing at bedtime. The vision-model version gets built only if the novelty holds.</p>
+<div class="facts"><div class="fact"><b>Routine</b><span>steps first, scan as the finale</span></div><div class="fact"><b>2 scans</b><span>palm pad, or a photo with a live aura</span></div><div class="fact"><b>On-device</b><span>photos never leave the phone</span></div><div class="fact"><b>Grey</b><span>a grown-up switch makes every scan read sleepy</span></div></div>
+<div class="read"><h2>The idea</h2><p>Kids tick off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (way too much sparkle for sleeping) down to Grey (battery empty, time to recharge). A neutral "machine says so" authority takes the argument off the parent.</p><h2>Two ways to scan</h2><ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li><li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, blazing at Rainbow. Grown-ups can save or share it.</li></ul><h2>Decisions</h2><ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps, and it never reads Rainbow once every step is done.</li><li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul><h2>Status</h2><p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>
 <p style="margin-top:40px"><a href="index.html">← All work</a></p></div>
 </main>
 <footer class="site"><div class="wrap">
