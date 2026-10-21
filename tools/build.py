@@ -53,7 +53,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>Chase Holroyd · Senior product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Senior product manager · Charlotte, NC</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
