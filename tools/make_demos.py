@@ -15,8 +15,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "tools" / "demo-src"
 
 SOURCES = {  # demo name -> artifact the snapshot came from
-    "build-slate": "https://claude.ai/artifact/261U9aQ4SAaMf5bvhCFdpM",
-    "roadmap": "https://claude.ai/artifact/1CRcZoHYYrSDTUJGMVLUpc",
     "energy-scanner": "https://claude.ai/artifact/VphgM8fKNVhcDc31RVdBJr",
     "role-radar": "https://claude.ai/artifact/YQFGobfPX9BKkv4yibcnsr",
 }
