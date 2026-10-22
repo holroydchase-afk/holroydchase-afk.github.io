@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-22 (WEB-M5 draft #12 waits on Chase's answers; main merged in with WEB-M3.5 Role Radar move #14 and WEB-M3.6 Hearth demo #15)
+Last updated: 2026-10-22 (WEB-M5.5 critique fixes on top of the #12 redraft; the home page is shippable once Chase answers the [check]s)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -55,6 +55,8 @@ Chase: the site is a case study of how he grew in using AI to solve problems in 
 | WEB-M5.2 | "How I work" leaves the nav; the page becomes "How I keep it all moving" (the system behind it), with PR #11's copy fixes plus "work-session estimates". About drops the dated "Since Jan 2026" line for "Now: building with AI" | doing (same PR) |
 | WEB-M5.3 | Each product page opens with its life story and real users (needs Chase's stories) | todo |
 | WEB-M5.4 | Case studies (WEB-M2.3/M2.4) linked from the ADT and Patter cards once their [check]s clear | blocked on Chase |
+| WEB-M5.5 | Critique fixes (Fable review, Oct 22, `pmo/portfolio/2026-10-22-fable-critique.md` in project files): H1 keeps the specialty with AI as the second beat; the journey is a numbered one-column steps list (`.steps`) with a "what changed in how I build" line per step; [check] who-lines are kept in `JOURNEY` but not rendered; career tags shortened to "2016–2019 · Engineer to Director"; "supported the $6M round" (the resume's claim); the ADT card has no link until its case study lands; family page: story before the cipher names, laptop shot hidden under 700px (`.wide-only`) | done (this PR) |
+Open: the Hearth demo at /demo/hearth/ shows "Hearth (working name)" and the tab title "Hearth" while this site withholds the name; intake sent to the Hearth project (Oct 22) to rebuild without it.
 Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this container can't open patter or palmetto sites), who uses Energy Scanner, Role Radar and ccwatts today, and whether "about an hour a night" is OK to publish.
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.

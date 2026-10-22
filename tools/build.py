@@ -109,38 +109,45 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 # Career highlights on the home page. Facts trace to pmo/story/resume-2026-10.md; outside links are public pages.
 # [check] items wait on Chase (WEB-M5); none of this merges until they're cleared.
 CAREER = [
-    ("Patter AI", "Staff PM · 2023–2026",
+    ("Patter AI", "2023–2026 · Staff PM",
      "An AI-native sales platform for solar and home services. I led one real-time pricing engine across loans, leases and PPAs, "
      "rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut onboarding from about a month to a week.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
-    ("ADT Solar", "PM → Senior PM · 2020–2023",
+    ("ADT Solar", "2020–2023 · PM to Senior PM",
      "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
      "and lender allocation that helped cut dealer fees 3–5 points, shipped to about 5,000 reps.",
-     [("Resume", "resume.html")]),
-    ("Palmetto", "Engineer → Director of Product · 2016–2019",
-     "I was Palmetto's first PM and built Alchemy, its design, proposal and real-time credit platform. Palmetto raised $6M to grow it. "
+     []),  # Links to the ADT case study once WEB-M2.3 clears
+    ("Palmetto", "2016–2019 · Engineer to Director",
+     "I was Palmetto's first PM and built Alchemy, its design, proposal and real-time credit platform, and supported the $6M round that funded it. "
      "Then I launched a machine-learning lead marketplace at 11,500+ consultations a month.",
      [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
 ]
 
 # The AI journey: each product starts with a problem in Chase's life and its real users. Ordered by how the
 # building grew (one prototype page → scheduled agent → open source → an agent team → the system behind it), not by date.
+# (page, product, the life problem, what changed in how I built it, who uses it, CTA label). A "[check]" who-line is
+# not rendered until Chase answers it (WEB-M5).
 JOURNEY = [
-    ("energy-scanner.html", "A one-page prototype", "Energy Scanner",
-     "Bedtime with my kids was a nightly negotiation. A prototype they tested at bedtime became a routine that ends in an energy scan, so the machine says it's bedtime instead of me.",
-     "[check] Who uses it today, e.g. my kids every night"),
-    ("role-radar.html", "A scheduled agent", "Role Radar",
-     "Job hunting meant hours of sifting. An agent now reads about 110 company boards each weekday and scores every role with a reason, so I only read the right few.",
-     "[check] Who uses it besides me"),
-    ("ccwatts.html", "Open source", "ccwatts",
+    ("energy-scanner.html", "Energy Scanner",
+     "Bedtime with my kids was a nightly negotiation. Now a routine ends in an energy scan, so the machine says it's bedtime instead of me.",
+     "One page, prompted into existence in an evening and tested at bedtime the same night.",
+     "[check] Who uses it today, e.g. my kids every night", "Try the app"),
+    ("role-radar.html", "Role Radar",
+     "Job hunting meant hours of sifting. An agent now reads about 110 company boards each weekday and scores every role with a reason.",
+     "First scheduled agent: it runs without me, and I only read the right few.",
+     "[check] Who uses it besides me", "Try the demo"),
+    ("ccwatts.html", "ccwatts",
      "I wanted to know what my own AI coding costs in electricity. Nobody had packaged it, so I built a local tool that answers as an honest range.",
-     "[check] Who's using it"),
-    ("family-photos.html", "A team of AI agents", "Family photo app",
-     "Two blended families, five group texts, grandparents on Android. I ran AI agents like a product team (spec, tests first, privacy review) to build one private place for our photos.",
-     "Family beta with about a dozen relatives, mostly grandparents, in late November"),
-    ("pm-tools.html", "The system behind it", "How I keep it all moving",
-     "Five products on about an hour a night only works with a system: one slate, one roadmap, and AI agents with clear lanes. The demos run on a snapshot of my real slate.",
-     "[check] OK to say \"about an hour a night\"?"),
+     "First open-source release: a public methodology, tests, and every assumption sourced.",
+     "[check] Who's using it", "Try the playground"),
+    ("family-photos.html", "Family photo app",
+     "Two blended families, five group texts, grandparents on Android. One private place for our photos, where every post has a chosen audience.",
+     "I ran AI agents like a product team: spec, tests first, privacy review, and a UX pass for grandparents.",
+     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo"),
+    ("pm-tools.html", "How I keep it all moving",
+     "Five products in the evenings only works with a system: one slate, one roadmap, and AI agents with clear lanes.",
+     "The system behind the rest. The demos run on a scrubbed snapshot of my real slate.",
+     "[check] OK to say \"about an hour a night\"?", "See the system"),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
@@ -153,24 +160,27 @@ PROOF = [
 
 home = f"""<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
-<h1>A staff PM who builds with AI to fix real problems.</h1>
-<p class="lede">For 8+ years I built the pricing, credit and checkout software that sells and finances home solar, at Palmetto, ADT and Patter AI. Lately I've been prototyping with AI to solve problems in my own life, and I'm onboarding real people to each one.</p>
+<h1>Staff PM for pricing, payments and point-of-sale lending. I build with AI to fix real problems.</h1>
+<p class="lede">8+ years building the pricing, credit and checkout software that sells and finances home solar, at Palmetto, ADT and Patter AI. Lately I've been prototyping with AI to solve problems in my own life, and onboarding real people to each one.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
 <div class="read"><h2>Career highlights</h2>
 <p>Pricing, payments and point-of-sale lending, from the first PM seat to staff.</p></div>
 <div class="grid">""" + "".join(
-    f'<div class="card career"><span class="tag">{r}</span><h3>{c}</h3><p>{d}</p><p class="links">'
-    + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p></div>"
+    f'<div class="card career"><span class="tag">{r}</span><h3>{c}</h3><p>{d}</p>'
+    + (('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else "")
+    + "</div>"
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="read"><h2>What I've built with AI</h2>
-<p>Each of these started as a problem in my own life. Together they show how my building with AI grew: from one prototype page to a team of agents with tests and reviews. Every demo runs on sample data, right in your browser.</p></div>
-<div class="grid">""" + "".join(
-    f'<a class="card" href="{h}"><span class="tag">{s}</span><h3>{n}</h3><p>{d}</p><p class="who">{w}</p></a>'
-    for h, s, n, d, w in JOURNEY
-) + "</div>"
+<p>Each one started as a problem in my own life, and each step changed how I build: from one prototype page to a team of agents with tests and reviews. Every demo runs on sample data, right in your browser.</p></div>
+<ol class="steps">""" + "".join(
+    f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
+    + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
+    + f'<p class="go"><a href="{h}">{cta} →</a></p></div></li>'
+    for h, n, d, how, w, cta in JOURNEY
+) + "</ol>"
 
 family = product(
     "Mobile app · building",
@@ -183,11 +193,11 @@ family = product(
         ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send meant worrying about who felt left out. "
          "Existing family apps didn't handle two equal households, and we don't post our kids publicly.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
-         "<li><b>Privacy underneath:</b> photos are encrypted on the phone (AES-256-GCM) before upload, group chat is end-to-end encrypted with MLS (RFC 9420), "
-         "database-level access rules make a post you can't see behave as \"not found\", and photo location data is stripped on the phone.</li>"
          "<li><b>No pressure to perform:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
-         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li></ul>"),
-        ("What it looks like", '<figure class="gallery-wide"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
+         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li>"
+         "<li><b>Privacy underneath:</b> photos are encrypted on the phone before upload, group chat is end-to-end encrypted, a post you can't see behaves as \"not found\", and photo location data is stripped on the phone. "
+         "(For the technical reader: AES-256-GCM, MLS per RFC 9420, and Postgres row-level security.)</li></ul>"),
+        ("What it looks like", '<figure class="gallery-wide wide-only"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
          '<div class="gallery">'
          '<img src="assets/family/iphone-02-share.webp" width="390" height="844" loading="lazy" alt="Share screen: a picked photo, a caption, and the group that will see it">'
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
