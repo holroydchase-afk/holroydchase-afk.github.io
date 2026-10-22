@@ -229,10 +229,10 @@ pm_tools = """<div class="read">
 <h1>How I run product work, end to end.</h1>
 <p class="lede">These are the tools and rituals I use to ship several products in parallel without losing the thread. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
 <h2>Build Slate</h2>
-<p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps me at five live projects so I go deep, not wide.</p>
+<p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps me at five active projects so I go deep, not wide.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/build-slate/">Try Build Slate</a></div>
 <h2>Near-term roadmap</h2>
-<p>Now, Next, Later and Done lanes with a board per product, owners, session-size estimates and a blocked flag. Any AI session can read and update it by link, so the roadmap stays current without me retyping it.</p>
+<p>Later, Next, Now and Done lanes with a board per product, owners, session-size estimates and a blocked flag. Any AI session can read and update it by link, so the roadmap stays current without me retyping it.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/roadmap/">Try the roadmap</a></div><p>Source for both apps, plus the PM templates and routines below, is on <a href="https://github.com/holroydchase-afk/pm-tools">GitHub</a>.</p>
 <h2>Decisions that leave a trail</h2>
 <ul class="clean"><li><b>Decision log:</b> every call records why, and what it beat.</li>
