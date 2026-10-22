@@ -73,3 +73,8 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   .resume .job{margin-top:8pt;break-inside:avoid}
   a{color:#000;text-decoration:none}
 }
+/* WEB-M5: career cards hold their own links, so they don't lift like the linked cards */
+.card.career:hover{border-color:var(--line);transform:none}
+.card .links{margin-top:auto;font-size:15px}
+.card .links a{display:inline-block;padding:10px 0;color:var(--accent)}
+.card .who{margin-top:auto;padding-top:6px;border-top:1px solid var(--line);font-size:14px}

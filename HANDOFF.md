@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-22 (WEB-M4 recruiter-ready review: P0/P1 fixes in draft PR)
+Last updated: 2026-10-22 (WEB-M5 draft: AI-journey reframe and career highlights)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -39,6 +39,16 @@ ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs
 - Studio agents synced into `.claude/agents/` from studio-agents (includes the upgraded ux-reviewer with the visual pass and showcase review, studio-agents draft PR #6 or later); re-sync with its `scripts/sync.sh`.
 - Next (overnight): WEB-M4.7 one sample-data screenshot per product page; pm-tools PMT-M2.2 re-seed, M2.3 landing nav.
 - Decision for Chase: WEB-M4.8, add "Independent product work, Jan 2026 – present" to the resume page? It mirrors your real resume, so it's your call.
+
+## WEB-M5 "my AI journey" reframe (Chase, Oct 22)
+Chase: the site is a case study of how he grew in using AI to solve problems in his own life, each product tied to a life story and its real users, told as a journey rather than a fixed timeline. His biggest career wins (Palmetto, ADT, Patter) belong on the front page, with links to Patter and Palmetto. He doesn't like "How I work". This overrides the staff PM's stop rule below.
+| ID | Task | Status |
+|---|---|---|
+| WEB-M5.1 | Home: hero "A staff PM who builds with AI to fix real problems", career highlight cards (Patter, ADT, Palmetto) with outside links, "What I've built with AI" journey cards ordered by how the building grew (prototype, scheduled agent, open source, agent team, the system) with a "who uses it" line each | doing (draft PR, [check] items wait on Chase) |
+| WEB-M5.2 | "How I work" leaves the nav; the page becomes "How I keep it all moving" (the system behind it), with PR #11's copy fixes plus "work-session estimates". About drops the dated "Since Jan 2026" line for "Now: building with AI" | doing (same PR) |
+| WEB-M5.3 | Each product page opens with its life story and real users (needs Chase's stories) | todo |
+| WEB-M5.4 | Case studies (WEB-M2.3/M2.4) linked from the ADT and Patter cards once their [check]s clear | blocked on Chase |
+Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this container can't open patter or palmetto sites), who uses Energy Scanner, Role Radar and ccwatts today, and whether "about an hour a night" is OK to publish.
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
