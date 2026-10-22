@@ -36,7 +36,7 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 ## WEB-M4 "recruiter-ready review" (Oct 22)
 ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs/reviews/2026-10-22-recruiter-ready.md`.
 - Done in this PR: WEB-M4.1 deploy only site files (`_site/` allowlist in pages.yml) and no claude.ai links in the repo (they remain in git history; no rewrite), M4.2 hero says "Most recently Staff PM at Patter AI", M4.3 "View resume" on the first screen, M4.4 How I work and family app copy, M4.5 styled 404 on nested paths, M4.6 `site-checks.yml` CI.
-- Studio agents copied into `.claude/agents/` (from studio-agents; re-sync with its `scripts/sync.sh`).
+- Studio agents synced into `.claude/agents/` from studio-agents (includes the upgraded ux-reviewer with the visual pass and showcase review, studio-agents draft PR #6 or later); re-sync with its `scripts/sync.sh`.
 - Next (overnight): WEB-M4.7 one sample-data screenshot per product page; pm-tools PMT-M2.2 re-seed, M2.3 landing nav.
 - Decision for Chase: WEB-M4.8, add "Independent product work, Jan 2026 – present" to the resume page? It mirrors your real resume, so it's your call.
 
