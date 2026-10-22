@@ -102,7 +102,7 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None):
 
 CARDS = [
     ("role-radar.html", "Live demo", "Role Radar",
-     "A job-search radar that scans about 110 company boards each weekday and turns a good match into a tailored resume in one tap."),
+     "A job-search radar that reads about 110 company boards each weekday and scores every role 0–100 with a reason, so I spend my time on the right few."),
     ("ccwatts.html", "Live playground", "ccwatts",
      "How much electricity does your AI coding agent use? A local tool that answers as an honest range, with every assumption sourced."),
     ("pm-tools.html", "Live demos", "How I run product work",
@@ -160,20 +160,21 @@ family = product(
 role_radar = product(
     "AI tool · beta",
     "Role Radar",
-    "Job searching is mostly finding, filtering and re-typing. I built a radar that does the first two every weekday and turns the third into one tap.",
-    [("~110", "company job boards watched"), ("4", "sources merged and de-duplicated"), ("1 tap", "from match to tailored resume"),
-     ("< 20 min", "target per fast-lane application")],
+    "Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.",
+    [("~110", "company job boards watched"), ("4", "sources merged and de-duplicated"), ("0–100", "fit score, each with a one-line reason"),
+     ("By hand", "every application is still my call")],
     [
-        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails.</li>'
-         "<li>It filters by my rules (title, remote, comp floor, industries), rates each fit as strong, maybe or stretch with a one-line reason, and flags any role that competes with something I'm building.</li>"
-         "<li>Application status updates itself from confirmation and rejection emails, read-only.</li>"
-         "<li>One tracker holds everything, and an Apply button starts a resume intake that drafts a tailored version from my career master.</li></ul>"),
-        ("Product decisions", '<ul class="clean"><li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>'
-         "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li>"
-         "<li><b>Built to be shared.</b> Filters and profile live in config, so other job seekers can copy it.</li></ul>"),
-        ("Stack", "<p>A Claude artifact with a saved database, a weekday scheduled agent, Gmail (read-only) and ZipRecruiter connectors, and a resume-intake skill that fills a Google Docs template.</p>"),
+        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li>'
+         "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
+         "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
+        ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
+         "<li><b>Precision, not volume.</b> The goal is fewer, better applications. The measure is how many top-scored roles turn into real conversations.</li>"
+         "<li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li>"
+         "<li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>"
+         "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
+        ("Stack", "<p>A Claude artifact with a saved database, a weekday scheduled agent, and the ZipRecruiter and email connectors.</p>"),
     ],
-    status_note="The demo uses made-up jobs, companies and people, never real applications. Changes you make stay in your browser.",
+    status_note="The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.",
     links=[("Try the demo", "demo/role-radar/")],
 )
 
