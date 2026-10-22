@@ -181,5 +181,5 @@ scoring:
   };
 
   window.DEMO_FULL = FULL;
-  window.DEMO = { key: FULL ? "role-radar-full" : "role-radar-v2", seed: { jobs, companies, recruiters, meta } };
+  window.DEMO = { back: "../../role-radar.html", backLabel: "← Back to Role Radar", key: FULL ? "role-radar-full" : "role-radar-v2", seed: { jobs, companies, recruiters, meta } };
 })();
