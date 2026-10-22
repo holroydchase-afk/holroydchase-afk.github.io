@@ -72,7 +72,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Staff product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte area</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
@@ -168,10 +168,10 @@ role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.",
-    [("~110", "company job boards watched"), ("4", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
+    [("~110", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
-        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li>'
+        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
          "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
          "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
         ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
@@ -181,10 +181,10 @@ role_radar = product(
          "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
         ("Stack", "<p>A single-page app on Claude with its own saved database, a scheduled agent that runs each weekday, and connectors for ZipRecruiter and email.</p>"),
     ],
-    status_note="The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.",
-    links=[("Try the live demo", "demo/role-radar/"), ("View on GitHub", f"{GITHUB}/role-radar")],
+    status_note="The demo uses made-up jobs and companies, never real applications. Try anything: the demo resets when you reload.",
+    links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
-          "The demo reads 7 sample boards. The real radar watches about 110."),
+          "The demo reads 9 sample boards. The real radar watches about 110."),
 )
 
 ccwatts = product(
