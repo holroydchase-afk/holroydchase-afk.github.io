@@ -21,8 +21,14 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+      # Deploy only the public site, not HANDOFF.md, CLAUDE.md, tools/ or .claude/ (WEB-M4.1)
+      - name: Stage site files
+        run: |
+          mkdir _site
+          cp -r *.html assets demo robots.txt sitemap.xml CNAME LICENSE _site/
+          for f in HANDOFF.md CLAUDE.md tools .claude .github; do test ! -e "_site/$f"; done
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

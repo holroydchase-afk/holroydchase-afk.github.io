@@ -14,9 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "tools" / "demo-src"
 
-SOURCES = {  # demo name -> artifact the snapshot came from
-    "energy-scanner": "https://claude.ai/artifact/VphgM8fKNVhcDc31RVdBJr",
-    "role-radar": "https://claude.ai/artifact/YQFGobfPX9BKkv4yibcnsr",
+SOURCES = {  # demo name -> artifact the snapshot came from (links live in project memory; this repo is public)
+    "energy-scanner": "energy-scanner bedtime artifact",
+    "role-radar": "role-radar artifact",
 }
 # Demo-only changes to the app itself, as (old, new) pairs.
 EDITS = {

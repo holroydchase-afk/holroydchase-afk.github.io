@@ -43,7 +43,7 @@ def page(slug, title, description, body):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{'<base href="/">' + chr(10) if slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{full_title}">
@@ -124,8 +124,8 @@ PROOF = [
 home = f"""<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
 <h1>Staff PM for pricing, payments and point-of-sale lending.</h1>
-<p class="lede">8+ years building credit, offer and pricing engines for lenders, dealers and about 5,000 sales reps. Staff PM at Patter AI; before that ADT and Palmetto.</p>
-<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="about.html">My path</a></div>
+<p class="lede">8+ years building credit, offer and pricing engines for lenders, dealers and about 5,000 sales reps. Most recently Staff PM at Patter AI; before that ADT and Palmetto.</p>
+<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
 <div class="read">
@@ -138,7 +138,7 @@ home = f"""<div class="read">
 
 family = product(
     "Mobile app · building",
-    "A family photo app (name coming)",
+    "A private family photo app",
     "Five family group texts, two divorced-and-remarried families, grandpas on Android and everyone else on iPhone. "
     "I wanted one private place where each photo goes to exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
@@ -154,7 +154,7 @@ family = product(
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
-    status_note="The app is being renamed before beta, so this page uses a placeholder name for now. The code is private.",
+    status_note="The code is private; beta starts late November.",
 )
 
 role_radar = product(
@@ -215,8 +215,8 @@ energy = product(
 
 pm_tools = """<div class="read">
 <p class="eyebrow">How I work</p>
-<h1>A product studio of one, run like a team.</h1>
-<p class="lede">I have about an hour a night. These are the tools and rituals that let me ship several products at once without losing the thread. The two apps below are live demos with my real slate and roadmap as of October 2026; anything you change stays in your browser.</p>
+<h1>How I run product work, end to end.</h1>
+<p class="lede">These are the tools and rituals I use to ship several products in parallel without losing the thread. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
 <h2>Build Slate</h2>
 <p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps me at five live projects so I go deep, not wide.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/build-slate/">Try Build Slate</a></div>
