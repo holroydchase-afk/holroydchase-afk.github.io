@@ -71,7 +71,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Staff product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte area</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
@@ -182,25 +182,34 @@ family = product(
     [
         ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send meant worrying about who felt left out. "
          "Existing family apps didn't handle two equal households, and we don't post our kids publicly.</p>"),
-        ("What I built", '<ul class="clean"><li><b>Groups and households:</b> share with Everyone, one side of the family, a single house, or an event like a birthday trip.</li>'
-         "<li><b>Privacy underneath:</b> database-level access rules, a post you can't see behaves as \"not found\", and photo location data is stripped on the phone.</li>"
+        ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
+         "<li><b>Privacy underneath:</b> photos are encrypted on the phone (AES-256-GCM) before upload, group chat is end-to-end encrypted with MLS (RFC 9420), "
+         "database-level access rules make a post you can't see behave as \"not found\", and photo location data is stripped on the phone.</li>"
+         "<li><b>No pressure to perform:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
          "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li></ul>"),
-        ("How I built it", "<p>I ran it like a small team: a staff PM agent writes the spec, a QA agent writes failing tests, an engineer agent makes them pass, "
-         "and privacy and UX reviewers sign off. By the second week there were 600+ backend checks and 340 app tests, and a co-parent data leak was caught in review before any real user saw it.</p>"
+        ("What it looks like", '<figure class="gallery-wide"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
+         '<div class="gallery">'
+         '<img src="assets/family/iphone-02-share.webp" width="390" height="844" loading="lazy" alt="Share screen: a picked photo, a caption, and the group that will see it">'
+         '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
+         '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
+         '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
+        ("How I built it", "<p>I ran it like a small team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
+         "QA writes failing tests first and the engineer makes them pass. There are 600+ app tests and 800+ database checks, and a co-parent data leak was caught in review before any real user saw it.</p>"
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
-    status_note="The code is private; beta starts late November.",
+    status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private; the family beta starts late November.",
+    links=[("Try the demo", "demo/hearth/")],
 )
 
 role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.",
-    [("~110", "company job boards watched"), ("4", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
+    [("~110", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
-        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li>'
+        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
          "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
          "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
         ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
@@ -210,10 +219,10 @@ role_radar = product(
          "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
         ("Stack", "<p>A single-page app on Claude with its own saved database, a scheduled agent that runs each weekday, and connectors for ZipRecruiter and email.</p>"),
     ],
-    status_note="The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.",
-    links=[("Try the live demo", "demo/role-radar/"), ("View on GitHub", f"{GITHUB}/role-radar")],
+    status_note="The demo uses made-up jobs and companies, never real applications. Try anything: the demo resets when you reload.",
+    links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
-          "The demo reads 7 sample boards. The real radar watches about 110."),
+          "The demo reads 9 sample boards. The real radar watches about 110."),
 )
 
 ccwatts = product(
