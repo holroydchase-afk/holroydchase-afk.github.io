@@ -168,7 +168,7 @@ role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.",
-    [("~110", "company job boards watched"), ("4", "sources merged and de-duplicated"), ("0–100", "fit score, each with a one-line reason"),
+    [("~110", "company job boards watched"), ("4", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li>'

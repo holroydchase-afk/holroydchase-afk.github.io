@@ -44,3 +44,14 @@ Scope: role-radar, ccwatts, energy-scanner and family-photos pages, shared CSS a
 | QAR1-3 | P3 | Role Radar demo loads js-yaml from a CDN | Role Radar intake (its demo moves to its own repo) |
 | QAR1-4 | note | ?full hides in the browser only; seed data ships to everyone | fine while seed data stays made up |
 Notes for WEB-M5 (home): career cards and links, the dated "Since Jan 2026" heading, and "every demo runs on sample data" not being true of the family app or Energy Scanner. #12 covers the first two; the third is a #12 copy fix.
+
+### Round 2: ux-reviewer and qa-tdd (QA in its own copy)
+All round 1 fixes held. QA: CI steps, a 44-load crawl, alt text and aspect ratios, 44px targets, one h1 per page, caption contrast (5.75:1 light, 7.33:1 dark), the demo bar and the privacy grep all passed, identical across 3 repeats.
+| ID | Pri | Finding | Status |
+|---|---|---|---|
+| UXR2-1 | P2 | At 900–1099px the fourth fact wrapped alone | done: 2x2 facts in that range |
+| UXR2-2 | P3 | Role Radar shot still showed the old demo bar | done: re-shot |
+| UXR2-3 | P3 | "de-duplicated" broke at the hyphen | done: "sources merged, duplicates removed" |
+| QAR2-1 | P3 | Skip link 43px while hidden | done: sizing on the base rule |
+| QAR2-2 | P3 | Public demo HTML still contains the hidden Apply/intake text | accepted; goes away when Role Radar hosts its own demo |
+Result: nothing at P2 or above is left in scope. The loop stops here.
