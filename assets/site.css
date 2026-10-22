@@ -73,9 +73,15 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   .resume .job{margin-top:8pt;break-inside:avoid}
   a{color:#000;text-decoration:none}
 }
-/* WEB-M4.7: phone screenshot under the lede */
+/* WEB-M4.7: phone screenshot under the lede. On wide screens it sits beside the text and facts, so the facts stay above the fold */
 .shot{margin:28px 0 0}
 .shot img{display:block;width:min(300px,78%);height:auto;border-radius:22px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.12)}
-/* UX-13: 44px tap targets for nav, footer and back links */
-nav.top a,footer.site a,.back a{display:inline-flex;align-items:center;min-height:44px}
+.shot figcaption{margin-top:10px;max-width:300px;font-size:14.5px;color:var(--muted)}
+@media(min-width:900px){.hero.has-shot{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"text shot" "facts shot";column-gap:56px;align-items:start}
+  .hero.has-shot>.read{grid-area:text}.hero.has-shot>.facts{grid-area:facts}
+  .hero.has-shot .shot{grid-area:shot;margin:0}.hero.has-shot .shot img{width:300px}}
+/* UX-13: 44px tap targets for the name, nav, footer, back and skip links */
+header.site .mark,nav.top a,footer.site a,.back a{display:inline-flex;align-items:center;min-height:44px}
+.skip:focus{min-height:44px;display:inline-flex;align-items:center}
+footer.site .wrap{align-items:center}
 .back{margin-top:40px}

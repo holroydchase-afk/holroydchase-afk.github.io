@@ -28,19 +28,18 @@
 <nav class="top" aria-label="Main"><a href="index.html">Work</a><a href="pm-tools.html">How I work</a><a href="resume.html">Resume</a><a href="about.html">About</a></nav>
 </div></header>
 <main class="wrap" id="main">
-<div class="read">
+<div class="hero has-shot"><div class="read">
 <p class="eyebrow">AI tool · beta</p>
 <h1>Role Radar</h1>
 <p class="lede">Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.</p>
 <div class="cta"><a class="btn primary" href="demo/role-radar/">Try the live demo</a><a class="btn" href="https://github.com/holroydchase-afk/role-radar">View on GitHub</a></div>
-<figure class="shot"><img src="assets/shots/role-radar-phone.webp" width="300" height="600" alt="Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits." loading="lazy" decoding="async"></figure>
-</div>
-<div class="facts"><div class="fact"><b>~110</b><span>company job boards watched</span></div><div class="fact"><b>4</b><span>sources merged and de-duplicated</span></div><div class="fact"><b>0–100</b><span>fit score, each with a one-line reason</span></div><div class="fact"><b>By hand</b><span>every application is still my call</span></div></div>
+</div><figure class="shot"><img src="assets/shots/role-radar-phone.webp" width="300" height="600" alt="Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits." fetchpriority="high" decoding="async"><figcaption>The demo reads 7 sample boards. The real radar watches about 110.</figcaption></figure>
+<div class="facts"><div class="fact"><b>~110</b><span>company job boards watched</span></div><div class="fact"><b>4</b><span>sources merged and de-duplicated</span></div><div class="fact"><b>0–100</b><span>fit score, each with a one-line reason</span></div><div class="fact"><b>By hand</b><span>every application is still my call</span></div></div></div>
 <div class="read"><h2>How it works</h2><ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li><li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li><li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul><h2>Product decisions</h2><ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li><li><b>Precision, not volume.</b> The goal is fewer, better applications. The measure is how many top-scored roles turn into real conversations.</li><li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li><li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li><li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul><h2>Stack</h2><p>A single-page app on Claude with its own saved database, a scheduled agent that runs each weekday, and connectors for ZipRecruiter and email.</p><p class="note">The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.</p>
 <p class="back"><a href="index.html">← All work</a></p></div>
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte, NC</span>
 <span><a href="https://www.linkedin.com/in/chase-holroyd">LinkedIn</a> · <a href="https://github.com/holroydchase-afk">GitHub</a></span>
 </div></footer>
 </body>

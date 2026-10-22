@@ -72,7 +72,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte, NC</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
@@ -90,16 +90,19 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
     secs = "".join(f"<h2>{h}</h2>{c}" for h, c in sections)
     note = f'<p class="note">{status_note}</p>' if status_note else ""
     # One phone screenshot under the lede, sample data only (WEB-M4.7). Source PNGs: 390x844 at 2x, cropped, WebP.
-    shot_html = (f'<figure class="shot"><img src="assets/shots/{shot[0]}" width="300" height="600" '
-                 f'alt="{shot[1]}" loading="lazy" decoding="async"></figure>') if shot else ""
-    return f"""<div class="read">
+    # shot = (file, alt, height at 300px wide, optional caption). It sits above the fold, so it loads eagerly.
+    shot_html = ""
+    if shot:
+        cap = f"<figcaption>{shot[3]}</figcaption>" if len(shot) > 3 else ""
+        shot_html = (f'<figure class="shot"><img src="assets/shots/{shot[0]}" width="300" height="{shot[2]}" '
+                     f'alt="{shot[1]}" fetchpriority="high" decoding="async">{cap}</figure>')
+    return f"""<div class="hero{" has-shot" if shot else ""}"><div class="read">
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
 {links_html}
-{shot_html}
-</div>
-<div class="facts">{facts_html}</div>
+</div>{shot_html}
+<div class="facts">{facts_html}</div></div>
 <div class="read">{secs}{note}
 <p class="back"><a href="index.html">← All work</a></p></div>"""
 
@@ -180,7 +183,8 @@ role_radar = product(
     ],
     status_note="The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.",
     links=[("Try the live demo", "demo/role-radar/"), ("View on GitHub", f"{GITHUB}/role-radar")],
-    shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits."),
+    shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
+          "The demo reads 7 sample boards. The real radar watches about 110."),
 )
 
 ccwatts = product(
@@ -198,7 +202,7 @@ ccwatts = product(
         ("Stack", "<p>A TypeScript monorepo with one shared core used by both the CLI (<code>npx ccwatts</code>) and an offline HTML dashboard.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
-    shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh."),
+    shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600),
 )
 
 energy = product(
@@ -217,7 +221,7 @@ energy = product(
         ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
     ],
     links=[("Try the live app", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
-    shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready."),
+    shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
 )
 
 pm_tools = """<div class="read">
