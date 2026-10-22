@@ -86,3 +86,8 @@ header.site .mark,nav.top a,footer.site a,.back a{display:inline-flex;align-item
 .skip{min-height:44px;display:inline-flex;align-items:center}
 footer.site .wrap{align-items:center}
 .back{margin-top:40px}
+/* Family app screenshots (Hearth intake, Oct 22) */
+.gallery-wide{margin:20px 0 0}
+.gallery-wide img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.gallery img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
