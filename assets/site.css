@@ -73,3 +73,9 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   .resume .job{margin-top:8pt;break-inside:avoid}
   a{color:#000;text-decoration:none}
 }
+/* WEB-M4.7: phone screenshot under the lede */
+.shot{margin:28px 0 0}
+.shot img{display:block;width:min(300px,78%);height:auto;border-radius:22px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+/* UX-13: 44px tap targets for nav, footer and back links */
+nav.top a,footer.site a,.back a{display:inline-flex;align-items:center;min-height:44px}
+.back{margin-top:40px}
