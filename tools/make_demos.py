@@ -22,16 +22,23 @@ SOURCES = {  # demo name -> artifact the snapshot came from
 EDITS = {
     # Start with a real reading; in the app a parent switch keeps every scan grey.
     "energy-scanner": [('store.get("alwaysGrey",true)', 'store.get("alwaysGrey",false)')],
-    # Portfolio shows the radar (scan, score, track), not resume drafting or the recruiter tracker (WEB-M3.4).
+    # Public demo shows the radar (scan, score, track). Resume drafting and the recruiter
+    # tracker only show with ?full, which seed.js reads into DEMO_FULL (WEB-M3.4).
     "role-radar": [
-        ('{id:"people",label:"Recruiters"},', ''),
-        ('<button class="apply" data-apply="${id}">${resumeUrl?"Re-run intake":"Apply"}</button>', ''),
-        ('${resumeUrl?`<a class="resume" href="${esc(resumeUrl)}" target="_blank" rel="noopener">${esc(j.resumeName||"Tailored resume")} ↗</a>`:(j.resumeName?`<span class="hint">Resume: ${esc(j.resumeName)}</span>`:`<span class="hint">Copies an intake prompt for a new chat</span>`)}', '<span class="hint">Every application is my own call, made by hand.</span>'),
-        ('<label for="cCmd">Intake command<input id="cCmd" class="mono" value="${esc(config.intakeCommand)}"></label>', ''),
-        ('<label for="cInstr">Intake instructions (added to every Apply prompt)<textarea id="cInstr">${esc(config.intakeInstructions)}</textarea></label>', ''),
-        ('return "Resume ready, not submitted"', 'return "Ready, not submitted"'),
-        ('intakeCommand:$("#cCmd").value.trim()||"/job-intake",intakeInstructions:$("#cInstr").value.trim()', ''),
-        ('"Follow-ups due, stale applications and unsent resumes show up here."', '"Follow-ups due and stale applications show up here."'),
+        ('{id:"people",label:"Recruiters"},', '...(window.DEMO_FULL?[{id:"people",label:"Recruiters"}]:[]),'),
+        ('<button class="apply" data-apply="${id}">${resumeUrl?"Re-run intake":"Apply"}</button>',
+         '${window.DEMO_FULL?`<button class="apply" data-apply="${id}">${resumeUrl?"Re-run intake":"Apply"}</button>`:""}'),
+        ('${resumeUrl?`<a class="resume" href="${esc(resumeUrl)}" target="_blank" rel="noopener">${esc(j.resumeName||"Tailored resume")} ↗</a>`:(j.resumeName?`<span class="hint">Resume: ${esc(j.resumeName)}</span>`:`<span class="hint">Copies an intake prompt for a new chat</span>`)}',
+         '${!window.DEMO_FULL?`<span class="hint">Every application is my own call, made by hand.</span>`:resumeUrl?`<a class="resume" href="${esc(resumeUrl)}" target="_blank" rel="noopener">${esc(j.resumeName||"Tailored resume")} ↗</a>`:(j.resumeName?`<span class="hint">Resume: ${esc(j.resumeName)}</span>`:`<span class="hint">Copies an intake prompt for a new chat</span>`)}'),
+        ('<label for="cCmd">Intake command<input id="cCmd" class="mono" value="${esc(config.intakeCommand)}"></label>',
+         '${window.DEMO_FULL?`<label for="cCmd">Intake command<input id="cCmd" class="mono" value="${esc(config.intakeCommand)}"></label>`:""}'),
+        ('<label for="cInstr">Intake instructions (added to every Apply prompt)<textarea id="cInstr">${esc(config.intakeInstructions)}</textarea></label>',
+         '${window.DEMO_FULL?`<label for="cInstr">Intake instructions (added to every Apply prompt)<textarea id="cInstr">${esc(config.intakeInstructions)}</textarea></label>`:""}'),
+        ('intakeCommand:$("#cCmd").value.trim()||"/job-intake",intakeInstructions:$("#cInstr").value.trim()',
+         '...(window.DEMO_FULL?{intakeCommand:$("#cCmd").value.trim()||"/job-intake",intakeInstructions:$("#cInstr").value.trim()}:{})'),
+        ('return "Resume ready, not submitted"', 'return window.DEMO_FULL?"Resume ready, not submitted":"Ready, not submitted"'),
+        ('"Follow-ups due, stale applications and unsent resumes show up here."',
+         '(window.DEMO_FULL?"Follow-ups due, stale applications and unsent resumes show up here.":"Follow-ups due and stale applications show up here.")'),
     ],
 }
 
