@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-22 (WEB-M3.5: Role Radar demo now hosted by its own repo at /role-radar/)
+Last updated: 2026-10-22 (WEB-M3.6: Hearth no-login demo at /demo/hearth/, family app page refreshed; WEB-M3.5 Role Radar move merged in PR #14)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -31,7 +31,8 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
 | WEB-M3.3 | Visit counter | dropped (no-analytics rule) |
 | WEB-M3.4 | Role Radar public demo shows the radar only (page reframed as "say no faster"). The resume intake/Apply, intake settings and Recruiters tab sit behind a flag: `/demo/role-radar/?full` shows them, for people Chase shares that link with. Chase's live app is unchanged. Storage keys `role-radar-v2` (public) and `role-radar-full` | done (PR #9, Oct 22). Next: Role Radar hosts its own demo (intake sent), then delete `demo/role-radar/` here |
-| WEB-M3.5 | Role Radar intake (Oct 22): "Try the live demo" opens /role-radar/ (built and deployed from the role-radar repo); `demo/role-radar/`, its snapshot and its make_demos.py edits are deleted; 5 sources (adds Climatebase); "Try anything: the demo resets when you reload"; "Code on GitHub"; footer "Charlotte area"; screenshot re-shot from Role Radar's own demo | done (this PR) |
+| WEB-M3.5 | Role Radar intake (Oct 22): "Try the live demo" opens /role-radar/ (built and deployed from the role-radar repo); `demo/role-radar/`, its snapshot and its make_demos.py edits are deleted; 5 sources (adds Climatebase); "Try anything: the demo resets when you reload"; "Code on GitHub"; footer "Charlotte area"; screenshot re-shot from Role Radar's own demo | done (PR #14, Oct 22) |
+| WEB-M3.6 | Hearth intake (Oct 22, `docs/portfolio/INTAKE-2026-10-22-demo.md` in the Hearth repo): no-login demo copied to `demo/hearth/` (built from Hearth main 10001df with `cd app && npm ci && bash scripts/build-demo.sh`, the contents of `app/dist-demo-site/`; a made-up family, drawn pictures, browser-only). family-photos.html gets "Try the demo", named groups, encryption (AES-256-GCM, MLS), no "Seen by" count, eight agents, 600+ app tests and 800+ database checks, and 4 screenshots in `assets/family/`. Placeholder name kept; the expo.app build and the private repo are not linked | done (this PR) |
 | ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | done (PR #8, Oct 21) |
 
 ## WEB-M4 "recruiter-ready review" (Oct 22)
@@ -59,6 +60,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 | energy-scanner (legacy, unlinked since ES-M2.3; remove next release) | link in project memory | 1792454453-b0d3 |
 
 ## Rules
+- `demo/hearth/` is a build output from the Hearth repo. Don't edit it here: rebuild it there and copy it over. Re-check /demo/hearth/photos and a full-screen photo reload after each copy.
 - Only site files deploy (see pages.yml). Add a new top-level public file or folder to the `cp` line there.
 - Never publish Chase's phone or email. LinkedIn is the contact route.
 - Role Radar's demo lives in the role-radar repo (chaseholroyd.com/role-radar/); change it there, not here.
