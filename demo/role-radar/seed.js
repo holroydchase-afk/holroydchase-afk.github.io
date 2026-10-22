@@ -5,6 +5,9 @@
   const iso = (n) => new Date(Date.now() + n * day).toISOString();
   const date = (n) => iso(n).slice(0, 10);
   const url = "https://example.com/jobs";
+  // Public demo shows the radar only. A link ending in ?full also shows the resume
+  // intake and recruiter tracker, for people Chase shares it with (WEB-M3.4).
+  const FULL = new URLSearchParams(location.search).has("full");
 
   const job = (id, o) => {
     const d = Object.assign({ ats: "greenhouse", tags: [], source: "board",
@@ -35,16 +38,16 @@
       lane: "Other", sector: "Adventure & outdoor brands", fit: "strong", score: 75,
       comp: "$170K–$195K", location: "Remote, US", statusAt: iso(-1), firstSeen: iso(-5),
       fitNote: "Loyalty and mobile app for an outdoor co-op. Good culture signals in the posting.",
-      resumeName: "Sam – Trailhead – tailored", nextStep: "Finish the two short-answer questions" }),
+      resumeName: FULL ? "Sam – Trailhead – tailored" : "", nextStep: "Finish the two short-answer questions" }),
     job("cumulus-sr-pm-agents", { company: "Cumulus AI", title: "Senior Product Manager, Agent Workflows", status: "applied",
       lane: "AI platform", sector: "AI tooling & automation", fit: "strong", score: 60,
       comp: "$180K–$210K", location: "Remote, US", appliedAt: iso(-8), statusAt: iso(-8), firstSeen: iso(-10),
       followUpDue: date(-1), fitNote: "Agent orchestration for ops teams. Direct match to recent AI workflow projects.",
-      resumeName: "Sam – Cumulus – tailored", nextStep: "Follow up with the recruiter" }),
+      resumeName: FULL ? "Sam – Cumulus – tailored" : "", nextStep: "Follow up with the recruiter" }),
     job("brightgrid-pm-vpp", { company: "BrightGrid", title: "Senior Product Manager, Virtual Power Plant", status: "interviewing",
       lane: "Geospatial / clean energy", sector: "Solar, storage & distributed energy", fit: "strong", score: 90,
       comp: "$195K–$225K", location: "Remote, US", appliedAt: iso(-15), statusAt: iso(-2), firstSeen: iso(-18),
-      referral: "Jordan Lee (former teammate)", resumeName: "Sam – BrightGrid – tailored",
+      referral: "Jordan Lee (former teammate)", resumeName: FULL ? "Sam – BrightGrid – tailored" : "",
       fitNote: "Utility programs and home batteries. Best fit on the board.", nextStep: "Panel interview: prep the pricing case study",
       followUpDue: date(2) }),
     job("ledgerly-pm-billing", { company: "Ledgerly", title: "Product Manager, Billing", status: "skipped",
@@ -71,7 +74,8 @@
     co("QuickCash Now", "quickcash", "lever", "payday lending", "vetoed", "seed"),
   ].map(([id, d]) => [id, JSON.parse(JSON.stringify(d))]));
 
-  const recruiters = {
+  // The recruiter tracker only shows in the full view (WEB-M3.4).
+  const recruiters = !FULL ? {} : {
     "priya-shah-canopy-ledger": { name: "Priya Shah", company: "Canopy Ledger", title: "Product lead", type: "referral",
       roles: "Principal PM, Carbon Accounting", sector: "Climate & sustainability software", lastContact: date(-12),
       lastNote: "Met at a climate meetup. Offered to pass a resume along.", nextStep: "Ask for a referral to the principal role",
@@ -176,5 +180,6 @@ scoring:
     filters: { notes: "Superseded by Criteria. Kept as a fallback." },
   };
 
-  window.DEMO = { key: "role-radar", seed: { jobs, companies, recruiters, meta } };
+  window.DEMO_FULL = FULL;
+  window.DEMO = { key: FULL ? "role-radar-full" : "role-radar-v2", seed: { jobs, companies, recruiters, meta } };
 })();

@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-21 (ES-M2.3 merged in PR #8; studio status link)
+Last updated: 2026-10-22 (WEB-M3.4 draft: Role Radar shows the radar only)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -30,6 +30,7 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M3.1 | Outcomes and "what I'd do differently" on Role Radar and ccwatts pages | todo |
 | WEB-M3.2 | Hearth page after the rename | dropped (off the job-hunt critical path) |
 | WEB-M3.3 | Visit counter | dropped (no-analytics rule) |
+| WEB-M3.4 | Role Radar public demo shows the radar only (page reframed as "say no faster"). The resume intake/Apply, intake settings and Recruiters tab sit behind a flag: `/demo/role-radar/?full` shows them, for people Chase shares that link with. Chase's live app is unchanged. Storage keys `role-radar-v2` (public) and `role-radar-full` | done (PR #9, Oct 22). Next: Role Radar hosts its own demo (intake sent), then delete `demo/role-radar/` here |
 | ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | done (PR #8, Oct 21) |
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
