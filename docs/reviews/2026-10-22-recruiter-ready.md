@@ -21,3 +21,26 @@ Bar (Chase, Oct 22): every product on chaseholroyd.com is ready to show a recrui
 | 10 | RR intake (UX-8, UX-9, QA-6, QA-7) | P1 | Role Radar | Demo: "Sam" never introduced, 60 STRONG vs 60 MAYBE, "Open posting" goes to example.com, js-yaml from a CDN | Goes to Role Radar with its demo move | intake to Role Radar |
 | 11 | WEB-M4.8 (UX-7) | P1 | portfolio | Resume ends Jan 2026 with no current entry | Chase's call: resume page mirrors his real resume | waiting on Chase |
 | — | UX-12..15, QA-8, QA-11 | P2 | both | Back links go home not to the product page; 24px tap targets; jargon ("Claude artifact", "anxiety-less"); CTA wording; legacy demo/energy-scanner; pm-tools browser test | Later, after the P1s | later |
+
+## Overnight rounds (Oct 22, draft PR #13): product pages only
+Scope: role-radar, ccwatts, energy-scanner and family-photos pages, shared CSS and checks. WEB-M5 (#12) owns the home page, nav, About and How I work.
+
+### Round 1: ux-reviewer (showcase review, 390x844 and 1280x800, light and dark) and qa-tdd
+| ID | Pri | Finding | Status |
+|---|---|---|---|
+| WEB-M4.7 / UX-10 | P1 | No product page had a screenshot | done: phone shot under the lede on 3 pages, beside the text and facts at 900px and up so the facts stay above the fold |
+| UX-12 / UXR1-3 | P2 | Demo back link went home, said "← Chase Holroyd" and was 20px tall | done: "← Back to Role Radar", opens role-radar.html, 44px |
+| UX-13 / QAR1-1 / UXR1-7 | P2 | Nav, footer, back and name links under 44px | done: all 44px; focused skip link 44px (QAR1-2) |
+| UX-14 | P2 | "Claude artifact" jargon on Role Radar | done ("Built with" and "calm by default" aren't on this site) |
+| UX-15 | P2 | CTA wording; no GitHub link on Role Radar | done |
+| UXR1-1 | P2 | Shot shows 7 boards, stat says ~110 | done: caption "The demo reads 7 sample boards. The real radar watches about 110." |
+| UXR1-2 | P2 | Desktop: shot alone, facts below the fold | done (two-column hero) |
+| UXR1-4 | P2 | Energy Scanner shot clipped through a line of text | done: re-cropped to 600x1092 |
+| UXR1-5 | P3 | Above-the-fold shots lazy-loaded | done: eager, fetchpriority high |
+| UXR1-6 | P3 | Footer links sat lower than the © line | done |
+| UXR1-8 | P3 | Footer said "Product manager" | done: "Staff product manager" |
+| UXR1-9 | P3 | ccwatts CTAs wrap on a phone | left as is (acceptable) |
+| QAR1-0 | P0 process | QA's `git checkout -- .` wiped in-progress edits in a shared tree | redone; later QA rounds run in their own worktree |
+| QAR1-3 | P3 | Role Radar demo loads js-yaml from a CDN | Role Radar intake (its demo moves to its own repo) |
+| QAR1-4 | note | ?full hides in the browser only; seed data ships to everyone | fine while seed data stays made up |
+Notes for WEB-M5 (home): career cards and links, the dated "Since Jan 2026" heading, and "every demo runs on sample data" not being true of the family app or Energy Scanner. #12 covers the first two; the third is a #12 copy fix.

@@ -77,7 +77,7 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 .shot{margin:28px 0 0}
 .shot img{display:block;width:min(300px,78%);height:auto;border-radius:22px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.12)}
 .shot figcaption{margin-top:10px;max-width:300px;font-size:14.5px;color:var(--muted)}
-@media(min-width:900px){.hero.has-shot{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"text shot" "facts shot";column-gap:56px;align-items:start}
+@media(min-width:900px){.hero.has-shot{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"text shot" "facts shot";grid-template-rows:auto 1fr;column-gap:56px;align-items:start}
   .hero.has-shot>.read{grid-area:text}.hero.has-shot>.facts{grid-area:facts}
   .hero.has-shot .shot{grid-area:shot;margin:0}.hero.has-shot .shot img{width:300px}}
 /* UX-13: 44px tap targets for the name, nav, footer, back and skip links */
