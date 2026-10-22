@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-22 (WEB-M3.4 draft: Role Radar shows the radar only)
+Last updated: 2026-10-22 (WEB-M4 recruiter-ready review: P0/P1 fixes in draft PR)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -33,6 +33,13 @@ The research, audit and ranked plan from the "Portfolio research and upgrade pla
 | WEB-M3.4 | Role Radar public demo shows the radar only (page reframed as "say no faster"). The resume intake/Apply, intake settings and Recruiters tab sit behind a flag: `/demo/role-radar/?full` shows them, for people Chase shares that link with. Chase's live app is unchanged. Storage keys `role-radar-v2` (public) and `role-radar-full` | done (PR #9, Oct 22). Next: Role Radar hosts its own demo (intake sent), then delete `demo/role-radar/` here |
 | ES-M2.3 | Energy Scanner page: "Try it" opens the live app at /energy-scanner/ (deployed from the energy-scanner repo), copy covers the palm and on-device photo scans, adds a GitHub link. The old `demo/energy-scanner/` snapshot stays one release, unlinked, then gets removed | done (PR #8, Oct 21) |
 
+## WEB-M4 "recruiter-ready review" (Oct 22)
+ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs/reviews/2026-10-22-recruiter-ready.md`.
+- Done in this PR: WEB-M4.1 deploy only site files (`_site/` allowlist in pages.yml) and no claude.ai links in the repo (they remain in git history; no rewrite), M4.2 hero says "Most recently Staff PM at Patter AI", M4.3 "View resume" on the first screen, M4.4 How I work and family app copy, M4.5 styled 404 on nested paths, M4.6 `site-checks.yml` CI.
+- Studio agents copied into `.claude/agents/` (from studio-agents; re-sync with its `scripts/sync.sh`).
+- Next (overnight): WEB-M4.7 one sample-data screenshot per product page; pm-tools PMT-M2.2 re-seed, M2.3 landing nav.
+- Decision for Chase: WEB-M4.8, add "Independent product work, Jan 2026 – present" to the resume page? It mirrors your real resume, so it's your call.
+
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Keeping the demos in sync with the real apps
@@ -47,6 +54,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 | role-radar | link in project memory | 1792568778-859e |
 
 ## Rules
+- Only site files deploy (see pages.yml). Add a new top-level public file or folder to the `cp` line there.
 - Never publish Chase's phone or email. LinkedIn is the contact route.
 - Role Radar demo data is made up (companies, people, jobs, comp floor). Never copy real applications or recruiters into `demo/role-radar/seed.js`.
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
