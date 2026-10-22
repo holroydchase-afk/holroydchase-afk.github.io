@@ -71,7 +71,7 @@ def page(slug, title, description, body):
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<span>© 2026 Chase Holroyd · Product manager · Charlotte, NC</span>
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte, NC</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
 </body>
@@ -79,7 +79,7 @@ def page(slug, title, description, body):
 """
 
 
-def product(eyebrow, name, lede, facts, sections, status_note=None, links=None):
+def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None):
     facts_html = "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in facts)
     links_html = ""
     if links:
@@ -88,15 +88,22 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None):
         ) + "</div>"
     secs = "".join(f"<h2>{h}</h2>{c}" for h, c in sections)
     note = f'<p class="note">{status_note}</p>' if status_note else ""
-    return f"""<div class="read">
+    # One phone screenshot under the lede, sample data only (WEB-M4.7). Source PNGs: 390x844 at 2x, cropped, WebP.
+    # shot = (file, alt, height at 300px wide, optional caption). It sits above the fold, so it loads eagerly.
+    shot_html = ""
+    if shot:
+        cap = f"<figcaption>{shot[3]}</figcaption>" if len(shot) > 3 else ""
+        shot_html = (f'<figure class="shot"><img src="assets/shots/{shot[0]}" width="300" height="{shot[2]}" '
+                     f'alt="{shot[1]}" fetchpriority="high" decoding="async">{cap}</figure>')
+    return f"""<div class="hero{" has-shot" if shot else ""}"><div class="read">
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
 {links_html}
-</div>
-<div class="facts">{facts_html}</div>
+</div>{shot_html}
+<div class="facts">{facts_html}</div></div>
 <div class="read">{secs}{note}
-<p style="margin-top:40px"><a href="index.html">← All work</a></p></div>"""
+<p class="back"><a href="index.html">← All work</a></p></div>"""
 
 
 # Career highlights on the home page. Facts trace to pmo/story/resume-2026-10.md; outside links are public pages.
@@ -190,7 +197,7 @@ role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is sifting. I built a radar that reads the boards every weekday and tells me, with reasons, which roles are worth my time, so I can say no faster.",
-    [("~110", "company job boards watched"), ("4", "sources merged and de-duplicated"), ("0–100", "fit score, each with a one-line reason"),
+    [("~110", "company job boards watched"), ("4", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas and job-alert emails, and merges duplicates across sources.</li>'
@@ -201,10 +208,12 @@ role_radar = product(
          "<li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li>"
          "<li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>"
          "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
-        ("Stack", "<p>A Claude artifact with a saved database, a weekday scheduled agent, and the ZipRecruiter and email connectors.</p>"),
+        ("Stack", "<p>A single-page app on Claude with its own saved database, a scheduled agent that runs each weekday, and connectors for ZipRecruiter and email.</p>"),
     ],
     status_note="The demo uses made-up jobs and companies, never real applications. Changes you make stay in your browser.",
-    links=[("Try the demo", "demo/role-radar/")],
+    links=[("Try the live demo", "demo/role-radar/"), ("View on GitHub", f"{GITHUB}/role-radar")],
+    shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
+          "The demo reads 7 sample boards. The real radar watches about 110."),
 )
 
 ccwatts = product(
@@ -219,9 +228,10 @@ ccwatts = product(
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
          "<li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li>"
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
-        ("Stack", "<p>A TypeScript monorepo with one shared core used by both the CLI (<code>npx ccwatts</code>) and an offline HTML dashboard.</p>"),
+        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI, on npm once the name is final, and an offline HTML dashboard.</p>"),
     ],
-    links=[("Try the playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
+    links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
+    shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600),
 )
 
 energy = product(
@@ -239,7 +249,8 @@ energy = product(
          "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul>"),
         ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
     ],
-    links=[("Try it", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
+    links=[("Try the live app", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
+    shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
 )
 
 pm_tools = """<div class="read">
