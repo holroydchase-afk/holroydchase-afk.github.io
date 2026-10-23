@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-23 (WEB-M6.1: new Studio page, studio.html, the story of the agents, the coordinator and Chase as product owner)
+Last updated: 2026-10-23 (WEB-M6.1: Studio page, now merged with main after WEB-M5.5 home journey and WEB-M4.9 page checks)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -11,7 +11,7 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - **Live** at https://chaseholroyd.com. The repo is `holroydchase-afk/holroydchase-afk.github.io` (renamed from `portfolio` on Oct 21), so it is the account's user site and other repos' Pages sites appear at chaseholroyd.com/<repo>, e.g. the ccwatts playground at /ccwatts/. Deploys run on every push to `main` via `.github/workflows/pages.yml`.
 - Don't add a top-level folder named after another repo with Pages on (e.g. `ccwatts/`, `pm-tools/`); it would hide that repo's site.
 - **Custom domain:** DNS at Porkbun and the Pages custom domain are set (Chase, Oct 21). Actions deploys ignore the `CNAME` file; the domain lives in Settings → Pages.
-- **Pages:** Work (home), Studio, the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, Resume, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
+- **Pages:** Work (home), Studio, the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, PM tools ("How I keep it all moving", not in the nav), Resume, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
 - **Demos** under `demo/`: Role Radar and Energy Scanner, each running the real app on sample data saved only in the visitor's browser (`demo/fake-db.js` stands in for the artifact database).
 - **Build Slate and the Near-Term Roadmap** demos live in the `pm-tools` repo, served at chaseholroyd.com/pm-tools/build-slate/ and /pm-tools/roadmap/. "How I work" links there. Sync those apps in pm-tools (its HANDOFF.md), not here.
 
@@ -41,17 +41,30 @@ ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs
 - Studio agents synced into `.claude/agents/` from studio-agents (includes the upgraded ux-reviewer with the visual pass and showcase review, studio-agents draft PR #6 or later); re-sync with its `scripts/sync.sh`.
 - Done (overnight round 5, R4-3): How I work now says Build Slate caps "five active projects" and lists the roadmap lanes as "Later, Next, Now and Done", matching the pm-tools demo.
 - Overnight Oct 22 (draft PR, branch `claude/project-thread-hsgkpq-m47`): WEB-M4.7 one 390px phone screenshot under the lede on Role Radar, ccwatts and Energy Scanner (`assets/shots/*.webp`, 26–46 KB, sample data only, Role Radar from its public view; set with `product(shot=...)`). UX-13 44px tap targets on nav, footer and back links. UX-14 "Claude artifact" jargon on Role Radar's stack line. UX-15 CTAs "Try the live demo / playground / app", plus a GitHub link on Role Radar. UX-12 the Role Radar demo's back link opens role-radar.html. To re-shoot: Playwright at 390x844 with deviceScaleFactor 2 (Energy Scanner with the clock set to 7:42 PM and three steps ticked), crop to 780x1560, then save as 600x1200 WebP q78.
-- ccwatts intake (Oct 22): the Stack line no longer says `npx ccwatts` (it 404s until the npm name is final). The ccwatts playground links back to https://chaseholroyd.com/ccwatts.html, so keep that URL stable. Re-shoot `assets/shots/ccwatts-phone.webp` once ccwatts PRs #22–#29 merge.
+- ccwatts intake (Oct 22): the Stack line no longer says `npx ccwatts` (it 404s until the npm name is final). The ccwatts playground links back to https://chaseholroyd.com/ccwatts.html, so keep that URL stable. `assets/shots/ccwatts-phone.webp` was re-shot on Oct 23 from ccwatts main (23cc31a, after #22–#29): the new headline and intro, the privacy note and the 8.5 kWh result. It's built locally (`npm ci && npm run build`, open `packages/web/dist/ccwatts.html`) and cropped 780x1560 from y=135 so the back link is left out.
+- Night shift Oct 23 (WEB-M4.9): `tools/check_site.py` runs in site-checks.yml: one h1, title, description and canonical per page, alt plus width and height on every image, root links resolve, every page in sitemap.xml, no email or phone on public pages, and every linked top-level file is in the pages.yml deploy list. 404 now carries `noindex`; the home H1 keeps "point-of-sale" on one line (`.nowrap`). Playwright sweep at 390px and 1280px: no overflow, broken images, console errors or sub-44px tap targets on any site page.
 - Round 2 (UXR2-1..3, QAR2-1) done. Nothing at P2 or above is left on the product pages; see the review doc.
 - Round 1 review fixes (caption, desktop two-column hero, re-crop, 44px name/skip/demo back link, footer title) are logged in the review doc's "Overnight rounds" section.
 - Not here: "Built with" and "calm by default" aren't on this site (pm-tools copy). "anxiety-less" sits in How I work, which belongs to WEB-M5 PR #12.
 - Decision for Chase: WEB-M4.8, add "Independent product work, Jan 2026 – present" to the resume page? It mirrors your real resume, so it's your call.
 
+## WEB-M5 "my AI journey" reframe (Chase, Oct 22)
+Chase: the site is a case study of how he grew in using AI to solve problems in his own life, each product tied to a life story and its real users, told as a journey rather than a fixed timeline. His biggest career wins (Palmetto, ADT, Patter) belong on the front page, with links to Patter and Palmetto. He doesn't like "How I work". This overrides the staff PM's stop rule below.
+| ID | Task | Status |
+|---|---|---|
+| WEB-M5.1 | Home: hero "A staff PM who builds with AI to fix real problems", career highlight cards (Patter, ADT, Palmetto) with outside links, "What I've built with AI" journey cards ordered by how the building grew (prototype, scheduled agent, open source, agent team, the system) with a "who uses it" line each | doing (draft PR, [check] items wait on Chase) |
+| WEB-M5.2 | "How I work" leaves the nav; the page becomes "How I keep it all moving" (the system behind it), with PR #11's copy fixes plus "work-session estimates". About drops the dated "Since Jan 2026" line for "Now: building with AI" | doing (same PR) |
+| WEB-M5.3 | Each product page opens with its life story and real users (needs Chase's stories) | todo |
+| WEB-M5.4 | Case studies (WEB-M2.3/M2.4) linked from the ADT and Patter cards once their [check]s clear | blocked on Chase |
+| WEB-M5.5 | Critique fixes (Fable review, Oct 22, `pmo/portfolio/2026-10-22-fable-critique.md` in project files): H1 keeps the specialty with AI as the second beat; the journey is a numbered one-column steps list (`.steps`) with a "what changed in how I build" line per step; [check] who-lines are kept in `JOURNEY` but not rendered; career tags shortened to "2016–2019 · Engineer to Director"; "supported the $6M round" (the resume's claim); the ADT card has no link until its case study lands; family page: story before the cipher names, laptop shot hidden under 700px (`.wide-only`) | done (this PR) |
+Open: the Hearth demo at /demo/hearth/ shows "Hearth (working name)" and the tab title "Hearth" while this site withholds the name; intake sent to the Hearth project (Oct 22) to rebuild without it.
+Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this container can't open patter or palmetto sites), who uses Energy Scanner, Role Radar and ccwatts today, and whether "about an hour a night" is OK to publish.
+
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Portfolio / public presence
-- 2026-10-23, WEB-M6.1 (draft PR, branch `claude/project-thread-vdj96r`): new page `studio.html`, "I stopped prompting chats and started running a studio." A journey with no dates: one chat per product, the six shared agents (links github.com/holroydchase-afk/studio-agents), the coordinator that builds nothing, the operating system (HANDOFF.md, studio status list, ownership rule and intakes, 2:15am shifts, 6:30 digest, story log), Chase as product owner reviewing PR descriptions, and what it taught. Linked from the nav ("Studio", after Work), a home card, and the end of How I work. Content in `studio` in `tools/build.py`.
-- Overlaps PR #16 (WEB-M5.5): #16 drops "How I work" from NAV and replaces CARDS with JOURNEY. Whichever merges second keeps the "Studio" nav entry and adds a studio step at the end of JOURNEY (after pm-tools).
+- 2026-10-23, WEB-M6.1 (draft PR, branch `claude/project-thread-vdj96r`): new page `studio.html`, "I stopped prompting chats and started running a studio." A journey with no dates: one chat per product, the six shared agents (links github.com/holroydchase-afk/studio-agents), the coordinator that builds nothing, the operating system (HANDOFF.md, studio status list, ownership rule and intakes, 2:15am shifts, 6:30 digest, story log), Chase as product owner reviewing PR descriptions, and what it taught. Linked from the nav ("Studio", after Work), the home journey, and the end of the PM tools page. Content in `studio` in `tools/build.py`.
+- After PR #16 merged: the nav is Work, Studio, Resume, About, and the studio is the last step of the home JOURNEY (after pm-tools). The home CARDS list is gone.
 - Decisions for Chase on WEB-M6.1: OK to say publicly that builds run at 2:15am and the digest at 6:30, and to mention the co-parent leak caught in review (already on the family app page)?
 
 ## Keeping the demos in sync with the real apps
