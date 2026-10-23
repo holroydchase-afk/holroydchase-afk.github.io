@@ -13,7 +13,6 @@ GITHUB = "https://github.com/holroydchase-afk"
 
 NAV = [
     ("index.html", "Work"),
-    ("pm-tools.html", "How I work"),
     ("resume.html", "Resume"),
     ("about.html", "About"),
 ]
@@ -107,17 +106,48 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 <p class="back"><a href="index.html">← All work</a></p></div>"""
 
 
-CARDS = [
-    ("role-radar.html", "Live demo", "Role Radar",
-     "A job-search radar that reads about 110 company boards each weekday and scores every role 0–100 with a reason, so I spend my time on the right few."),
-    ("ccwatts.html", "Live playground", "ccwatts",
-     "How much electricity does your AI coding agent use? A local tool that answers as an honest range, with every assumption sourced."),
-    ("pm-tools.html", "Live demos", "How I run product work",
-     "Build Slate, a multi-board roadmap, persona checks enforced in CI, a decision log, and a team of AI agents with defined lanes."),
-    ("energy-scanner.html", "Live demo", "Energy Scanner",
-     "A bedtime routine for kids that ends in an energy scan, by palm or by photo with an on-device aura, so the machine says it's bedtime instead of the parent."),
-    ("family-photos.html", "Private beta soon", "Family photo app",
-     "Private photo sharing for split families and grandparents who avoid social media. Every post has a visible audience."),
+# Career highlights on the home page. Facts trace to pmo/story/resume-2026-10.md; outside links are public pages.
+# [check] items wait on Chase (WEB-M5); none of this merges until they're cleared.
+CAREER = [
+    ("Patter AI", "2023–2026 · Staff PM",
+     "An AI-native sales platform for solar and home services. I led one real-time pricing engine across loans, leases and PPAs, "
+     "rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut onboarding from about a month to a week.",
+     [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
+    ("ADT Solar", "2020–2023 · PM to Senior PM",
+     "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
+     "and lender allocation that helped cut dealer fees 3–5 points, shipped to about 5,000 reps.",
+     []),  # Links to the ADT case study once WEB-M2.3 clears
+    ("Palmetto", "2016–2019 · Engineer to Director",
+     "I was Palmetto's first PM and built Alchemy, its design, proposal and real-time credit platform, and supported the $6M round that funded it. "
+     "Then I launched a machine-learning lead marketplace at 11,500+ consultations a month.",
+     [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
+]
+
+# The AI journey: each product starts with a problem in Chase's life and its real users. Ordered by how the
+# building grew (one prototype page → scheduled agent → open source → an agent team → the system behind it), not by date.
+# (page, product, the life problem, what changed in how I built it, who uses it, CTA label). A "[check]" who-line is
+# not rendered until Chase answers it (WEB-M5).
+JOURNEY = [
+    ("energy-scanner.html", "Energy Scanner",
+     "Bedtime with my kids was a nightly negotiation. Now a routine ends in an energy scan, so the machine says it's bedtime instead of me.",
+     "One page, prompted into existence in an evening and tested at bedtime the same night.",
+     "[check] Who uses it today, e.g. my kids every night", "Try the app"),
+    ("role-radar.html", "Role Radar",
+     "Job hunting meant hours of sifting. An agent now reads about 110 company boards each weekday and scores every role with a reason.",
+     "First scheduled agent: it runs without me, and I only read the right few.",
+     "[check] Who uses it besides me", "Try the demo"),
+    ("ccwatts.html", "ccwatts",
+     "I wanted to know what my own AI coding costs in electricity. Nobody had packaged it, so I built a local tool that answers as an honest range.",
+     "First open-source release: a public methodology, tests, and every assumption sourced.",
+     "[check] Who's using it", "Try the playground"),
+    ("family-photos.html", "Family photo app",
+     "Two blended families, five group texts, grandparents on Android. One private place for our photos, where every post has a chosen audience.",
+     "I ran AI agents like a product team: spec, tests first, privacy review, and a UX pass for grandparents.",
+     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo"),
+    ("pm-tools.html", "How I keep it all moving",
+     "Five products in the evenings only works with a system: one slate, one roadmap, and AI agents with clear lanes.",
+     "The system behind the rest. The demos run on a scrubbed snapshot of my real slate.",
+     "[check] OK to say \"about an hour a night\"?", "See the system"),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
@@ -130,18 +160,27 @@ PROOF = [
 
 home = f"""<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
-<h1>Staff PM for pricing, payments and point-of-sale lending.</h1>
-<p class="lede">8+ years building credit, offer and pricing engines for lenders, dealers and about 5,000 sales reps. Most recently Staff PM at Patter AI; before that ADT and Palmetto.</p>
+<h1>Staff PM for pricing, payments and point-of-sale lending. I build with AI to fix real problems.</h1>
+<p class="lede">8+ years building the pricing, credit and checkout software that sells and finances home solar, at Palmetto, ADT and Patter AI. Lately I've been prototyping with AI to solve problems in my own life, and onboarding real people to each one.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
-<div class="read">
-<h2>Since Jan 2026: independent product work</h2>
-<p>Between roles, I'm building AI-agent tools in public to stay sharp on how LLM products ship. Not raising, not selling; ready for a full-time role. Each one runs on sample data, right in your browser.</p>
-</div>
+<div class="read"><h2>Career highlights</h2>
+<p>Pricing, payments and point-of-sale lending, from the first PM seat to staff.</p></div>
 <div class="grid">""" + "".join(
-    f'<a class="card" href="{h}"><span class="tag">{s}</span><h3>{n}</h3><p>{d}</p></a>' for h, s, n, d in CARDS
-) + "</div>"
+    f'<div class="card career"><span class="tag">{r}</span><h3>{c}</h3><p>{d}</p>'
+    + (('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else "")
+    + "</div>"
+    for c, r, d, links in CAREER
+) + """</div>
+<div class="read"><h2>What I've built with AI</h2>
+<p>Each one started as a problem in my own life, and each step changed how I build: from one prototype page to a team of agents with tests and reviews. Every demo runs on sample data, right in your browser.</p></div>
+<ol class="steps">""" + "".join(
+    f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
+    + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
+    + f'<p class="go"><a href="{h}">{cta} →</a></p></div></li>'
+    for h, n, d, how, w, cta in JOURNEY
+) + "</ol>"
 
 family = product(
     "Mobile app · building",
@@ -154,11 +193,11 @@ family = product(
         ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send meant worrying about who felt left out. "
          "Existing family apps didn't handle two equal households, and we don't post our kids publicly.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
-         "<li><b>Privacy underneath:</b> photos are encrypted on the phone (AES-256-GCM) before upload, group chat is end-to-end encrypted with MLS (RFC 9420), "
-         "database-level access rules make a post you can't see behave as \"not found\", and photo location data is stripped on the phone.</li>"
          "<li><b>No pressure to perform:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
-         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li></ul>"),
-        ("What it looks like", '<figure class="gallery-wide"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
+         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li>"
+         "<li><b>Privacy underneath:</b> photos are encrypted on the phone before upload, group chat is end-to-end encrypted, a post you can't see behaves as \"not found\", and photo location data is stripped on the phone. "
+         "(For the technical reader: AES-256-GCM, MLS per RFC 9420, and Postgres row-level security.)</li></ul>"),
+        ("What it looks like", '<figure class="gallery-wide wide-only"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
          '<div class="gallery">'
          '<img src="assets/family/iphone-02-share.webp" width="390" height="844" loading="lazy" alt="Share screen: a picked photo, a caption, and the group that will see it">'
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
@@ -234,14 +273,14 @@ energy = product(
 )
 
 pm_tools = """<div class="read">
-<p class="eyebrow">How I work</p>
-<h1>How I run product work, end to end.</h1>
+<p class="eyebrow">The system behind it</p>
+<h1>How I keep it all moving.</h1>
 <p class="lede">These are the tools and rituals I use to ship several products in parallel without losing the thread. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
 <h2>Build Slate</h2>
 <p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps me at five active projects so I go deep, not wide.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/build-slate/">Try Build Slate</a></div>
 <h2>Near-term roadmap</h2>
-<p>Later, Next, Now and Done lanes with a board per product, owners, session-size estimates and a blocked flag. Any AI session can read and update it by link, so the roadmap stays current without me retyping it.</p>
+<p>Later, Next, Now and Done lanes with a board per product, owners, work-session estimates and a blocked flag. Any AI session can read and update it by link, so the roadmap stays current without me retyping it.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/roadmap/">Try the roadmap</a></div><p>Source for both apps, plus the PM templates and routines below, is on <a href="https://github.com/holroydchase-afk/pm-tools">GitHub</a>.</p>
 <h2>Decisions that leave a trail</h2>
 <ul class="clean"><li><b>Decision log:</b> every call records why, and what it beat.</li>
@@ -266,7 +305,7 @@ about = f"""<div class="read">
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
 <li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (12,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from about a month to a week.</li>
-<li><b>Since Jan 2026: independent product work.</b> Between roles, I'm building AI-agent tools in public (job search, AI energy, PM operations) to stay sharp on how LLM products ship. Not raising, not selling; ready for a full-time role.</li>
+<li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. Not raising, not selling; ready for a full-time role.</li>
 </ol>
 <h2>What I care about</h2>
 <ul class="clean"><li>Checkout, pricing and payments that feel simple to the person at the kitchen table.</li>
@@ -345,7 +384,7 @@ PAGES = [
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
-    ("pm-tools.html", "How I work", "The tools and rituals behind a one-person product studio.", pm_tools),
+    ("pm-tools.html", "How I keep it all moving", "The slate, roadmap and AI agents that keep several products moving at once.", pm_tools),
     ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
     ("about.html", "About", "Chase Holroyd's path from solar design to product management and AI.", about),
     ("404.html", "Not found", "Page not found.", notfound),
