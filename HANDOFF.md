@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-22 (WEB-M3.6: Hearth no-login demo at /demo/hearth/, family app page refreshed; WEB-M3.5 Role Radar move merged in PR #14)
+Last updated: 2026-10-23 (WEB-M6.1: new Studio page, studio.html, the story of the agents, the coordinator and Chase as product owner)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -11,7 +11,7 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - **Live** at https://chaseholroyd.com. The repo is `holroydchase-afk/holroydchase-afk.github.io` (renamed from `portfolio` on Oct 21), so it is the account's user site and other repos' Pages sites appear at chaseholroyd.com/<repo>, e.g. the ccwatts playground at /ccwatts/. Deploys run on every push to `main` via `.github/workflows/pages.yml`.
 - Don't add a top-level folder named after another repo with Pages on (e.g. `ccwatts/`, `pm-tools/`); it would hide that repo's site.
 - **Custom domain:** DNS at Porkbun and the Pages custom domain are set (Chase, Oct 21). Actions deploys ignore the `CNAME` file; the domain lives in Settings → Pages.
-- **Pages:** Work (home), the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
+- **Pages:** Work (home), Studio, the family photo app (name coming), Role Radar, ccwatts, Energy Scanner, How I work, Resume, About, 404. Content lives in `tools/build.py`; run `python3 tools/build.py` to regenerate the HTML.
 - **Demos** under `demo/`: Role Radar and Energy Scanner, each running the real app on sample data saved only in the visitor's browser (`demo/fake-db.js` stands in for the artifact database).
 - **Build Slate and the Near-Term Roadmap** demos live in the `pm-tools` repo, served at chaseholroyd.com/pm-tools/build-slate/ and /pm-tools/roadmap/. "How I work" links there. Sync those apps in pm-tools (its HANDOFF.md), not here.
 
@@ -48,6 +48,11 @@ ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs
 - Decision for Chase: WEB-M4.8, add "Independent product work, Jan 2026 – present" to the resume page? It mirrors your real resume, so it's your call.
 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
+
+## Portfolio / public presence
+- 2026-10-23, WEB-M6.1 (draft PR, branch `claude/project-thread-vdj96r`): new page `studio.html`, "I stopped prompting chats and started running a studio." A journey with no dates: one chat per product, the six shared agents (links github.com/holroydchase-afk/studio-agents), the coordinator that builds nothing, the operating system (HANDOFF.md, studio status list, ownership rule and intakes, 2:15am shifts, 6:30 digest, story log), Chase as product owner reviewing PR descriptions, and what it taught. Linked from the nav ("Studio", after Work), a home card, and the end of How I work. Content in `studio` in `tools/build.py`.
+- Overlaps PR #16 (WEB-M5.5): #16 drops "How I work" from NAV and replaces CARDS with JOURNEY. Whichever merges second keeps the "Studio" nav entry and adds a studio step at the end of JOURNEY (after pm-tools).
+- Decisions for Chase on WEB-M6.1: OK to say publicly that builds run at 2:15am and the digest at 6:30, and to mention the co-parent leak caught in review (already on the family app page)?
 
 ## Keeping the demos in sync with the real apps
 The real apps are Claude artifacts. The demos are snapshots of them, so they drift when an app changes.
