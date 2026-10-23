@@ -116,10 +116,10 @@ CAREER = [
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT Solar", "2020–2023 · PM to Senior PM",
      "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
-     "and lender allocation that helped cut dealer fees 3–5 points, shipped to about 5,000 reps.",
+     "and lender allocation that helped cut dealer fees 3–5 points, with releases to about 5,000 reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
-     "I was Palmetto's first PM and built Alchemy, its design, proposal and real-time credit platform, and supported the $6M round that funded it. "
+     "I was Palmetto's first PM and built Alchemy, its design, point-of-sale and real-time credit platform, and supported a $6M venture round. "
      "Then I launched a machine-learning lead marketplace at 11,500+ consultations a month.",
      [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
 ]
@@ -379,44 +379,34 @@ about = f"""<div class="read">
 </div>"""
 
 # Resume: mirrors pmo/story/resume-2026-10.md (Oct 2026). Never add phone or email; LinkedIn is the contact route.
+# One short story per company, no bullets (Chase, Oct 23): the problem, what I did, the outcome. Every number traces to the resume.
+# (company, [(title, dates)], [paragraphs]); a company with several roles gets one paragraph per stage.
 JOBS = [
-    ("Staff Product Manager", "Patter AI", "Jan 2023 – Jan 2026 · Remote", [
-        "Real-time pricing engine across loans, leases and PPAs for 4 clients.",
-        "Rep-guided checkout showing the payment impact of each add-on.",
-        "AI conversation analysis found 40% of a client's reps deviating from scripts; coaching went from about 4 a month to about 1 a day.",
+    ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
+        "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
+        "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
+        "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
-        "Lender onboarding cut from about a month to about a week with a rules engine; 5 lenders integrated.",
-    ]),
-    ("Senior Product Manager", "ADT", "Nov 2021 – Jan 2023", [
-        "Credit-check and offer engine across 5 lenders, 12,000+ applications a month, during 110% YoY sales growth.",
-        "Lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) used to cut dealer fees 3–5 points.",
-        "Channel-partner platform with redline and tiered pricing, Power BI reporting, 4+ partners.",
-        "Technical lead for the Lowe's in-store solar and security program.",
-        "Post-merger integration scaling to 400,000+ consultations a year, with releases to about 5,000 reps' iPads.",
-    ]),
-    ("Product Manager", "ADT", "Oct 2020 – Nov 2021", [
-        "Rep-guided checkout for complex solar products that cut contract review about 60%.",
-        "First PM for the 3,000-person solar division.",
-    ]),
-    ("Product Owner", "AGDATA", "Jun – Oct 2020", [
-        "Discovery for an MDM platform to consolidate 8+ legacy pricing and rebate systems (Bayer, among others).",
-    ]),
-    ("Founder", "Bigfoot Energy", "Oct 2019 – Jun 2020 · Charleston, WV", [
-        "Smart-home and clean-energy company.",
-    ]),
-    ("Director of Product", "Palmetto", "Jan – Jun 2019", [
-        "Machine-learning lead marketplace on about 300 data points, 11,500+ consultations a month.",
-    ]),
-    ("Senior Product Manager", "Palmetto", "Feb 2018 – Jan 2019", [
-        "Built Alchemy (design, point of sale and project management), integrating GoodLeap and Sunlight into real-time credit.",
-        "Supported a $6M venture round.",
-    ]),
-    ("Product Manager", "Palmetto", "Jun 2017 – Feb 2018", [
-        "First PM: sales enablement platform; digitized pricing models.",
-    ]),
-    ("Senior Solar Engineer", "Palmetto", "Feb 2016 – Jun 2017", [
-        "Designed 2,000+ PV systems; virtual surveys replaced 75% of site visits, saving $80K a year.",
-    ]),
+        "A lender rules engine cut onboarding a new lender <strong>from about a month to about a week</strong>, and I integrated 5 lenders."]),
+    ("ADT Solar", [("Senior Product Manager", "Nov 2021 – Jan 2023"), ("Product Manager", "Oct 2020 – Nov 2021")], [
+        "I joined as the first PM for a 3,000-person solar division, where complex solar contracts were slow to review. "
+        "A rep-guided checkout cut contract review <strong>about 60%</strong>.",
+        "As senior PM I built the credit-check and offer engine: 5 lenders, <strong>12,000+ applications a month</strong>, and 110% year-over-year sales growth. "
+        "My lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) cut dealer fees <strong>3–5 points</strong>. "
+        "I also led a channel-partner platform with redline and tiered pricing for 4+ partners, was technical lead for the Lowe's in-store solar and security program, "
+        "and scaled the post-merger platform to 400,000+ consultations a year, with releases to about 5,000 reps' iPads."]),
+    ("AGDATA", [("Product Owner", "Jun – Oct 2020")], [
+        "Pricing and rebate data for clients such as Bayer was spread across 8+ legacy systems. "
+        "I led discovery for a master data management platform to consolidate them."]),
+    ("Bigfoot Energy", [("Founder", "Oct 2019 – Jun 2020 · Charleston, WV")], [
+        "I founded a smart-home and clean-energy company in Charleston, West Virginia."]),
+    ("Palmetto", [("Director of Product", "Jan – Jun 2019"), ("Senior Product Manager", "Feb 2018 – Jan 2019"),
+                  ("Product Manager", "Jun 2017 – Feb 2018"), ("Senior Solar Engineer", "Feb 2016 – Jun 2017")], [
+        "I started as a solar engineer and designed 2,000+ PV systems. "
+        "Virtual surveys replaced 75% of site visits, <strong>saving $80K a year</strong>.",
+        "As Palmetto's first PM I digitized its pricing models, then built Alchemy, a design, point-of-sale and project management platform with real-time GoodLeap and Sunlight credit. "
+        "It supported a <strong>$6M venture round</strong>. "
+        "As Director of Product I launched a machine-learning lead marketplace on about 300 data points, running <strong>11,500+ consultations a month</strong>."]),
 ]
 
 resume = f"""<div class="read resume">
@@ -424,12 +414,13 @@ resume = f"""<div class="read resume">
 <h1>Chase Holroyd</h1>
 <p class="lede">Staff Product Manager · Pricing, Payments &amp; Point-of-Sale Lending</p>
 <p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 13+ lender integrations; a credit and offer engine at 12,000+ applications a month; lender allocation that cut dealer fees 3–5 points.</p>
-<p class="contact">Contact: <a href="{LINKEDIN}">linkedin.com/in/chase-holroyd</a> · Site: chaseholroyd.com</p>
+<p class="contact">Contact: <a href="{LINKEDIN}">linkedin.com/in/chase-holroyd</a> · Site: <a href="index.html">chaseholroyd.com</a></p>
 <h2>Experience</h2>
 """ + "".join(
-    f'<section class="job"><h3>{t}, {c}</h3><p class="when">{d}</p><ul class="clean">'
-    + "".join(f"<li>{b}</li>" for b in bullets) + "</ul></section>"
-    for t, c, d, bullets in JOBS
+    f'<section class="job"><h3>{c}</h3>'
+    + "".join(f'<p class="when"><span class="role">{t}</span><span class="sep"> · </span><span class="dates">{d}</span></p>' for t, d in roles)
+    + "".join(f"<p>{para}</p>" for para in paras) + "</section>"
+    for c, roles, paras in JOBS
 ) + """
 <h2>Education</h2>
 <p>B.A., Sustainable Design, West Virginia University, 2014.</p>

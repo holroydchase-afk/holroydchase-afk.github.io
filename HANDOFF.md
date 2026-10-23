@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-23 (WEB-M6.1: Studio page, now merged with main after WEB-M5.5 home journey and WEB-M4.9 page checks)
+Last updated: 2026-10-23 (WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -57,6 +57,7 @@ Chase: the site is a case study of how he grew in using AI to solve problems in 
 | WEB-M5.3 | Each product page opens with its life story and real users (needs Chase's stories) | todo |
 | WEB-M5.4 | Case studies (WEB-M2.3/M2.4) linked from the ADT and Patter cards once their [check]s clear | blocked on Chase |
 | WEB-M5.5 | Critique fixes (Fable review, Oct 22, `pmo/portfolio/2026-10-22-fable-critique.md` in project files): H1 keeps the specialty with AI as the second beat; the journey is a numbered one-column steps list (`.steps`) with a "what changed in how I build" line per step; [check] who-lines are kept in `JOURNEY` but not rendered; career tags shortened to "2016–2019 · Engineer to Director"; "supported the $6M round" (the resume's claim); the ADT card has no link until its case study lands; family page: story before the cipher names, laptop shot hidden under 700px (`.wide-only`) | done (this PR) |
+| WEB-M5.6 | Resume page, no bullets (Chase, Oct 23): one short prose story per company (problem, what I did, outcome) with each role and its dates on its own line, key numbers in bold, a paragraph per stage at ADT and Palmetto. Positioning and ux-reviewer passes applied: Bigfoot says Charleston, WV only; home career cards fixed to the resume (ADT's 5,000 reps are the iPad releases; Alchemy is design, point-of-sale and credit; "supported a $6M venture round"); print no longer pushes Palmetto to page 2 (still 2 Letter pages), eyebrow hidden in print; phone puts dates under the title. Checked at 390px and 1280px, no horizontal scroll. Patter's B2B dollar figures still off. Night shift: this PR touched `JOBS`, `resume` and the `.resume` CSS, so rebase on main before editing them | done (this PR) |
 Open: the Hearth demo at /demo/hearth/ shows "Hearth (working name)" and the tab title "Hearth" while this site withholds the name; intake sent to the Hearth project (Oct 22) to rebuild without it.
 Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this container can't open patter or palmetto sites), who uses Energy Scanner, Role Radar and ccwatts today, and whether "about an hour a night" is OK to publish.
 
@@ -78,6 +79,7 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 | energy-scanner (legacy, unlinked since ES-M2.3; remove next release) | link in project memory | 1792454453-b0d3 |
 
 ## Rules
+- Resume copy (WEB-M5.6) is prose per company: keep it that way, every number from pmo/story/resume-2026-10.md, no bullets. The Patter problem line ("reps had to price loans, leases and PPAs on the spot") is a reading of the resume; Chase can reword it.
 - `demo/hearth/` is a build output from the Hearth repo. Don't edit it here: rebuild it there and copy it over. Re-check /demo/hearth/photos and a full-screen photo reload after each copy.
 - Only site files deploy (see pages.yml). Add a new top-level public file or folder to the `cp` line there.
 - Never publish Chase's phone or email. LinkedIn is the contact route.
