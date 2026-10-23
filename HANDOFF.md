@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-23 (WEB-M5.6 resume as prose stories, no bullets; before that WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto career highlights merged; ccwatts screenshot re-shot after ccwatts #22-#29)
+Last updated: 2026-10-23 (WEB-M5.6 resume as prose stories, no bullets; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto career highlights merged)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -42,6 +42,7 @@ ux-reviewer and qa-tdd reviewed the site and pm-tools; staff-pm ranked it: `docs
 - Done (overnight round 5, R4-3): How I work now says Build Slate caps "five active projects" and lists the roadmap lanes as "Later, Next, Now and Done", matching the pm-tools demo.
 - Overnight Oct 22 (draft PR, branch `claude/project-thread-hsgkpq-m47`): WEB-M4.7 one 390px phone screenshot under the lede on Role Radar, ccwatts and Energy Scanner (`assets/shots/*.webp`, 26–46 KB, sample data only, Role Radar from its public view; set with `product(shot=...)`). UX-13 44px tap targets on nav, footer and back links. UX-14 "Claude artifact" jargon on Role Radar's stack line. UX-15 CTAs "Try the live demo / playground / app", plus a GitHub link on Role Radar. UX-12 the Role Radar demo's back link opens role-radar.html. To re-shoot: Playwright at 390x844 with deviceScaleFactor 2 (Energy Scanner with the clock set to 7:42 PM and three steps ticked), crop to 780x1560, then save as 600x1200 WebP q78.
 - ccwatts intake (Oct 22): the Stack line no longer says `npx ccwatts` (it 404s until the npm name is final). The ccwatts playground links back to https://chaseholroyd.com/ccwatts.html, so keep that URL stable. `assets/shots/ccwatts-phone.webp` was re-shot on Oct 23 from ccwatts main (23cc31a, after #22–#29): the new headline and intro, the privacy note and the 8.5 kWh result. It's built locally (`npm ci && npm run build`, open `packages/web/dist/ccwatts.html`) and cropped 780x1560 from y=135 so the back link is left out.
+- Night shift Oct 23 (WEB-M4.9): `tools/check_site.py` runs in site-checks.yml: one h1, title, description and canonical per page, alt plus width and height on every image, root links resolve, every page in sitemap.xml, no email or phone on public pages, and every linked top-level file is in the pages.yml deploy list. 404 now carries `noindex`; the home H1 keeps "point-of-sale" on one line (`.nowrap`). Playwright sweep at 390px and 1280px: no overflow, broken images, console errors or sub-44px tap targets on any site page.
 - Round 2 (UXR2-1..3, QAR2-1) done. Nothing at P2 or above is left on the product pages; see the review doc.
 - Round 1 review fixes (caption, desktop two-column hero, re-crop, 44px name/skip/demo back link, footer title) are logged in the review doc's "Overnight rounds" section.
 - Not here: "Built with" and "calm by default" aren't on this site (pm-tools copy). "anxiety-less" sits in How I work, which belongs to WEB-M5 PR #12.

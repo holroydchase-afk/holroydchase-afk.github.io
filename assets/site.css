@@ -118,3 +118,4 @@ footer.site .wrap{align-items:center}
 .step .go{margin-top:6px}
 .step .go a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:none}
 @media(max-width:699px){.wide-only{display:none}}
+.nowrap{white-space:nowrap}
