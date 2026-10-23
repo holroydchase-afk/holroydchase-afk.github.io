@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The studio · Chase Holroyd</title>
+<meta name="description" content="How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.">
+<meta property="og:title" content="The studio · Chase Holroyd">
+<meta property="og:description" content="How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.">
+<meta property="og:url" content="https://chaseholroyd.com/studio.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://chaseholroyd.com/assets/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://chaseholroyd.com/studio.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
+<nav class="top" aria-label="Main"><a href="index.html">Work</a><a href="studio.html" aria-current="page">Studio</a><a href="resume.html">Resume</a><a href="about.html">About</a></nav>
+</div></header>
+<main class="wrap" id="main">
+<div class="hero"><div class="read">
+<p class="eyebrow">The studio behind the work</p>
+<h1>I stopped prompting chats and started running a studio.</h1>
+<p class="lede">Every product here began as one conversation with an AI. Five products later, I was the only thing connecting them. This is how that turned into a small studio: agents with lanes, a coordinator above them, and me in the product owner's seat.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/holroydchase-afk/studio-agents">See the agents on GitHub</a><a class="btn" href="pm-tools.html">See the PM tools</a></div>
+</div>
+<div class="facts"><div class="fact"><b>6</b><span>shared agents, one file each</span></div><div class="fact"><b>5</b><span>products, each with its own project</span></div><div class="fact"><b>2:15am</b><span>unattended builds while I sleep</span></div><div class="fact"><b>1 file</b><span>per repo says where the work stands</span></div></div></div>
+<div class="read"><h2>One chat per product</h2><p>It started simply: open a chat, describe a problem from my own life, get a working page that evening. It worked so well that I kept going, and that's where it broke. Each chat forgot what the others knew. I was re-explaining rules, copying decisions between windows, and finding that two chats had solved the same problem two different ways. The AI wasn't the bottleneck. I was, because I was the only memory.</p><h2>Specialists with lanes</h2><p>The first fix was borrowed from every good product team: give each role one job. I wrote down the agents I kept recreating by hand, made them generic, and put them in one shared library that every repo syncs from.</p><ul class="clean"><li><b>Staff PM:</b> starts from the bet, writes testable criteria, cuts scope, and runs go/no-go gates.</li><li><b>QA (tests first):</b> turns each criterion or bug into a failing test before anyone writes a fix.</li><li><b>Engineer:</b> makes that test pass in one small, reversible PR, and never merges or deploys on its own.</li><li><b>UX reviewer:</b> reviews every screen and word as the least tech-savvy person who will use it, on a real phone width.</li><li><b>Privacy and security:</b> holds each product to its own promise, like "logs never leave the laptop" or "photos never leave the phone".</li><li><b>Positioning:</b> keeps a register of what's true today, so no page or post claims more than the product does.</li></ul><p>None of them names a product. Each one reads the repo it's working in first: its hard rules, its story and its current state. So the same staff PM works on a kids' bedtime app and an energy CLI, and improving one agent improves it everywhere. In the family photo app, that review loop caught a co-parent data leak before any real user saw it.</p><h2>A coordinator, not another builder</h2><p>The bigger move was deciding that one project should build nothing. Each product now has its own project that does its own coding. Above them sits a coordinator, the product studio, whose only job is the view across all of them: what moved, what stalled, what needs me, and where the portfolio stands.</p><p>It felt like the most grown-up decision in the whole effort. It's the same move a PM makes when a team outgrows one person's head: stop doing the work yourself and build the system that keeps the work honest.</p><h2>The operating system around it</h2><ul class="clean"><li><b>One handoff file per repo.</b> Every repo keeps a HANDOFF.md: what's done, what's in progress, the exact next step, and what's blocked. Every session reads it first, and a check fails any pull request that makes progress without updating it.</li><li><b>One status list across the studio.</b> A single page lists what's done and what's waiting on me. If it's done, no agent asks again. If it's waiting, no agent re-asks.</li><li><b>The repo decides who owns the work.</b> A change to a product's repo belongs to that product's project. Anything else goes to the studio. A project that needs a change it doesn't own writes a short intake, and the owner does the work. I don't have to make that call.</li><li><b>Overnight shifts.</b> Each product runs an unattended build at 2:15am, timed just after my usage limit resets. One night took ccwatts from a log parser to a working dashboard and playground in seven small PRs.</li><li><b>A morning digest.</b> At 6:30 I read one short summary: what shipped overnight, what's blocked, and the one thing that needs me today.</li><li><b>A story log.</b> Every notable call goes into a running log as it happens, which is where this page came from.</li></ul><h2>My job became the product owner</h2><p>I don't review the code line by line. I review the pull request descriptions: what changed and why, how it was tested, and which decision is mine. The agents write them for that reader, so a good description is part of the work, not an afterthought.</p><p>Nothing reaches a live site or a user without me. Agents open draft pull requests and stop. My evenings went from typing prompts to making calls: approve, cut, or send it back with one sentence. In one recruiter-ready sprint, three review rounds found 21 issues in ccwatts, and every one was fixed test-first across eight small draft PRs before I woke up.</p><h2>What it taught me</h2><ul class="clean"><li><b>Rules in files beat rules in my head.</b> A hard rule written once in the repo is followed by every session. One I only say in chat is forgotten by the next.</li><li><b>One source of truth per thing.</b> When status lived in three places, it drifted in three directions.</li><li><b>Ask the human once, in one step.</b> My time is the scarcest resource in the studio, so every ask is a link, a paste box or a one-word choice.</li><li><b>Honest beats impressive.</b> Agents say "untested" when they couldn't check something, and sample data says so everywhere.</li></ul>
+<p class="back"><a href="index.html">← All work</a></p></div>
+</main>
+<footer class="site"><div class="wrap">
+<span>© 2026 Chase Holroyd · Staff product manager · Charlotte area</span>
+<span><a href="https://www.linkedin.com/in/chase-holroyd">LinkedIn</a> · <a href="https://github.com/holroydchase-afk">GitHub</a></span>
+</div></footer>
+</body>
+</html>

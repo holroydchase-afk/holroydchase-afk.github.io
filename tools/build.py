@@ -13,6 +13,7 @@ GITHUB = "https://github.com/holroydchase-afk"
 
 NAV = [
     ("index.html", "Work"),
+    ("studio.html", "Studio"),
     ("resume.html", "Resume"),
     ("about.html", "About"),
 ]
@@ -148,6 +149,10 @@ JOURNEY = [
      "Five products in the evenings only works with a system: one slate, one roadmap, and AI agents with clear lanes.",
      "The system behind the rest. The demos run on a scrubbed snapshot of my real slate.",
      "[check] OK to say \"about an hour a night\"?", "See the system"),
+    ("studio.html", "The studio behind it",
+     "Five products, one of me. Every chat forgot what the others knew, so I was the only memory.",
+     "Agents with lanes, a coordinator that builds nothing, and me as product owner, reviewing what the team ships.",
+     "Every product on this page runs through it", "Read the story"),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
@@ -272,6 +277,63 @@ energy = product(
     shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
 )
 
+# The studio story (WEB-M6.1). Facts trace to studio-agents, pm-tools STUDIO-STATUS.md and the Atlas Story logs.
+# No schedule ids, project names from private chats, or anyone but Chase.
+STUDIO_AGENTS = [
+    ("Staff PM", "starts from the bet, writes testable criteria, cuts scope, and runs go/no-go gates."),
+    ("QA (tests first)", "turns each criterion or bug into a failing test before anyone writes a fix."),
+    ("Engineer", "makes that test pass in one small, reversible PR, and never merges or deploys on its own."),
+    ("UX reviewer", "reviews every screen and word as the least tech-savvy person who will use it, on a real phone width."),
+    ("Privacy and security", "holds each product to its own promise, like \"logs never leave the laptop\" or \"photos never leave the phone\"."),
+    ("Positioning", "keeps a register of what's true today, so no page or post claims more than the product does."),
+]
+
+studio = product(
+    "The studio behind the work",
+    "I stopped prompting chats and started running a studio.",
+    "Every product here began as one conversation with an AI. Five products later, I was the only thing connecting them. "
+    "This is how that turned into a small studio: agents with lanes, a coordinator above them, and me in the product owner's seat.",
+    [("6", "shared agents, one file each"), ("5", "products, each with its own project"), ("2:15am", "unattended builds while I sleep"),
+     ("1 file", "per repo says where the work stands")],
+    [
+        ("One chat per product", "<p>It started simply: open a chat, describe a problem from my own life, get a working page that evening. "
+         "It worked so well that I kept going, and that's where it broke. Each chat forgot what the others knew. I was re-explaining rules, "
+         "copying decisions between windows, and finding that two chats had solved the same problem two different ways. "
+         "The AI wasn't the bottleneck. I was, because I was the only memory.</p>"),
+        ("Specialists with lanes", "<p>The first fix was borrowed from every good product team: give each role one job. "
+         "I wrote down the agents I kept recreating by hand, made them generic, and put them in one shared library that every repo syncs from.</p>"
+         '<ul class="clean">' + "".join(f"<li><b>{n}:</b> {d}</li>" for n, d in STUDIO_AGENTS) + "</ul>"
+         "<p>None of them names a product. Each one reads the repo it's working in first: its hard rules, its story and its current state. "
+         "So the same staff PM works on a kids' bedtime app and an energy CLI, and improving one agent improves it everywhere. "
+         "In the family photo app, that review loop caught a co-parent data leak before any real user saw it.</p>"),
+        ("A coordinator, not another builder", "<p>The bigger move was deciding that one project should build nothing. "
+         "Each product now has its own project that does its own coding. Above them sits a coordinator, the product studio, whose only job is the view across all of them: "
+         "what moved, what stalled, what needs me, and where the portfolio stands.</p>"
+         "<p>It felt like the most grown-up decision in the whole effort. It's the same move a PM makes when a team outgrows one person's head: "
+         "stop doing the work yourself and build the system that keeps the work honest.</p>"),
+        ("The operating system around it", '<ul class="clean">'
+         "<li><b>One handoff file per repo.</b> Every repo keeps a HANDOFF.md: what's done, what's in progress, the exact next step, and what's blocked. "
+         "Every session reads it first, and a check fails any pull request that makes progress without updating it.</li>"
+         "<li><b>One status list across the studio.</b> A single page lists what's done and what's waiting on me. If it's done, no agent asks again. If it's waiting, no agent re-asks.</li>"
+         "<li><b>The repo decides who owns the work.</b> A change to a product's repo belongs to that product's project. Anything else goes to the studio. "
+         "A project that needs a change it doesn't own writes a short intake, and the owner does the work. I don't have to make that call.</li>"
+         "<li><b>Overnight shifts.</b> Each product runs an unattended build at 2:15am, timed just after my usage limit resets. One night took ccwatts from a log parser to a working dashboard and playground in seven small PRs.</li>"
+         "<li><b>A morning digest.</b> At 6:30 I read one short summary: what shipped overnight, what's blocked, and the one thing that needs me today.</li>"
+         "<li><b>A story log.</b> Every notable call goes into a running log as it happens, which is where this page came from.</li></ul>"),
+        ("My job became the product owner", "<p>I don't review the code line by line. I review the pull request descriptions: what changed and why, how it was tested, "
+         "and which decision is mine. The agents write them for that reader, so a good description is part of the work, not an afterthought.</p>"
+         "<p>Nothing reaches a live site or a user without me. Agents open draft pull requests and stop. "
+         "My evenings went from typing prompts to making calls: approve, cut, or send it back with one sentence. "
+         "In one recruiter-ready sprint, three review rounds found 21 issues in ccwatts, and every one was fixed test-first across eight small draft PRs before I woke up.</p>"),
+        ("What it taught me", '<ul class="clean">'
+         "<li><b>Rules in files beat rules in my head.</b> A hard rule written once in the repo is followed by every session. One I only say in chat is forgotten by the next.</li>"
+         "<li><b>One source of truth per thing.</b> When status lived in three places, it drifted in three directions.</li>"
+         "<li><b>Ask the human once, in one step.</b> My time is the scarcest resource in the studio, so every ask is a link, a paste box or a one-word choice.</li>"
+         "<li><b>Honest beats impressive.</b> Agents say \"untested\" when they couldn't check something, and sample data says so everywhere.</li></ul>"),
+    ],
+    links=[("See the agents on GitHub", f"{GITHUB}/studio-agents"), ("See the PM tools", "pm-tools.html")],
+)
+
 pm_tools = """<div class="read">
 <p class="eyebrow">The system behind it</p>
 <h1>How I keep it all moving.</h1>
@@ -290,7 +352,7 @@ pm_tools = """<div class="read">
 <h2>An AI team with lanes</h2>
 <p>Specialist agents each own one job: staff PM, QA (tests first), engineer, privacy and security, UX for low-tech users, and marketing. I keep an inventory of every agent's maturity (proven, working, dormant or broken) and decide which to use, mature or retire.</p>
 <h2>One hub across projects</h2>
-<p>Each project reports into a central product office: products, PM tools, agents, decisions and open loops, so nothing lives only in one chat.</p>
+<p>Each project reports into a central product office: products, PM tools, agents, decisions and open loops, so nothing lives only in one chat. <a href="studio.html">The story of how that came together</a>.</p>
 </div>"""
 
 about = f"""<div class="read">
@@ -375,6 +437,7 @@ PAGES = [
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
+    ("studio.html", "The studio", "How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.", studio),
     ("pm-tools.html", "How I keep it all moving", "The slate, roadmap and AI agents that keep several products moving at once.", pm_tools),
     ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
     ("about.html", "About", "Chase Holroyd's path from solar design to product management and AI.", about),
