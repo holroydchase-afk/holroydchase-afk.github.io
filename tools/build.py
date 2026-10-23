@@ -42,7 +42,7 @@ def page(slug, title, description, body):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-{'<base href="/">' + chr(10) if slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{'<base href="/">' + chr(10) + '<meta name="robots" content="noindex">' + chr(10) if slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{full_title}">
@@ -160,7 +160,7 @@ PROOF = [
 
 home = f"""<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
-<h1>Staff PM for pricing, payments and point-of-sale lending. I build with AI to fix real problems.</h1>
+<h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending. I build with AI to fix real problems.</h1>
 <p class="lede">8+ years building the pricing, credit and checkout software that sells and finances home solar, at Palmetto, ADT and Patter AI. Lately I've been prototyping with AI to solve problems in my own life, and onboarding real people to each one.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
