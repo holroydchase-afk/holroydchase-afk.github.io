@@ -114,7 +114,7 @@ CAREER = [
      "An AI-native sales platform for solar and home services. I led one real-time pricing engine across loans, leases and PPAs, "
      "rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut onboarding from about a month to a week.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
-    ("ADT Solar", "2020–2023 · PM to Senior PM",
+    ("ADT", "2020–2023 · PM to Senior PM",
      "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
      "and lender allocation that helped cut dealer fees 3–5 points, with releases to about 5,000 reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
