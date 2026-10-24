@@ -111,16 +111,16 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 # [check] items wait on Chase (WEB-M5); none of this merges until they're cleared.
 CAREER = [
     ("Patter AI", "2023–2026 · Staff PM",
-     "An AI-native sales platform for solar and home services. I led a single real-time pricing engine across loans, leases and PPAs, "
-     "a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut onboarding from about a month to a week.",
+     "AI sales platform for solar and home services. I led a single real-time pricing engine across loans, leases and PPAs, "
+     "a rep-guided checkout that prices every add-on into the monthly payment, and a lender rules engine that cut lender onboarding from a month to a week.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT", "2020–2023 · PM to Senior PM",
-     "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
-     "and lender allocation that helped cut dealer fees 3–5 points, with releases to about 5,000 reps.",
+     "First PM for a 3,000-person solar division. I scaled the credit-check and offer engine to 12,000+ applications a month across 5 lenders "
+     "and built lender allocation that helped cut dealer fees 3–5 points. Shipped to about 5,000 reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
-     "I was Palmetto's first PM and built Alchemy, its design, point-of-sale and real-time credit platform, and supported a $6M venture round. "
-     "Then I launched a machine-learning lead marketplace at 11,500+ consultations a month.",
+     "Palmetto's first PM. I built Alchemy, its design, point-of-sale and real-time credit platform, which supported a $6M venture round. "
+     "As Director of Product, I launched a machine-learning lead marketplace serving 11,500+ consultations a month.",
      [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
 ]
 
@@ -130,28 +130,28 @@ CAREER = [
 # not rendered until Chase answers it (WEB-M5).
 JOURNEY = [
     ("energy-scanner.html", "Energy Scanner",
-     "Bedtime with my kids had become a nightly negotiation. I designed a routine that ends in an energy scan, so a neutral signal, not a parent, calls lights out.",
-     "Built as a single page in one evening and tested with its real users at bedtime that night.",
+     "Ended the nightly bedtime negotiation with my kids: a routine that closes with an energy scan, so a neutral signal, not a parent, calls lights out.",
+     "Prototyped in one evening and tested with its real users that night.",
      "[check] Who uses it today, e.g. my kids every night", "Try the app"),
     ("role-radar.html", "Role Radar",
-     "A job search is mostly triage. An agent now reads about 110 company boards each weekday and scores every role with a stated reason, so my time goes to the few worth pursuing.",
-     "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
+     "Turned job-search triage into a ranked shortlist. An agent reads about 110 company boards each weekday and scores every role with a stated reason.",
+     "First scheduled agent: it runs unattended, and I audit its judgment instead of the raw feed.",
      "[check] Who uses it besides me", "Try the demo"),
     ("ccwatts.html", "ccwatts",
-     "I wanted to know the electricity cost of my own AI-assisted coding. No tool answered it, so I built a local one that reports a sourced range instead of a false point estimate.",
-     "My first open-source release, with a public methodology, full tests and a citation for every assumption.",
+     "Answers a question no tool did: how much electricity my AI coding consumes. It reports a sourced range, never a false point estimate.",
+     "First open-source release: a public methodology, a full test suite and a citation for every assumption.",
      "[check] Who's using it", "Try the playground"),
     ("family-photos.html", "Family photo app",
-     "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
-     "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
+     "Built to replace five family group texts across two blended families with one private app, where every post reaches exactly the audience chosen for it.",
+     "Run as a product team of AI agents: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo"),
     ("pm-tools.html", "How I keep it all moving",
-     "Running five products in limited hours takes a system: one slate, one roadmap and AI agents with clear ownership.",
-     "The operating layer under everything else. The demos run on a scrubbed snapshot of my real slate.",
+     "The operating system for five products in limited hours: one slate, one roadmap and AI agents with clear ownership.",
+     "It runs every product on this page. The demos use a scrubbed snapshot of my real slate.",
      "[check] OK to say \"about an hour a night\"?", "See the system"),
     ("studio.html", "The studio behind it",
-     "Five products and one person. Each AI chat lost what the others knew, which made me the only shared memory and the bottleneck.",
-     "Specialist agents, a coordinator that only coordinates, and me as product owner, reviewing what ships.",
+     "Five products, one product owner. Separate AI chats made me the only shared memory, so I built the structure that removed that bottleneck.",
+     "Specialist agents, a coordinator that only coordinates, and every release reviewed by me.",
      "Every product on this page runs through it", "Read the story"),
 ]
 
@@ -164,14 +164,14 @@ PROOF = [
 ]
 
 home = f"""<div class="read">
-<p class="eyebrow">Open to remote senior and staff PM roles</p>
-<h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending. I use AI to turn real problems into working products.</h1>
-<p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. Today I use AI to go from problem to working product in days, starting with problems in my own life and putting each one in front of real users.</p>
+<p class="eyebrow">Staff product manager · Open to remote senior and staff roles</p>
+<h1>I build the lending, payments and pricing products that close the sale.</h1>
+<p class="lede">For eight years I've led point-of-sale lending at Palmetto, ADT and Patter AI: a credit and offer engine at 12,000+ applications a month, 13+ lender integrations, and lender allocation that cut dealer fees 3–5 points. Today I use AI agents to take products from problem to production.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
 <div class="read"><h2>Career highlights</h2>
-<p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
+<p>Three companies, one through-line: putting credit, pricing and payments inside the sale.</p></div>
 <div class="grid">""" + "".join(
     f'<div class="card career"><span class="tag">{r}</span><h3>{c}</h3><p>{d}</p>'
     + (('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else "")
@@ -179,7 +179,7 @@ home = f"""<div class="read">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="read"><h2>What I've built with AI</h2>
-<p>Each product started with a problem in my own life. Together they show how my practice matured, from a single prototype page to a team of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
+<p>Each one solves a real problem in my own life, for real users. In sequence they show the progression: a single prototype, a scheduled agent, an open-source release, then a full agent team working under tests and review. Every demo runs on sample data in your browser.</p></div>
 <ol class="steps">""" + "".join(
     f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
     + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
@@ -191,11 +191,11 @@ family = product(
     "Mobile app · building",
     "A private family photo app",
     "Two divorced-and-remarried families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
-    "I set out to build one private place where each photo reaches exactly the people it's meant for.",
+    "I'm building one private app where each photo reaches exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
     [
-        ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
+        ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send risked leaving someone out. "
          "Existing family apps assume one household, not two equal ones, and we don't post our kids publicly.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
          "<li><b>No social pressure:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
@@ -208,10 +208,10 @@ family = product(
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
-        ("How I built it", "<p>I ran it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
-         "QA writes failing tests first and the engineer makes them pass. There are 600+ app tests and 800+ database checks, and a co-parent data leak was caught in review before any real user saw it.</p>"
+        ("How I built it", "<p>I run it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
+         "QA writes failing tests first; the engineer makes them pass. The result: 600+ app tests, 800+ database checks, and a co-parent data leak caught in review before any real user saw it.</p>"
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
-        ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
+        ("What's next", "<p>Private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private; the family beta starts late November.",
     links=[("Try the demo", "demo/hearth/")],
@@ -220,12 +220,12 @@ family = product(
 role_radar = product(
     "AI tool · beta",
     "Role Radar",
-    "Most of a job search is triage. Role Radar reads the boards every weekday and explains which roles merit my time, so I can say no faster and focus on the few that fit.",
+    "I built Role Radar to cut the noise in a job search. It reads the boards every weekday and scores every role with a stated reason, so I can say no faster and spend time only on the strongest fits.",
     [("~110", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
-         "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
+         "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so every score can be audited, not just trusted.</li>"
          "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
         ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
          "<li><b>Precision, not volume.</b> The goal is fewer, better applications. The measure is how many top-scored roles turn into real conversations.</li>"
@@ -243,14 +243,14 @@ role_radar = product(
 ccwatts = product(
     "Developer tool · playground live",
     "ccwatts",
-    "Every AI session has an electricity cost, and almost no one can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.",
+    "Every AI session draws power, and almost no developer can see how much. ccwatts reads local Claude Code logs and estimates the energy consumed, as a sourced range.",
     [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
      ("Open", "source on GitHub")],
     [
         ("Why it exists", "<p>In 2026 climate scientist Zeke Hausfather estimated his own Claude Code use by hand, at about 170 kWh over eight weeks. "
-         "Existing tools counted tokens and cost. None covered energy, so I built one.</p>"),
-        ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
-         "<li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li>"
+         "Existing tools counted tokens and cost; none measured energy. I built the one that does.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and repositioned for the individual developer.</li>'
+         "<li><b>Ranges, not false precision.</b> Public estimates vary by an order of magnitude, so every result is a range backed by a public methodology.</li>"
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
         ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI, on npm once the name is final, and an offline HTML dashboard.</p>"),
     ],
@@ -261,17 +261,17 @@ ccwatts = product(
 energy = product(
     "Family app · live",
     "Energy Scanner",
-    "Bedtime had become a nightly negotiation. I built a routine that ends with a neutral machine, not a parent, deciding it's time to sleep.",
+    "I built Energy Scanner to end the nightly bedtime negotiation. Kids complete a routine, then scan, and a neutral machine, not a parent, calls bedtime.",
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
      ("On-device", "photos never leave the phone"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
-        ("The idea", "<p>Kids tick off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
+        ("The idea", "<p>Kids check off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
          "A neutral authority makes the call, which takes the argument off the parent.</p>"),
         ("Two ways to scan", '<ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>'
          "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, brightest at Rainbow. Grown-ups can save or share it.</li></ul>"),
         ("Decisions", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps, and it never reads Rainbow once every step is done.</li>'
          "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul>"),
-        ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
+        ("Status", "<p>Live. It began as a palm-scan prototype tested at bedtime; the photo scan shipped once it could run entirely on the phone.</p>"),
     ],
     links=[("Try the live app", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
     shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
@@ -290,17 +290,17 @@ STUDIO_AGENTS = [
 
 studio = product(
     "The studio behind the work",
-    "How I run a small AI product studio.",
+    "I run a product studio of AI agents.",
     "Every product here began as a single AI conversation. By the fifth, I was the only thing connecting them. "
-    "This is how I turned that into a studio: specialist agents with defined lanes, a coordinator above them, and me as product owner.",
+    "I restructured the work the way I would a growing product org: specialist agents with defined lanes, a coordinator above them, and me as product owner.",
     [("6", "shared agents, one file each"), ("5", "products, each with its own project"), ("2:15am", "unattended nightly builds"),
      ("1 file", "per repo says where the work stands")],
     [
-        ("One chat per product", "<p>It started simply: describe a problem from my own life in a chat and have a working page that evening. "
-         "That worked well enough to scale, and scaling is where it broke. Each chat lost what the others knew. I was restating rules, "
-         "carrying decisions between windows, and finding two chats solving the same problem two different ways. "
-         "The constraint wasn't the AI. It was me, as the only shared memory.</p>"),
-        ("Specialists with lanes", "<p>The first fix came from how strong product teams work: give each role one clear job. "
+        ("One chat per product", "<p>Each product started the same way: a problem from my own life, a chat, and a working page that evening. "
+         "That approach scaled until it didn't. Each chat lost what the others knew. I was restating rules, "
+         "carrying decisions between windows, and watching two chats solve the same problem two different ways. "
+         "The constraint wasn't the AI; it was me, as the only shared memory.</p>"),
+        ("Specialists with lanes", "<p>The first fix came from how strong product teams work: one clear job per role. "
          "I codified the agents I kept recreating by hand, made them product-agnostic, and moved them into one shared library that every repo syncs from.</p>"
          '<ul class="clean">' + "".join(f"<li><b>{n}:</b> {d}</li>" for n, d in STUDIO_AGENTS) + "</ul>"
          "<p>None is tied to a product. Each reads the repo it's working in first: its hard rules, its story and its current state. "
@@ -309,8 +309,8 @@ studio = product(
         ("A coordinator, not another builder", "<p>The more important decision was that one project should build nothing. "
          "Each product has its own project that owns its code. Above them, a coordinator, the product studio, holds the view across all of them: "
          "what moved, what stalled, what needs my decision, and where the portfolio stands.</p>"
-         "<p>It mirrors what happens when a team outgrows one person: "
-         "the job shifts from doing the work to designing the system that keeps it on track.</p>"),
+         "<p>It's the same transition a product leader makes as a team scales: "
+         "from doing the work to designing the system that keeps it on track.</p>"),
         ("The operating system around it", '<ul class="clean">'
          "<li><b>One handoff file per repo.</b> Every repo keeps a HANDOFF.md: what's done, what's in progress, the exact next step, and what's blocked. "
          "Every session reads it first, and a check fails any pull request that makes progress without updating it.</li>"
@@ -358,7 +358,7 @@ pm_tools = """<div class="read">
 about = f"""<div class="read">
 <p class="eyebrow">About</p>
 <h1>From solar engineering to product leadership.</h1>
-<p class="lede">I started out designing solar systems and ended up building the software that prices, sells and finances them. Pricing, payments and point-of-sale lending are my core expertise. I design my own screens and prototype with current AI tools, so ideas reach users as working software, not slides.</p>
+<p class="lede">I began designing solar systems and moved into building the software that prices, sells and finances them. Point-of-sale lending, payments and pricing are my core expertise. I design my own screens and prototype with AI, so ideas reach users as working software, not slides.</p>
 <h2>The path</h2>
 <ol class="timeline">
 <li><b>Solar engineer, Palmetto (2016).</b> Designed 2,000+ residential and commercial PV systems and replaced 75% of on-site surveys with virtual ones, saving $80K a year.</li>
@@ -367,13 +367,13 @@ about = f"""<div class="read">
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
 <li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (12,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from about a month to a week.</li>
-<li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
+<li><b>Now: building with AI.</b> I ship products that solve real problems in my own life (bedtime, the job search, family photos, the energy cost of AI) and put real users on each one. I'm not raising or selling; I'm looking for my next full-time product role.</li>
 </ol>
 <h2>What I care about</h2>
 <ul class="clean"><li>Checkout, pricing and payments that feel simple to the person at the kitchen table.</li>
 <li>Clean energy and climate, rooted in a WVU degree in Sustainable Design.</li>
 <li>Privacy that's strong underneath and obvious on the surface.</li>
-<li>Steady, focused teams that ship.</li></ul>
+<li>Focused teams with a steady release cadence.</li></ul>
 <h2>Get in touch</h2>
 <p>I'm looking for a senior or staff product role, remote. The best way to reach me is <a href="{LINKEDIN}">LinkedIn</a>.</p>
 </div>"""
