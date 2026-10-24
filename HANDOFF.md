@@ -84,6 +84,10 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 |---|---|---|
 | energy-scanner (legacy, unlinked since ES-M2.3; remove next release) | link in project memory | 1792454453-b0d3 |
 
+## Night shift Oct 24 (WEB-M4.10, stacked on #23)
+- Sweep of every page at 390px and 1280px on top of #23's copy: no overflow, broken images, console errors or sub-44px targets; `check_site.py` passes 3x.
+- Studio page stat said "6 shared agents", but studio-agents now has 8 (the 6 specialists plus orchestrator and focus-coach). It now reads "6 specialist agents, one file each, plus a coordinator", which matches the list and the coordinator section.
+
 ## Rules
 - **Voice (Chase, Oct 24, round 2):** three voices, each for its context. **A, operator** (the Toast resume: verb-led, numbers first, the domain's own vocabulary, almost no "I") for career and resume roles, because those were team efforts and "I" there reads as poor taste. **B, leader in first person** for Chase's own products, which he built alone: the problem in his life, what he built, the result. **C, point of view** as the hook that opens each product's story (the page lede): a belief that draws the reader in, under 35 words. Every product ties to a real problem Chase solved in his own life. In every voice: sell without arrogance (no superlatives or self-praise), and no hobby tone (no jokes, rhetorical questions, musing, "lately", "passion project", or lecturing about lessons learned).
 - Resume copy (WEB-M5.6) is prose per company: keep it that way, every number from pmo/story/resume-2026-10.md, no bullets. The Patter problem line ("reps had to price loans, leases and PPAs on the spot") is a reading of the resume; Chase can reword it.
