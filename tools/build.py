@@ -111,16 +111,16 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 # [check] items wait on Chase (WEB-M5); none of this merges until they're cleared.
 CAREER = [
     ("Patter AI", "2023–2026 · Staff PM",
-     "AI sales platform for solar and home services. I led a single real-time pricing engine across loans, leases and PPAs, "
+     "AI sales platform for solar and home services. Led a single real-time pricing engine across loans, leases and PPAs, "
      "a rep-guided checkout that prices every add-on into the monthly payment, and a lender rules engine that cut lender onboarding from a month to a week.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT", "2020–2023 · PM to Senior PM",
-     "First PM for a 3,000-person solar division. I scaled the credit-check and offer engine to 12,000+ applications a month across 5 lenders "
+     "First PM for a 3,000-person solar division. Scaled the credit-check and offer engine to 12,000+ applications a month across 5 lenders "
      "and built lender allocation that helped cut dealer fees 3–5 points. Shipped to about 5,000 reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
-     "Palmetto's first PM. I built Alchemy, its design, point-of-sale and real-time credit platform, which supported a $6M venture round. "
-     "As Director of Product, I launched a machine-learning lead marketplace serving 11,500+ consultations a month.",
+     "Palmetto's first PM. Built Alchemy, its design, point-of-sale and real-time credit platform, which supported a $6M venture round. "
+     "As Director of Product, launched a machine-learning lead marketplace serving 11,500+ consultations a month.",
      [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
 ]
 
@@ -130,7 +130,7 @@ CAREER = [
 # not rendered until Chase answers it (WEB-M5).
 JOURNEY = [
     ("energy-scanner.html", "Energy Scanner",
-     "Ended the nightly bedtime negotiation with my kids: a routine that closes with an energy scan, so a neutral signal, not a parent, calls lights out.",
+     "Built to end the nightly bedtime negotiation with my kids: a routine that closes with an energy scan, so a neutral signal, not a parent, calls lights out.",
      "Prototyped in one evening and tested with its real users that night.",
      "[check] Who uses it today, e.g. my kids every night", "Try the app"),
     ("role-radar.html", "Role Radar",
@@ -165,8 +165,8 @@ PROOF = [
 
 home = f"""<div class="read">
 <p class="eyebrow">Staff product manager · Open to remote senior and staff roles</p>
-<h1>I build the lending, payments and pricing products that close the sale.</h1>
-<p class="lede">For eight years I've led point-of-sale lending at Palmetto, ADT and Patter AI: a credit and offer engine at 12,000+ applications a month, 13+ lender integrations, and lender allocation that cut dealer fees 3–5 points. Today I use AI agents to take products from problem to production.</p>
+<h1>Staff PM for <span class="nowrap">point-of-sale</span> lending, payments and pricing.</h1>
+<p class="lede">Eight years embedding lending in sales software at Palmetto, ADT and Patter AI. Scaled a credit and offer engine to 12,000+ applications a month, delivered 13+ lender integrations, and cut dealer fees 3–5 points with lender allocation. Now shipping products end to end with AI agents.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
 </div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
@@ -190,13 +190,13 @@ home = f"""<div class="read">
 family = product(
     "Mobile app · building",
     "A private family photo app",
-    "Two divorced-and-remarried families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
-    "I'm building one private app where each photo reaches exactly the people it's meant for.",
+    "Family apps assume one household. Ours spans two, and every photo sent by group text risked leaving someone out.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
     [
-        ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send risked leaving someone out. "
-         "Existing family apps assume one household, not two equal ones, and we don't post our kids publicly.</p>"),
+        ("Why I built it", "<p>Photos of our kids moved through five group texts across two divorced-and-remarried families, with grandparents on Android and everyone else on iPhone. "
+         "They arrived late, compressed, or not at all. Existing family apps assume one household, not two equal ones, and we don't post our kids publicly. "
+         "I'm building one private app where each photo reaches exactly the group it was shared with, encrypted on the phone before upload.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
          "<li><b>No social pressure:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
          "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li>"
@@ -220,10 +220,13 @@ family = product(
 role_radar = product(
     "AI tool · beta",
     "Role Radar",
-    "I built Role Radar to cut the noise in a job search. It reads the boards every weekday and scores every role with a stated reason, so I can say no faster and spend time only on the strongest fits.",
+    "A job search has the same problem as a bad funnel: too much volume, too little signal.",
     [("~110", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
+        ("Why I built it", "<p>A senior job search turned into a daily chore: checking dozens of boards each morning, with status split across a spreadsheet, my inbox and my head. "
+         "I built Role Radar to cut the noise. It scans about 110 company boards each weekday and scores every role with a stated reason, "
+         "so I can say no faster and spend time only on the strongest fits. I use it every day.</p>"),
         ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
          "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so every score can be audited, not just trusted.</li>"
          "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
@@ -243,12 +246,13 @@ role_radar = product(
 ccwatts = product(
     "Developer tool · playground live",
     "ccwatts",
-    "Every AI session draws power, and almost no developer can see how much. ccwatts reads local Claude Code logs and estimates the energy consumed, as a sourced range.",
+    "Every AI coding session draws power, yet developer tools count tokens and dollars, never kilowatt-hours.",
     [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
      ("Open", "source on GitHub")],
     [
-        ("Why it exists", "<p>In 2026 climate scientist Zeke Hausfather estimated his own Claude Code use by hand, at about 170 kWh over eight weeks. "
-         "Existing tools counted tokens and cost; none measured energy. I built the one that does.</p>"),
+        ("Why I built it", "<p>I started my career designing solar systems, and today AI agents build my products overnight. I wanted to know how much electricity that work draws, and no tool reported it. "
+         "In 2026 climate scientist Zeke Hausfather estimated his own Claude Code use by hand, at about 170 kWh over eight weeks. "
+         "I built ccwatts to make that a one-command answer: it reads local Claude Code logs and reports energy as a sourced range, with every assumption cited and no data leaving the laptop.</p>"),
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and repositioned for the individual developer.</li>'
          "<li><b>Ranges, not false precision.</b> Public estimates vary by an order of magnitude, so every result is a range backed by a public methodology.</li>"
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
@@ -261,11 +265,14 @@ ccwatts = product(
 energy = product(
     "Family app · live",
     "Energy Scanner",
-    "I built Energy Scanner to end the nightly bedtime negotiation. Kids complete a routine, then scan, and a neutral machine, not a parent, calls bedtime.",
+    "Bedtime goes better when the parent is not the one calling it. A routine needs a neutral referee.",
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
      ("On-device", "photos never leave the phone"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
-        ("The idea", "<p>Kids check off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
+        ("Why I built it", "<p>Bedtime at our house was a nightly negotiation, and \"five more minutes\" works on a parent. "
+         "I built Energy Scanner so my kids finish their routine and then scan, and a neutral reading, not me, calls bedtime. "
+         "My kids tested the first version the night I built it.</p>"),
+        ("How it works", "<p>Kids check off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
          "A neutral authority makes the call, which takes the argument off the parent.</p>"),
         ("Two ways to scan", '<ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>'
          "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, brightest at Rainbow. Grown-ups can save or share it.</li></ul>"),
@@ -291,7 +298,7 @@ STUDIO_AGENTS = [
 studio = product(
     "The studio behind the work",
     "I run a product studio of AI agents.",
-    "Every product here began as a single AI conversation. By the fifth, I was the only thing connecting them. "
+    "When every product lives in its own AI chat, the person moving between them becomes the only shared memory. That does not scale. "
     "I restructured the work the way I would a growing product org: specialist agents with defined lanes, a coordinator above them, and me as product owner.",
     [("6", "shared agents, one file each"), ("5", "products, each with its own project"), ("2:15am", "unattended nightly builds"),
      ("1 file", "per repo says where the work stands")],
@@ -337,7 +344,8 @@ studio = product(
 pm_tools = """<div class="read">
 <p class="eyebrow">The system behind it</p>
 <h1>How I keep it all moving.</h1>
-<p class="lede">The tools and operating habits I use to run several products in parallel without losing track. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
+<p class="lede">With limited hours, ideas are not the constraint. Knowing the exact next step when a session starts is.</p>
+<p>I run several products at once, with AI agents that start every session with no memory of the last one. These tools keep the next step written down. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
 <h2>Build Slate</h2>
 <p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps active projects at five, which forces depth over breadth.</p>
 <div class="cta"><a class="btn primary" href="/pm-tools/build-slate/">Try Build Slate</a></div>
@@ -358,7 +366,7 @@ pm_tools = """<div class="read">
 about = f"""<div class="read">
 <p class="eyebrow">About</p>
 <h1>From solar engineering to product leadership.</h1>
-<p class="lede">I began designing solar systems and moved into building the software that prices, sells and finances them. Point-of-sale lending, payments and pricing are my core expertise. I design my own screens and prototype with AI, so ideas reach users as working software, not slides.</p>
+<p class="lede">Solar engineer turned product leader. Ten years across the solar sale, from designing the systems to building the software that prices, sells and finances them. Core expertise in point-of-sale lending, payments and pricing, with hands-on design and AI prototyping that put working software, not slides, in front of users.</p>
 <h2>The path</h2>
 <ol class="timeline">
 <li><b>Solar engineer, Palmetto (2016).</b> Designed 2,000+ residential and commercial PV systems and replaced 75% of on-site surveys with virtual ones, saving $80K a year.</li>
