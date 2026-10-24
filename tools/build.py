@@ -300,7 +300,7 @@ studio = product(
     "I run a product studio of AI agents.",
     "When every product lives in its own AI chat, the person moving between them becomes the only shared memory. That does not scale. "
     "I restructured the work the way I would a growing product org: specialist agents with defined lanes, a coordinator above them, and me as product owner.",
-    [("6", "shared agents, one file each"), ("5", "products, each with its own project"), ("2:15am", "unattended nightly builds"),
+    [("6", "specialist agents, one file each, plus a coordinator"), ("5", "products, each with its own project"), ("2:15am", "unattended nightly builds"),
      ("1 file", "per repo says where the work stands")],
     [
         ("One chat per product", "<p>Each product started the same way: a problem from my own life, a chat, and a working page that evening. "
