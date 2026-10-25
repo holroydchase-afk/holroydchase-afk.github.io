@@ -11,6 +11,14 @@ SITE = "https://chaseholroyd.com"
 LINKEDIN = "https://www.linkedin.com/in/chase-holroyd"
 GITHUB = "https://github.com/holroydchase-afk"
 
+# Keep the site out of search engines while it's in progress (Chase, Oct 25): every page carries noindex and
+# robots.txt drops the sitemap line. Anyone with the link can still open it. Set False when the site is ready.
+NOINDEX = True
+
+# Below the 8/10 bar: the home page leaves these out and lists them, unlinked, as in active development.
+# Their pages stay up for anyone with the link. Remove a page from this set once it reaches the bar.
+IN_DEVELOPMENT = {"energy-scanner.html", "family-photos.html"}
+
 NAV = [
     ("index.html", "Work"),
     ("studio.html", "Studio"),
@@ -43,7 +51,7 @@ def page(slug, title, description, body):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-{'<base href="/">' + chr(10) + '<meta name="robots" content="noindex">' + chr(10) if slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{'<base href="/">' + chr(10) if slug == "404.html" else ""}{'<meta name="robots" content="noindex">' + chr(10) if NOINDEX or slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{full_title}">
@@ -126,33 +134,36 @@ CAREER = [
 
 # The AI journey: each product starts with a problem in Chase's life and its real users. Ordered by how the
 # building grew (one prototype page → scheduled agent → open source → an agent team → the system behind it), not by date.
-# (page, product, the life problem, what changed in how I built it, who uses it, CTA label). A "[check]" who-line is
-# not rendered until Chase answers it (WEB-M5).
+# (page, product, the life problem, what changed in how I built it, who uses it, CTA label, line for the
+# in-development list). A "[check]" who-line is not rendered until Chase answers it (WEB-M5). Pages in
+# IN_DEVELOPMENT render only their last field, in the unlinked list under the steps.
 JOURNEY = [
     ("energy-scanner.html", "Energy Scanner",
      "Bedtime with my kids had become a nightly negotiation. I designed a routine that ends in an energy scan, so a neutral signal, not a parent, calls lights out.",
      "Built as a single page in one evening and tested with its real users at bedtime that night.",
-     "[check] Who uses it today, e.g. my kids every night", "Try the app"),
+     "[check] Who uses it today, e.g. my kids every night", "Try the app",
+     "a bedtime routine for my kids that ends in an on-device energy scan"),
     ("role-radar.html", "Role Radar",
      "A job search is mostly triage. An agent now reads about 110 company boards each weekday and scores every role with a stated reason, so my time goes to the few worth pursuing.",
      "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
-     "[check] Who uses it besides me", "Try the demo"),
+     "[check] Who uses it besides me", "Try the demo", ""),
     ("ccwatts.html", "ccwatts",
      "I wanted to know the electricity cost of my own AI-assisted coding. No tool answered it, so I built a local one that reports a sourced range instead of a false point estimate.",
      "My first open-source release, with a public methodology, full tests and a citation for every assumption.",
-     "[check] Who's using it", "Try the playground"),
+     "[check] Who's using it", "Try the playground", ""),
     ("family-photos.html", "Family photo app",
      "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
-     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo"),
+     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo",
+     "a private photo app for two blended families, with a family beta in late November"),
     ("pm-tools.html", "How I keep it all moving",
      "Running five products in limited hours takes a system: one slate, one roadmap and AI agents with clear ownership.",
      "The operating layer under everything else. The demos run on a scrubbed snapshot of my real slate.",
-     "[check] OK to say \"about an hour a night\"?", "See the system"),
+     "[check] OK to say \"about an hour a night\"?", "See the system", ""),
     ("studio.html", "The studio behind it",
      "Five products and one person. Each AI chat lost what the others knew, which made me the only shared memory and the bottleneck.",
      "Specialist agents, a coordinator that only coordinates, and me as product owner, reviewing what ships.",
-     "Every product on this page runs through it", "Read the story"),
+     "Every product on this page runs through it", "Read the story", ""),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
@@ -179,16 +190,17 @@ home = f"""<div class="read">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="read"><h2>What I've built with AI</h2>
-<p>Each product started with a problem in my own life. Together they show how my practice matured, from a single prototype page to a team of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
+<p>Each product started with a problem in my own life. Together they show how my practice matured, from a scheduled agent to a studio of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
 <ol class="steps">""" + "".join(
     f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
     + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
     + f'<p class="go"><a href="{h}">{cta} →</a></p></div></li>'
-    for h, n, d, how, w, cta in JOURNEY
-) + "</ol>"
+    for h, n, d, how, w, cta, _ in JOURNEY if h not in IN_DEVELOPMENT
+) + "</ol>" + '<div class="read"><p class="note"><b>In active development:</b> ' + "; ".join(
+    dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + ".</p></div>"
 
 family = product(
-    "Mobile app · building",
+    "Mobile app · in active development",
     "A private family photo app",
     "Two divorced-and-remarried families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
@@ -259,7 +271,7 @@ ccwatts = product(
 )
 
 energy = product(
-    "Family app · live",
+    "Family app · in active development",
     "Energy Scanner",
     "Bedtime had become a nightly negotiation. I built a routine that ends with a neutral machine, not a parent, deciding it's time to sleep.",
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
@@ -452,5 +464,7 @@ if __name__ == "__main__":
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       f"{urls}</urlset>\n", encoding="utf-8")
-    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
+    # Crawlers must be allowed in to see each page's noindex, so robots.txt only drops the sitemap line.
+    sitemap_line = "" if NOINDEX else f"Sitemap: {SITE}/sitemap.xml\n"
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
