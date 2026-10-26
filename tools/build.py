@@ -36,12 +36,18 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
 "jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
-"url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/share-card.png",
+"url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/chase-800.jpg",
 "address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
 "alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
 "sameAs":["https://www.linkedin.com/in/chase-holroyd","https://github.com/holroydchase-afk"]}}
 </script>
 """
+
+
+# Headshot (WEB-M2.6, Chase, Oct 26): 400 and 800px WebP plus an 800px JPG for JSON-LD, metadata stripped.
+# It sits above the fold on home and About, so it loads eagerly.
+HEADSHOT = ('<img class="headshot" src="assets/chase-400.webp" srcset="assets/chase-400.webp 1x, assets/chase-800.webp 2x" '
+            'width="200" height="200" alt="Chase Holroyd" fetchpriority="high" decoding="async">')
 
 
 def page(slug, title, description, body):
@@ -177,12 +183,12 @@ PROOF = [
     ("1 mo → 1 wk", "to onboard a new lender, with a rules engine"),
 ]
 
-home = f"""<div class="read">
+home = f"""<div class="intro">{HEADSHOT}<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
 <h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending. I use AI to turn real problems into working products.</h1>
 <p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. Today I use AI to go from problem to working product in days, starting with problems in my own life and putting each one in front of real users.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
-</div>
+</div></div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
 <div class="read"><h2>Career highlights</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
@@ -371,10 +377,12 @@ pm_tools = """<div class="read">
 <p>Each project reports into a central product office: products, PM tools, agents, decisions and open loops, so nothing lives only in one chat. <a href="studio.html">The story of how that came together</a>.</p>
 </div>"""
 
-about = f"""<div class="read">
+about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <p class="eyebrow">About</p>
 <h1>From solar engineering to product leadership.</h1>
 <p class="lede">I started out designing solar systems and ended up building the software that prices, sells and finances them. Pricing, payments and point-of-sale lending are my core expertise. I design my own screens and prototype with current AI tools, so ideas reach users as working software, not slides.</p>
+</div></div>
+<div class="read">
 <h2>The path</h2>
 <ol class="timeline">
 <li><b>Solar engineer, Palmetto (2016).</b> Designed 2,000+ residential and commercial PV systems and replaced 75% of on-site surveys with virtual ones, saving $80K a year.</li>
