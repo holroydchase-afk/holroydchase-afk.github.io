@@ -256,7 +256,7 @@ role_radar = product(
 )
 
 ccwatts = product(
-    "Developer tool · playground live",
+    "Developer tool · on npm · playground live",
     "ccwatts",
     "Every AI session has an electricity cost, and almost no one can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.",
     [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
@@ -267,7 +267,8 @@ ccwatts = product(
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
          "<li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li>"
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
-        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI, on npm once the name is final, and an offline HTML dashboard.</p>"),
+        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI you can run with <code>npx ccwatts</code> (try <code>npx ccwatts --demo</code> without any logs) and an offline HTML dashboard.</p>"
+         "<p>The same CLI ships as a Claude Code plugin, so developers can check their usage without leaving a session: <code>/plugin marketplace add holroydchase-afk/ccwatts</code>.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
     shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600),
