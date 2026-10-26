@@ -119,3 +119,7 @@ footer.site .wrap{align-items:center}
 .step .go a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:none}
 @media(max-width:699px){.wide-only{display:none}}
 .nowrap{white-space:nowrap}
+/* Headshot (WEB-M2.6): small circle above the eyebrow on phones, a column beside the heading from 760px. */
+.headshot{display:block;width:96px;height:96px;border-radius:50%;object-fit:cover;border:1px solid var(--line);background:var(--surface);margin-bottom:20px}
+@media(min-width:760px){.intro{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:48px;align-items:start}
+  .intro>.read{grid-row:1;grid-column:1}.intro .headshot{grid-row:1;grid-column:2;width:200px;height:200px;margin:8px 0 0}}
