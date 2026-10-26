@@ -14,6 +14,9 @@ GITHUB = "https://github.com/holroydchase-afk"
 # Keep the site out of search engines while it's in progress (Chase, Oct 25): every page carries noindex and
 # robots.txt drops the sitemap line. Anyone with the link can still open it. Set False when the site is ready.
 NOINDEX = True
+# robots.txt disallows these AI crawlers.
+AI_BOTS = ["GPTBot", "ChatGPT-User", "ClaudeBot", "anthropic-ai", "CCBot", "Google-Extended",
+           "PerplexityBot", "Bytespider", "Applebot-Extended"]
 
 # Below the 8/10 bar: the home page leaves these out and lists them, unlinked, as in active development.
 # Their pages stay up for anyone with the link. Remove a page from this set once it reaches the bar.
@@ -466,5 +469,7 @@ if __name__ == "__main__":
                                       f"{urls}</urlset>\n", encoding="utf-8")
     # Crawlers must be allowed in to see each page's noindex, so robots.txt only drops the sitemap line.
     sitemap_line = "" if NOINDEX else f"Sitemap: {SITE}/sitemap.xml\n"
-    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
+    # AI training and answer bots are shut out (Chase, Oct 26). Well-behaved bots obey; it isn't a lock.
+    ai_block = "".join(f"User-agent: {bot}\n" for bot in AI_BOTS) + "Disallow: /\n\n"
+    (ROOT / "robots.txt").write_text(f"{ai_block}User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
