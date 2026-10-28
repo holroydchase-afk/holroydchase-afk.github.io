@@ -123,3 +123,11 @@ footer.site .wrap{align-items:center}
 .headshot{display:block;width:96px;height:96px;border-radius:50%;object-fit:cover;border:1px solid var(--line);background:var(--surface);margin-bottom:20px}
 @media(min-width:760px){.intro{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:48px;align-items:start}
   .intro>.read{grid-row:1;grid-column:1}.intro .headshot{grid-row:1;grid-column:2;width:200px;height:200px;margin:8px 0 0}}
+/* Agent scoreboard on the Studio page: scrolls sideways on phones instead of overflowing the page. */
+.table-scroll{overflow-x:auto;margin-top:16px}
+table.scoreboard{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--surface)}
+table.scoreboard caption{text-align:left;color:var(--muted);font-size:14.5px;padding-bottom:8px}
+table.scoreboard th,table.scoreboard td{border-bottom:1px solid var(--line);padding:10px clamp(6px,2vw,12px);text-align:left;vertical-align:top}
+table.scoreboard thead th{font-weight:600;font-size:14px;color:var(--muted)}
+table.scoreboard .num{white-space:nowrap;font-family:var(--f-mono);text-align:right}
+p.small{font-size:14.5px;color:var(--muted)}

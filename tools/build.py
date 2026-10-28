@@ -4,6 +4,7 @@
 Run from the repo root: python3 tools/build.py
 Each page is plain HTML written to the repo root, so GitHub Pages serves it with no build step.
 """
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -310,6 +311,23 @@ STUDIO_AGENTS = [
     ("Positioning", "keeps a register of what's true today, so no page or post claims more than the product does."),
 ]
 
+# Agent scoreboard (agent upgrade 3 of 3). Scores come from studio-agents plugins/studio/evals (claude plugin eval);
+# update tools/scoreboard.json from that README, never by hand-tuning. tools/check_site.py checks the page matches it.
+SCOREBOARD = json.loads((ROOT / "tools/scoreboard.json").read_text())
+
+
+def scoreboard_html(sb):
+    rows = "".join(
+        f'<tr><th scope="row">{r["agent"]}</th><td>{r["task"]}</td>'
+        f'<td class="num">{r["with"]}/{r["runs"]}</td><td class="num">{r["without"]}/{r["runs"]}</td></tr>'
+        for r in sb["evals"])
+    return ('<div class="table-scroll"><table class="scoreboard"><caption>Agent evals, ' + sb["as_of"] + '. Tasks passed with the agent and with a plain session.</caption>'
+            '<thead><tr><th scope="col">Agent</th><th scope="col">Fixed task</th><th scope="col" class="num">With agent</th><th scope="col" class="num">Without</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div>'
+            f'<p class="small">One run per arm, judged by fixed checks plus a model grader. <a href="{sb["source"]}">The tasks and graders are on GitHub</a>. '
+            "Two tasks don't yet separate the agent from a plain session, so harder versions are next.</p>")
+
+
 studio = product(
     "The studio behind the work",
     "How I run a small AI product studio.",
@@ -347,6 +365,14 @@ studio = product(
          "<p>Nothing reaches a live site or a user without me. Agents open draft pull requests and stop. "
          "My evenings shifted from writing prompts to making decisions: approve, cut, or return it with one sentence of direction. "
          "In one recruiter-ready sprint, three review rounds found 21 issues in ccwatts, and every one was fixed test-first across eight small draft PRs overnight.</p>"),
+        ("How I know the agents work", "<p>An agent saying it ran the tests isn't evidence. Two checks turn that claim into something I can verify.</p>"
+         '<ul class="clean">'
+         "<li><b>Every credit is checked against a log.</b> A hook records each time a session hands work to an agent. "
+         "A pull request that credits an agent with no logged run fails CI, and when QA ran, CI reruns the test suites three times on its own. "
+         "On its first day it failed one of my own pull requests.</li>"
+         "<li><b>Every agent is scored.</b> Each one has fixed tasks with known answers, run with the agent and without it, "
+         "so a change to an agent's instructions gets a score before it reaches any product.</li></ul>"
+         + scoreboard_html(SCOREBOARD)),
         ("What I took from it", '<ul class="clean">'
          "<li><b>Write the rule down once.</b> A hard rule in the repo is followed by every session. One stated only in chat is gone by the next.</li>"
          "<li><b>One source of truth per thing.</b> When status lived in three places, it drifted in three directions.</li>"

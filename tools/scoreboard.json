@@ -1,0 +1,10 @@
+{
+  "as_of": "Oct 28, 2026",
+  "source": "https://github.com/holroydchase-afk/studio-agents/tree/main/plugins/studio/evals",
+  "evals": [
+    {"agent": "QA (tests first)", "task": "Turn a pricing bug report into a failing test, run it red, and leave the bug unfixed", "runs": 1, "with": 1, "without": 0},
+    {"agent": "Staff PM", "task": "Fit six feature asks into five hours: keep one, cut the rest, say why", "runs": 1, "with": 1, "without": 0},
+    {"agent": "UX reviewer", "task": "Find the accessibility blockers in a sign-up form and rank them P0 to P2", "runs": 1, "with": 1, "without": 1},
+    {"agent": "Privacy and security", "task": "Catch a logged token, an email sent to a tracker, and a token in local storage", "runs": 1, "with": 1, "without": 1}
+  ]
+}
