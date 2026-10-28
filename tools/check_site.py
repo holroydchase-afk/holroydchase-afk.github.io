@@ -102,8 +102,25 @@ def check_deploy_allowlist(failures):
                 failures.append(f"{page.name}: links {href}, but pages.yml doesn't deploy {top}")
 
 
+def check_scoreboard(failures):
+    """The Studio page's agent scoreboard shows every row of tools/scoreboard.json, with a source and date."""
+    import json
+    data = json.loads((ROOT / "tools/scoreboard.json").read_text())
+    page = (ROOT / "studio.html").read_text()
+    if 'class="scoreboard"' not in page:
+        failures.append("studio.html: no agent scoreboard table")
+    for row in data["evals"]:
+        cells = re.search(rf"<tr><th scope=\"row\">{re.escape(row['agent'])}</th>(.*?)</tr>", page)
+        if not cells:
+            failures.append(f"studio.html: scoreboard is missing {row['agent']}")
+        elif f"{row['with']}/{row['runs']}" not in cells.group(1) or f"{row['without']}/{row['runs']}" not in cells.group(1):
+            failures.append(f"studio.html: {row['agent']} scores don't match tools/scoreboard.json")
+    if data["as_of"] not in page or not data.get("source"):
+        failures.append("studio.html: scoreboard needs its date and a source")
+
+
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
-          check_no_contact_details, check_deploy_allowlist]
+          check_no_contact_details, check_deploy_allowlist, check_scoreboard]
 
 
 def main():
