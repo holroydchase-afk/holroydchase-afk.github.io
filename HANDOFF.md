@@ -2,7 +2,7 @@
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
-Last updated: 2026-10-29 (security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
+Last updated: 2026-10-29 (open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
@@ -100,6 +100,9 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - The Hearth repo stays private and its name isn't final, so the site says "family photo app (name coming)".
 
 ## Next
+- Open-PR cleanup (2026-10-29): security kit #24 merged (no page change). Closed with notes, branches kept: #23 WEB-M5.8 voice by context (five site PRs behind, 12 conflicting copy hunks, its questions for Chase never answered; the home hero already uses the operator voice) and #25 WEB-M4.10 (stacked on #23). Until Chase turns on Dependency graph, the `dependencies` job is red on every PR here (not a required check).
+- Next without Chase: the Studio page fact still says "6 shared agents"; studio-agents now has 9 (the `studio = product(...)` facts in `tools/build.py`). Fix with the type-scale pass (V2: the home page uses 13-14 font sizes).
+- Decision for Chase (WEB-M5.8, from closed #23): add a first-person "Why I built it" section and a point-of-view hook to each product page? If yes, redo it on current main from branch `claude/project-thread-enr7fd`.
 - Security kit (2026-10-24, security audit; report in pm-tools `docs/security/2026-10-24-audit.md`): added `.github/workflows/security.yml` (gitleaks over full history, privacy scan, dependency review), `codeql.yml`, `dependabot.yml` (Actions), `.github/privacy-scan.py`, `SECURITY.md` and a `.gitignore` for `.env`. None of these are in the Pages deploy allowlist, so nothing new is published. Audit result for this repo: no secrets in history, no contact details or comp on the site. Next: Chase merges the PR and turns on the toggles listed in pm-tools STUDIO-STATUS.
 - Who does what (Chase, Oct 21): the thread that owns a repo makes its changes. Product threads send the portfolio thread an intake for portfolio-repo changes; every portfolio change that touches a product gets a dated line in that product's HANDOFF.md, written by that product's thread.
 - After ES-M2.3 merges and one release passes: delete `demo/energy-scanner/` and `tools/demo-src/energy-scanner.html`.
