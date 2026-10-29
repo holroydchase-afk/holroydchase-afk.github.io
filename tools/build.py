@@ -4,12 +4,24 @@
 Run from the repo root: python3 tools/build.py
 Each page is plain HTML written to the repo root, so GitHub Pages serves it with no build step.
 """
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://chaseholroyd.com"
 LINKEDIN = "https://www.linkedin.com/in/chase-holroyd"
 GITHUB = "https://github.com/holroydchase-afk"
+
+# Keep the site out of search engines while it's in progress (Chase, Oct 25): every page carries noindex and
+# robots.txt drops the sitemap line. Anyone with the link can still open it. Set False when the site is ready.
+NOINDEX = True
+# robots.txt disallows these AI crawlers.
+AI_BOTS = ["GPTBot", "ChatGPT-User", "ClaudeBot", "anthropic-ai", "CCBot", "Google-Extended",
+           "PerplexityBot", "Bytespider", "Applebot-Extended"]
+
+# Below the 8/10 bar: the home page leaves these out and lists them, unlinked, as in active development.
+# Their pages stay up for anyone with the link. Remove a page from this set once it reaches the bar.
+IN_DEVELOPMENT = {"energy-scanner.html", "family-photos.html"}
 
 NAV = [
     ("index.html", "Work"),
@@ -25,12 +37,18 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
 "jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
-"url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/share-card.png",
+"url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/chase-800.jpg",
 "address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
 "alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
 "sameAs":["https://www.linkedin.com/in/chase-holroyd","https://github.com/holroydchase-afk"]}}
 </script>
 """
+
+
+# Headshot (WEB-M2.6, Chase, Oct 26): 400 and 800px WebP plus an 800px JPG for JSON-LD, metadata stripped.
+# It sits above the fold on home and About, so it loads eagerly.
+HEADSHOT = ('<img class="headshot" src="assets/chase-400.webp" srcset="assets/chase-400.webp 1x, assets/chase-800.webp 2x" '
+            'width="200" height="200" alt="Chase Holroyd" fetchpriority="high" decoding="async">')
 
 
 def page(slug, title, description, body):
@@ -43,7 +61,7 @@ def page(slug, title, description, body):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-{'<base href="/">' + chr(10) + '<meta name="robots" content="noindex">' + chr(10) if slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{'<base href="/">' + chr(10) if slug == "404.html" else ""}{'<meta name="robots" content="noindex">' + chr(10) if NOINDEX or slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{full_title}">
@@ -126,33 +144,36 @@ CAREER = [
 
 # The AI journey: each product starts with a problem in Chase's life and its real users. Ordered by how the
 # building grew (one prototype page → scheduled agent → open source → an agent team → the system behind it), not by date.
-# (page, product, the life problem, what changed in how I built it, who uses it, CTA label). A "[check]" who-line is
-# not rendered until Chase answers it (WEB-M5).
+# (page, product, the life problem, what changed in how I built it, who uses it, CTA label, line for the
+# in-development list). A "[check]" who-line is not rendered until Chase answers it (WEB-M5). Pages in
+# IN_DEVELOPMENT render only their last field, in the unlinked list under the steps.
 JOURNEY = [
     ("energy-scanner.html", "Energy Scanner",
      "Bedtime with my kids had become a nightly negotiation. I designed a routine that ends in an energy scan, so a neutral signal, not a parent, calls lights out.",
      "Built as a single page in one evening and tested with its real users at bedtime that night.",
-     "[check] Who uses it today, e.g. my kids every night", "Try the app"),
+     "[check] Who uses it today, e.g. my kids every night", "Try the app",
+     "a bedtime routine for my kids that ends in an on-device energy scan"),
     ("role-radar.html", "Role Radar",
      "A job search is mostly triage. An agent now reads about 110 company boards each weekday and scores every role with a stated reason, so my time goes to the few worth pursuing.",
      "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
-     "[check] Who uses it besides me", "Try the demo"),
+     "[check] Who uses it besides me", "Try the demo", ""),
     ("ccwatts.html", "ccwatts",
      "I wanted to know the electricity cost of my own AI-assisted coding. No tool answered it, so I built a local one that reports a sourced range instead of a false point estimate.",
      "My first open-source release, with a public methodology, full tests and a citation for every assumption.",
-     "[check] Who's using it", "Try the playground"),
+     "[check] Who's using it", "Try the playground", ""),
     ("family-photos.html", "Family photo app",
      "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
-     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo"),
+     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo",
+     "a private photo app for two blended families, with a family beta in late November"),
     ("pm-tools.html", "How I keep it all moving",
      "Running five products in limited hours takes a system: one slate, one roadmap and AI agents with clear ownership.",
      "The operating layer under everything else. The demos run on a scrubbed snapshot of my real slate.",
-     "[check] OK to say \"about an hour a night\"?", "See the system"),
+     "[check] OK to say \"about an hour a night\"?", "See the system", ""),
     ("studio.html", "The studio behind it",
      "Five products and one person. Each AI chat lost what the others knew, which made me the only shared memory and the bottleneck.",
      "Specialist agents, a coordinator that only coordinates, and me as product owner, reviewing what ships.",
-     "Every product on this page runs through it", "Read the story"),
+     "Every product on this page runs through it", "Read the story", ""),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
@@ -163,12 +184,12 @@ PROOF = [
     ("1 mo → 1 wk", "to onboard a new lender, with a rules engine"),
 ]
 
-home = f"""<div class="read">
+home = f"""<div class="intro">{HEADSHOT}<div class="read">
 <p class="eyebrow">Open to remote senior and staff PM roles</p>
 <h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending. I use AI to turn real problems into working products.</h1>
 <p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. Today I use AI to go from problem to working product in days, starting with problems in my own life and putting each one in front of real users.</p>
 <div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
-</div>
+</div></div>
 <div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
 <div class="read"><h2>Career highlights</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
@@ -179,16 +200,17 @@ home = f"""<div class="read">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="read"><h2>What I've built with AI</h2>
-<p>Each product started with a problem in my own life. Together they show how my practice matured, from a single prototype page to a team of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
+<p>Each product started with a problem in my own life. Together they show how my practice matured, from a scheduled agent to a studio of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
 <ol class="steps">""" + "".join(
     f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
     + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
     + f'<p class="go"><a href="{h}">{cta} →</a></p></div></li>'
-    for h, n, d, how, w, cta in JOURNEY
-) + "</ol>"
+    for h, n, d, how, w, cta, _ in JOURNEY if h not in IN_DEVELOPMENT
+) + "</ol>" + '<div class="read"><p class="note"><b>In active development:</b> ' + "; ".join(
+    dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + ".</p></div>"
 
 family = product(
-    "Mobile app · building",
+    "Mobile app · in active development",
     "A private family photo app",
     "Two divorced-and-remarried families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
@@ -241,7 +263,7 @@ role_radar = product(
 )
 
 ccwatts = product(
-    "Developer tool · playground live",
+    "Developer tool · on npm · playground live",
     "ccwatts",
     "Every AI session has an electricity cost, and almost no one can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.",
     [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
@@ -252,14 +274,15 @@ ccwatts = product(
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
          "<li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li>"
          "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
-        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI, on npm once the name is final, and an offline HTML dashboard.</p>"),
+        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI you can run with <code>npx ccwatts</code> (try <code>npx ccwatts --demo</code> without any logs) and an offline HTML dashboard.</p>"
+         "<p>The same CLI ships as a Claude Code plugin, so developers can check their usage without leaving a session: <code>/plugin marketplace add holroydchase-afk/ccwatts</code>.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
     shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600),
 )
 
 energy = product(
-    "Family app · live",
+    "Family app · in active development",
     "Energy Scanner",
     "Bedtime had become a nightly negotiation. I built a routine that ends with a neutral machine, not a parent, deciding it's time to sleep.",
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
@@ -287,6 +310,23 @@ STUDIO_AGENTS = [
     ("Privacy and security", "holds each product to its own promise, like \"logs never leave the laptop\" or \"photos never leave the phone\"."),
     ("Positioning", "keeps a register of what's true today, so no page or post claims more than the product does."),
 ]
+
+# Agent scoreboard (agent upgrade 3 of 3). Scores come from studio-agents plugins/studio/evals (claude plugin eval);
+# update tools/scoreboard.json from that README, never by hand-tuning. tools/check_site.py checks the page matches it.
+SCOREBOARD = json.loads((ROOT / "tools/scoreboard.json").read_text())
+
+
+def scoreboard_html(sb):
+    rows = "".join(
+        f'<tr><th scope="row">{r["agent"]}</th><td>{r["task"]}</td>'
+        f'<td class="num">{r["with"]}/{r["runs"]}</td><td class="num">{r["without"]}/{r["runs"]}</td></tr>'
+        for r in sb["evals"])
+    return ('<div class="table-scroll"><table class="scoreboard"><caption>Agent evals, ' + sb["as_of"] + '. Tasks passed with the agent and with a plain session.</caption>'
+            '<thead><tr><th scope="col">Agent</th><th scope="col">Fixed task</th><th scope="col" class="num">With agent</th><th scope="col" class="num">Without</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div>'
+            f'<p class="small">One run per arm, judged by fixed checks plus a model grader. <a href="{sb["source"]}">The tasks and graders are on GitHub</a>. '
+            "Two tasks don't yet separate the agent from a plain session, so harder versions are next.</p>")
+
 
 studio = product(
     "The studio behind the work",
@@ -325,6 +365,14 @@ studio = product(
          "<p>Nothing reaches a live site or a user without me. Agents open draft pull requests and stop. "
          "My evenings shifted from writing prompts to making decisions: approve, cut, or return it with one sentence of direction. "
          "In one recruiter-ready sprint, three review rounds found 21 issues in ccwatts, and every one was fixed test-first across eight small draft PRs overnight.</p>"),
+        ("How I know the agents work", "<p>An agent saying it ran the tests isn't evidence. Two checks turn that claim into something I can verify.</p>"
+         '<ul class="clean">'
+         "<li><b>Every credit is checked against a log.</b> A hook records each time a session hands work to an agent. "
+         "A pull request that credits an agent with no logged run fails CI, and when QA ran, CI reruns the test suites three times on its own. "
+         "On its first day it failed one of my own pull requests.</li>"
+         "<li><b>Every agent is scored.</b> Each one has fixed tasks with known answers, run with the agent and without it, "
+         "so a change to an agent's instructions gets a score before it reaches any product.</li></ul>"
+         + scoreboard_html(SCOREBOARD)),
         ("What I took from it", '<ul class="clean">'
          "<li><b>Write the rule down once.</b> A hard rule in the repo is followed by every session. One stated only in chat is gone by the next.</li>"
          "<li><b>One source of truth per thing.</b> When status lived in three places, it drifted in three directions.</li>"
@@ -355,10 +403,12 @@ pm_tools = """<div class="read">
 <p>Each project reports into a central product office: products, PM tools, agents, decisions and open loops, so nothing lives only in one chat. <a href="studio.html">The story of how that came together</a>.</p>
 </div>"""
 
-about = f"""<div class="read">
+about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <p class="eyebrow">About</p>
 <h1>From solar engineering to product leadership.</h1>
 <p class="lede">I started out designing solar systems and ended up building the software that prices, sells and finances them. Pricing, payments and point-of-sale lending are my core expertise. I design my own screens and prototype with current AI tools, so ideas reach users as working software, not slides.</p>
+</div></div>
+<div class="read">
 <h2>The path</h2>
 <ol class="timeline">
 <li><b>Solar engineer, Palmetto (2016).</b> Designed 2,000+ residential and commercial PV systems and replaced 75% of on-site surveys with virtual ones, saving $80K a year.</li>
@@ -452,5 +502,9 @@ if __name__ == "__main__":
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       f"{urls}</urlset>\n", encoding="utf-8")
-    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
+    # Crawlers must be allowed in to see each page's noindex, so robots.txt only drops the sitemap line.
+    sitemap_line = "" if NOINDEX else f"Sitemap: {SITE}/sitemap.xml\n"
+    # AI training and answer bots are shut out (Chase, Oct 26). Well-behaved bots obey; it isn't a lock.
+    ai_block = "".join(f"User-agent: {bot}\n" for bot in AI_BOTS) + "Disallow: /\n\n"
+    (ROOT / "robots.txt").write_text(f"{ai_block}User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
