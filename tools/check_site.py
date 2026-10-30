@@ -119,8 +119,79 @@ def check_scoreboard(failures):
         failures.append("studio.html: scoreboard needs its date and a source")
 
 
+def _section(html, sid):
+    """The HTML of the element carrying id=sid, up to its matching close tag."""
+    m = re.search(rf'<(\w+)\b[^>]*\bid="{re.escape(sid)}"[^>]*>', html)
+    if not m:
+        return None
+    tag, depth, pos = m.group(1), 1, m.end()
+    for t in re.finditer(rf"<(/?){tag}\b[^>]*>", html[pos:]):
+        depth += -1 if t.group(1) else 1
+        if depth == 0:
+            return html[m.start():pos + t.end()]
+    return html[m.start():]
+
+
+def _text(html):
+    html = re.sub(r"<(script|style)\b.*?</\1>", " ", html, flags=re.S)
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html)).strip()
+
+
+def check_home(failures):
+    """Acceptance criteria for the homepage: Hearth front and center, real
+    product imagery, a short h1, a resume PDF, one product name."""
+    html = (ROOT / "index.html").read_text()
+
+    # HOME-1 Hearth is featured above career and work.
+    pos = {sid: html.find(f'id="{sid}"') for sid in ("hearth", "career", "work")}
+    if pos["hearth"] < 0:
+        failures.append('index.html: no section with id="hearth" (HOME-1)')
+    else:
+        for sid in ("career", "work"):
+            if pos[sid] >= 0 and pos[sid] < pos["hearth"]:
+                failures.append(f'index.html: id="hearth" must come before id="{sid}" (HOME-1)')
+
+    # HOME-2 The Hearth section links to its case study and its demo.
+    hearth = _section(html, "hearth") or ""
+    hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', hearth)
+    for want in ("family-photos.html", "demo/hearth/"):
+        if want not in hrefs:
+            failures.append(f"index.html: Hearth section doesn't link to {want} (HOME-2)")
+
+    # HOME-3 At least 6 product images, all on disk.
+    shots = [s for s in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html)
+             if s.startswith(("assets/home/", "assets/shots/"))]
+    if len(shots) < 6:
+        failures.append(f"index.html: {len(shots)} product images from assets/home/ or assets/shots/, needs at least 6 (HOME-3)")
+    for s in shots:
+        if not (ROOT / s).exists():
+            failures.append(f"index.html: image {s} doesn't exist (HOME-3)")
+
+    # HOME-4 The single h1 is at most 14 words (REC-R13).
+    h1s = re.findall(r"<h1\b[^>]*>(.*?)</h1>", html, flags=re.S)
+    if len(h1s) == 1:
+        words = len(_text(h1s[0]).split())
+        if words > 14:
+            failures.append(f"index.html: h1 is {words} words, keep it to 14 or fewer (HOME-4, REC-R13)")
+    else:
+        failures.append(f"index.html: needs exactly one <h1>, found {len(h1s)} (HOME-4)")
+
+    # HOME-5 A resume PDF link that resolves.
+    pdf = "assets/chase-holroyd-resume.pdf"
+    if not re.search(rf'<a\b[^>]*\bhref="{re.escape(pdf)}"', html):
+        failures.append(f"index.html: no link to {pdf} (HOME-5)")
+    if not (ROOT / pdf).exists():
+        failures.append(f"index.html: {pdf} doesn't exist (HOME-5)")
+
+    # HOME-6 One product name: no "name coming" once Hearth is named (REC-R2).
+    text = _text(html)
+    if "Hearth" in text and "name coming" in text.lower():
+        failures.append('index.html: says "Hearth" and "name coming"; use one product name (HOME-6, REC-R2)')
+
+
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
-          check_no_contact_details, check_deploy_allowlist, check_scoreboard]
+          check_no_contact_details, check_deploy_allowlist, check_scoreboard,
+          check_home]
 
 
 def main():

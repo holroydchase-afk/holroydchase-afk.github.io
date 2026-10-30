@@ -21,7 +21,16 @@ AI_BOTS = ["GPTBot", "ChatGPT-User", "ClaudeBot", "anthropic-ai", "CCBot", "Goog
 
 # Below the 8/10 bar: the home page leaves these out and lists them, unlinked, as in active development.
 # Their pages stay up for anyone with the link. Remove a page from this set once it reaches the bar.
-IN_DEVELOPMENT = {"energy-scanner.html", "family-photos.html"}
+IN_DEVELOPMENT = {"energy-scanner.html"}
+
+# Hearth (WEB-M8, Oct 30): featured first on home. The rename is still pending, so it shows as a working name,
+# matching the demo's own banner (REC-R2). After the rename, change HEARTH and HEARTH_TAG here and nowhere else.
+HEARTH = "Hearth"
+HEARTH_TAG = "working name · family beta planned for late November"
+# Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
+HEARTH_FACTS = [("660+", "app tests"), ("960+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
+               "I ran the build with a team of AI agents, tests first.")
 
 NAV = [
     ("index.html", "Work"),
@@ -86,7 +95,7 @@ def page(slug, title, description, body):
 <a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
 <nav class="top" aria-label="Main">{nav}</nav>
 </div></header>
-<main class="wrap" id="main">
+<main class="{"home" if slug == "index.html" else "wrap"}" id="main">
 {body}
 </main>
 <footer class="site"><div class="wrap">
@@ -161,7 +170,7 @@ JOURNEY = [
      "I wanted to know the electricity cost of my own AI-assisted coding. No tool answered it, so I built a local one that reports a sourced range instead of a false point estimate.",
      "My first open-source release, with a public methodology, full tests and a citation for every assumption.",
      "[check] Who's using it", "Try the playground", ""),
-    ("family-photos.html", "Family photo app",
+    ("family-photos.html", HEARTH,
      "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo",
@@ -173,46 +182,130 @@ JOURNEY = [
     ("studio.html", "The studio behind it",
      "Five products and one person. Each AI chat lost what the others knew, which made me the only shared memory and the bottleneck.",
      "Specialist agents, a coordinator that only coordinates, and me as product owner, reviewing what ships.",
-     "Every product on this page runs through it", "Read the story", ""),
+     "Every product on this page runs through it.", "Read the story", ""),
 ]
 
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
 PROOF = [
-    ("12,000+", "credit applications a month through the offer engine I led"),
-    ("3–5 pts", "dealer fees cut with lender allocation"),
+    ("8+ years", "in pricing, payments and point-of-sale lending"),
     ("13+", "lender integrations shipped"),
-    ("1 mo → 1 wk", "to onboard a new lender, with a rules engine"),
+    ("3–5 pts", "dealer fees cut with lender allocation"),
+    ("$6M", "venture round supported at Palmetto"),
 ]
 
-home = f"""<div class="intro">{HEADSHOT}<div class="read">
-<p class="eyebrow">Open to remote senior and staff PM roles</p>
-<h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending. I use AI to turn real problems into working products.</h1>
-<p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. Today I use AI to go from problem to working product in days, starting with problems in my own life and putting each one in front of real users.</p>
-<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="resume.html">View resume</a></div>
-</div></div>
-<div class="facts">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + """</div>
-<div class="read"><h2>Career highlights</h2>
+# Home (WEB-M8, Chase, Oct 30: "Hearth front and center", quality screenshots, immersive). Full-bleed bands, each
+# with its own .wrap: hero, featured Hearth, career, the AI work as image rows, closing call. Every screenshot is a
+# demo on sample data (assets/home/ and assets/shots/; re-shoot with Playwright at 390x844 or 1440x900, 2x).
+RESUME_PDF = "assets/chase-holroyd-resume.pdf"
+
+
+def phone(src, alt, w=300, h=600, eager=False, cls=""):
+    load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
+    return (f'<figure class="phone{(" " + cls) if cls else ""}"><img src="{src}" width="{w}" height="{h}" alt="{alt}" {load}></figure>')
+
+
+def browser(src, alt):
+    return (f'<figure class="browser"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>'
+            f'<img src="{src}" width="1200" height="750" alt="{alt}" loading="lazy" decoding="async"></figure>')
+
+
+# Career cards lead with one number each; every number traces to pmo/story/resume-2026-10.md.
+CAREER_STAT = {"Patter AI": ("1 mo → 1 wk", "to onboard a new lender"),
+               "ADT": ("12,000+", "credit applications a month"),
+               "Palmetto": ("11,500+", "consultations a month")}
+
+# The AI work as rows with screenshots, in the JOURNEY order. (page, images html) per row; text comes from JOURNEY.
+WORK_SHOTS = {
+    "role-radar.html": browser("assets/home/role-radar-wide.webp", "Role Radar on a laptop, sample data: the morning digest and the top-scored roles.")
+        + phone("assets/shots/role-radar-phone.webp", "Role Radar on a phone, sample data: a Senior Product Manager role scored 90 with the reason it fits."),
+    "ccwatts.html": phone("assets/shots/ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a range of 1.3 to 30.5 kWh."),
+    "pm-tools.html": browser("assets/home/build-slate-wide.webp", "Build Slate, sample data: every product with its stage, next step and milestone, capped at five active."),
+}
+
+HERO_PHONES = (
+    phone("assets/shots/role-radar-phone.webp", "Role Radar, sample data: a role scored 90 with its reason.", eager=True, cls="p-left")
+    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see it, by group and by name.", h=563, eager=True, cls="p-mid")
+    + phone("assets/shots/ccwatts-phone.webp", "ccwatts, sample data: 8.5 kWh over 30 days.", eager=True, cls="p-right"))
+
+home = f"""<section class="band hero-band"><div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="who-line">{HEADSHOT}<p class="eyebrow">Open to remote senior and staff PM roles</p></div>
+<h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending.</h1>
+<p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. I now use AI to take real problems to working products, with the same discipline: clear rules, tests first and privacy by design.</p>
+<div class="cta"><a class="btn primary" href="#hearth">See the work</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a><a class="btn ghost" href="{LINKEDIN}">LinkedIn</a></div>
+</div>
+<div class="hero-art" aria-hidden="false">{HERO_PHONES}</div>
+</div>
+<div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
+
+<section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
+<div class="feature-copy reveal">
+<p class="eyebrow">Featured build · {HEARTH_TAG}</p>
+<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
+<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
+<ul class="ticks">
+<li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
+<li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
+<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
+</ul>
+<div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
+<div class="cta"><a class="btn primary" href="demo/hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
+<p class="credit">{HEARTH_TEAM}</p>
+</div>
+<div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
+    + phone("assets/home/hearth-feed.webp", f"{HEARTH}, sample family: a pumpkin patch photo that says which side of the family it went to.", h=548, cls="f-front") \
+    + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
+</div></section>
+
+<section class="band" id="career" aria-labelledby="career-h"><div class="wrap">
+<div class="read reveal"><p class="eyebrow">Career</p><h2 id="career-h">Where I've led</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
-<div class="grid">""" + "".join(
-    f'<div class="card career"><span class="tag">{r}</span><h3>{c}</h3><p>{d}</p>'
+<div class="grid career-grid">""" + "".join(
+    f'<article class="card career reveal"><span class="tag">{r}</span><h3>{c}</h3>'
+    + (f'<p class="stat"><b>{CAREER_STAT[c][0]}</b> {CAREER_STAT[c][1]}</p>' if c in CAREER_STAT else "")
+    + f'<p>{d}</p>'
     + (('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else "")
-    + "</div>"
+    + "</article>"
     for c, r, d, links in CAREER
 ) + """</div>
-<div class="read"><h2>What I've built with AI</h2>
-<p>Each product started with a problem in my own life. Together they show how my practice matured, from a scheduled agent to a studio of agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
-<ol class="steps">""" + "".join(
-    f'<li><div class="step"><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
+<div class="bridge reveal"><h3>The through-line</h3>
+<p>The AI work below applies what lending systems taught me. Role Radar scores every job the way an offer engine scores an application: written rules and a stated reason for each decision. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
+<p class="links"><a href="resume.html">Read the full resume</a></p></div>
+</div></section>
+
+<section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
+<div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">From one page to a studio of agents</h2>
+<p>Each product started with a problem in my own life. In order, they show how my practice matured, from a scheduled agent to agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
+""" + "".join(
+    f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'
+    f'<p class="num">{i:02d}</p><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
     + (f'<p class="who">{w}</p>' if not w.startswith("[check]") else "")
-    + f'<p class="go"><a href="{h}">{cta} →</a></p></div></li>'
-    for h, n, d, how, w, cta, _ in JOURNEY if h not in IN_DEVELOPMENT
-) + "</ol>" + '<div class="read"><p class="note"><b>In active development:</b> ' + "; ".join(
-    dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + ".</p></div>"
+    + f'<p class="go"><a class="btn" href="{h}">{cta} →</a></p></div>'
+    + (f'<div class="work-art{" combo" if WORK_SHOTS[h].startswith("<figure class=\"browser") and "phone" in WORK_SHOTS[h] else ""}">{WORK_SHOTS[h]}</div>' if h in WORK_SHOTS else "")
+    + "</article>"
+    for i, (h, n, d, how, w, cta, _) in enumerate([j for j in JOURNEY if j[0] not in IN_DEVELOPMENT and j[0] != "family-photos.html"], 1)
+) + '<p class="note reveal"><b>In active development:</b> ' + "; ".join(
+    dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + f""".</p>
+</div></section>
+
+<section class="band closing"><div class="wrap closing-inner reveal">
+<h2>Senior and staff PM roles in pricing, payments and lending</h2>
+<p class="lede">I'm open to remote roles. LinkedIn is the fastest way to reach me.</p>
+<div class="cta"><a class="btn primary" href="{LINKEDIN}">Connect on LinkedIn</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a></div>
+</div></section>
+<script>
+// Fade sections in as they scroll into view. Without JS, or with reduced motion, everything is simply visible.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {{
+  document.documentElement.classList.add('js-reveal');
+  const io = new IntersectionObserver(es => es.forEach(e => {{ if (e.isIntersecting) {{ e.target.classList.add('in'); io.unobserve(e.target); }} }}), {{ rootMargin: '0px 0px -8% 0px' }});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}}
+</script>"""
 
 family = product(
-    "Mobile app · in active development",
-    "A private family photo app",
-    "Two divorced-and-remarried families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
+    f"Mobile app · {HEARTH_TAG}",
+    f"{HEARTH}: a private family photo app",
+    "Two blended families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
@@ -231,11 +324,12 @@ family = product(
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
         ("How I built it", "<p>I ran it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
-         "QA writes failing tests first and the engineer makes them pass. There are 600+ app tests and 800+ database checks, and a co-parent data leak was caught in review before any real user saw it.</p>"
+         "QA writes failing tests first and the engineer makes them pass. There are 660+ app tests and 960+ database checks, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
+        ("The team", f"<p>{HEARTH_TEAM}</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
-    status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private; the family beta starts late November.",
+    status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private.",
     links=[("Try the demo", "demo/hearth/")],
 )
 
@@ -483,7 +577,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
-    ("family-photos.html", "Family photo app", "A private family photo app for split families and grandparents, with a chosen audience on every post.", family),
+    ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
