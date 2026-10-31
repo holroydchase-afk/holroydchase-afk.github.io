@@ -224,15 +224,17 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.45em;width:14px;h
 @media(min-width:1180px){.feature .facts{grid-template-columns:repeat(4,minmax(0,1fr))}.feature .fact b{font-size:24px}}
 .feature .btn.primary{background:#6FC49C;border-color:#6FC49C;color:#0C1410}
 .work-row:not(.has-art) .work-copy{max-width:72ch}
-/* Hero collage (Oct 31): two browser shots and two phones, overlapped. Positions are percentages of .hero-art. */
-.hero-art.collage{max-width:600px;height:clamp(300px,46vw,500px)}
-.collage>figure{position:absolute;margin:0}
-.collage .browser{box-shadow:0 22px 60px rgba(0,0,0,.45);border-color:rgba(255,255,255,.12)}
-.collage .c-charlie{top:2%;right:0;width:76%}
-.collage .c-ccwatts{bottom:4%;left:0;width:62%;z-index:1}
-.collage .phone{width:24%;top:auto;transform:none}
-.collage .c-crew{left:4%;top:0;z-index:2;transform:rotate(-4deg)}
-.collage .c-hearth{right:3%;bottom:0;z-index:3;transform:rotate(4deg)}
-.collage-links{margin:24px 0 0;font-size:14.5px;color:var(--deep-muted)}
-.collage-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--deep-ink)}
-@media(max-width:699px){.collage .phone{width:30%}}
+/* Hero tiles (Oct 31): an even 2x2 grid of products; each screenshot's top rises from the tile's bottom edge. */
+.hero-art.tiles-wrap{height:auto;max-width:600px}
+.tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tile{display:flex;flex-direction:column;height:100%;border-radius:12px;overflow:hidden;text-decoration:none;color:var(--deep-ink);
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:border-color .15s,background .15s}
+.tile:hover{border-color:#6FC49C;background:rgba(255,255,255,.09)}
+.tile-text{display:block;padding:14px 16px 12px}
+.tile-text b{display:block;font:600 18px var(--f-display)}
+.tile-text span{display:block;margin-top:2px;font-size:14px;line-height:1.4;color:var(--deep-muted)}
+.peek{display:flex;justify-content:center;align-items:flex-start;margin-top:auto;height:clamp(110px,15vw,170px);overflow:hidden;padding:0 16px}
+.peek img{display:block;height:auto;border-radius:8px 8px 0 0;box-shadow:0 -2px 24px rgba(0,0,0,.35);background:#fff}
+.tile.t-wide .peek img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.tile.t-phone .peek img{width:58%;border-radius:14px 14px 0 0}
+@media(max-width:420px){.tiles{gap:10px}.tile-text{padding:12px}.tile-text span{font-size:13px}.peek{padding:0 10px}}

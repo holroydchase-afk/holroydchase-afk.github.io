@@ -223,14 +223,25 @@ WORK_SHOTS = {
     "pm-tools.html": browser("assets/home/build-slate-wide.webp", "Build Slate, sample data: every product with its stage, next step and milestone, capped at five active."),
 }
 
-# Hero collage (Chase, Oct 31): several products at once, so the three-phone layout is used only for Hearth.
-# Each shot is a live demo on sample data.
-HERO_COLLAGE = (
-    browser("assets/home/charlie-wide.webp", "Charlie, sample data: stock ideas drawn from a resume, each with its chance of profit and maximum loss. Paper trading only.", cls="c-charlie", eager=True)
-    + browser("assets/home/ccwatts-wide.webp", "ccwatts, sample data: estimated electricity for 30 days of AI coding, shown as a range.", cls="c-ccwatts", eager=True)
-    + phone("assets/home/crew-clock-phone.webp", "Crew Clock, made-up crew: a worker's screen with one large Clock in button.", h=596, eager=True, cls="c-crew")
-    + phone("assets/home/hearth-feed.webp", f"{HEARTH}, sample family: a photo that says which side of the family it went to.", h=548, eager=True, cls="c-hearth"))
-HERO_LINKS = [("ccwatts", "/ccwatts/"), (HEARTH, "#hearth"), ("Crew Clock", "/crew-clock/"), ("Charlie", "/charlie/")]
+# Hero tiles (Chase, Oct 31: no collage, and the three-phone layout is Hearth's alone): four products in an even
+# 2x2 grid, each a link to its live demo with the top of one screenshot rising from the tile's bottom edge.
+# (name, one line, link, image, alt, "wide" for a laptop shot or "phone")
+HERO_TILES = [
+    ("ccwatts", "Electricity use of AI coding, as a sourced range", "/ccwatts/", "assets/home/ccwatts-wide.webp",
+     "ccwatts, sample data: estimated electricity for 30 days of AI coding.", "wide"),
+    (HEARTH, "Private family photos, with an audience on every post", "#hearth", "assets/home/hearth-feed.webp",
+     f"{HEARTH}, sample family: a photo that says which side of the family it went to.", "phone"),
+    ("Crew Clock", "GPS clock-in for small construction crews", "/crew-clock/", "assets/home/crew-clock-phone.webp",
+     "Crew Clock, made-up crew: a worker's screen with one large Clock in button.", "phone"),
+    ("Charlie", "Paper-trading ideas from what you already know", "/charlie/", "assets/home/charlie-wide.webp",
+     "Charlie, sample data: stock ideas with their chance of profit and maximum loss. Paper trading only.", "wide"),
+]
+SIZES = {"assets/home/ccwatts-wide.webp": (1200, 750), "assets/home/charlie-wide.webp": (1200, 750),
+         "assets/home/hearth-feed.webp": (600, 1097), "assets/home/crew-clock-phone.webp": (600, 1191)}
+HERO_GRID = '<ul class="tiles">' + "".join(
+    f'<li><a class="tile t-{kind}" href="{href}"><span class="tile-text"><b>{name}</b><span>{line}</span></span>'
+    f'<span class="peek"><img src="{img}" width="{SIZES[img][0]}" height="{SIZES[img][1]}" alt="{alt}" fetchpriority="high" decoding="async"></span></a></li>'
+    for name, line, href, img, alt, kind in HERO_TILES) + "</ul>"
 
 home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <div class="hero-copy">
@@ -239,10 +250,9 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. I now use AI to take real problems to working products, with the same discipline: clear rules, tests first and privacy by design.</p>
 <div class="cta"><a class="btn primary" href="#hearth">See the work</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a><a class="btn ghost" href="{LINKEDIN}">LinkedIn</a></div>
 </div>
-<div class="hero-art collage">{HERO_COLLAGE}</div>
+<div class="hero-art tiles-wrap">{HERO_GRID}</div>
 </div>
-<div class="wrap"><p class="collage-links">Live demos: """ + " · ".join(f'<a href="{u}">{t}</a>' for t, u in HERO_LINKS) + """</p>
-<div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
+<div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
 
 <section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
 <div class="feature-copy reveal">
