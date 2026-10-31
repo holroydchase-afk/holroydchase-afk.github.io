@@ -9,7 +9,7 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Generated pages match tools/build.py and the demo sources
         run: |
           python3 tools/build.py
