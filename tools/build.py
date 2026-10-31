@@ -183,10 +183,10 @@ JOURNEY = [
      "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
      "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
      "A five-person crew starts a two-week beta next", "Try the demo", ""),
-    ("pm-tools.html", "How I keep it all moving",
-     "Running five products in limited hours takes a system: one slate, one roadmap and AI agents with clear ownership.",
-     "The operating layer under everything else. The demos run on a scrubbed snapshot of my real slate.",
-     "[check] OK to say \"about an hour a night\"?", "See the system", ""),
+    ("pm-tools.html", "Studio Console",
+     "My agents were shipping across several products faster than I could read their work. I built one goal-first page that shows where my week went and every call waiting on me.",
+     "It rebuilds hourly from public GitHub repos, with no database or login, and replaced my earlier slate and roadmap apps.",
+     "[check] OK to say \"about an hour a night\"?", "See the console", ""),
     ("studio.html", "The studio behind it",
      "Five products and one person. Each AI chat lost what the others knew, which made me the only shared memory and the bottleneck.",
      "Specialist agents, a coordinator that only coordinates, and me as product owner, reviewing what ships.",
@@ -228,7 +228,7 @@ WORK_SHOTS = {
     "role-radar.html": browser("assets/home/role-radar-wide.webp", "Role Radar on a laptop, sample data: the morning digest and the top-scored roles.")
         + phone("assets/shots/role-radar-phone.webp", "Role Radar on a phone, sample data: a Senior Product Manager role scored 90 with the reason it fits."),
     "ccwatts.html": phone("assets/shots/ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a range of 1.3 to 30.5 kWh."),
-    "pm-tools.html": browser("assets/home/build-slate-wide.webp", "Build Slate, sample data: every product with its stage, next step and milestone, capped at five active."),
+    "pm-tools.html": browser("assets/home/console-wide.webp", "The Studio Console on a laptop, a snapshot from Oct 31: each product's stage, goal and next step."),
 }
 
 # Hero tiles (Chase, Oct 31: no collage, and the three-phone layout is Hearth's alone): four products in an even
@@ -299,7 +299,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 
 <section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
 <div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">From one page to a studio of agents</h2>
-<p>Each product started with a problem in my own life. In order, they show how my practice matured, from a scheduled agent to agents working under tests and review. Every demo runs on sample data in your browser.</p></div>
+<p>Each product started with a problem in my own life. In order, they show how my practice matured, from a scheduled agent to agents working under tests and review. Every demo runs on sample data in your browser. The Studio Console shows my live studio, read from public repos.</p></div>
 """ + "".join(
     f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'
     f'<p class="num">{i:02d}</p><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
@@ -541,28 +541,35 @@ studio = product(
          "<li><b>Make every ask one step.</b> My time is the scarcest resource in the studio, so every request is a link, a paste box or a one-word choice.</li>"
          "<li><b>Credibility comes from candor.</b> Agents say \"untested\" when they couldn't check something, and sample data says so everywhere.</li></ul>"),
     ],
-    links=[("See the agents on GitHub", f"{GITHUB}/studio-agents"), ("See the PM tools", "pm-tools.html")],
+    links=[("See the agents on GitHub", f"{GITHUB}/studio-agents"), ("See the Studio Console", "pm-tools.html")],
 )
 
 pm_tools = """<div class="read">
 <p class="eyebrow">The system behind it</p>
-<h1>How I keep it all moving.</h1>
-<p class="lede">The tools and operating habits I use to run several products in parallel without losing track. The two apps below run on a scrubbed snapshot of my real slate and roadmap; anything you change stays in your browser.</p>
-<h2>Build Slate</h2>
-<p>One board for every product: stage (idea, spec, building, beta, launched, paused), the very next step, and a milestone date. It caps active projects at five, which forces depth over breadth.</p>
-<div class="cta"><a class="btn primary" href="/pm-tools/build-slate/">Try Build Slate</a></div>
-<h2>Near-term roadmap</h2>
-<p>Later, Next, Now and Done lanes with a board per product, owners, work-session estimates and a blocked flag. Any AI session can read and update it by link, so it stays current without manual upkeep.</p>
-<div class="cta"><a class="btn primary" href="/pm-tools/roadmap/">Try the roadmap</a></div><p>Source for both apps, plus the PM templates and routines below, is on <a href="https://github.com/holroydchase-afk/pm-tools">GitHub</a>.</p>
+<h1>The console I use to direct my agent team.</h1>
+<p class="lede">When agents ship faster than I can read, my attention becomes the scarce resource. I built the console to spend it on my goals first.</p>
+<p>I run a team of AI agents across several products: a staff PM, QA, an engineer, a UX reviewer, privacy and security, and positioning. By October their pull requests and handoff notes arrived faster than I could read them, and I was losing hours to work that felt urgent but served no goal.</p>
+<div class="cta"><a class="btn primary" href="/pm-tools/console/">Open the Studio Console</a></div>
+<p>The live page shows real numbers. In its first week, most of my agents' work matched no goal, which is the problem it exists to catch. Job-search progress is kept private.</p>
+<h2>What it shows</h2>
+<ul class="clean"><li><b>Focus:</b> my three or four goals, where this week's effort went, and any work that served no goal, flagged as a possible rabbit hole.</li>
+<li><b>Call Sheet:</b> everything waiting on my decision, each reduced to one step.</li>
+<li><b>Build Slate:</b> each product's stage and health.</li>
+<li><b>Horizon Board:</b> milestones in Now, Next, Later and Done.</li>
+<li><b>Agent Roster:</b> which agents ran on each pull request and whether it passed its gates.</li></ul>
+<h2>How it works</h2>
+<p>The page rebuilds every hour from the studio's public GitHub repos: each product's HANDOFF.md, its open pull requests, intake issues and agent run logs. It has no database and no login. I built it for one job, a product owner directing an agent team, so it has no team accounts or permissions.</p>
+<p>It went live on October 31 with a success test set in advance: five weekdays in a row run from the Call Sheet without opening a handoff file. If that hasn't happened by November 14, I'll change it or retire it.</p>
+<h2>What it replaced</h2>
+<p>Before the console I ran two small apps, Build Slate and a near-term roadmap. Both were organized by product. Neither showed whether the week's work served a goal or which calls were waiting on me. Their sample-data demos are still up: <a href="/pm-tools/build-slate/">Build Slate</a> and <a href="/pm-tools/roadmap/">the roadmap</a>.</p>
+<p>Source for the console, both earlier apps and the PM templates below is on <a href="https://github.com/holroydchase-afk/pm-tools">GitHub</a>.</p>
 <h2>Decisions that leave a trail</h2>
 <ul class="clean"><li><b>Decision log:</b> every call records why, and what it beat.</li>
 <li><b>Persona check:</b> before a product decision is final, each persona gets a green or red with a one-line reason. CI fails if a decision file skips it.</li>
 <li><b>Anchors:</b> a few principles every feature is checked against, like "anxiety-less" and "stays on US soil."</li>
 <li><b>Post mortems:</b> each one adds a rule, so the same mistake doesn't happen twice.</li></ul>
-<h2>An AI team with lanes</h2>
-<p>Specialist agents each own one job: staff PM, QA (tests first), engineer, privacy and security, UX for low-tech users, and marketing. I keep an inventory of every agent's maturity (proven, working, dormant or broken) and decide which to use, mature or retire.</p>
-<h2>One hub across projects</h2>
-<p>Each project reports into a central product office: products, PM tools, agents, decisions and open loops, so nothing lives only in one chat. <a href="studio.html">The story of how that came together</a>.</p>
+<h2>The team it directs</h2>
+<p>Each agent owns one lane, every repo keeps a handoff file, and nothing ships without my review. <a href="studio.html">The story of how the studio came together</a>.</p>
 </div>"""
 
 about = f"""<div class="intro">{HEADSHOT}<div class="read">
@@ -652,7 +659,7 @@ PAGES = [
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
     ("crew-clock.html", "Crew Clock", "A phone time clock for small rural crews: three taps to clock in, even with no signal, and every punch signed.", crew_clock),
     ("studio.html", "The studio", "How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.", studio),
-    ("pm-tools.html", "How I keep it all moving", "The slate, roadmap and AI agents that keep several products moving at once.", pm_tools),
+    ("pm-tools.html", "Studio Console", "The goal-first console Chase uses to direct a team of AI agents across several products, rebuilt hourly from public GitHub repos.", pm_tools),
     ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
     ("about.html", "About", "Chase Holroyd's path from solar design to product management and AI.", about),
     ("404.html", "Not found", "Page not found.", notfound),
