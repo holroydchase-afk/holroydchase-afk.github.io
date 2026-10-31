@@ -71,6 +71,7 @@ Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Portfolio / public presence
+- 2026-10-31, CI: the five Dependabot GitHub Actions bumps (#31-#35: checkout v7, configure-pages v6, upload-pages-artifact v5, deploy-pages v5, dependency-review-action v5) are merged as one PR with this HANDOFF line, since each Dependabot PR failed handoff-check on its own. Check the first Pages deploy after merge.
 - 2026-10-31, Charlie intake (was PR #37, rebuilt on main after WEB-M8 so it merges cleanly): new page `charlie.html` ("Charlie: Invest in What You Know", `charlie` in `tools/build.py`) and a home work row after ccwatts. Copy from Charlie's positioning pass; demo link /charlie/ (Pages from the charlie repo, so never add a top-level `charlie/` folder here) and the code on GitHub. Phone shot `assets/shots/charlie-phone.webp` is charlie's `docs/screenshots/demo-phone.png` after charlie PR #27 (600x1298, WebP q78, uncropped so the disclaimer footer stays in). Log it in charlie HANDOFF.md.
 - 2026-10-31, WEB-M8.2: Crew Clock page (crew-clock.html) and a home work row, from Crew Clock's Oct 29 intake. Log it in crew-clock HANDOFF.md under Portfolio / public presence.
 - 2026-10-31, WEB-M8.1: hero shows ccwatts, Hearth, Crew Clock and Charlie as four tiles linking to their live demos; Hearth keeps the three-phone section.
