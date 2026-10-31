@@ -170,6 +170,10 @@ JOURNEY = [
      "I wanted to know the electricity cost of my own AI-assisted coding. No tool answered it, so I built a local one that reports a sourced range instead of a false point estimate.",
      "My first open-source release, with a public methodology, full tests and a citation for every assumption.",
      "[check] Who's using it", "Try the playground", ""),
+    ("charlie.html", "Charlie: Invest in What You Know",
+     "Most trading apps start from the trade, so beginners act on hype instead of businesses they understand. Charlie starts from what you already know and turns it into a few paper trades with the risk spelled out.",
+     "Research first, safety rules enforced in code and tests rather than copy, and one tested Python engine that runs on a server and in the browser.",
+     "Built for a new investor learning options by paper trading companies inside their own circle of competence", "Try the demo", ""),
     ("family-photos.html", HEARTH,
      "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
@@ -434,6 +438,30 @@ crew_clock = product(
     shot=("crew-clock-phone.webp", "Crew Clock on a phone, made-up crew: the boss's Today list with all punches verified, one worker not in yet, and who is on site.", 600),
 )
 
+# Charlie intake (Oct 29): copy from Charlie's positioning pass; facts trace to the charlie repo README and HANDOFF.md.
+charlie = product(
+    "Investing tool · paper trading · demo live",
+    "Charlie: Invest in What You Know",
+    "Most trading apps start from the trade, so beginners act on hype instead of businesses they understand. "
+    "Charlie starts from the person: it maps what you already know to companies, then offers the most conservative way to act on one.",
+    [("1–3", "trade ideas a day, one per sector"), ("Paper", "never places a real order"),
+     ("Every trade", "max loss, breakeven and an exit plan"), ("400+", "tests behind the engine")],
+    [
+        ("Who it's for", "<p>A new investor who wants to learn options by paper trading companies inside their own circle of competence, "
+         "the businesses their job and life already taught them.</p>"),
+        ("How it works", '<ul class="clean"><li><b>Profile:</b> a resume, interests and brands become ranked sectors, each with the evidence behind it.</li>'
+         "<li><b>Today:</b> 1–3 ideas scored against a Charlie Munger-style checklist, each with the exact trade, chance of profit, max loss in dollars, breakeven, a payoff chart and an exit plan.</li>"
+         "<li><b>Risk slider:</b> it starts conservative (covered calls and cash-secured puts) and widens only when you choose. Uncovered calls and same-day options are never offered.</li></ul>"),
+        ("Product decisions", '<ul class="clean"><li><b>Person before trade.</b> Ideas come only from sectors the profile supports, and each card says why it is in your circle.</li>'
+         "<li><b>Safety in code, not copy.</b> Position sizing and banned strategies are enforced and tested in the engine, not left to a disclaimer.</li>"
+         "<li><b>Paper only.</b> Charlie never places real orders and is not financial advice.</li></ul>"),
+        ("Stack", "<p>One Python engine with 400+ tests. It runs as a local app and, for the demo, entirely in the browser with Pyodide, served from this site with no third-party calls.</p>"),
+    ],
+    status_note="The demo turns a fictional resume into paper trades on simulated prices, kept only in your browser: no sign-up, and Reset demo clears it. Not financial advice.",
+    links=[("Try the live demo", "/charlie/"), ("Code on GitHub", f"{GITHUB}/charlie")],
+    shot=("charlie-phone.webp", "Charlie's Today screen on a phone: the top paper-trade idea with its score, chance of profit, max loss and payoff chart, above the line &quot;Not financial advice. Paper trading only.&quot;", 649),
+)
+
 # The studio story (WEB-M6.1). Facts trace to studio-agents, pm-tools STUDIO-STATUS.md and the Atlas Story logs.
 # No schedule ids, project names from private chats, or anyone but Chase.
 STUDIO_AGENTS = [
@@ -620,6 +648,7 @@ PAGES = [
     ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
+    ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
     ("crew-clock.html", "Crew Clock", "A phone time clock for small rural crews: three taps to clock in, even with no signal, and every punch signed.", crew_clock),
     ("studio.html", "The studio", "How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.", studio),
