@@ -14,7 +14,7 @@ SITE = "https://chaseholroyd.com/"
 # 404 is served for missing paths and is not a page to index.
 NOT_INDEXED = {"404.html"}
 # Root-absolute links that point at another repo's Pages site, not a file here.
-OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/")
+OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/")
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<![\d.])\(?\d{3}\)?[ .-]\d{3}[ .-]\d{4}(?!\d)")
