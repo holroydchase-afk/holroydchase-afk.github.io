@@ -204,9 +204,10 @@ def phone(src, alt, w=300, h=600, eager=False, cls=""):
     return (f'<figure class="phone{(" " + cls) if cls else ""}"><img src="{src}" width="{w}" height="{h}" alt="{alt}" {load}></figure>')
 
 
-def browser(src, alt):
-    return (f'<figure class="browser"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>'
-            f'<img src="{src}" width="1200" height="750" alt="{alt}" loading="lazy" decoding="async"></figure>')
+def browser(src, alt, cls="", eager=False):
+    load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
+    return (f'<figure class="browser{(" " + cls) if cls else ""}"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>'
+            f'<img src="{src}" width="1200" height="750" alt="{alt}" {load}></figure>')
 
 
 # Career cards lead with one number each; every number traces to pmo/story/resume-2026-10.md.
@@ -222,10 +223,14 @@ WORK_SHOTS = {
     "pm-tools.html": browser("assets/home/build-slate-wide.webp", "Build Slate, sample data: every product with its stage, next step and milestone, capped at five active."),
 }
 
-HERO_PHONES = (
-    phone("assets/shots/role-radar-phone.webp", "Role Radar, sample data: a role scored 90 with its reason.", eager=True, cls="p-left")
-    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see it, by group and by name.", h=563, eager=True, cls="p-mid")
-    + phone("assets/shots/ccwatts-phone.webp", "ccwatts, sample data: 8.5 kWh over 30 days.", eager=True, cls="p-right"))
+# Hero collage (Chase, Oct 31): several products at once, so the three-phone layout is used only for Hearth.
+# Each shot is a live demo on sample data.
+HERO_COLLAGE = (
+    browser("assets/home/charlie-wide.webp", "Charlie, sample data: stock ideas drawn from a resume, each with its chance of profit and maximum loss. Paper trading only.", cls="c-charlie", eager=True)
+    + browser("assets/home/ccwatts-wide.webp", "ccwatts, sample data: estimated electricity for 30 days of AI coding, shown as a range.", cls="c-ccwatts", eager=True)
+    + phone("assets/home/crew-clock-phone.webp", "Crew Clock, made-up crew: a worker's screen with one large Clock in button.", h=596, eager=True, cls="c-crew")
+    + phone("assets/home/hearth-feed.webp", f"{HEARTH}, sample family: a photo that says which side of the family it went to.", h=548, eager=True, cls="c-hearth"))
+HERO_LINKS = [("ccwatts", "/ccwatts/"), (HEARTH, "#hearth"), ("Crew Clock", "/crew-clock/"), ("Charlie", "/charlie/")]
 
 home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <div class="hero-copy">
@@ -234,9 +239,10 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. I now use AI to take real problems to working products, with the same discipline: clear rules, tests first and privacy by design.</p>
 <div class="cta"><a class="btn primary" href="#hearth">See the work</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a><a class="btn ghost" href="{LINKEDIN}">LinkedIn</a></div>
 </div>
-<div class="hero-art" aria-hidden="false">{HERO_PHONES}</div>
+<div class="hero-art collage">{HERO_COLLAGE}</div>
 </div>
-<div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
+<div class="wrap"><p class="collage-links">Live demos: """ + " · ".join(f'<a href="{u}">{t}</a>' for t, u in HERO_LINKS) + """</p>
+<div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
 
 <section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
 <div class="feature-copy reveal">
@@ -253,7 +259,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <p class="credit">{HEARTH_TEAM}</p>
 </div>
 <div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
-    + phone("assets/home/hearth-feed.webp", f"{HEARTH}, sample family: a pumpkin patch photo that says which side of the family it went to.", h=548, cls="f-front") \
+    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see the post, by group and by name.", h=563, cls="f-front") \
     + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
 </div></section>
 

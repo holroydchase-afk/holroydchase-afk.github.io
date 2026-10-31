@@ -224,3 +224,15 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.45em;width:14px;h
 @media(min-width:1180px){.feature .facts{grid-template-columns:repeat(4,minmax(0,1fr))}.feature .fact b{font-size:24px}}
 .feature .btn.primary{background:#6FC49C;border-color:#6FC49C;color:#0C1410}
 .work-row:not(.has-art) .work-copy{max-width:72ch}
+/* Hero collage (Oct 31): two browser shots and two phones, overlapped. Positions are percentages of .hero-art. */
+.hero-art.collage{max-width:600px;height:clamp(300px,46vw,500px)}
+.collage>figure{position:absolute;margin:0}
+.collage .browser{box-shadow:0 22px 60px rgba(0,0,0,.45);border-color:rgba(255,255,255,.12)}
+.collage .c-charlie{top:2%;right:0;width:76%}
+.collage .c-ccwatts{bottom:4%;left:0;width:62%;z-index:1}
+.collage .phone{width:24%;top:auto;transform:none}
+.collage .c-crew{left:4%;top:0;z-index:2;transform:rotate(-4deg)}
+.collage .c-hearth{right:3%;bottom:0;z-index:3;transform:rotate(4deg)}
+.collage-links{margin:24px 0 0;font-size:14.5px;color:var(--deep-muted)}
+.collage-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--deep-ink)}
+@media(max-width:699px){.collage .phone{width:30%}}
