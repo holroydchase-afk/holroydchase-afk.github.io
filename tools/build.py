@@ -175,6 +175,10 @@ JOURNEY = [
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo",
      "a private photo app for two blended families, with a family beta in late November"),
+    ("crew-clock.html", "Crew Clock",
+     "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
+     "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
+     "A five-person crew starts a two-week beta next", "Try the demo", ""),
     ("pm-tools.html", "How I keep it all moving",
      "Running five products in limited hours takes a system: one slate, one roadmap and AI agents with clear ownership.",
      "The operating layer under everything else. The demos run on a scrubbed snapshot of my real slate.",
@@ -410,6 +414,26 @@ energy = product(
     shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
 )
 
+crew_clock = product(
+    "Field app · live demo",
+    "Crew Clock",
+    "A small rural crew tracked hours on paper and memory, on cheap phones with weak signal, so pay disputes came down to whose story you believed. Crew Clock makes every punch a record both sides can trust.",
+    [("3 taps", "to clock in, even with no signal"), ("Signed", "every punch, checked in the boss's browser"),
+     ("Fair", "the geofence flags a punch, never blocks it"), ("$0", "a month to run")],
+    [
+        ("Who uses it", '<ul class="clean"><li><b>The crew</b> clocks in with three taps on the phones they already own. With no signal, the punch is saved on the phone and sent later.</li>'
+         "<li><b>The boss</b> checks a map and a Today list: who is on the clock, where, and who isn't in yet. The weekly timesheet comes out in one tap.</li></ul>"),
+        ("Product decisions", '<ul class="clean"><li><b>Offline first.</b> Job sites often have one bar or none, so a punch never waits on the network.</li>'
+         "<li><b>Trust over surveillance.</b> Location is read at the punch, not all day, and each worker agrees to it once in plain words.</li>"
+         "<li><b>Tamper-evident.</b> Each punch is signed on the phone and checked in the boss's browser, so a changed time shows up in red.</li>"
+         "<li><b>No new cost.</b> It runs on free tiers, because a small crew won't pay for another subscription.</li></ul>"),
+        ("Status", "<p>The demo runs the real app on a made-up crew. A two-week beta with a five-person crew is next.</p>"),
+    ],
+    status_note="The demo uses a made-up crew and job sites, and it never asks for your real location unless you turn that on. Everything stays in your browser.",
+    links=[("Try the live demo", "/crew-clock/"), ("View on GitHub", f"{GITHUB}/crew-clock")],
+    shot=("crew-clock-phone.webp", "Crew Clock on a phone, made-up crew: the boss's Today list with all punches verified, one worker not in yet, and who is on site.", 600),
+)
+
 # The studio story (WEB-M6.1). Facts trace to studio-agents, pm-tools STUDIO-STATUS.md and the Atlas Story logs.
 # No schedule ids, project names from private chats, or anyone but Chase.
 STUDIO_AGENTS = [
@@ -597,6 +621,7 @@ PAGES = [
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
+    ("crew-clock.html", "Crew Clock", "A phone time clock for small rural crews: three taps to clock in, even with no signal, and every punch signed.", crew_clock),
     ("studio.html", "The studio", "How Chase runs a small AI product studio: shared agents with lanes, a coordinator, overnight shifts, and a product owner who reviews the PRs.", studio),
     ("pm-tools.html", "How I keep it all moving", "The slate, roadmap and AI agents that keep several products moving at once.", pm_tools),
     ("resume.html", "Resume", "Chase Holroyd's resume: staff product manager for pricing, payments and point-of-sale lending.", resume),
