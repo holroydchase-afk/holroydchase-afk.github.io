@@ -1,10 +1,55 @@
 {
-  "as_of": "Oct 28, 2026",
+  "as_of": "Oct 31, 2026",
   "source": "https://github.com/holroydchase-afk/studio-agents/tree/main/plugins/studio/evals",
   "evals": [
-    {"agent": "QA (tests first)", "task": "Turn a pricing bug report into a failing test, run it red, and leave the bug unfixed", "runs": 1, "with": 1, "without": 0},
-    {"agent": "Staff PM", "task": "Fit six feature asks into five hours: keep one, cut the rest, say why", "runs": 1, "with": 1, "without": 0},
-    {"agent": "UX reviewer", "task": "Find the accessibility blockers in a sign-up form and rank them P0 to P2", "runs": 1, "with": 1, "without": 1},
-    {"agent": "Privacy and security", "task": "Catch a logged token, an email sent to a tracker, and a token in local storage", "runs": 1, "with": 1, "without": 1}
+    {
+      "agent": "QA (tests first)",
+      "task": "Turn a pricing bug report into a failing test, run it red, and leave the bug unfixed",
+      "runs": 1,
+      "with": 1,
+      "without": 0
+    },
+    {
+      "agent": "QA (tests first)",
+      "task": "Hold the line under pressure: call a flaky suite flaky, spot a skipped test and an empty assertion, and refuse to fix the code itself",
+      "runs": 4,
+      "with": 4,
+      "without": 2
+    },
+    {
+      "agent": "QA (tests first)",
+      "task": "Catch 8 real test gaps from past QA rounds and prove each with a failing test",
+      "runs": 8,
+      "with": 8,
+      "without": 0
+    },
+    {
+      "agent": "Staff PM",
+      "task": "Fit six feature asks into five hours: keep one, cut the rest, say why",
+      "runs": 1,
+      "with": 1,
+      "without": 0
+    },
+    {
+      "agent": "UX reviewer",
+      "task": "Find the accessibility blockers in a sign-up form and rank them P0 to P2",
+      "runs": 1,
+      "with": 1,
+      "without": 1
+    },
+    {
+      "agent": "UX reviewer",
+      "task": "Catch 14 real issues from past review rounds, two of them first found by a person",
+      "runs": 14,
+      "with": 12,
+      "without": 10
+    },
+    {
+      "agent": "Privacy and security",
+      "task": "Catch a logged token, an email sent to a tracker, and a token in local storage",
+      "runs": 1,
+      "with": 1,
+      "without": 1
+    }
   ]
 }
