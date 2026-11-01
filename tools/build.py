@@ -312,6 +312,12 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + f""".</p>
 </div></section>
 
+<section class="band" id="cause" aria-labelledby="cause-h"><div class="wrap">
+<div class="read reveal"><p class="eyebrow">Built for a cause</p><h2 id="cause-h">Open Arms Foundation</h2>
+<p>Open Arms has run a children's home in Medellín, Colombia, since 1991, funded entirely by individual donors. I built its website, nine pages that each lead a visitor to one action: sponsor a child for $30 a month.</p>
+<p class="go"><a class="btn" href="/websites/">Visit the site →</a></p></div>
+</div></section>
+
 <section class="band closing"><div class="wrap closing-inner reveal">
 <h2>Senior and staff PM roles in pricing, payments and lending</h2>
 <p class="lede">I'm open to remote roles. LinkedIn is the fastest way to reach me.</p>
