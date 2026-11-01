@@ -110,9 +110,9 @@ def check_scoreboard(failures):
     if 'class="scoreboard"' not in page:
         failures.append("studio.html: no agent scoreboard table")
     for row in data["evals"]:
-        cells = re.search(rf"<tr><th scope=\"row\">{re.escape(row['agent'])}</th>(.*?)</tr>", page)
+        cells = re.search(rf"<tr><th scope=\"row\">{re.escape(row['agent'])}</th><td>{re.escape(row['task'])}</td>(.*?)</tr>", page)
         if not cells:
-            failures.append(f"studio.html: scoreboard is missing {row['agent']}")
+            failures.append(f"studio.html: scoreboard is missing {row['agent']}: {row['task']}")
         elif f"{row['with']}/{row['runs']}" not in cells.group(1) or f"{row['without']}/{row['runs']}" not in cells.group(1):
             failures.append(f"studio.html: {row['agent']} scores don't match tools/scoreboard.json")
     if data["as_of"] not in page or not data.get("source"):

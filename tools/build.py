@@ -487,7 +487,8 @@ def scoreboard_html(sb):
             '<thead><tr><th scope="col">Agent</th><th scope="col">Fixed task</th><th scope="col" class="num">With agent</th><th scope="col" class="num">Without</th></tr></thead>'
             f'<tbody>{rows}</tbody></table></div>'
             f'<p class="small">One run per arm, judged by fixed checks plus a model grader. <a href="{sb["source"]}">The tasks and graders are on GitHub</a>. '
-            "Two tasks don't yet separate the agent from a plain session, so harder versions are next.</p>")
+            "Rows with more than one task count tasks passed. On the QA recall row, a plain session spotted most gaps but never proved one with a failing test. "
+            "Two single tasks don't yet separate the agent from a plain session, so harder versions are next.</p>")
 
 
 studio = product(
