@@ -273,7 +273,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
 </ul>
 <div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
-<div class="cta"><a class="btn primary" href="demo/hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
+<div class="cta"><a class="btn primary" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
 <p class="credit">{HEARTH_TEAM}</p>
 </div>
 <div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
@@ -360,7 +360,7 @@ family = product(
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private.",
-    links=[("Try the demo", "demo/hearth/")],
+    links=[("Try the demo", "/Hearth/")],
 )
 
 role_radar = product(
