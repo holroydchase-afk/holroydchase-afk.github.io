@@ -14,7 +14,7 @@ SITE = "https://chaseholroyd.com/"
 # 404 is served for missing paths and is not a page to index.
 NOT_INDEXED = {"404.html"}
 # Root-absolute links that point at another repo's Pages site, not a file here.
-OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/")
+OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/")
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<![\d.])\(?\d{3}\)?[ .-]\d{3}[ .-]\d{4}(?!\d)")
@@ -154,7 +154,7 @@ def check_home(failures):
     # HOME-2 The Hearth section links to its case study and its demo.
     hearth = _section(html, "hearth") or ""
     hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', hearth)
-    for want in ("family-photos.html", "demo/hearth/"):
+    for want in ("family-photos.html", "/Hearth/"):
         if want not in hrefs:
             failures.append(f"index.html: Hearth section doesn't link to {want} (HOME-2)")
 
