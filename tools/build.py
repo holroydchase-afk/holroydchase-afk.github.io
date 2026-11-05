@@ -613,7 +613,7 @@ JOBS = [
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
         "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
-        "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 5 lenders."]),
+        "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders."]),
     ("ADT Solar", [("Senior Product Manager", "Nov 2021 – Jan 2023"), ("Product Manager", "Oct 2020 – Nov 2021")], [
         "I joined as the first PM for a 3,000-person solar division, where complex solar contracts were slow to review. "
         "A rep-guided checkout cut contract review <strong>about 60%</strong>.",
