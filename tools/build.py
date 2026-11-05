@@ -139,10 +139,10 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 CAREER = [
     ("Patter AI", "2023–2026 · Staff PM",
      "An AI-native sales platform for solar and home services. I led a single real-time pricing engine across loans, leases and PPAs, "
-     "a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut onboarding from about a month to a week.",
+     "a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut lender onboarding from 4 weeks to 1 week.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT", "2020–2023 · PM to Senior PM",
-     "First PM for a 3,000-person solar division. I built the credit-check and offer engine (12,000+ applications a month across 5 lenders) "
+     "First PM for a 3,000-person solar division. I built the credit-check and offer engine (35,000+ applications a month across 5 lenders) "
      "and lender allocation that helped cut dealer fees 3–5 points, with releases to about 5,000 reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
@@ -163,7 +163,7 @@ JOURNEY = [
      "[check] Who uses it today, e.g. my kids every night", "Try the app",
      "a bedtime routine for my kids that ends in an on-device energy scan"),
     ("role-radar.html", "Role Radar",
-     "A job search is mostly triage. An agent now reads about 110 company boards each weekday and scores every role with a stated reason, so my time goes to the few worth pursuing.",
+     "A job search is mostly triage. An agent reads about 190 company boards on request and scores every role with a stated reason, so my time goes to the few worth pursuing.",
      "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
      "[check] Who uses it besides me", "Try the demo", ""),
     ("ccwatts.html", "ccwatts",
@@ -196,7 +196,7 @@ JOURNEY = [
 # Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
 PROOF = [
     ("8+ years", "in pricing, payments and point-of-sale lending"),
-    ("13+", "lender integrations shipped"),
+    ("14+", "lender integrations shipped"),
     ("3–5 pts", "dealer fees cut with lender allocation"),
     ("$6M", "venture round supported at Palmetto"),
 ]
@@ -219,8 +219,8 @@ def browser(src, alt, cls="", eager=False):
 
 
 # Career cards lead with one number each; every number traces to pmo/story/resume-2026-10.md.
-CAREER_STAT = {"Patter AI": ("1 mo → 1 wk", "to onboard a new lender"),
-               "ADT": ("12,000+", "credit applications a month"),
+CAREER_STAT = {"Patter AI": ("4 wks → 1 wk", "to onboard a new lender"),
+               "ADT": ("35,000+", "credit applications a month"),
                "Palmetto": ("11,500+", "consultations a month")}
 
 # The AI work as rows with screenshots, in the JOURNEY order. (page, images html) per row; text comes from JOURNEY.
@@ -366,8 +366,8 @@ family = product(
 role_radar = product(
     "AI tool · beta",
     "Role Radar",
-    "Most of a job search is triage. Role Radar reads the boards every weekday and explains which roles merit my time, so I can say no faster and focus on the few that fit.",
-    [("~110", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
+    "Most of a job search is triage. Role Radar reads the boards when I run a scan and explains which roles merit my time, so I can say no faster and focus on the few that fit.",
+    [("~190", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
@@ -378,12 +378,12 @@ role_radar = product(
          "<li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li>"
          "<li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>"
          "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
-        ("Stack", "<p>A single-page app on Claude with its own saved database, a scheduled agent that runs each weekday, and connectors for ZipRecruiter and email.</p>"),
+        ("Stack", "<p>A single-page app on Claude with its own saved database, an agent that runs a scan on request, and connectors for ZipRecruiter and email.</p>"),
     ],
     status_note="The demo uses made-up jobs and companies, never real applications. Try anything: the demo resets when you reload.",
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
-          "The demo reads 9 sample boards. The real radar watches about 110."),
+          "The demo reads 9 sample boards. The real radar watches about 190."),
 )
 
 ccwatts = product(
@@ -591,8 +591,8 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <li><b>First PM, then Senior PM, then Director of Product, Palmetto (2017–2019).</b> Launched the sales enablement platform, built Alchemy (design, point of sale and project management with real-time credit decisions), and launched a machine-learning lead marketplace supporting 11,500+ consultations a month.</li>
 <li><b>Founder, Bigfoot Energy (2019–2020).</b> A smart-home and clean-energy company in Charleston, WV.</li>
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
-<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (12,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
-<li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from about a month to a week.</li>
+<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
+<li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from 4 weeks to 1 week.</li>
 <li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
 </ol>
 <h2>What I care about</h2>
@@ -613,11 +613,11 @@ JOBS = [
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
         "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
-        "A lender rules engine cut onboarding a new lender <strong>from about a month to about a week</strong>, and I integrated 5 lenders."]),
+        "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders."]),
     ("ADT Solar", [("Senior Product Manager", "Nov 2021 – Jan 2023"), ("Product Manager", "Oct 2020 – Nov 2021")], [
         "I joined as the first PM for a 3,000-person solar division, where complex solar contracts were slow to review. "
         "A rep-guided checkout cut contract review <strong>about 60%</strong>.",
-        "As senior PM I built the credit-check and offer engine: 5 lenders, <strong>12,000+ applications a month</strong>, and 110% year-over-year sales growth. "
+        "As senior PM I built the credit-check and offer engine: 5 lenders, <strong>35,000+ applications a month</strong>, and 110% year-over-year sales growth. "
         "My lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) cut dealer fees <strong>3–5 points</strong>. "
         "I also led a channel-partner platform with redline and tiered pricing for 4+ partners, was technical lead for the Lowe's in-store solar and security program, "
         "and scaled the post-merger platform to 400,000+ consultations a year, with releases to about 5,000 reps' iPads."]),
@@ -639,7 +639,7 @@ resume = f"""<div class="read resume">
 <p class="eyebrow">Resume · Charlotte, NC · open to remote roles</p>
 <h1>Chase Holroyd</h1>
 <p class="lede">Staff Product Manager · Pricing, Payments &amp; Point-of-Sale Lending</p>
-<p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 13+ lender integrations; a credit and offer engine at 12,000+ applications a month; lender allocation that cut dealer fees 3–5 points.</p>
+<p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 14+ lender integrations; a credit and offer engine at 35,000+ applications a month; lender allocation that cut dealer fees 3–5 points.</p>
 <p class="contact">Contact: <a href="{LINKEDIN}">linkedin.com/in/chase-holroyd</a> · Site: <a href="index.html">chaseholroyd.com</a></p>
 <h2>Experience</h2>
 """ + "".join(
@@ -660,7 +660,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
     ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
-    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 110 company boards each weekday.", role_radar),
+    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 190 company boards on request.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
