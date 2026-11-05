@@ -139,11 +139,11 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 CAREER = [
     ("Patter AI", "2023–2026 · Staff PM",
      "An AI-native sales platform for solar and home services. I led a single real-time pricing engine across loans, leases and PPAs, "
-     "a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut lender onboarding from 4 weeks to 1 week.",
+     "a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine that cut lender onboarding from 4 weeks to 1 week. An agentic pipeline cut each new lender integration from 2 engineers for a 2-week sprint to 1–2 days.",
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT", "2020–2023 · PM to Senior PM",
-     "First PM for a 3,000-person solar division. I built the credit-check and offer engine (35,000+ applications a month across 5 lenders) "
-     "and lender allocation that helped cut dealer fees 3–5 points, with releases to about 5,000 reps.",
+     "First PM for ADT's solar division. I built the credit-check and offer engine (35,000+ applications a month across 5 lenders) "
+     "and the lender allocation that leadership used to cut dealer fees 3–5 points, with releases to 5,000+ reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
      "I was Palmetto's first PM and built Alchemy, its design, point-of-sale and real-time credit platform, and supported a $6M venture round. "
@@ -591,8 +591,8 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <li><b>First PM, then Senior PM, then Director of Product, Palmetto (2017–2019).</b> Launched the sales enablement platform, built Alchemy (design, point of sale and project management with real-time credit decisions), and launched a machine-learning lead marketplace supporting 11,500+ consultations a month.</li>
 <li><b>Founder, Bigfoot Energy (2019–2020).</b> A smart-home and clean-energy company in Charleston, WV.</li>
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
-<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for a 3,000-person solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that helped cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to about 5,000 reps.</li>
-<li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, and a rules engine that cut lender onboarding from 4 weeks to 1 week.</li>
+<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for ADT's solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that leadership used to cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to 5,000+ reps.</li>
+<li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, a rules engine that cut lender onboarding from 4 weeks to 1 week, and an agentic pipeline that cut new lender integrations from a 2-week sprint to 1–2 days.</li>
 <li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
 </ol>
 <h2>What I care about</h2>
@@ -613,14 +613,18 @@ JOBS = [
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
         "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
-        "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders."]),
+        "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders. "
+        "An agentic pipeline read each lender's API documents and, with an engineer in the loop, built, tested and fixed the integration, cutting a new one from <strong>2 engineers for a 2-week sprint to 1–2 days</strong>. "
+        "Patter's agents ran on a LangGraph platform, and I defined a trust ladder for 6 of them, from human-run to AI with human observation, with audit logs, undo and approvals. "
+        "Every model call went through one shared gateway with rate limits, failover and spend tracking that routed each use case by accuracy and cost."]),
     ("ADT Solar", [("Senior Product Manager", "Nov 2021 – Jan 2023"), ("Product Manager", "Oct 2020 – Nov 2021")], [
-        "I joined as the first PM for a 3,000-person solar division, where complex solar contracts were slow to review. "
-        "A rep-guided checkout cut contract review <strong>about 60%</strong>.",
+        "I joined as the first PM for ADT's solar division, where complex solar contracts were slow to review. "
+        "A rep-guided checkout cut contract review <strong>about 60%</strong>. "
+        "A training app for new reps cut training from <strong>6 weeks to 2</strong> and tripled the training team's onboarding capacity without adding trainers.",
         "As senior PM I built the credit-check and offer engine: 5 lenders, <strong>35,000+ applications a month</strong>, and 110% year-over-year sales growth. "
-        "My lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) cut dealer fees <strong>3–5 points</strong>. "
+        "I built the lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) that leadership used to cut dealer fees <strong>3–5 points</strong>. "
         "I also led a channel-partner platform with redline and tiered pricing for 4+ partners, was technical lead for the Lowe's in-store solar and security program, "
-        "and scaled the post-merger platform to 400,000+ consultations a year, with releases to about 5,000 reps' iPads."]),
+        "and scaled the post-merger platform to 400,000+ consultations a year, with releases to 5,000+ reps' iPads."]),
     ("AGDATA", [("Product Owner", "Jun – Oct 2020")], [
         "Pricing and rebate data for clients such as Bayer was spread across 8+ legacy systems. "
         "I led discovery for a master data management platform to consolidate them."]),
