@@ -57,7 +57,7 @@ NAV = [
     ("about.html", "About"),
 ]
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600"
+FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700"
          "&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap")
 
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
@@ -299,10 +299,12 @@ HERO_TILES = [
 ]
 SIZES = {"assets/home/ccwatts-wide.webp": (1200, 750), "assets/home/charlie-wide.webp": (1200, 750),
          "assets/home/hearth-feed.webp": (600, 1097), "assets/home/crew-clock-phone.webp": (600, 1191)}
-HERO_GRID = '<ul class="tiles">' + "".join(
-    f'<li><a class="tile t-{kind}" href="{href}"><span class="tile-text"><b>{name}</b><span>{line}</span></span>'
-    f'<span class="peek"><img src="{img}" width="{SIZES[img][0]}" height="{SIZES[img][1]}" alt="{alt}" fetchpriority="high" decoding="async"></span></a></li>'
-    for name, line, href, img, alt, kind in HERO_TILES) + "</ul>"
+# Hero tiles (Chase, Nov 6): no products before Career, so the hero shows the three career wins instead. Each links to
+# the Career band. Numbers come from CAREER_STAT below (every one traces to the resume and the career facts).
+HERO_GRID = '<ul class="tiles career-tiles">' + "".join(
+    f'<li><a class="tile t-stat" href="#career"><span class="tile-text"><b>{c}</b><span class="when">{r}</span>'
+    f'<span class="big">{CAREER_STAT[c][0]}</span><span>{CAREER_STAT[c][1]}</span></span></a></li>'
+    for c, r, *_ in CAREER) + "</ul>"
 
 home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <div class="hero-copy">
@@ -316,7 +318,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
 
 <section class="band" id="career" aria-labelledby="career-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Career</p><h2 id="career-h">Where I've led</h2>
+<div class="read reveal"><p class="eyebrow">Part one · Career</p><h2 id="career-h">Where I've led</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
 <div class="grid career-grid">""" + "".join(
     f'<article class="card career reveal"><span class="tag">{r}</span><h3>{c}</h3>'
@@ -327,13 +329,18 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="bridge reveal"><h3>The through-line</h3>
-<p>The AI work below applies what lending systems taught me. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
+<p>Across all three companies the work was the same: decisions that touch money need written rules and a stated reason for every outcome. That is how an offer engine scores a credit application, and it is the discipline I carry into the AI work below.</p>
 <p class="links"><a href="resume.html">Read the full resume</a></p></div>
+</div></section>
+
+<section class="band divider" id="built" aria-labelledby="built-h"><div class="wrap">
+<p class="eyebrow">Part two</p><h2 id="built-h">What I've built with AI</h2>
+<p class="lede">Since January 2026 I've taken real problems from my own life to working, tested products. Two of them, then the rest.</p>
 </div></section>
 
 <section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
 <div class="feature-copy reveal">
-<p class="eyebrow">Built with AI · {HEARTH_TAG}</p>
+<p class="eyebrow">Featured · {HEARTH_TAG}</p>
 <h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
 <p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
 <ul class="ticks">
@@ -351,7 +358,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 </div></section>
 
 <section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Built with AI · open source</p><h2 id="work-h">ccwatts</h2>
+<div class="read reveal"><p class="eyebrow">Featured · open source</p><h2 id="work-h">ccwatts</h2>
 <p>My open-source release: a sourced range for the electricity AI coding uses. The demo runs on sample data in your browser. How I direct the agents behind it: <a href="studio.html">the studio</a> and the <a href="pm-tools.html">Studio Console</a>.</p></div>
 """ + "".join(
     f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'

@@ -159,11 +159,11 @@ def check_home(failures):
         if want not in hrefs:
             failures.append(f"index.html: Hearth section doesn't link to {want} (HOME-2)")
 
-    # HOME-3 At least 6 product images, all on disk.
+    # HOME-3 At least 4 product images, all on disk.
     shots = [s for s in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html)
              if s.startswith(("assets/home/", "assets/shots/"))]
-    if len(shots) < 6:
-        failures.append(f"index.html: {len(shots)} product images from assets/home/ or assets/shots/, needs at least 6 (HOME-3)")
+    if len(shots) < 4:
+        failures.append(f"index.html: {len(shots)} product images from assets/home/ or assets/shots/, needs at least 4 (HOME-3)")
     for s in shots:
         if not (ROOT / s).exists():
             failures.append(f"index.html: image {s} doesn't exist (HOME-3)")
