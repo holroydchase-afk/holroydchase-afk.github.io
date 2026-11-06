@@ -95,7 +95,7 @@ def page(slug, title, description, body):
 <a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
 <nav class="top" aria-label="Main">{nav}</nav>
 </div></header>
-<main class="{"home" if slug == "index.html" else "wrap"}" id="main">
+<main class="{"home" if slug == "index.html" or "pp-hero" in body else "wrap"}" id="main">
 {body}
 </main>
 <footer class="site"><div class="wrap">
@@ -107,31 +107,70 @@ def page(slug, title, description, body):
 """
 
 
-def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None):
+def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None, feature=None, accent=None):
+    """The shared product-page template (docs/product/PAGE-GUIDELINES.md): dark hero band with the phone shot,
+    a proof row of four facts, then one band per section (number, title, body), then a back link."""
     facts_html = "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in facts)
     links_html = ""
     if links:
         links_html = '<div class="cta">' + "".join(
             f'<a class="btn{" primary" if i == 0 else ""}" href="{u}">{t}</a>' for i, (t, u) in enumerate(links)
         ) + "</div>"
-    secs = "".join(f"<h2>{h}</h2>{c}" for h, c in sections)
-    note = f'<p class="note">{status_note}</p>' if status_note else ""
-    # One phone screenshot under the lede, sample data only (WEB-M4.7). Source PNGs: 390x844 at 2x, cropped, WebP.
-    # shot = (file, alt, height at 300px wide, optional caption). It sits above the fold, so it loads eagerly.
+    # shot = (file, alt, height at 300px wide, optional caption). Sample data only; above the fold, so eager.
     shot_html = ""
     if shot:
-        cap = f"<figcaption>{shot[3]}</figcaption>" if len(shot) > 3 else ""
-        shot_html = (f'<figure class="shot"><img src="assets/shots/{shot[0]}" width="300" height="{shot[2]}" '
-                     f'alt="{shot[1]}" fetchpriority="high" decoding="async">{cap}</figure>')
-    return f"""<div class="hero{" has-shot" if shot else ""}"><div class="read">
+        cap = f'<figcaption class="shot-cap">{shot[3]}</figcaption>' if len(shot) > 3 else ""
+        shot_html = f'<div class="pp-art">{phone("assets/shots/" + shot[0], shot[1], 300, shot[2], eager=True)}{cap}</div>'
+    secs = "".join(
+        f'<section class="psec"><div class="wrap psec-grid"><h2>{h}</h2><div class="pbody">{c}</div></div></section>'
+        for h, c in sections)
+    note = f'<section class="psec"><div class="wrap psec-grid"><h2>A note on the demo</h2><div class="pbody"><p>{status_note}</p></div></div></section>' if status_note else ""
+    feat = f'<section class="pfeature"><div class="wrap">{feature}</div></section>' if feature else ""
+    style = f' style="--pp:{accent}"' if accent else ""
+    return f"""<section class="hero-band pp-hero"{style}><div class="wrap">
+<div class="hero-grid{" has-art" if shot else ""}"><div>
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
 {links_html}
-</div>{shot_html}
-<div class="facts">{facts_html}</div></div>
-<div class="read">{secs}{note}
-<p class="back"><a href="index.html">← All work</a></p></div>"""
+</div>{shot_html}</div>
+<div class="facts proof">{facts_html}</div></div></section>
+{feat}{secs}{note}
+<section class="psec back"><div class="wrap"><a class="btn" href="index.html">← All work</a></div></section>"""
+
+
+# ---- Product-page template (docs/product/PAGE-GUIDELINES.md) -------------------------------------------------
+# Every product page is product(...) with sections in the fixed order from the guidelines. These helpers build the
+# shared blocks so no page hand-writes its own markup.
+def code_block(*lines, label=None):
+    cap = f'<p class="code-label">{label}</p>' if label else ""
+    return cap + '<pre class="code"><code>' + "\n".join(lines) + "</code></pre>"
+
+
+def proof_grid(items):
+    """items = [(heading, text)]: short, checkable claims, each backed by the product's repo."""
+    return '<ul class="proof-grid">' + "".join(f"<li><b>{h}</b><span>{t}</span></li>" for h, t in items) + "</ul>"
+
+
+def shots(*figs, note=None):
+    """figs = [(src, alt, w, h, caption)] rendered as captioned figures; sample data only."""
+    out = "".join(
+        f'<figure class="pshot"><a href="assets/shots/{s}"><img src="assets/shots/{s}" width="{w}" height="{h}" loading="lazy" decoding="async" alt="{a}"></a><figcaption>{c}</figcaption></figure>'
+        for s, a, w, h, c in figs)
+    return f'<div class="pshots">{out}</div>' + (f'<p class="note">{note}</p>' if note else "")
+
+
+def range_viz(rows, ticks, lo, hi, caption):
+    """Log-scale range bars. rows = [(label, low, high, marker, text, css_class)]. Numbers must come from the product's method doc."""
+    import math
+    pos = lambda v: 100 * (math.log10(v) - math.log10(lo)) / (math.log10(hi) - math.log10(lo))
+    out = ""
+    for label, a, b, m, text, cls in rows:
+        out += (f'<div class="rv-row {cls}"><p class="rv-label"><b>{label}</b><span>{text}</span></p>'
+                f'<div class="rv-track"><i class="rv-bar" style="left:{pos(a):.1f}%;width:{pos(b) - pos(a):.1f}%"></i>'
+                f'<i class="rv-dot" style="left:{pos(m):.1f}%"></i></div></div>')
+    axis = "".join(f'<span style="left:{pos(t):.1f}%">{t} kWh</span>' for t in ticks)
+    return f'<div class="rv" role="img" aria-label="{caption}">{out}<div class="rv-axis">{axis}</div></div><p class="rv-cap">{caption}</p>'
 
 
 # Career highlights on the home page. Facts trace to pmo/story/resume-2026-10.md; outside links are public pages.
@@ -387,22 +426,46 @@ role_radar = product(
 )
 
 ccwatts = product(
-    "Developer tool · on npm · playground live",
+    "Developer tool · on npm · live playground",
     "ccwatts",
-    "Every AI session has an electricity cost, and almost no one can see theirs. ccwatts reads your local Claude Code logs and estimates the energy your usage consumed.",
-    [("Range", "low / central / high, never one number"), ("Local", "logs never leave your machine"), ("Sourced", "every assumption cited"),
-     ("Open", "source on GitHub")],
+    "ccwatts estimates the electricity your Claude Code use consumes, as a sourced range and never a single number. It reads the logs Claude Code already keeps on your machine. I did the research, the product calls, the method and the build.",
+    [("1.3–30.5 kWh", "range on the sample data, never one number"), ("0", "network requests, enforced by a test"), ("30+", "test files, CI on every change"),
+     ("MIT", "code open, methodology public")],
     [
-        ("Why it exists", "<p>In 2026 climate scientist Zeke Hausfather estimated his own Claude Code use by hand, at about 170 kWh over eight weeks. "
-         "Existing tools counted tokens and cost. None covered energy, so I built one.</p>"),
+        ("The problem", "<p>Developers run AI agents all day and almost nobody can see the electricity behind it. Providers don't publish energy per token, and public estimates disagree by about 10x. "
+         "In 2026 the climate scientist Zeke Hausfather worked out his own Claude Code use by hand, at about 170 kWh over eight weeks. Existing log tools counted tokens and cost, not energy.</p>"),
+        ("What I built", '<ul class="clean"><li><b>One command:</b> electricity for the last 30 days, an everyday comparison, and the split by model, token type and project.</li>'
+         "<li><b>A playground in the browser:</b> opens on labeled sample data, needs no install, and parses your own logs on the page without uploading them.</li>"
+         "<li><b>A history that lasts:</b> Claude Code deletes old logs, so ccwatts keeps its own daily counts, and can export them or make a shareable card.</li>"
+         "<li><b>Inside Claude Code:</b> the same CLI ships as a plugin, so you can check usage without leaving a session.</li></ul>"
+         + shots(("ccwatts-laptop.webp", "The ccwatts playground on a laptop, sample data: 8.5 kWh for the last 30 days with a plausible range of 1.3 to 30.5 kWh and a daily chart.", 1280, 1060, "The playground, 30 days of sample data. Open the image to read it at full size."),
+                 note="Synthetic sample data, not anyone's real usage.")),
+        ("How the estimate works", "<p>Energy is tokens times an energy cost per token, by model family and token type. Every parameter has a low and a high bound, a source and a date, and the bounds combine into the range you see. "
+         "The least certain assumption is what a cache read costs, which matters because cache reads are usually 90%+ of an agent's tokens. The method uses 10% of fresh input and tests 1% to 25%, and the playground has a \"What if?\" slider for it.</p>"
+         "<p>Published figures from Google and Microsoft, and Hausfather's 170 kWh, run as unit tests.</p>"),
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
          "<li><b>Honest numbers.</b> Public estimates vary by an order of magnitude, so it always shows a range and a public methodology.</li>"
-         "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, and no mobile app, because the data lives on laptops.</li></ul>"),
-        ("Stack", "<p>A TypeScript monorepo with one shared core used by both a CLI you can run with <code>npx ccwatts</code> (try <code>npx ccwatts --demo</code> without any logs) and an offline HTML dashboard.</p>"
-         "<p>The same CLI ships as a Claude Code plugin, so developers can check their usage without leaving a session: <code>/plugin marketplace add holroydchase-afk/ccwatts</code>.</p>"),
+         "<li><b>Privacy is the trust story.</b> No network calls, no telemetry, counts only, no prompt or code content, and no mobile app because the data lives on laptops.</li></ul>"),
+        ("Proof", proof_grid([
+            ("Privacy, enforced", "The web page's Content-Security-Policy is default-src 'none', and a test confirms zero requests in a real browser."),
+            ("Tested", "30+ test files and CI on every change."),
+            ("Open", "MIT license for the code, CC BY 4.0 for the methodology and parameters."),
+            ("On npm", "Published as ccwatts and runnable with npx."),
+        ])),
+        ("Try it", code_block("npx ccwatts --demo", label="Sample data, no logs needed (Node 22+):")
+         + code_block("npx ccwatts", label="Your own Claude Code logs:")
+         + code_block("/plugin marketplace add holroydchase-afk/ccwatts", label="As a Claude Code plugin:")),
+        ("Status and what's next", "<p>The CLI and the playground are live. 0.2.0 is finished and waiting on my npm publishing setup. It adds an opt-in view of your own work rhythm and an opt-in bedtime nudge, both counts only and local.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
-    shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600),
+    accent="#F0AE4E",
+    feature='<p class="eyebrow">The check</p><h2>Same question as a climate scientist, and the ranges overlap.</h2>'
+            + range_viz([("Hausfather, by hand", 70, 330, 170, "70–330 kWh, about 170", "a"),
+                         ("ccwatts, same case", 32, 678, 194, "32–678 kWh, central 194", "b")], [10, 100, 1000], 10, 1000,
+                        "Eight weeks of heavy Claude Code use, log scale. ccwatts' range is wider on purpose. The token mix is illustrative because Hausfather's exact counts aren't published (METHODOLOGY.md).")
+            + '<p class="go"><a class="btn" href="https://github.com/holroydchase-afk/ccwatts/blob/main/METHODOLOGY.md">Read the methodology</a></p>',
+    shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600,
+          "Sample data: 8.5 kWh over 30 days, range 1.3 to 30.5."),
 )
 
 energy = product(
