@@ -26,27 +26,27 @@ IN_DEVELOPMENT = {"energy-scanner.html"}
 # Nov 4 shape (Chase): feature Hearth and ccwatts only. Everything else sits in a labeled "In progress" band that
 # claims only what the repo backs today and says what is left. A product moves up when its row in
 # pmo/portfolio/claims-register.md is "ready". FEATURED_WORK is the "Built with AI" rows (Hearth has its own band).
-FEATURED_WORK = {"ccwatts.html", "pm-tools.html", "studio.html"}
+FEATURED_WORK = {"ccwatts.html"}
 # (page, name, what it is, what's left before it moves up, link label)
 IN_PROGRESS = [
     ("role-radar.html", "Role Radar", "A scheduled agent that scans company boards and scores every role 0-100 with a stated reason. The demo runs on made-up data.",
-     "A privacy cleanup of its settings file, and checking the board count against the repo.", "See the demo"),
+     "confirming the board count and tightening the demo's sample data.", "See the demo"),
     ("charlie.html", "Charlie", "Paper-trading ideas that start from companies you already understand, with max loss and breakeven on each. Paper trading only.",
-     "Quoting a verified test total.", "See the demo"),
+     "publishing its test results.", "See the demo"),
     ("crew-clock.html", "Crew Clock", "A phone time clock for small crews: three taps to clock in, even with no signal.",
-     "Verifying the cost and signed-punch claims. The crew beta has not started.", "See the demo"),
+     "a beta with a small real crew.", "See the demo"),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
-     "Settling its status wording and a copy pass.", "See the app"),
+     "a copy pass before I call it done.", "See the app"),
     ("/websites/", "Open Arms Foundation", "The website I built for a children's home in Medell\u00edn, Colombia.",
-     "Verifying the sponsorship figures before they come back.", "Visit the site"),
+     "adding the sponsorship details.", "Visit the site"),
 ]
 
 # Hearth (WEB-M8, Oct 30): featured first on home. The rename is still pending, so it shows as a working name,
 # matching the demo's own banner (REC-R2). After the rename, change HEARTH and HEARTH_TAG here and nowhere else.
 HEARTH = "Hearth"
-HEARTH_TAG = "working name · family beta planned for late November"
+HEARTH_TAG = "working name · family beta late November"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("660+", "app tests"), ("960+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("90+", "app test files"), ("20+", "database test files"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with a team of AI agents, tests first.")
 
@@ -346,13 +346,13 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="bridge reveal"><h3>The through-line</h3>
-<p>The AI work below applies what lending systems taught me. Role Radar scores every job the way an offer engine scores an application: written rules and a stated reason for each decision. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
+<p>The AI work below applies what lending systems taught me. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
 <p class="links"><a href="resume.html">Read the full resume</a></p></div>
 </div></section>
 
 <section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">ccwatts, and the studio behind it</h2>
-<p>ccwatts is my open-source release: a sourced range for the electricity AI coding uses. Below it, the Studio Console and the studio show how I direct a team of agents. Every demo runs on sample data in your browser.</p></div>
+<div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">ccwatts</h2>
+<p>My open-source release: a sourced range for the electricity AI coding uses. The demo runs on sample data in your browser. How I direct the agents behind it: <a href="studio.html">the studio</a> and the <a href="pm-tools.html">Studio Console</a>.</p></div>
 """ + "".join(
     f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'
     f'<p class="num">{i:02d}</p><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
@@ -363,11 +363,11 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     for i, (h, n, d, how, w, cta, _) in enumerate([j for j in JOURNEY if j[0] in FEATURED_WORK], 1)
 ) + "</div></section>" + f"""
 <section class="band" id="in-progress" aria-labelledby="ip-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">In progress</p><h2 id="ip-h">Also building</h2>
-<p>These work today but are not at the bar of the two above. Each card says what is left. They move up when it is done.</p></div>
+<div class="read reveal"><p class="eyebrow">In progress</p><h2 id="ip-h">Also in progress</h2>
+<p>These are working builds, shown with what is still open. Each moves up when it is finished.</p></div>
 <div class="grid career-grid">""" + "".join(
-    f'<article class="card career reveal"><span class="tag">In progress</span><h3>{n}</h3><p>{d}</p>'
-    f'<p class="how"><b>Left:</b> {left}</p><p class="links"><a href="{h}">{cta} \u2192</a></p></article>'
+    f'<article class="card career reveal"><h3>{n}</h3><p>{d}</p>'
+    f'<p class="how"><b>Next:</b> {left}</p><p class="links"><a href="{h}">{cta} \u2192</a></p></article>'
     for h, n, d, left, cta in IN_PROGRESS) + f"""</div></div></section>
 
 <section class="band closing"><div class="wrap closing-inner reveal">
@@ -406,7 +406,7 @@ family = product(
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
         ("How I built it", "<p>I ran it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
-         "QA writes failing tests first and the engineer makes them pass. There are 660+ app tests and 960+ database checks, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
+         "QA writes failing tests first and the engineer makes them pass. There are 90+ app test files and 20+ database test files, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
         ("The team", f"<p>{HEARTH_TEAM}</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
@@ -669,8 +669,7 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
 <li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for ADT's solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that leadership used to cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to 5,000+ reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, a rules engine that cut lender onboarding from 4 weeks to 1 week, and an agentic pipeline that cut new lender integrations from a 2-week sprint to 1–2 days.</li>
-<li><b>Jan 2026 to now: home with my kids, building with AI.</b> I stepped back from employment to care for my young children full time, and kept my product skills sharp by shipping real software with AI agents.</li>
-<li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
+<li><b>Jan 2026 to now: career break for family caregiving, building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
 </ol>
 <h2>What I care about</h2>
 <ul class="clean"><li>Checkout, pricing and payments that feel simple to the person at the kitchen table.</li>
@@ -685,10 +684,8 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 # One short story per company, no bullets (Chase, Oct 23): the problem, what I did, the outcome. Every number traces to the resume.
 # (company, [(title, dates)], [paragraphs]); a company with several roles gets one paragraph per stage.
 JOBS = [
-    ("Independent product work", [("Product builder", "Jan 2026 – present")], [
-        "After Patter I stepped back from employment to care for my young children full time, and used the time to take AI-assisted product work from idea to working software. "
-        "I shipped the open-source ccwatts, and I am building a private family photo app with a team of AI agents, tests first. "
-        "Both are on this site, with the code public."]),
+    ("Career break", [("Family caregiving", "Jan 2026 – present")], [
+        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with a team of AI agents, tests first. Both are on this site with the code public."]),
     ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
         "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
