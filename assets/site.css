@@ -316,3 +316,8 @@ main.home{counter-reset:psec}
 pre.code{position:relative;padding-top:34px}
 pre.code::before{content:"";position:absolute;left:14px;top:12px;width:9px;height:9px;border-radius:50%;background:#ED6A5E;box-shadow:16px 0 #F5BF4F,32px 0 #61C554}
 @media(prefers-reduced-motion:reduce){.proof-grid li{transition:none}}
+/* WEB-M11: In progress grid centers its last row; hero tiles sit centered against the copy. */
+#in-progress .career-grid{display:flex;flex-wrap:wrap;justify-content:center}
+#in-progress .career-grid>.card{flex:1 1 290px;max-width:calc(33.333% - 11px)}
+@media(max-width:900px){#in-progress .career-grid>.card{max-width:none}}
+.hero-grid{align-items:center}

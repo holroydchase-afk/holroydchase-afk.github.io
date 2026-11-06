@@ -142,14 +142,15 @@ def check_home(failures):
     product imagery, a short h1, a resume PDF, one product name."""
     html = (ROOT / "index.html").read_text()
 
-    # HOME-1 Hearth is featured above career and work.
-    pos = {sid: html.find(f'id="{sid}"') for sid in ("hearth", "career", "work")}
-    if pos["hearth"] < 0:
-        failures.append('index.html: no section with id="hearth" (HOME-1)')
-    else:
-        for sid in ("career", "work"):
-            if pos[sid] >= 0 and pos[sid] < pos["hearth"]:
-                failures.append(f'index.html: id="hearth" must come before id="{sid}" (HOME-1)')
+    # HOME-1 Order (Chase, Nov 6): career first, then the featured builds (Hearth, ccwatts), then In progress.
+    order = ("career", "hearth", "work", "in-progress")
+    pos = [html.find(f'id="{sid}"') for sid in order]
+    for sid, at in zip(order, pos):
+        if at < 0:
+            failures.append(f'index.html: no section with id="{sid}" (HOME-1)')
+    found = [at for at in pos if at >= 0]
+    if found != sorted(found):
+        failures.append("index.html: sections must run career, hearth, work, in-progress (HOME-1)")
 
     # HOME-2 The Hearth section links to its case study and its demo.
     hearth = _section(html, "hearth") or ""

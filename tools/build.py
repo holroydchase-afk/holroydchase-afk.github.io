@@ -23,12 +23,30 @@ AI_BOTS = ["GPTBot", "ChatGPT-User", "ClaudeBot", "anthropic-ai", "CCBot", "Goog
 # Their pages stay up for anyone with the link. Remove a page from this set once it reaches the bar.
 IN_DEVELOPMENT = {"energy-scanner.html"}
 
+# Nov 4 shape (Chase): feature Hearth and ccwatts only. Everything else sits in a labeled "In progress" band that
+# claims only what the repo backs today and says what is left. A product moves up when its row in
+# pmo/portfolio/claims-register.md is "ready". FEATURED_WORK is the "Built with AI" rows (Hearth has its own band).
+FEATURED_WORK = {"ccwatts.html"}
+# (page, name, what it is, what's left before it moves up, link label)
+IN_PROGRESS = [
+    ("role-radar.html", "Role Radar", "A scheduled agent that scans company boards and scores every role 0-100 with a stated reason. The demo runs on made-up data.",
+     "confirming the board count and tightening the demo's sample data.", "See the demo"),
+    ("charlie.html", "Charlie", "Paper-trading ideas that start from companies you already understand, with max loss and breakeven on each. Paper trading only.",
+     "publishing its test results.", "See the demo"),
+    ("crew-clock.html", "Crew Clock", "A phone time clock for small crews: three taps to clock in, even with no signal.",
+     "a beta with a small real crew.", "See the demo"),
+    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
+     "a copy pass before I call it done.", "See the app"),
+    ("/websites/", "Open Arms Foundation", "The website I built for a children's home in Medell\u00edn, Colombia.",
+     "adding the sponsorship details.", "Visit the site"),
+]
+
 # Hearth (WEB-M8, Oct 30): featured first on home. The rename is still pending, so it shows as a working name,
 # matching the demo's own banner (REC-R2). After the rename, change HEARTH and HEARTH_TAG here and nowhere else.
 HEARTH = "Hearth"
-HEARTH_TAG = "working name · family beta planned for late November"
+HEARTH_TAG = "working name · family beta late November"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("660+", "app tests"), ("960+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("90+", "app test files"), ("20+", "database test files"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with a team of AI agents, tests first.")
 
@@ -278,10 +296,6 @@ HERO_TILES = [
      "ccwatts, sample data: estimated electricity for 30 days of AI coding.", "wide"),
     (HEARTH, "Private family photos, with an audience on every post", "#hearth", "assets/home/hearth-feed.webp",
      f"{HEARTH}, sample family: a photo that says which side of the family it went to.", "phone"),
-    ("Crew Clock", "GPS clock-in for small construction crews", "/crew-clock/", "assets/home/crew-clock-phone.webp",
-     "Crew Clock, made-up crew: a worker's screen with one large Clock in button.", "phone"),
-    ("Charlie", "Paper-trading ideas from what you already know", "/charlie/", "assets/home/charlie-wide.webp",
-     "Charlie, sample data: stock ideas with their chance of profit and maximum loss. Paper trading only.", "wide"),
 ]
 SIZES = {"assets/home/ccwatts-wide.webp": (1200, 750), "assets/home/charlie-wide.webp": (1200, 750),
          "assets/home/hearth-feed.webp": (600, 1097), "assets/home/crew-clock-phone.webp": (600, 1191)}
@@ -301,25 +315,6 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 </div>
 <div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
 
-<section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
-<div class="feature-copy reveal">
-<p class="eyebrow">Featured build · {HEARTH_TAG}</p>
-<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
-<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
-<ul class="ticks">
-<li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
-<li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
-<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
-</ul>
-<div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
-<div class="cta"><a class="btn primary" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
-<p class="credit">{HEARTH_TEAM}</p>
-</div>
-<div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
-    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see the post, by group and by name.", h=563, cls="f-front") \
-    + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
-</div></section>
-
 <section class="band" id="career" aria-labelledby="career-h"><div class="wrap">
 <div class="read reveal"><p class="eyebrow">Career</p><h2 id="career-h">Where I've led</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
@@ -332,13 +327,32 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     for c, r, d, links in CAREER
 ) + """</div>
 <div class="bridge reveal"><h3>The through-line</h3>
-<p>The AI work below applies what lending systems taught me. Role Radar scores every job the way an offer engine scores an application: written rules and a stated reason for each decision. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
+<p>The AI work below applies what lending systems taught me. ccwatts reports a sourced range, not a single number, with a citation for every assumption. """ + f"""{HEARTH} checks who can see each photo in the database itself, the same access discipline applicant credit data requires.</p>
 <p class="links"><a href="resume.html">Read the full resume</a></p></div>
 </div></section>
 
+<section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
+<div class="feature-copy reveal">
+<p class="eyebrow">Built with AI · {HEARTH_TAG}</p>
+<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
+<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
+<ul class="ticks">
+<li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
+<li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
+<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
+</ul>
+<div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
+<div class="cta"><a class="btn" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
+<p class="credit">{HEARTH_TEAM}</p>
+</div>
+<div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
+    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see the post, by group and by name.", h=563, cls="f-front") \
+    + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
+</div></section>
+
 <section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">From one page to a studio of agents</h2>
-<p>Each product started with a problem in my own life. In order, they show how my practice matured, from a scheduled agent to agents working under tests and review. Every demo runs on sample data in your browser. The Studio Console shows my live studio, read from public repos.</p></div>
+<div class="read reveal"><p class="eyebrow">Built with AI · open source</p><h2 id="work-h">ccwatts</h2>
+<p>My open-source release: a sourced range for the electricity AI coding uses. The demo runs on sample data in your browser. How I direct the agents behind it: <a href="studio.html">the studio</a> and the <a href="pm-tools.html">Studio Console</a>.</p></div>
 """ + "".join(
     f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'
     f'<p class="num">{i:02d}</p><h3><a href="{h}">{n}</a></h3><p>{d}</p><p class="how">{how}</p>'
@@ -346,16 +360,15 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
     + f'<p class="go"><a class="btn" href="{h}">{cta} →</a></p></div>'
     + (f'<div class="work-art{" combo" if WORK_SHOTS[h].startswith("<figure class=\"browser") and "phone" in WORK_SHOTS[h] else ""}">{WORK_SHOTS[h]}</div>' if h in WORK_SHOTS else "")
     + "</article>"
-    for i, (h, n, d, how, w, cta, _) in enumerate([j for j in JOURNEY if j[0] not in IN_DEVELOPMENT and j[0] != "family-photos.html"], 1)
-) + '<p class="note reveal"><b>In active development:</b> ' + "; ".join(
-    dev for h, *_, dev in JOURNEY if h in IN_DEVELOPMENT) + f""".</p>
-</div></section>
-
-<section class="band" id="cause" aria-labelledby="cause-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Built for a cause</p><h2 id="cause-h">Open Arms Foundation</h2>
-<p>Open Arms has run a children's home in Medellín, Colombia, since 1991, funded entirely by individual donors. I built its website, nine pages that each lead a visitor to one action: sponsor a child for $30 a month.</p>
-<p class="go"><a class="btn" href="/websites/">Visit the site →</a></p></div>
-</div></section>
+    for i, (h, n, d, how, w, cta, _) in enumerate([j for j in JOURNEY if j[0] in FEATURED_WORK], 1)
+) + "</div></section>" + f"""
+<section class="band" id="in-progress" aria-labelledby="ip-h"><div class="wrap">
+<div class="read reveal"><p class="eyebrow">In progress</p><h2 id="ip-h">Also in progress</h2>
+<p>These are working builds, shown with what is still open. Each moves up when it is finished.</p></div>
+<div class="grid career-grid">""" + "".join(
+    f'<article class="card career reveal"><h3>{n}</h3><p>{d}</p>'
+    f'<p class="how"><b>Next:</b> {left}</p><p class="links"><a href="{h}">{cta} \u2192</a></p></article>'
+    for h, n, d, left, cta in IN_PROGRESS) + f"""</div></div></section>
 
 <section class="band closing"><div class="wrap closing-inner reveal">
 <h2>Senior and staff PM roles in pricing, payments and lending</h2>
@@ -393,7 +406,7 @@ family = product(
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
         ("How I built it", "<p>I ran it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
-         "QA writes failing tests first and the engineer makes them pass. There are 660+ app tests and 960+ database checks, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
+         "QA writes failing tests first and the engineer makes them pass. There are 90+ app test files and 20+ database test files, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
          "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
         ("The team", f"<p>{HEARTH_TEAM}</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
@@ -409,17 +422,23 @@ role_radar = product(
     [("~190", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
-        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
-         "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
-         "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
-        ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
-         "<li><b>Precision, not volume.</b> The goal is fewer, better applications. The measure is how many top-scored roles turn into real conversations.</li>"
-         "<li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li>"
+        ("The problem", "<p>Most of a job search is triage: dozens of boards, repeat postings, and a pull to apply to everything. The scarce thing is my attention, so the tool's job is to say no faster.</p>"),
+        ("What I built", '<ul class="clean"><li><b>A scan on request</b> across company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, with duplicates merged.</li>'
+         "<li><b>A 0-100 fit score</b> for every role with a one-line reason.</li>"
+         "<li><b>One tracker</b> that updates itself when an application is confirmed or closed.</li></ul>"),
+        ("How it works", "<p>Each role is scored against criteria I edit in one plain file: title, remote, pay, sectors and culture signals. The score always shows its reasons, so a wrong call is a one-line fix to the criteria, not a mystery. The agent finds and ranks; reading the posting and applying stay with me.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text.</li>'
+         "<li><b>Precision, not volume.</b> The goal is fewer, better applications, measured by how many top-scored roles become real conversations.</li>"
          "<li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>"
-         "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
-        ("Stack", "<p>A single-page app on Claude with its own saved database, an agent that runs a scan on request, and connectors for ZipRecruiter and email.</p>"),
+         "<li><b>Cost-aware.</b> Big boards run three days a week, and a scan stops paging when results stop being new.</li></ul>"),
+        ("Proof", proof_grid([
+            ("Tested", "30+ test files in the public repo."),
+            ("Demo on sample data", "Made-up jobs and companies; screenshots are labeled demo data."),
+            ("Open", "Code on GitHub, with a README case study."),
+        ])),
+        ("Try it", "<p>The demo runs the real app in your browser on made-up jobs. Try anything: it resets when you reload.</p>"),
+        ("Status and what's next", "<p>The radar runs for me every weekday. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
     ],
-    status_note="The demo uses made-up jobs and companies, never real applications. Try anything: the demo resets when you reload.",
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
           "The demo reads 9 sample boards. The real radar watches about 190."),
@@ -475,13 +494,21 @@ energy = product(
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
      ("On-device", "photos never leave the phone"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
-        ("The idea", "<p>Kids tick off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
-         "A neutral authority makes the call, which takes the argument off the parent.</p>"),
-        ("Two ways to scan", '<ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>'
-         "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, brightest at Rainbow. Grown-ups can save or share it.</li></ul>"),
-        ("Decisions", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps, and it never reads Rainbow once every step is done.</li>'
-         "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul>"),
-        ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
+        ("The problem", "<p>Bedtime with my kids had become a nightly negotiation. A parent saying \"it's time\" starts the argument; a neutral machine saying it takes the argument off the parent.</p>"),
+        ("What I built", '<ul class="clean"><li><b>A routine first:</b> kids tick off their steps (bath, PJs, teeth, potty, book), then scan.</li>'
+         "<li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>"
+         "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy. Grown-ups can save or share it.</li></ul>"),
+        ("How it works", "<p>The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). It never reads Rainbow once every step is done, and a grown-up switch makes every scan read sleepy. The photo scan runs entirely on the phone with a person-segmentation model (MediaPipe) and a GPU shader.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps.</li>'
+         "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run on the phone. No server, no account, no tracking.</li>"
+         "<li><b>An illustrated sample person.</b> Anyone can see the aura without a photo, and no real person's photo is ever published.</li></ul>"),
+        ("Proof", proof_grid([
+            ("On-device", "Photos never leave the phone; the page is locked so it can only talk to its own origin."),
+            ("Tested", "10+ test files, including end-to-end."),
+            ("Documented", "A case study in the repo covers the constraints and decisions."),
+        ])),
+        ("Try it", "<p>Open the app and use the sample person to see the aura, or run the palm scan.</p>"),
+        ("Status and what's next", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone. Next is a copy pass before I call it done.</p>"),
     ],
     links=[("Try the live app", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
     shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
@@ -656,7 +683,7 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
 <li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for ADT's solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that leadership used to cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to 5,000+ reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, a rules engine that cut lender onboarding from 4 weeks to 1 week, and an agentic pipeline that cut new lender integrations from a 2-week sprint to 1–2 days.</li>
-<li><b>Now: building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
+<li><b>Jan 2026 to now: career break for family caregiving, building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
 </ol>
 <h2>What I care about</h2>
 <ul class="clean"><li>Checkout, pricing and payments that feel simple to the person at the kitchen table.</li>
@@ -671,10 +698,12 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 # One short story per company, no bullets (Chase, Oct 23): the problem, what I did, the outcome. Every number traces to the resume.
 # (company, [(title, dates)], [paragraphs]); a company with several roles gets one paragraph per stage.
 JOBS = [
+    ("Career break", [("Family caregiving", "Jan 2026 – present")], [
+        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with a team of AI agents, tests first. Both are on this site with the code public."]),
     ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
         "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
-        "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
+        "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>.",
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
         "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders. "
         "An agentic pipeline read each lender's API documents and, with an engineer in the loop, built, tested and fixed the integration, cutting a new one from <strong>2 engineers for a 2-week sprint to 1–2 days</strong>. "

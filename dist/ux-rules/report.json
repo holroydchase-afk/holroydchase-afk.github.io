@@ -1,0 +1,29 @@
+[
+  {
+    "view": "home-phone",
+    "url": "file:///home/user/holroydchase-afk.github.io/resume.html",
+    "findings": [
+      {
+        "rule": "V2",
+        "what": "9 font sizes (12, 14, 14.5, 15, 17, 19, 21, 24, 34px); pick a scale of 8 or fewer",
+        "where": "page"
+      }
+    ]
+  },
+  {
+    "view": "home-laptop",
+    "url": "file:///home/user/holroydchase-afk.github.io/resume.html",
+    "findings": [
+      {
+        "rule": "V2",
+        "what": "9 font sizes (12, 14, 14.5, 15, 17, 21, 22, 32, 56px); pick a scale of 8 or fewer",
+        "where": "page"
+      }
+    ]
+  },
+  {
+    "view": "home-reflow",
+    "url": "file:///home/user/holroydchase-afk.github.io/resume.html",
+    "findings": []
+  }
+]
