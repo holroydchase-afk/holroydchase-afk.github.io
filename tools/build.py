@@ -398,7 +398,7 @@ family = product(
         ("The team", f"<p>{HEARTH_TEAM}</p>"),
         ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
     ],
-    status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend. The code is private.",
+    status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
 )
 
