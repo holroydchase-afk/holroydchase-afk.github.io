@@ -3,10 +3,10 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: Studio Console page and home row (PMT-M3.5)
-next: Chase merges the Studio Console PR; post the success-test result on Nov 14
+now: pre-launch audit (Nov 6) and the Nov 4 portfolio shape, not yet built
+next: Chase's go on PR #56 (ccwatts redesign), then build the Nov 4 shape (Hearth + ccwatts featured, In progress section, gap line, hello@ contact)
 waiting_on_chase:
-  - Merge the Studio Console PR (merging to main deploys the site)
+  - Go to merge PR #56 and this audit PR (merging to main deploys the site)
 blockers: []
 -->
 
@@ -15,6 +15,12 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## Pre-launch audit and live check (Nov 6)
+- Live check: https://chaseholroyd.com home, About, Role Radar and ccwatts pages were fetched and are byte-identical to `main` (a2a33b2); #52 and #53 (14+ lenders, 35,000+, 4 weeks to 1 week, ~190 boards) are live, Pages run 45 succeeded. What is NOT live: PR #56 (ccwatts redesign, waiting on Chase's go) and the Nov 4 shape (feature Hearth and ccwatts only, "In progress" section, gap line, hello@ email, roadmap labels), which was decided but never built.
+- Audit of the 6 public repos (pattern scan of current trees and all history for keys, tokens, private keys, JWTs; emails, phones, claude.ai links, ids): no secrets or personal contact data found. Only `.example` and test-fixture addresses. `atlas-portfolio` returned 404 anonymously, so it is private; it holds a Gmail address, claude.ai artifact links and salary rules, so it must never go public.
+- Fixed here: family-photos.html no longer says "The code is private" (the Hearth repo is public, claims register row Hearth).
+- Intakes (product-owned): Role Radar `criteria.yaml` is a labeled demo persona, but it publishes `base_floor_usd: 150000`; move the working copy to a private/gitignored file and keep only `plugin/example-criteria.yaml` public. Charlie "400+ tests" vs 366 `def test_`; Hearth "660+/960+" not reproducible (Hearth #94); pm-tools `goals.json` publishes the goal "Land a Staff PM role / 3 applications a weekday" on the public Console while the page says job-search progress is private.
 
 ## ux-reviewer sync (Nov 5)
 - Chase asked whether the latest ux-reviewer is live and synced. It is live in studio-agents (d077fdf, Oct 31, with its 17 evals; evals stay in studio-agents). Done here: re-ran studio-agents `scripts/sync.sh ux-reviewer` (agent, review-rounds skill, `.claude/design-rules.md`) and `scripts/sync-tools.sh check-findings ux-rules`. Next: Chase's go to merge (a merge to main deploys the site, though this PR changes no page).
