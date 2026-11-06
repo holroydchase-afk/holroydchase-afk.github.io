@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: Nov 4 portfolio shape (Hearth + ccwatts featured, In progress section, gap line, hello@ contact), next PR
-next: build WEB-M11.2 (the Nov 4 shape); post the Studio Console success-test result on Nov 14
+now: WEB-M11.2 Nov 4 shape PR open (Hearth + ccwatts featured, In progress band, gap line)
+next: Chase reviews and says merge; then hello@ contact once the alias is confirmed live, move Role Radar and Energy Scanner pages to the template order, then Hearth/Charlie/Crew Clock with their owners' facts
 waiting_on_chase: []
 blockers: []
 -->
@@ -14,6 +14,11 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M11.2 Nov 4 shape (Nov 6, PR open)
+- Done: hero shows only ccwatts and Hearth; "Built with AI" is now ccwatts, Studio Console and the studio; a labeled "In progress" band holds Role Radar, Charlie, Crew Clock, Energy Scanner and Open Arms, each saying what is left (`IN_PROGRESS` in build.py; `FEATURED_WORK` picks the featured rows). The Open Arms "$30 a month" claim is off the home page until verified. Gap line "Jan 2026 – present" on Resume and About (wording is a draft for Chase: stepped back to care for young children full time, no ages).
+- Not done: hello@ contact (check_site forbids emails on public pages and Chase hasn't confirmed the alias works; add it and relax the check in one change once confirmed). Other product pages are not yet in the template order: Hearth, Charlie and Crew Clock need their repos' facts (outside this project's access), Role Radar and Energy Scanner can follow here. Indexing stays off.
+- #56 (ccwatts redesign) and #57 (audit, Hearth "code is private" removed) merged Nov 6 on Chase's go.
 
 ## Pre-launch audit and live check (Nov 6)
 - Live check: https://chaseholroyd.com home, About, Role Radar and ccwatts pages were fetched and are byte-identical to `main` (a2a33b2); #52 and #53 (14+ lenders, 35,000+, 4 weeks to 1 week, ~190 boards) are live, Pages run 45 succeeded. What is NOT live: PR #56 (ccwatts redesign, waiting on Chase's go) and the Nov 4 shape (feature Hearth and ccwatts only, "In progress" section, gap line, hello@ email, roadmap labels), which was decided but never built.
