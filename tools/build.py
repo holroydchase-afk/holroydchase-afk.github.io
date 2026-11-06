@@ -107,7 +107,7 @@ def page(slug, title, description, body):
 """
 
 
-def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None):
+def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None, feature=None, accent=None):
     """The shared product-page template (docs/product/PAGE-GUIDELINES.md): dark hero band with the phone shot,
     a proof row of four facts, then one band per section (number, title, body), then a back link."""
     facts_html = "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in facts)
@@ -125,7 +125,9 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
         f'<section class="psec"><div class="wrap psec-grid"><h2>{h}</h2><div class="pbody">{c}</div></div></section>'
         for h, c in sections)
     note = f'<section class="psec"><div class="wrap psec-grid"><h2>A note on the demo</h2><div class="pbody"><p>{status_note}</p></div></div></section>' if status_note else ""
-    return f"""<section class="hero-band pp-hero"><div class="wrap">
+    feat = f'<section class="pfeature"><div class="wrap">{feature}</div></section>' if feature else ""
+    style = f' style="--pp:{accent}"' if accent else ""
+    return f"""<section class="hero-band pp-hero"{style}><div class="wrap">
 <div class="hero-grid{" has-art" if shot else ""}"><div>
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
@@ -133,7 +135,7 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 {links_html}
 </div>{shot_html}</div>
 <div class="facts proof">{facts_html}</div></div></section>
-{secs}{note}
+{feat}{secs}{note}
 <section class="psec back"><div class="wrap"><a class="btn" href="index.html">← All work</a></div></section>"""
 
 
@@ -156,6 +158,19 @@ def shots(*figs, note=None):
         f'<figure class="pshot"><a href="assets/shots/{s}"><img src="assets/shots/{s}" width="{w}" height="{h}" loading="lazy" decoding="async" alt="{a}"></a><figcaption>{c}</figcaption></figure>'
         for s, a, w, h, c in figs)
     return f'<div class="pshots">{out}</div>' + (f'<p class="note">{note}</p>' if note else "")
+
+
+def range_viz(rows, ticks, lo, hi, caption):
+    """Log-scale range bars. rows = [(label, low, high, marker, text, css_class)]. Numbers must come from the product's method doc."""
+    import math
+    pos = lambda v: 100 * (math.log10(v) - math.log10(lo)) / (math.log10(hi) - math.log10(lo))
+    out = ""
+    for label, a, b, m, text, cls in rows:
+        out += (f'<div class="rv-row {cls}"><p class="rv-label"><b>{label}</b><span>{text}</span></p>'
+                f'<div class="rv-track"><i class="rv-bar" style="left:{pos(a):.1f}%;width:{pos(b) - pos(a):.1f}%"></i>'
+                f'<i class="rv-dot" style="left:{pos(m):.1f}%"></i></div></div>')
+    axis = "".join(f'<span style="left:{pos(t):.1f}%">{t} kWh</span>' for t in ticks)
+    return f'<div class="rv" role="img" aria-label="{caption}">{out}<div class="rv-axis">{axis}</div></div><p class="rv-cap">{caption}</p>'
 
 
 # Career highlights on the home page. Facts trace to pmo/story/resume-2026-10.md; outside links are public pages.
@@ -425,7 +440,7 @@ ccwatts = product(
          "<li><b>Inside Claude Code:</b> the same CLI ships as a plugin, so you can check usage without leaving a session.</li></ul>"
          + shots(("ccwatts-laptop.webp", "The ccwatts playground on a laptop, sample data: 8.5 kWh for the last 30 days with a plausible range of 1.3 to 30.5 kWh and a daily chart.", 1280, 1060, "The playground, 30 days of sample data. Open the image to read it at full size."),
                  note="Synthetic sample data, not anyone's real usage.")),
-        ("How the estimate works", "<p><b>For the case Hausfather worked out by hand, ccwatts gives 194 kWh with a range of 32 to 678, against his 170.</b> The range is wider on purpose, so a skeptic can't easily push outside it.</p><p>Energy is tokens times an energy cost per token, by model family and token type. Every parameter has a low and a high bound, a source and a date, and the bounds combine into the range you see. "
+        ("How the estimate works", "<p>Energy is tokens times an energy cost per token, by model family and token type. Every parameter has a low and a high bound, a source and a date, and the bounds combine into the range you see. "
          "The least certain assumption is what a cache read costs, which matters because cache reads are usually 90%+ of an agent's tokens. The method uses 10% of fresh input and tests 1% to 25%, and the playground has a \"What if?\" slider for it.</p>"
          "<p>Published figures from Google and Microsoft, and Hausfather's 170 kWh, run as unit tests.</p>"),
         ("Product calls", '<ul class="clean"><li><b>Dev tool first.</b> I started on an enterprise carbon feed, found an established player already publishing a method, and pivoted to the individual developer.</li>'
@@ -443,6 +458,12 @@ ccwatts = product(
         ("Status and what's next", "<p>The CLI and the playground are live. 0.2.0 is finished and waiting on my npm publishing setup. It adds an opt-in view of your own work rhythm and an opt-in bedtime nudge, both counts only and local.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
+    accent="#F0AE4E",
+    feature='<p class="eyebrow">The check</p><h2>Same question as a climate scientist, and the ranges overlap.</h2>'
+            + range_viz([("Hausfather, by hand", 70, 330, 170, "70–330 kWh, about 170", "a"),
+                         ("ccwatts, same case", 32, 678, 194, "32–678 kWh, central 194", "b")], [10, 100, 1000], 10, 1000,
+                        "Eight weeks of heavy Claude Code use, log scale. ccwatts' range is wider on purpose. The token mix is illustrative because Hausfather's exact counts aren't published (METHODOLOGY.md).")
+            + '<p class="go"><a class="btn" href="https://github.com/holroydchase-afk/ccwatts/blob/main/METHODOLOGY.md">Read the methodology</a></p>',
     shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600,
           "Sample data: 8.5 kWh over 30 days, range 1.3 to 30.5."),
 )
