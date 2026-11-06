@@ -422,17 +422,23 @@ role_radar = product(
     [("~190", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
-        ("How it works", '<ul class="clean"><li>A scheduled agent scans company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, and merges duplicates across sources.</li>'
-         "<li>It scores each role 0–100 against criteria I edit in one file (title, remote, comp floor, sectors, culture signals) and gives a one-line reason, so I can check its judgement instead of trusting a number.</li>"
-         "<li>One tracker holds every role, and the pipeline updates itself when an application is confirmed or closed.</li></ul>"),
-        ("Product decisions", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text, so a wrong call is a one-line fix.</li>'
-         "<li><b>Precision, not volume.</b> The goal is fewer, better applications. The measure is how many top-scored roles turn into real conversations.</li>"
-         "<li><b>The human stays in the loop.</b> The radar finds and ranks. Reading the posting and applying stay with me.</li>"
+        ("The problem", "<p>Most of a job search is triage: dozens of boards, repeat postings, and a pull to apply to everything. The scarce thing is my attention, so the tool's job is to say no faster.</p>"),
+        ("What I built", '<ul class="clean"><li><b>A scan on request</b> across company boards (Greenhouse, Ashby, Lever), ZipRecruiter, Himalayas, Climatebase and job-alert emails, with duplicates merged.</li>'
+         "<li><b>A 0-100 fit score</b> for every role with a one-line reason.</li>"
+         "<li><b>One tracker</b> that updates itself when an application is confirmed or closed.</li></ul>"),
+        ("How it works", "<p>Each role is scored against criteria I edit in one plain file: title, remote, pay, sectors and culture signals. The score always shows its reasons, so a wrong call is a one-line fix to the criteria, not a mystery. The agent finds and ranks; reading the posting and applying stay with me.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Explainable over clever.</b> Every score shows its reasons, and the criteria are plain text.</li>'
+         "<li><b>Precision, not volume.</b> The goal is fewer, better applications, measured by how many top-scored roles become real conversations.</li>"
          "<li><b>One tracker, not three.</b> Status lived in three places and drifted, so I retired the old pipeline.</li>"
-         "<li><b>Cost-aware by design.</b> Big boards run three days a week, and the scan stops paging as soon as results stop being new.</li></ul>"),
-        ("Stack", "<p>A single-page app on Claude with its own saved database, an agent that runs a scan on request, and connectors for ZipRecruiter and email.</p>"),
+         "<li><b>Cost-aware.</b> Big boards run three days a week, and a scan stops paging when results stop being new.</li></ul>"),
+        ("Proof", proof_grid([
+            ("Tested", "30+ test files in the public repo."),
+            ("Demo on sample data", "Made-up jobs and companies; screenshots are labeled demo data."),
+            ("Open", "Code on GitHub, with a README case study."),
+        ])),
+        ("Try it", "<p>The demo runs the real app in your browser on made-up jobs. Try anything: it resets when you reload.</p>"),
+        ("Status and what's next", "<p>The radar runs for me every weekday. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
     ],
-    status_note="The demo uses made-up jobs and companies, never real applications. Try anything: the demo resets when you reload.",
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
           "The demo reads 9 sample boards. The real radar watches about 190."),
@@ -488,13 +494,21 @@ energy = product(
     [("Routine", "steps first, scan as the finale"), ("2 scans", "palm pad, or a photo with a live aura"),
      ("On-device", "photos never leave the phone"), ("Grey", "a grown-up switch makes every scan read sleepy")],
     [
-        ("The idea", "<p>Kids tick off their bedtime steps (bath, PJs, teeth, potty, book), then scan. The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). "
-         "A neutral authority makes the call, which takes the argument off the parent.</p>"),
-        ("Two ways to scan", '<ul class="clean"><li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>'
-         "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy, brightest at Rainbow. Grown-ups can save or share it.</li></ul>"),
-        ("Decisions", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps, and it never reads Rainbow once every step is done.</li>'
-         "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run entirely on the phone: a person-segmentation model (MediaPipe) and a GPU shader. No server, no account, no tracking, and the page is locked so it can only talk to its own origin.</li></ul>"),
-        ("Status", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone.</p>"),
+        ("The problem", "<p>Bedtime with my kids had become a nightly negotiation. A parent saying \"it's time\" starts the argument; a neutral machine saying it takes the argument off the parent.</p>"),
+        ("What I built", '<ul class="clean"><li><b>A routine first:</b> kids tick off their steps (bath, PJs, teeth, potty, book), then scan.</li>'
+         "<li><b>Palm scan:</b> press and hold the pad until the ring fills.</li>"
+         "<li><b>Photo scan:</b> take or upload a photo and the child's energy glows off them as an animated aura, softer and slower when sleepy. Grown-ups can save or share it.</li></ul>"),
+        ("How it works", "<p>The reading is a color from Rainbow (far too energetic for sleep) down to Grey (time to recharge). It never reads Rainbow once every step is done, and a grown-up switch makes every scan read sleepy. The photo scan runs entirely on the phone with a person-segmentation model (MediaPipe) and a GPU shader.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Routine first.</b> A scan alone wears off, so it is the reward at the end of real steps.</li>'
+         "<li><b>Privacy before camera.</b> Kids' faces should never go to a cloud model, so the camera waited until the photo scan could run on the phone. No server, no account, no tracking.</li>"
+         "<li><b>An illustrated sample person.</b> Anyone can see the aura without a photo, and no real person's photo is ever published.</li></ul>"),
+        ("Proof", proof_grid([
+            ("On-device", "Photos never leave the phone; the page is locked so it can only talk to its own origin."),
+            ("Tested", "10+ test files, including end-to-end."),
+            ("Documented", "A case study in the repo covers the constraints and decisions."),
+        ])),
+        ("Try it", "<p>Open the app and use the sample person to see the aura, or run the palm scan.</p>"),
+        ("Status and what's next", "<p>Live. It started as a palm-scan prototype my kids tested at bedtime; the photo scan came once it could stay on the phone. Next is a copy pass before I call it done.</p>"),
     ],
     links=[("Try the live app", "/energy-scanner/"), ("View on GitHub", f"{GITHUB}/energy-scanner")],
     shot=("energy-scanner-phone.webp", "Energy Scanner on a phone at 7:42 PM: three of five bedtime steps done (bath, PJs, teeth) and the palm scanner ready.", 546),
