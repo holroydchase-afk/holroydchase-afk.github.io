@@ -315,25 +315,6 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 </div>
 <div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
 
-<section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
-<div class="feature-copy reveal">
-<p class="eyebrow">Featured build · {HEARTH_TAG}</p>
-<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
-<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
-<ul class="ticks">
-<li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
-<li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
-<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
-</ul>
-<div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
-<div class="cta"><a class="btn primary" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
-<p class="credit">{HEARTH_TEAM}</p>
-</div>
-<div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
-    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see the post, by group and by name.", h=563, cls="f-front") \
-    + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
-</div></section>
-
 <section class="band" id="career" aria-labelledby="career-h"><div class="wrap">
 <div class="read reveal"><p class="eyebrow">Career</p><h2 id="career-h">Where I've led</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
@@ -350,8 +331,27 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <p class="links"><a href="resume.html">Read the full resume</a></p></div>
 </div></section>
 
+<section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
+<div class="feature-copy reveal">
+<p class="eyebrow">Built with AI · {HEARTH_TAG}</p>
+<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
+<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
+<ul class="ticks">
+<li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
+<li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
+<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
+</ul>
+<div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
+<div class="cta"><a class="btn" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
+<p class="credit">{HEARTH_TEAM}</p>
+</div>
+<div class="feature-art reveal">""" + phone("assets/home/hearth-grandma.webp", f"{HEARTH} as a grandparent, sample family: bigger text and only the photos shared with her.", h=533, cls="f-back") \
+    + phone("assets/home/hearth-share.webp", f"{HEARTH}'s share screen, sample family: who can see the post, by group and by name.", h=563, cls="f-front") \
+    + phone("assets/home/hearth-groups.webp", f"{HEARTH}'s groups, sample family: Everyone and each side of the family, by name.", h=563, cls="f-side") + """</div>
+</div></section>
+
 <section class="band alt" id="work" aria-labelledby="work-h"><div class="wrap">
-<div class="read reveal"><p class="eyebrow">Built with AI</p><h2 id="work-h">ccwatts</h2>
+<div class="read reveal"><p class="eyebrow">Built with AI · open source</p><h2 id="work-h">ccwatts</h2>
 <p>My open-source release: a sourced range for the electricity AI coding uses. The demo runs on sample data in your browser. How I direct the agents behind it: <a href="studio.html">the studio</a> and the <a href="pm-tools.html">Studio Console</a>.</p></div>
 """ + "".join(
     f'<article class="work-row reveal{" has-art" if h in WORK_SHOTS else ""}"><div class="work-copy">'
@@ -689,7 +689,7 @@ JOBS = [
     ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
         "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
-        "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>. "
+        "Its AI conversation analysis found 40% of one client's reps going off script, and coaching rose from <strong>about 4 sessions a month to about 1 a day</strong>.",
         # The B2B contract-pricing dollar figures stay off until Chase OKs publishing them (case-study doc [check]).
         "A lender rules engine cut onboarding a new lender <strong>from 4 weeks to 1 week</strong>, and I integrated 6+ lenders. "
         "An agentic pipeline read each lender's API documents and, with an engineer in the loop, built, tested and fixed the integration, cutting a new one from <strong>2 engineers for a 2-week sprint to 1–2 days</strong>. "
