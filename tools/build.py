@@ -46,7 +46,7 @@ IN_PROGRESS = [
 HEARTH = "Hearth"
 HEARTH_TAG = "working name · family beta late November"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("90+", "app test files"), ("20+", "database test files"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("734", "app tests, counted Nov 4"), ("1,029", "database checks, counted Nov 4"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with a team of AI agents, tests first.")
 
@@ -392,24 +392,32 @@ family = product(
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
     [
-        ("The problem", "<p>Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
-         "Existing family apps assume one household, not two equal ones, and we don't post our kids publicly.</p>"),
-        ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event like a birthday trip. One person can be in several groups.</li>'
+        ("The problem", "<p>Families with divorces, remarriages and step-relatives don't fit one group chat. Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
+         "Existing family apps assume one household, and we don't post our kids publicly.</p>"),
+        ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event. One person can be in several groups.</li>'
          "<li><b>No social pressure:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
-         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and invites that work from far away.</li>"
-         "<li><b>Privacy underneath:</b> photos are encrypted on the phone before upload, group chat is end-to-end encrypted, a post you can't see behaves as \"not found\", and photo location data is stripped on the phone. "
-         "(For technical readers: AES-256-GCM, MLS per RFC 9420, and Postgres row-level security.)</li></ul>"),
-        ("What it looks like", '<figure class="gallery-wide wide-only"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
+         "<li><b>Built for grandparents:</b> large text and tap targets, words under every icon, and a 6-digit email code instead of a password.</li></ul>"
+         '<figure class="gallery-wide wide-only"><img src="assets/family/laptop-01-demo.webp" width="1200" height="750" loading="lazy" alt="The demo on a laptop: the app beside a short guide"></figure>'
          '<div class="gallery">'
          '<img src="assets/family/iphone-02-share.webp" width="390" height="844" loading="lazy" alt="Share screen: a picked photo, a caption, and the group that will see it">'
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
-        ("How I built it", "<p>I ran it as a team of eight AI agents (staff PM, QA, app engineer, UI/UX for grandparents, a UX reviewer for public work, privacy and security, marketing, and funding), routed by a chief-of-staff session. "
-         "QA writes failing tests first and the engineer makes them pass. There are 90+ app test files and 20+ database test files, and the app's contract runs against a real Postgres API on every change. A co-parent data leak was caught in review before any real user saw it.</p>"
-         "<p>Stack: Expo / React Native, Supabase (Postgres with row-level security), US-hosted storage.</p>"),
-        ("The team", f"<p>{HEARTH_TEAM}</p>"),
-        ("What's next", "<p>A private beta with about a dozen family members, mostly grandparents in West Virginia, targeted for late November.</p>"),
+        ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is end-to-end encrypted with MLS (RFC 9420), "
+         "and access rules live in the database with Postgres row-level security, so a post you can't see behaves as if it doesn't exist.</p>"
+         "<p><b>The limit:</b> today Hearth's server still holds the photo keys. A family vault, where only family phones hold the keys, is planned and not built.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in two households, so it was replaced by plain named groups anyone can be in more than once.</li>'
+         "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
+         "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
+        ("Proof", proof_grid([
+            ("Tested", "734 app tests and 1,029 database checks, counted Nov 4 with a script in the repo (scripts/test-totals.sh)."),
+            ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
+            ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
+            ("Self-reviewed", "No outside security audit yet."),
+        ])),
+        ("Try it", "<p>Open the demo, a made-up family kept only in your browser. Switch to Grandma Jo's view from the demo bar's Details and see only what was shared with her.</p>"),
+        ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is a soft target for late November. {HEARTH_TEAM} "
+         "I built it with a team of nine AI agents, routed by a chief-of-staff session.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
@@ -518,16 +526,27 @@ crew_clock = product(
     "Field app · live demo",
     "Crew Clock",
     "A small rural crew tracked hours on paper and memory, on cheap phones with weak signal, so pay disputes came down to whose story you believed. Crew Clock makes every punch a record both sides can trust.",
-    [("3 taps", "to clock in, even with no signal"), ("Signed", "every punch, checked in the boss's browser"),
-     ("Fair", "the geofence flags a punch, never blocks it"), ("$0", "a month to run")],
+    [("3 taps", "to clock in, even with no signal"), ("Signed", "every punch is signed on the phone"),
+     ("Fair", "the geofence flags a punch, never blocks it"), ("Free tiers", "cover the beta, per the setup doc")],
     [
-        ("Who uses it", '<ul class="clean"><li><b>The crew</b> clocks in with three taps on the phones they already own. With no signal, the punch is saved on the phone and sent later.</li>'
-         "<li><b>The boss</b> checks a map and a Today list: who is on the clock, where, and who isn't in yet. The weekly timesheet comes out in one tap.</li></ul>"),
-        ("Product decisions", '<ul class="clean"><li><b>Offline first.</b> Job sites often have one bar or none, so a punch never waits on the network.</li>'
-         "<li><b>Trust over surveillance.</b> Location is read at the punch, not all day, and each worker agrees to it once in plain words.</li>"
-         "<li><b>Tamper-evident.</b> Each punch is signed on the phone and checked in the boss's browser, so a changed time shows up in red.</li>"
-         "<li><b>No new cost.</b> It runs on free tiers, because a small crew won't pay for another subscription.</li></ul>"),
-        ("Status", "<p>The demo runs the real app on a made-up crew. A two-week beta with a five-person crew is next.</p>"),
+        ("The problem", "<p>My dad runs a small construction crew on rural job sites, often with one bar of signal or none. Hours lived on paper and memory, so a pay dispute came down to whose story you believed. He needed to know who showed up, where and when, without tracking anyone all day.</p>"),
+        ("What I built", '<ul class="clean"><li><b>Three-tap clock-in</b> on the phones the crew already owns, saved on the phone with no signal and sent later.</li>'
+         "<li><b>A boss view:</b> a map and a Today list of who is on the clock, plus a weekly timesheet as a CSV with names, dates, times and hours, no GPS.</li>"
+         "<li><b>Encrypted crew chat</b> (MLS).</li></ul>"),
+        ("How it works", "<p>The phone saves the time and location at the tap. Each phone signs every punch with a key that can't be copied off the phone and chains it to the one before, so a changed time can be caught. "
+         "In the demo the boss's Today list checks every punch in the browser, and a Try tampering button shows a changed one in red.</p>"
+         "<p><b>The limit:</b> that Verified line is demo only today. In the crew app the server checks the signatures, and showing the check on the boss's screen needs the phones' public keys there.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Never block a clock-in.</b> Bad GPS or no signal means a photo or a flag for the boss, never "you can\'t clock in."</li>'
+         "<li><b>A fair geofence.</b> Phone GPS can be off by a lot in the hills, so the app counts that error in the worker's favor.</li>"
+         "<li><b>Location only at the tap, and only with consent.</b> No background tracking, each worker agrees once, and tests check that no other screen reads location.</li></ul>"),
+        ("Proof", proof_grid([
+            ("Tested", "40+ test files, run in CI."),
+            ("Privacy contract", "A written privacy contract in the repo, with consent records that are never edited."),
+            ("Open", "MIT-licensed code on GitHub."),
+            ("Built to be cheap", "The setup doc says every service used has a free tier that covers a beta."),
+        ])),
+        ("Try it", "<p>Open the demo and tap Travis K. to clock in as a worker. Turn on No signal to see the offline queue, then tap Not you? and choose Sam W. to see the boss's view.</p>"),
+        ("Status and what's next", "<p>The demo runs the real app on a made-up crew. The crew's own app is getting ready for a two-week beta with five workers; it has not started.</p>"),
     ],
     status_note="The demo uses a made-up crew and job sites, and it never asks for your real location unless you turn that on. Everything stays in your browser.",
     links=[("Try the live demo", "/crew-clock/"), ("View on GitHub", f"{GITHUB}/crew-clock")],
@@ -541,17 +560,25 @@ charlie = product(
     "Most trading apps start from the trade, so beginners act on hype instead of businesses they understand. "
     "Charlie starts from the person: it maps what you already know to companies, then offers the most conservative way to act on one.",
     [("1–3", "trade ideas a day, one per sector"), ("Paper", "never places a real order"),
-     ("Every trade", "max loss, breakeven and an exit plan"), ("400+", "tests behind the engine")],
+     ("Every trade", "max loss, breakeven and an exit plan"), ("360+", "tests behind the engine")],
     [
-        ("Who it's for", "<p>A new investor who wants to learn options by paper trading companies inside their own circle of competence, "
-         "the businesses their job and life already taught them.</p>"),
-        ("How it works", '<ul class="clean"><li><b>Profile:</b> a resume, interests and brands become ranked sectors, each with the evidence behind it.</li>'
-         "<li><b>Today:</b> 1–3 ideas scored against a Charlie Munger-style checklist, each with the exact trade, chance of profit, max loss in dollars, breakeven, a payoff chart and an exit plan.</li>"
-         "<li><b>Risk slider:</b> it starts conservative (covered calls and cash-secured puts) and widens only when you choose. Uncovered calls and same-day options are never offered.</li></ul>"),
-        ("Product decisions", '<ul class="clean"><li><b>Person before trade.</b> Ideas come only from sectors the profile supports, and each card says why it is in your circle.</li>'
+        ("The problem", "<p>Most trading apps start from the trade, so beginners act on hype instead of businesses they understand. A new investor learning options needs ideas from companies their own job and life already taught them.</p>"),
+        ("What I built", '<ul class="clean"><li><b>Profile:</b> a resume, interests and brands become ranked sectors, each with the evidence behind it.</li>'
+         "<li><b>Today:</b> 1-3 ideas, each with the exact trade, chance of profit, max loss in dollars, breakeven, a payoff chart and an exit plan.</li>"
+         "<li><b>Paper portfolio:</b> one click opens a paper position, marked to current prices, and it is flagged when its exit plan says to act.</li></ul>"),
+        ("How it works", "<p>Companies in your circle of competence are scored against a Charlie Munger-style checklist. The risk slider starts conservative (covered calls and cash-secured puts) and widens only when you choose. Uncovered calls and same-day options are never offered.</p>"
+         "<p><b>The limit:</b> the demo uses a fictional person and simulated prices. The local app can use free live data and falls back to demo data, and its badge says Demo data whenever numbers are simulated.</p>"),
+        ("Product calls", '<ul class="clean"><li><b>Person before trade.</b> Ideas come only from sectors the profile supports, and each card says why it is in your circle.</li>'
          "<li><b>Safety in code, not copy.</b> Position sizing and banned strategies are enforced and tested in the engine, not left to a disclaimer.</li>"
          "<li><b>Paper only.</b> Charlie never places real orders and is not financial advice.</li></ul>"),
-        ("Stack", "<p>One Python engine with 400+ tests. It runs as a local app and, for the demo, entirely in the browser with Pyodide, served from this site with no third-party calls.</p>"),
+        ("Proof", proof_grid([
+            ("Tested", "360+ unit and end-to-end tests, with CI on every change."),
+            ("Demo checked", "A repo check fails the demo build if it needs keys or hosts beyond the Pyodide CDN, or loses its strict content security policy."),
+            ("Local first", "The local app answers only to localhost and refuses writes from other sites."),
+            ("Documented", "Decision records and a research log in the repo."),
+        ])),
+        ("Try it", "<p>Open the demo. It turns a fictional resume into paper trades in your browser, with no sign-up. Reset demo clears it.</p>"),
+        ("Status and what's next", "<p>The demo is live and the engine runs in the browser with Pyodide. The next feature (an earnings check or paper trading through a broker) has not been chosen.</p>"),
     ],
     status_note="The demo turns a fictional resume into paper trades on simulated prices, kept only in your browser: no sign-up, and Reset demo clears it. Not financial advice.",
     links=[("Try the live demo", "/charlie/"), ("Code on GitHub", f"{GITHUB}/charlie")],
