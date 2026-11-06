@@ -250,12 +250,12 @@ JOURNEY = [
      "Every product on this page runs through it.", "Read the story", ""),
 ]
 
-# Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
+# Every number here traces to the career master impact bank (atlas-portfolio facts/career-impacts.md: PAT-01, ADTP-01, X-01). Change them only with the master.
 PROOF = [
     ("8+ years", "in pricing, payments and point-of-sale lending"),
     ("14+", "lender integrations shipped"),
-    ("3–5 pts", "dealer fees cut with lender allocation"),
-    ("$6M", "venture round supported at Palmetto"),
+    ("2 wks → 48 hrs", "to onboard a new client at Patter"),
+    ("60%", "faster contract review at ADT"),
 ]
 
 # Home (WEB-M8, Chase, Oct 30: "Hearth front and center", quality screenshots, immersive). Full-bleed bands, each
