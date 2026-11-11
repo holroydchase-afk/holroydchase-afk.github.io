@@ -3,11 +3,15 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M11.2 Nov 4 shape PR open (Hearth + ccwatts featured, In progress band, gap line)
+now: WEB-M11.5 proof strip swapped (Chase dropped $6M and 3-5 pts for 2 wks to 48 hrs and 60%); PR open
 next: Chase reviews and says merge; then hello@ contact once the alias is confirmed live, move Role Radar and Energy Scanner pages to the template order, then Hearth/Charlie/Crew Clock with their owners' facts
 waiting_on_chase: []
 blockers: []
 -->
+
+## WEB-M11.5 proof strip (Nov 6)
+- Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
+- Next: Chase said merge when green.
 
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
