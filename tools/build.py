@@ -57,8 +57,8 @@ NAV = [
     ("about.html", "About"),
 ]
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700"
-         "&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap")
+FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600"
+         "&display=swap")
 
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
@@ -200,10 +200,10 @@ CAREER = [
      [("See Patter", "https://salespatter.io")]),  # [check] Capterra lists salespatter.io as Patter's site; confirm the URL
     ("ADT", "2020–2023 · PM to Senior PM",
      "First PM for ADT's solar division. I built the credit-check and offer engine (35,000+ applications a month across 5 lenders) "
-     "and the lender allocation that leadership used to cut dealer fees 3–5 points, with releases to 5,000+ reps.",
+     "and a lender allocation platform, with releases to 5,000+ reps.",
      []),  # Links to the ADT case study once WEB-M2.3 clears
     ("Palmetto", "2016–2019 · Engineer to Director",
-     "I was Palmetto's first PM and built Alchemy, its design, point-of-sale and real-time credit platform, and supported a $6M venture round. "
+     "I was Palmetto's first PM and built Alchemy, its design, point-of-sale and real-time credit platform. "
      "Then I launched a machine-learning lead marketplace at 11,500+ consultations a month.",
      [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
 ]
@@ -250,12 +250,12 @@ JOURNEY = [
      "Every product on this page runs through it.", "Read the story", ""),
 ]
 
-# Every number here traces to pmo/story/resume-2026-10.md. Change them only with the resume.
+# Every number here traces to the career master impact bank (atlas-portfolio facts/career-impacts.md: PAT-01, ADTP-01, X-01). Change them only with the master.
 PROOF = [
     ("8+ years", "in pricing, payments and point-of-sale lending"),
     ("14+", "lender integrations shipped"),
-    ("3–5 pts", "dealer fees cut with lender allocation"),
-    ("$6M", "venture round supported at Palmetto"),
+    ("2 wks → 48 hrs", "to onboard a new client at Patter"),
+    ("60%", "faster contract review at ADT"),
 ]
 
 # Home (WEB-M8, Chase, Oct 30: "Hearth front and center", quality screenshots, immersive). Full-bleed bands, each
@@ -714,7 +714,7 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 <li><b>First PM, then Senior PM, then Director of Product, Palmetto (2017–2019).</b> Launched the sales enablement platform, built Alchemy (design, point of sale and project management with real-time credit decisions), and launched a machine-learning lead marketplace supporting 11,500+ consultations a month.</li>
 <li><b>Founder, Bigfoot Energy (2019–2020).</b> A smart-home and clean-energy company in Charleston, WV.</li>
 <li><b>Product Owner, AGDATA (2020).</b> Scoped a master data platform to replace 8+ legacy pricing and rebate systems.</li>
-<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for ADT's solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform that leadership used to cut dealer fees 3–5 points, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to 5,000+ reps.</li>
+<li><b>PM, then Senior PM, ADT (2020–2023).</b> First PM for ADT's solar division. Built the credit-check and offer engine (35,000+ applications a month), a lender allocation platform, a channel-partner pricing platform, and the Lowe's in-store program. Shipped to 5,000+ reps.</li>
 <li><b>Staff PM, Patter AI (2023–2026).</b> A real-time pricing engine across loans, leases and PPAs, rep-guided checkout, AI conversation analysis that found 40% of a client's reps going off-script, a rules engine that cut lender onboarding from 4 weeks to 1 week, and an agentic pipeline that cut new lender integrations from a 2-week sprint to 1–2 days.</li>
 <li><b>Jan 2026 to now: career break for family caregiving, building with AI.</b> I prototype tools that fix problems in my own life (bedtime, the job search, family photos, the energy my AI use takes) and onboard real people to each one. I'm not raising or selling; I'm looking for my next full-time role.</li>
 </ol>
@@ -747,7 +747,7 @@ JOBS = [
         "A rep-guided checkout cut contract review <strong>about 60%</strong>. "
         "A training app for new reps cut training from <strong>6 weeks to 2</strong> and tripled the training team's onboarding capacity without adding trainers.",
         "As senior PM I built the credit-check and offer engine: 5 lenders, <strong>35,000+ applications a month</strong>, and 110% year-over-year sales growth. "
-        "I built the lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others) that leadership used to cut dealer fees <strong>3–5 points</strong>. "
+        "I built the lender allocation platform (GoodLeap, Sunlight, Mosaic, Dividend and others). "
         "I also led a channel-partner platform with redline and tiered pricing for 4+ partners, was technical lead for the Lowe's in-store solar and security program, "
         "and scaled the post-merger platform to 400,000+ consultations a year, with releases to 5,000+ reps' iPads."]),
     ("AGDATA", [("Product Owner", "Jun – Oct 2020")], [
@@ -760,7 +760,6 @@ JOBS = [
         "I started as a solar engineer and designed 2,000+ PV systems. "
         "Virtual surveys replaced 75% of site visits, <strong>saving $80K a year</strong>.",
         "As Palmetto's first PM I digitized its pricing models, then built Alchemy, a design, point-of-sale and project management platform with real-time GoodLeap and Sunlight credit. "
-        "It supported a <strong>$6M venture round</strong>. "
         "As Director of Product I launched a machine-learning lead marketplace on about 300 data points, running <strong>11,500+ consultations a month</strong>."]),
 ]
 
@@ -768,7 +767,7 @@ resume = f"""<div class="read resume">
 <p class="eyebrow">Resume · Charlotte, NC · open to remote roles</p>
 <h1>Chase Holroyd</h1>
 <p class="lede">Staff Product Manager · Pricing, Payments &amp; Point-of-Sale Lending</p>
-<p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 14+ lender integrations; a credit and offer engine at 35,000+ applications a month; lender allocation that cut dealer fees 3–5 points.</p>
+<p>8+ years building point-of-sale financing and pricing products: rep-guided checkout, dealer-fee and redline pricing engines, and real-time loan, lease and PPA payments. 14+ lender integrations; a credit and offer engine at 35,000+ applications a month; lender allocation across GoodLeap, Sunlight, Mosaic and Dividend.</p>
 <p class="contact">Contact: <a href="{LINKEDIN}">linkedin.com/in/chase-holroyd</a> · Site: <a href="index.html">chaseholroyd.com</a></p>
 <h2>Experience</h2>
 """ + "".join(
