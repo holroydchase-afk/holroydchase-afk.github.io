@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M11.5 proof strip swapped (Chase dropped $6M and 3-5 pts for 2 wks to 48 hrs and 60%); PR open
-next: Chase reviews and says merge; then hello@ contact once the alias is confirmed live, move Role Radar and Energy Scanner pages to the template order, then Hearth/Charlie/Crew Clock with their owners' facts
+now: WEB-M12.1 natural palette PR open (sand/sage/clay, white base, flat colour, no gradients)
+next: Chase reviews and says merge; then chop the site down to Shell, Home and About and bring pieces back one PR at a time (WEB-M12.2); then hello@ contact once the alias is confirmed live, move Role Radar and Energy Scanner pages to the template order, then Hearth/Charlie/Crew Clock with their owners' facts
 waiting_on_chase: []
 blockers: []
 -->
@@ -18,6 +18,11 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M12.1 natural palette (Nov 10, PR open)
+- Chase (Nov 10): the dark green base is too heavy, gradients are an AI tell; wants whites and greys with natural clays, sage and sand, light by default and a warm-charcoal dark mode. Done: `assets/site.css` tokens only. Light base #FAF9F6 with white cards, text #2B2620, sage accent #4A6B4C, clay #A24A2A; dark #1E1B18 base, text #EDE6D8, sage #A9C4A6, clay #DE9772. The old dark-green "deep" bands (hero, closing, bridge, divider) are now flat sage tint (#E3E8D9) in light and flat warm charcoal in dark. Every gradient, glow and grid overlay is gone (hero, feature, product hero, product feature). ccwatts no longer sets its own amber accent (`accent=` removed in build.py), so the whole site has one sage accent and one clay highlight. Contrast computed for every text pairing (all 4.5:1 or better; lowest 4.7:1). Font and copy unchanged; `check_site.py` passes.
+- Not run: ux-reviewer and qa-tdd (cloud thread cannot load the studio agent types); verified by building, `check_site.py` and screenshots of Home, ccwatts and Hearth in light and dark (Google Fonts blocked in the sandbox, so shots use fallback fonts).
+- Next (WEB-M12.2, Chase's go given Nov 10): chop the site to Shell, Home (career first) and About, hide the rest rather than delete, then bring pieces back one PR at a time starting with Hearth, then ccwatts. Slow restart after the Nov 6 GitHub suspension: one PR at a time.
 
 ## WEB-M11.2 Nov 4 shape (Nov 6, PR open)
 - Done: hero shows only ccwatts and Hearth; "Built with AI" is now ccwatts, Studio Console and the studio; a labeled "In progress" band holds Role Radar, Charlie, Crew Clock, Energy Scanner and Open Arms, each saying what is left (`IN_PROGRESS` in build.py; `FEATURED_WORK` picks the featured rows). The Open Arms "$30 a month" claim is off the home page until verified. Gap line "Jan 2026 – present" on Resume and About (wording is a draft for Chase: stepped back to care for young children full time, no ages).

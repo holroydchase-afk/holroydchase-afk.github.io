@@ -492,7 +492,6 @@ ccwatts = product(
         ("Status and what's next", "<p>The CLI and the playground are live. 0.2.0 is finished and waiting on my npm publishing setup. It adds an opt-in view of your own work rhythm and an opt-in bedtime nudge, both counts only and local.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
-    accent="#F0AE4E",
     feature='<p class="eyebrow">The check</p><h2>Same question as a climate scientist, and the ranges overlap.</h2>'
             + range_viz([("Hausfather, by hand", 70, 330, 170, "70–330 kWh, about 170", "a"),
                          ("ccwatts, same case", 32, 678, 194, "32–678 kWh, central 194", "b")], [10, 100, 1000], 10, 1000,
