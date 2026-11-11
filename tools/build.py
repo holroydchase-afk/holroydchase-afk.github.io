@@ -57,8 +57,8 @@ NAV = [
     ("about.html", "About"),
 ]
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700"
-         "&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap")
+FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600"
+         "&display=swap")
 
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
