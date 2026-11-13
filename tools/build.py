@@ -57,6 +57,9 @@ NAV = [
     ("about.html", "About"),
 ]
 
+# One-page rebuild (Chase, Nov 11): the home page's nav is anchors only. Other pages keep NAV until they are hidden.
+HOME_NAV = [("#career", "Career"), ("about.html", "About"), ("#contact", "Contact")]
+
 FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600"
          "&display=swap")
 
@@ -81,7 +84,7 @@ HEADSHOT = ('<img class="headshot" src="assets/chase-400.webp" srcset="assets/ch
 def page(slug, title, description, body):
     nav = "".join(
         f'<a href="{href}"{" aria-current=\"page\"" if href == slug else ""}>{label}</a>'
-        for href, label in NAV
+        for href, label in (HOME_NAV if slug == "index.html" else NAV)
     )
     full_title = "Chase Holroyd" if slug == "index.html" else f"{title} · Chase Holroyd"
     return f"""<!doctype html>
@@ -116,7 +119,7 @@ def page(slug, title, description, body):
 <main class="{"home" if slug == "index.html" or "pp-hero" in body else "wrap"}" id="main">
 {body}
 </main>
-<footer class="site"><div class="wrap">
+<footer class="site" id="contact"><div class="wrap">
 <span>© 2026 Chase Holroyd · Staff product manager · Charlotte area</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
@@ -276,7 +279,7 @@ def browser(src, alt, cls="", eager=False):
 
 
 # Career cards lead with one number each; every number traces to pmo/story/resume-2026-10.md.
-CAREER_STAT = {"Patter AI": ("4 wks → 1 wk", "to onboard a new lender"),
+CAREER_STAT = {"Patter AI": ("4 wks → 1 wk", "to onboard a new lender, excluding compliance review"),
                "ADT": ("35,000+", "credit applications a month"),
                "Palmetto": ("11,500+", "consultations a month")}
 
@@ -306,27 +309,108 @@ HERO_GRID = '<ul class="tiles career-tiles">' + "".join(
     f'<span class="big">{CAREER_STAT[c][0]}</span><span>{CAREER_STAT[c][1]}</span></span></a></li>'
     for c, r, *_ in CAREER) + "</ul>"
 
+# Career case studies (Chase, Nov 11: direct experience is the main event). Wording follows the private career impact
+# bank (approved resume forms only). Kept off the site on purpose: "$6M", "3-5 points", Lowe's store count, 3,000 + 5,000 pair.
+# UX review WEB13-R1..R4: problem as a one-line subhead, a sub-result under the big number, one <strong> phrase per row,
+# and the result detail behind a native <details>. Wording is cut, never added.
+# (company, label, problem, sub-result, [(row, html)], result detail, links)
+CASES = [
+    ("Patter AI", "2023–2026 · Staff PM",
+     "Reps quoted financing by hand across separate CRM, e-sign, pricing and design tools, and every new lender was a custom project.",
+     "New lender integrations: a 2-week sprint down to 1–2 days",
+     [("What I owned", "A <strong>real-time pricing engine</strong> across loans, leases and PPAs, a rep-guided checkout that shows the payment impact of each add-on, and a lender rules engine."),
+      ("The call", "After riding along with two clients' sales teams in two cities, I <strong>moved the copilot from manager reporting to coaching the reps directly</strong>.")],
+     "Lender onboarding fell from 4 weeks to 1 week (compliance review excluded). An agentic pipeline cut each new lender integration from 2 engineers for a 2-week sprint to 1–2 days, with an engineer in the loop. The platform identified 40% of a launched client's reps going off-script with homeowners.",
+     [("See Patter", "https://salespatter.io")]),
+    ("ADT", "2020–2023 · PM to Senior PM",
+     "Contracts stuck in review, financing fees eating margin, and reps drawing their own designs.",
+     "Contract review down 60%",
+     [("What I owned", "As the first PM for ADT's solar division, the <strong>credit-check and offer engine</strong> (35,000+ applications a month across 5 lenders), a one-button contract-review wizard and a lender allocation platform, with releases to 5,000+ reps."),
+      ("The call", "I started capturing why reps skipped the paid design. <strong>80% of rep-drawn designs triggered change orders</strong>, compared with 14% of professionally drawn designs.")],
+     "Contract review fell 60%. Leadership used the allocation platform to cut dealer fees. Rep training went from 6 weeks to 2.",
+     []),
+    ("Palmetto", "2016–2019 · Engineer to Director",
+     "Quoting and design were slow and manual, and every site needed a visit.",
+     "75% of on-site surveys replaced, saving $80K a year",
+     [("What I owned", "As Palmetto's first PM I built <strong>Alchemy</strong>, its design, point-of-sale and real-time credit platform, integrating GoodLeap and Sunlight Financial into real-time credit decisions. As Director I launched a machine-learning lead marketplace and led a 25-person external development team in India.")],
+     "The lead marketplace supported 11,500+ consultations a month. As an engineer I had replaced 75% of on-site surveys with virtual surveys, saving $80K a year.",
+     [("Alchemy in the press", "https://techstartups.com/?p=13148"), ("Palmetto today", "https://palmetto.com")]),
+]
+BETWEEN = ("Between Palmetto and ADT", "2019–2020 · Founder, then Product Owner", [
+    ("Bigfoot Energy", "Founded a smart-home and clean-energy company, negotiated 50+ product and service offerings and ran its web, search, social and email marketing."),
+    ("AGDATA", "Ran discovery, scoping and vendor assessment for a master data management platform to consolidate over 8 legacy pricing and rebate systems serving major agriculture manufacturers."),
+])
+
+
+def case_card(c, label, problem, sub, rows, result, links):
+    stat = (f'<p class="stat"><b>{CAREER_STAT[c][0]}</b> {CAREER_STAT[c][1]}</p>' if c in CAREER_STAT else "")
+    dl = '<dl class="case">' + "".join(f"<div><dt>{t}</dt><dd>{x}</dd></div>" for t, x in rows) + "</dl>"
+    ln = ('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else ""
+    return (f'<article class="card career case-study reveal"><span class="tag">{label}</span><h3>{c}</h3>{stat}'
+            f'<p class="sub">{sub}</p><p class="problem">{problem}</p>{dl}'
+            f'<details class="result"><summary>See the full result</summary><p>{result}</p></details>{ln}</article>')
+
+
+def between_card():
+    c, label, rows = BETWEEN
+    dl = '<dl class="case">' + "".join(f"<div><dt>{t}</dt><dd>{x}</dd></div>" for t, x in rows) + "</dl>"
+    return f'<article class="card career case-study case-small reveal"><span class="tag">{label}</span><h3>{c}</h3>{dl}</article>'
+
+
+def _roof_scene():
+    P0, P1, P3 = (80, 230), (420, 230), (140, 130)
+    def pt(u, v):
+        return (P0[0] + u * (P1[0] - P0[0]) + v * (P3[0] - P0[0]), P0[1] + u * (P1[1] - P0[1]) + v * (P3[1] - P0[1]))
+    panels = []
+    cols, rows, i = 5, 2, 0
+    for r in range(rows):
+        for c in range(cols):
+            u0 = 0.07 + c * (0.86 / cols); u1 = u0 + 0.86 / cols - 0.025
+            v0 = 0.12 + r * (0.76 / rows); v1 = v0 + 0.76 / rows - 0.06
+            pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in (pt(u0, v0), pt(u1, v0), pt(u1, v1), pt(u0, v1)))
+            panels.append(f'<polygon class="panel" style="animation-delay:{0.25 + i * 0.09:.2f}s" points="{pts}"/>')
+            i += 1
+    return (
+        '<svg class="roof-scene" viewBox="0 0 560 420" role="img" aria-label="A house with solar panels on the roof and a signed contract in front of it.">'
+        '<circle class="sun" cx="470" cy="76" r="40"/>'
+        '<rect class="ground" x="0" y="380" width="560" height="4"/>'
+        '<rect class="wall" x="100" y="230" width="300" height="150"/>'
+        '<rect class="door" x="130" y="290" width="46" height="90"/>'
+        '<rect class="win" x="214" y="262" width="62" height="52"/><rect class="win" x="304" y="262" width="62" height="52"/>'
+        '<polygon class="roof" points="80,230 420,230 480,130 140,130"/>'
+        + "".join(panels) +
+        '<g class="contract" transform="rotate(4 420 330)"><rect x="338" y="282" width="170" height="104" rx="8"/>'
+        '<rect class="ln" x="356" y="304" width="96" height="6" rx="3"/><rect class="ln" x="356" y="322" width="130" height="6" rx="3"/>'
+        '<rect class="ln" x="356" y="340" width="70" height="6" rx="3"/><circle class="ok" cx="470" cy="362" r="14"/>'
+        '<path class="tick" d="M463 362 l5 5 l9 -10" fill="none"/></g></svg>')
+
+
+ROOF_SCENE = _roof_scene()
+
+ROOF_JOURNEY = [
+    ("Palmetto", "2016–2019", "Designed the roof", "11,500+", "consultations a month"),
+    ("ADT", "2020–2023", "Priced the offer", "35,000+", "credit applications a month"),
+    ("Patter AI", "2023–2026", "Closed it with AI", "4 wks → 1 wk", "to onboard a new lender, excluding compliance review"),
+]
+JOURNEY_HTML = '<ol class="journey">' + "".join(
+    f'<li><a href="#career"><span class="step">{st}</span><b>{co}</b><span class="when">{yr}</span>'
+    f'<span class="big">{n}</span><span>{lab}</span></a></li>' for co, yr, st, n, lab in ROOF_JOURNEY) + "</ol>"
+
 home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <div class="hero-copy">
 <div class="who-line">{HEADSHOT}<p class="eyebrow">Open to remote senior and staff PM roles</p></div>
-<h1>Staff PM for pricing, payments and <span class="nowrap">point-of-sale</span> lending.</h1>
-<p class="lede">8+ years building the pricing, credit and checkout systems that sell and finance home solar, at Palmetto, ADT and Patter AI. I now use AI to take real problems to working products, with the same discipline: clear rules, tests first and privacy by design.</p>
-<div class="cta"><a class="btn primary" href="#hearth">See the work</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a><a class="btn ghost" href="{LINKEDIN}">LinkedIn</a></div>
+<h1>From the roof to the signed contract.</h1>
+<p class="lede">Staff PM in pricing, payments and point-of-sale lending: 8+ years building the systems that finance home solar. Now using AI to ship real products, with clear rules, tests first and privacy by design.</p>
+<div class="cta"><a class="btn primary" href="#career">See my career</a><a class="btn" href="{RESUME_PDF}" download>Download resume (PDF)</a><a class="btn" href="{LINKEDIN}">LinkedIn</a></div>
 </div>
-<div class="hero-art tiles-wrap">{HERO_GRID}</div>
+<div class="hero-art scene-wrap">{ROOF_SCENE}</div>
 </div>
-<div class="wrap"><div class="facts proof">""" + "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in PROOF) + f"""</div></div></section>
+<div class="wrap">{JOURNEY_HTML}</div></section>
 
 <section class="band" id="career" aria-labelledby="career-h"><div class="wrap">
 <div class="read reveal"><p class="eyebrow">Part one · Career</p><h2 id="career-h">Where I've led</h2>
 <p>From first PM to staff, in pricing, payments and point-of-sale lending.</p></div>
-<div class="grid career-grid">""" + "".join(
-    f'<article class="card career reveal"><span class="tag">{r}</span><h3>{c}</h3>'
-    + (f'<p class="stat"><b>{CAREER_STAT[c][0]}</b> {CAREER_STAT[c][1]}</p>' if c in CAREER_STAT else "")
-    + f'<p>{d}</p>'
-    + (('<p class="links">' + " · ".join(f'<a href="{u}">{t}</a>' for t, u in links) + "</p>") if links else "")
-    + "</article>"
-    for c, r, d, links in CAREER
+<div class="grid career-grid case-grid">""" + "".join(case_card(*x) for x in CASES[:2]) + between_card() + "".join(case_card(*x) for x in CASES[2:]
 ) + """</div>
 <div class="bridge reveal"><h3>The through-line</h3>
 <p>Across all three companies the work was the same: decisions that touch money need written rules and a stated reason for every outcome. That is how an offer engine scores a credit application, and it is the discipline I carry into the AI work below.</p>

@@ -42,7 +42,7 @@ p{margin:14px 0 0}
 .eyebrow{font:500 12px var(--f-body);letter-spacing:.02em;color:var(--sun)}
 .lede{font-size:clamp(19px,2.4vw,22px);color:var(--muted);margin-top:18px;max-width:60ch}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-block;padding:11px 18px;border-radius:6px;font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:11px 18px;border-radius:6px;font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;margin-top:24px}
 .card{display:flex;flex-direction:column;gap:10px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
@@ -98,7 +98,7 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   .hero.has-shot .shot{grid-area:shot;margin:0}.hero.has-shot .shot img{width:300px}}
 @media(min-width:900px) and (max-width:1099px){.hero.has-shot>.facts{grid-template-columns:repeat(2,1fr)}}
 /* UX-13: 44px tap targets for the name, nav, footer, back and skip links */
-header.site .mark,nav.top a,footer.site a,.back a{display:inline-flex;align-items:center;min-height:44px}
+header.site .mark,nav.top a,footer.site a,.back a{display:inline-flex;align-items:center;min-height:48px}
 .skip{min-height:44px;display:inline-flex;align-items:center}
 footer.site .wrap{align-items:center}
 .back{margin-top:40px}
@@ -143,7 +143,7 @@ main.home{padding:0}
 .band h2{margin-top:0}
 .band.alt{background:var(--surface);border-block:1px solid var(--line)}
 .hero-band{background:var(--deep);color:var(--deep-ink);padding-block:clamp(40px,7vw,88px) clamp(40px,6vw,64px);overflow:hidden}
-.hero-band .eyebrow{color:var(--sun)}
+.hero-band .eyebrow{color:var(--sun);font:500 17px var(--f-body)}
 .hero-band h1{font-size:clamp(36px,5.6vw,62px);letter-spacing:-.02em;max-width:15ch}
 .hero-band .lede{color:var(--deep-muted);max-width:52ch}
 .hero-band .btn{background:transparent;color:var(--deep-ink);border-color:color-mix(in srgb,var(--deep-ink) 28%,transparent)}
@@ -335,3 +335,52 @@ pre.code::before{content:"";position:absolute;left:14px;top:12px;width:9px;heigh
 .divider h2{font-size:clamp(28px,4vw,40px);color:inherit}
 .divider .eyebrow{color:var(--sun)}
 .divider .lede{color:var(--deep-muted,#B9C9BF);max-width:56ch;margin-top:12px}
+
+/* Career case studies (Nov 11): chip, one-line result, one-line problem, two rows, details for the rest (WEB13-R1..R6). */
+.case-grid{grid-template-columns:1fr;gap:40px}
+.card.case-study{padding:clamp(20px,3vw,32px);gap:12px}
+.card.case-study .sub{color:var(--ink);font:600 17px/1.4 var(--f-body)}
+.card.case-study .problem{color:var(--muted);font-size:17px}
+.case{margin:6px 0 0;display:grid;gap:24px}
+.case>div{display:grid;gap:4px;max-width:68ch}
+.case dt{font:500 17px var(--f-body);color:var(--accent)}
+.case dd{margin:0;color:var(--ink);font-size:17px;line-height:1.55}
+.case strong,.card .result strong{font-weight:600}
+.result{margin-top:4px;border-left:3px solid var(--sun);padding-left:14px}
+.result summary{min-height:48px;display:flex;align-items:center;cursor:pointer;font:500 17px var(--f-body);color:var(--accent)}
+.result summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card .result p{color:var(--ink);font-size:17px;max-width:68ch;margin:0 0 12px}
+.case-small{padding:20px 24px}
+@media(min-width:760px){.case>div{grid-template-columns:150px minmax(0,1fr);gap:20px;max-width:none}.case dt{padding-top:0}.case-small dd{max-width:68ch}}
+
+/* Hook (Nov 11, Chase: memorable, beautiful, delight): a flat roof scene and a roof-to-contract journey. Flat colour only. */
+.hero-art.scene-wrap{height:auto;max-width:560px}
+.hero-band h1{max-width:12ch}
+.roof-scene{width:100%;height:auto;display:block}
+.roof-scene .sun{fill:var(--sun)}
+.roof-scene .ground{fill:var(--line)}
+.roof-scene .wall{fill:var(--surface);stroke:var(--line);stroke-width:2}
+.roof-scene .door{fill:var(--accent)}
+.roof-scene .win{fill:var(--sun-soft);stroke:var(--line);stroke-width:2}
+.roof-scene .roof{fill:var(--tag-ink)}
+.roof-scene .panel{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.roof-scene .contract rect:first-child{fill:var(--surface);stroke:var(--accent);stroke-width:2.5}
+.roof-scene .ln{fill:var(--line)}
+.roof-scene .ok{fill:var(--accent)}
+.roof-scene .tick{stroke:var(--accent-ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+@media(prefers-reduced-motion:no-preference){
+  .roof-scene .panel{opacity:0;animation:pin .5s ease-out forwards}
+  .roof-scene .contract{opacity:0;animation:pin .6s ease-out 1.4s forwards}
+  @keyframes pin{from{opacity:0}to{opacity:1}}
+}
+.journey{list-style:none;margin:clamp(36px,5vw,56px) 0 0;padding:20px 0 0;display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr));counter-reset:j;position:relative}
+.journey::before{content:"";position:absolute;left:12%;right:12%;top:0;border-top:2px dashed var(--accent)}
+.journey li{position:relative}
+.journey li::before{content:"";position:absolute;left:50%;top:-27px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--sun);border:3px solid var(--deep)}
+.journey a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;height:100%}
+.journey a:hover{border-color:var(--accent)}
+.journey .step{font:500 17px var(--f-body);color:var(--sun)}
+.journey b{font:600 19px var(--f-display)}
+.journey .when{font-size:14.5px;color:var(--muted)}
+.journey .big{font:600 28px/1.15 var(--f-display);color:var(--accent);margin-top:6px;font-variant-numeric:tabular-nums}
+@media(max-width:760px){.journey{grid-template-columns:1fr;padding:0 0 0 22px}.journey::before{left:7px;right:auto;top:8px;bottom:8px;border-top:0;border-left:2px dashed var(--accent)}.journey li::before{left:-22px;top:20px;margin-left:0}}
