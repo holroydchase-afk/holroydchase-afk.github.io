@@ -95,8 +95,8 @@ def check_deploy_allowlist(failures):
     shipped = cp.group(1).split() if cp else []
     for page in pages():
         for href in re.findall(r'(?:href|src)="([^"#?]+)', page.read_text()):
-            if href.startswith(("/", "..")) or re.match(r"[a-z]+:", href):
-                continue
+            if href.startswith(("/", "..", "'")) or re.match(r"[a-z]+:", href):
+                continue  # a leading ' is a link built in page script, not a file
             top = href.split("/")[0]
             if top.endswith(".html") and "*.html" in shipped:
                 continue
@@ -140,12 +140,12 @@ def _text(html):
 
 
 def check_home(failures):
-    """Home page v30 (Chase, Nov 13): photo, one headline, one green CTA, three career cards, Now bar."""
+    """Home page v41 (Chase, Nov 14): photo, one headline, products right after the hero, three career cards, Now bar."""
     html = (ROOT / "index.html").read_text()
-    # HOME-1 Sections in order: hero, career, side projects, about, contact.
-    order = [html.find(f'id="{sid}"') for sid in ("hero", "career", "ai", "about", "contact")]
+    # HOME-1 Sections in order: hero, products (ai), career, about, contact.
+    order = [html.find(f'id="{sid}"') for sid in ("hero", "ai", "career", "about", "contact")]
     if -1 in order or order != sorted(order):
-        failures.append("index.html: sections must run hero, career, ai, about, contact (HOME-1)")
+        failures.append("index.html: sections must run hero, ai, career, about, contact (HOME-1)")
     # HOME-2 Hero holds the three career cards and the Now bar.
     hero = _section(html, "hero") or ""
     for co in ("Palmetto", "ADT Solar", "Patter"):
@@ -153,9 +153,9 @@ def check_home(failures):
             failures.append(f"index.html: hero is missing the {co} card (HOME-2)")
     if 'class="nowb"' not in hero:
         failures.append("index.html: hero is missing the Now bar (HOME-2)")
-    # HOME-3 Exactly one primary (green) button in the hero: Say hello.
-    if len(re.findall(r'class="btn p"', hero)) != 1:
-        failures.append("index.html: the hero needs exactly one primary button (HOME-3)")
+    # HOME-3 At most one primary button in the hero (v41 has none: green marks impact numbers only).
+    if len(re.findall(r'class="btn p"', hero)) > 1:
+        failures.append("index.html: the hero has more than one primary button (HOME-3)")
     # HOME-4 The single h1 is at most 14 words (REC-R13).
     h1s = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.S)
     if len(h1s) == 1:

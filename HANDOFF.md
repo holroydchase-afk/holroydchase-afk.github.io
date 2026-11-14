@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.1 new home page (preview v30) PR open; Chase said "build it and publish" (Nov 13)
-next: merge once Chase confirms hello@chaseholroyd.com receives mail; then bring the other pages (About, product pages) into the v30 look one PR at a time
+now: WEB-M13.1 new home page (preview v41) PR open; Chase approved v41 "we can refine later" (Nov 14)
+next: Chase sends a test email to hello@chaseholroyd.com and says merge; then bring the other pages (About, product pages) into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
@@ -13,7 +13,12 @@ blockers: []
 - Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
 - Next: Chase said merge when green.
 
-## WEB-M13.1 home page v30 (Nov 13, PR open)
+## WEB-M13.1 home page v41 (Nov 14, PR open)
+- Chase (Nov 14): "41 good we can refine later." `index.html` now holds preview v41 instead of v30. Changes from v30: no "Say hello" button (mail, LinkedIn and GitHub icons; the mail icon copies hello@chaseholroyd.com with a toast), products (Hearth, ccwatts) sit right after the hero and before Career, slimmer product cards (problem headline, one-line value, green impact number with its basis, 3 chips, Demo, Case study and Code), green marks impact numbers only, fun About tiles. The Hearth demo link is /Hearth/ (capital H). The head (noindex, canonical, share card) is unchanged.
+- check_site.py: HOME-1 order is now hero, ai, career, about, contact; HOME-3 allows at most one primary hero button (v41 has none); the deploy-allowlist check skips links built in page script. All checks pass; Playwright at 390 and 1366: no horizontal scroll, case-study dialog opens, no console errors.
+- Not run: ux-reviewer and qa-tdd on v41 (cloud thread). Bigfoot dates stay off, indexing stays off.
+
+## WEB-M13.1 home page v30 (Nov 13, history)
 - Chase (Nov 13): "Go with that version... Build it and publish." The home page is now preview v30, hand-built (`index.html`); `tools/build.py` no longer writes it (home() kept, not deleted). Hero: 128px round photo, "Hey there, I'm Chase.", h1 "I turn slow, manual work into software your team actually uses.", one green Say hello (mailto hello@) plus LinkedIn and GitHub icons, three career cards (Palmetto, ADT Solar, Patter) that open case-study dialogs, a Now bar (Hearth, ccwatts). Then every role as tiles, side projects, About, Contact. Name always top left, photo docks on scroll, one sun/moon button (OS default, remembers choice). Emerald accent, Atkinson 400/500, white base, no nav line. Fits on load at 1366x768.
 - Facts checked against the career master (atlas-portfolio facts/): Palmetto proposal "about an hour to minutes" (PALP-01, qualitative), 75% surveys, ADT 35,000+ a month (ADTS-01) and training 6 to 2 weeks (ADTP-04), Patter 2 weeks to 48 hours (PAT-01). Bigfoot dates still [CONFIRM] (Oct vs Jul 2019).
 - check_site.py: HOME-1..6 rewritten for the new page; hello@chaseholroyd.com is the one allowed address. New asset `assets/chase-hero.jpg` (same headshot). The hero-bg canvas was hidden in the preview and is not shipped.
