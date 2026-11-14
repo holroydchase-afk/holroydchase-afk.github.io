@@ -17,6 +17,8 @@ NOT_INDEXED = {"404.html"}
 OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/")
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
+# The one public address (Chase, Nov 4 and Nov 13): it may appear on pages; no others.
+ALLOWED_EMAILS = {"hello@chaseholroyd.com"}
 PHONE = re.compile(r"(?<![\d.])\(?\d{3}\)?[ .-]\d{3}[ .-]\d{4}(?!\d)")
 
 
@@ -81,7 +83,7 @@ def check_no_contact_details(failures):
         text = f.read_text()
         for m in EMAIL.findall(text):
             # Image and font filenames like name@2x.png aren't addresses.
-            if not re.search(r"\.(png|webp|jpg|svg|woff2?)$", m):
+            if m not in ALLOWED_EMAILS and not re.search(r"\.(png|webp|jpg|svg|woff2?)$", m):
                 failures.append(f"{f.name}: email address on a public page: {m}")
         for m in PHONE.findall(text):
             failures.append(f"{f.name}: phone number on a public page: {m}")
@@ -93,8 +95,8 @@ def check_deploy_allowlist(failures):
     shipped = cp.group(1).split() if cp else []
     for page in pages():
         for href in re.findall(r'(?:href|src)="([^"#?]+)', page.read_text()):
-            if href.startswith(("/", "..")) or re.match(r"[a-z]+:", href):
-                continue
+            if href.startswith(("/", "..", "'")) or re.match(r"[a-z]+:", href):
+                continue  # a leading ' is a link built in page script, not a file
             top = href.split("/")[0]
             if top.endswith(".html") and "*.html" in shipped:
                 continue
@@ -138,56 +140,36 @@ def _text(html):
 
 
 def check_home(failures):
-    """Acceptance criteria for the homepage: Hearth front and center, real
-    product imagery, a short h1, a resume PDF, one product name."""
+    """Home page v41 (Chase, Nov 14): photo, one headline, products right after the hero, three career cards, Now bar."""
     html = (ROOT / "index.html").read_text()
-
-    # HOME-1 Order (Chase, Nov 6): career first, then the featured builds (Hearth, ccwatts), then In progress.
-    order = ("career", "hearth", "work", "in-progress")
-    pos = [html.find(f'id="{sid}"') for sid in order]
-    for sid, at in zip(order, pos):
-        if at < 0:
-            failures.append(f'index.html: no section with id="{sid}" (HOME-1)')
-    found = [at for at in pos if at >= 0]
-    if found != sorted(found):
-        failures.append("index.html: sections must run career, hearth, work, in-progress (HOME-1)")
-
-    # HOME-2 The Hearth section links to its case study and its demo.
-    hearth = _section(html, "hearth") or ""
-    hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', hearth)
-    for want in ("family-photos.html", "/Hearth/"):
-        if want not in hrefs:
-            failures.append(f"index.html: Hearth section doesn't link to {want} (HOME-2)")
-
-    # HOME-3 At least 4 product images, all on disk.
-    shots = [s for s in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html)
-             if s.startswith(("assets/home/", "assets/shots/"))]
-    if len(shots) < 4:
-        failures.append(f"index.html: {len(shots)} product images from assets/home/ or assets/shots/, needs at least 4 (HOME-3)")
-    for s in shots:
-        if not (ROOT / s).exists():
-            failures.append(f"index.html: image {s} doesn't exist (HOME-3)")
-
+    # HOME-1 Sections in order: hero, products (ai), career, about, contact.
+    order = [html.find(f'id="{sid}"') for sid in ("hero", "ai", "career", "about", "contact")]
+    if -1 in order or order != sorted(order):
+        failures.append("index.html: sections must run hero, ai, career, about, contact (HOME-1)")
+    # HOME-2 Hero holds the three career cards and the Now bar.
+    hero = _section(html, "hero") or ""
+    for co in ("Palmetto", "ADT Solar", "Patter"):
+        if co not in hero:
+            failures.append(f"index.html: hero is missing the {co} card (HOME-2)")
+    if 'class="nowb"' not in hero:
+        failures.append("index.html: hero is missing the Now bar (HOME-2)")
+    # HOME-3 At most one primary button in the hero (v41 has none: green marks impact numbers only).
+    if len(re.findall(r'class="btn p"', hero)) > 1:
+        failures.append("index.html: the hero has more than one primary button (HOME-3)")
     # HOME-4 The single h1 is at most 14 words (REC-R13).
-    h1s = re.findall(r"<h1\b[^>]*>(.*?)</h1>", html, flags=re.S)
+    h1s = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.S)
     if len(h1s) == 1:
         words = len(_text(h1s[0]).split())
         if words > 14:
             failures.append(f"index.html: h1 is {words} words, keep it to 14 or fewer (HOME-4, REC-R13)")
-    else:
-        failures.append(f"index.html: needs exactly one <h1>, found {len(h1s)} (HOME-4)")
-
-    # HOME-5 A resume PDF link that resolves.
-    pdf = "assets/chase-holroyd-resume.pdf"
-    if not re.search(rf'<a\b[^>]*\bhref="{re.escape(pdf)}"', html):
-        failures.append(f"index.html: no link to {pdf} (HOME-5)")
-    if not (ROOT / pdf).exists():
-        failures.append(f"index.html: {pdf} doesn't exist (HOME-5)")
-
-    # HOME-6 One product name: no "name coming" once Hearth is named (REC-R2).
-    text = _text(html)
-    if "Hearth" in text and "name coming" in text.lower():
-        failures.append('index.html: says "Hearth" and "name coming"; use one product name (HOME-6, REC-R2)')
+    # HOME-5 No banned claims (Chase, Nov 6).
+    for bad in ("$6M", "3–5 points", "3-5 points"):
+        if bad in html:
+            failures.append(f"index.html: remove {bad!r} (HOME-5)")
+    # HOME-6 Every image on disk.
+    for src in re.findall(r'<img[^>]*src="([^"]+)"', html):
+        if not src.startswith(("http", "data:")) and not (ROOT / src).exists():
+            failures.append(f"index.html: image {src} doesn't exist (HOME-6)")
 
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
