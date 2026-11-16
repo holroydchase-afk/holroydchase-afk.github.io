@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>In progress · Chase Holroyd</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="What Chase Holroyd is building with Claude Code: the products in progress, each with the problem it solves.">
+<link rel="canonical" href="https://chaseholroyd.com/building.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF9F6;--surface:#fff;--ink:#2B2620;--muted:#6A6155;--line:#DDD8CC;--cta:#0B7A4B;--f:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1E1B18;--surface:#27231F;--ink:#EDE6D8;--muted:#A79F8F;--line:#443E37;--cta:#3DDC97}}
+:root[data-theme=dark]{--bg:#1E1B18;--surface:#27231F;--ink:#EDE6D8;--muted:#A79F8F;--line:#443E37;--cta:#3DDC97}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.55 var(--f)}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;min-height:64px}
+a{color:var(--ink)}a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.tl{display:inline-flex;align-items:center;min-height:48px;font-weight:500;font-size:18px;text-underline-offset:5px;text-decoration-thickness:1.5px}
+.tl:hover{text-decoration-thickness:3px}.tl.g{color:var(--cta)}
+.top{padding:clamp(36px,6vw,72px) 0 clamp(20px,3vw,32px)}
+.ey{margin:0;color:var(--muted);font-size:17px;display:flex;align-items:center;gap:8px}
+.sd{display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid var(--cta);background:linear-gradient(90deg,var(--cta) 50%,transparent 50%)}
+h1{font:400 clamp(34px,5vw,54px)/1.08 var(--f);letter-spacing:-.03em;margin:8px 0 0;max-width:18ch;text-wrap:balance}
+.lede{margin:14px 0 0;color:var(--muted);font-size:19px;max-width:56ch}
+.jump{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0}
+.jump a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface);text-decoration:none;font-size:17px;color:var(--muted)}
+.jump a:hover{color:var(--ink);border-color:var(--cta)}
+.it{display:grid;gap:24px clamp(28px,5vw,64px);padding:clamp(32px,5vw,60px) 0;border-top:1px solid var(--line);align-items:center;scroll-margin-top:80px}
+@media(min-width:860px){.it{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.it:nth-of-type(even) figure{order:2}.it.solo{grid-template-columns:minmax(0,1fr)}}
+.it h2{font:500 clamp(26px,3.2vw,36px)/1.15 var(--f);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.it p{margin:14px 0 0;font-size:19px;line-height:1.5;max-width:56ch}
+.it .left{color:var(--muted);font-size:17px}
+.it .pl{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:10px}
+figure{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);justify-self:center;width:100%}
+figure.ph{max-width:300px}
+figure img{display:block;width:100%;height:auto}
+figcaption{padding:10px 14px;color:var(--muted);font-size:17px;border-top:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:17px}
+</style></head><body>
+<header><div class="w"><a class="tl" href="index.html">&larr; Chase Holroyd</a><a class="tl" href="index.html#contact">Contact</a></div></header>
+<main class="w">
+<div class="top"><p class="ey"><span class="sd" aria-hidden="true"></span>Building</p><h1>What I&rsquo;m building with Claude Code</h1>
+<p class="lede">Six products in progress. I scope the work, write the rules and approve every merge.</p>
+<ul class="jump"><li><a href="#crew">Time clock</a></li><li><a href="#agents">Agent team</a></li><li><a href="#console">Studio console</a></li><li><a href="#stocks">Stock ideas</a></li><li><a href="#bedtime">Bedtime scan</a></li><li><a href="#roles">Job radar</a></li></ul></div>
+
+<section class="it" id="crew"><figure class="ph"><img src="assets/building/crew-clock.jpg" alt="Phone screen of the time clock demo: pick a crew member, then clock in." width="585" height="1050" loading="lazy"><figcaption>Demo, made-up crew</figcaption></figure>
+<div><h2>A crew on a rural job site has no signal and no time clock.</h2>
+<p>A GPS time clock for a small construction crew. Clocking in takes three taps and works with no signal. It checks location only at the tap and never follows the worker. The boss sees who is at which job on a map.</p>
+<div class="pl"><a class="tl g" href="https://chaseholroyd.com/crew-clock/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/crew-clock">Code</a></div></div></section>
+
+<section class="it solo" id="agents"><div><h2>One builder can&rsquo;t also be the tester, the reviewer and the privacy check.</h2>
+<p>A shared team of Claude Code agents that every one of my projects installs: a staff PM that scopes the work, a tester that writes the failing test first, an engineer, a UX reviewer, and a privacy and security reviewer. A check on each pull request fails if an agent is named but did not really run.</p>
+<div class="pl"><a class="tl" href="https://github.com/holroydchase-afk/studio-agents">Code</a></div></div></section>
+
+<section class="it" id="console"><figure><img src="assets/building/pm-tools.jpg" alt="Console screen listing each product with its stage, current work and next step." width="1800" height="1140" loading="lazy"><figcaption>Demo, read from the repos</figcaption></figure>
+<div><h2>Several products at once, and no one place to see them.</h2>
+<p>One console for everything I&rsquo;m building: each product&rsquo;s stage, what is happening now, what comes next, and the agent roster. It reads each repo&rsquo;s handoff notes, so nobody types a status update.</p>
+<div class="pl"><a class="tl g" href="https://chaseholroyd.com/pm-tools/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/pm-tools">Code</a></div></div></section>
+
+<section class="it" id="stocks"><figure><img src="assets/building/charlie.jpg" alt="Screen showing a practice trade idea with its score, chance of profit, most you could make and most you could lose." width="1800" height="1140" loading="lazy"><figcaption>Demo, fictional sample person</figcaption></figure>
+<div><h2>Most stock ideas ignore what you already know.</h2>
+<p>It reads a resume, finds the industries the person knows, scores companies with a Charlie Munger style checklist, and suggests one to three practice trades a day. Every trade shows the most you could lose. It never places a real order.</p>
+<div class="pl"><a class="tl g" href="https://chaseholroyd.com/charlie/">Demo &rarr;</a></div></div></section>
+
+<section class="it" id="bedtime"><figure class="ph"><img src="assets/building/energy-scanner.jpg" alt="Phone screen of the bedtime helper: five steps to tap, then a scan." width="585" height="1050" loading="lazy"><figcaption>Demo</figcaption></figure>
+<div><h2>Bedtime needed something the kids look forward to.</h2>
+<p>A bedtime helper for my two kids: finish the five steps, then get a scan. The photo scan draws an aura around a person with AI that runs on the device, so nothing is uploaded.</p>
+<div class="pl"><a class="tl g" href="https://chaseholroyd.com/energy-scanner/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/energy-scanner">Code</a></div></div></section>
+
+<section class="it" id="roles"><figure><img src="assets/building/role-radar.jpg" alt="Screen listing new roles, each with a score from 0 to 100." width="1800" height="1140" loading="lazy"><figcaption>Demo, made-up companies</figcaption></figure>
+<div><h2>The few roles worth applying to are spread across many job boards.</h2>
+<p>A radar I built for my own search. It reads job boards every weekday and scores each role from 0 to 100 against criteria I edit, with the reasons on every card. Applying stays my call.</p>
+<div class="pl"><a class="tl g" href="https://chaseholroyd.com/role-radar/">Demo &rarr;</a></div></div></section>
+</main>
+<footer><div class="w"><a class="tl" href="index.html">&larr; Back to the home page</a></div></footer>
+</body></html>

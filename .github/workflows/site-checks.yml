@@ -29,7 +29,7 @@ jobs:
           bad = []
           for page in pathlib.Path(".").glob("*.html"):
               for href in re.findall(r'(?:href|src)="([^"#?]+)', page.read_text()):
-                  if href.startswith(("http", "mailto:", "/")):
+                  if href.startswith(("http", "mailto:", "/", "'")):  # a leading ' is a link built in page script
                       continue
                   target = page.parent / href
                   if href.endswith("/"):

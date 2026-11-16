@@ -140,35 +140,38 @@ def _text(html):
 
 
 def check_home(failures):
-    """Home page v41 (Chase, Nov 14): photo, one headline, products right after the hero, three career cards, Now bar."""
+    """Home page v60 (Chase, Nov 16): photo, greeting, one headline, two journey lines, case studies, building, career."""
     html = (ROOT / "index.html").read_text()
-    # HOME-1 Sections in order: hero, products (ai), career, about, contact.
-    order = [html.find(f'id="{sid}"') for sid in ("hero", "ai", "career", "about", "contact")]
+    # HOME-1 Sections in order: hero, impact (journey lines), cases, ai (building), career, about, contact.
+    order = [html.find(f'id="{sid}"') for sid in ("hero", "impact", "cases", "ai", "career", "about", "contact")]
     if -1 in order or order != sorted(order):
-        failures.append("index.html: sections must run hero, ai, career, about, contact (HOME-1)")
-    # HOME-2 Hero holds the three career cards and the Now bar.
+        failures.append("index.html: sections must run hero, impact, cases, ai, career, about, contact (HOME-1)")
+    # HOME-2 The journey lines link down to the case studies and the building section.
+    impact = _section(html, "impact") or ""
+    for target in ('href="#cases"', 'href="#ai"'):
+        if target not in impact:
+            failures.append(f"index.html: the journey lines must link to {target} (HOME-2)")
+    # HOME-3 At most one primary button in the hero (v60 has none: green marks links and results only).
     hero = _section(html, "hero") or ""
-    for co in ("Palmetto", "ADT Solar", "Patter"):
-        if co not in hero:
-            failures.append(f"index.html: hero is missing the {co} card (HOME-2)")
-    if 'class="nowb"' not in hero:
-        failures.append("index.html: hero is missing the Now bar (HOME-2)")
-    # HOME-3 At most one primary button in the hero (v41 has none: green marks impact numbers only).
     if len(re.findall(r'class="btn p"', hero)) > 1:
         failures.append("index.html: the hero has more than one primary button (HOME-3)")
-    # HOME-4 The single h1 is at most 14 words (REC-R13).
+    # HOME-4 The single h1 is at most 25 words (Chase wants the staff PM title and the AI/ML claim in it).
     h1s = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.S)
     if len(h1s) == 1:
         words = len(_text(h1s[0]).split())
-        if words > 14:
-            failures.append(f"index.html: h1 is {words} words, keep it to 14 or fewer (HOME-4, REC-R13)")
+        if words > 25:
+            failures.append(f"index.html: h1 is {words} words, keep it to 25 or fewer (HOME-4)")
+    else:
+        failures.append("index.html: expected exactly one h1 (HOME-4)")
     # HOME-5 No banned claims (Chase, Nov 6).
     for bad in ("$6M", "3–5 points", "3-5 points"):
         if bad in html:
             failures.append(f"index.html: remove {bad!r} (HOME-5)")
-    # HOME-6 Every image on disk.
+    # HOME-6 Every image on disk, and no inlined photos.
     for src in re.findall(r'<img[^>]*src="([^"]+)"', html):
-        if not src.startswith(("http", "data:")) and not (ROOT / src).exists():
+        if src.startswith("data:"):
+            failures.append("index.html: photos must be files in assets/, not inlined (HOME-6)")
+        elif not src.startswith("http") and not (ROOT / src).exists():
             failures.append(f"index.html: image {src} doesn't exist (HOME-6)")
 
 
