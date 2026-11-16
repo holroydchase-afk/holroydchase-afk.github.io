@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M12.1 natural palette PR open (sand/sage/clay, white base, flat colour, no gradients)
-next: Chase reviews and says merge; then chop the site down to Shell, Home and About and bring pieces back one PR at a time (WEB-M12.2); then hello@ contact once the alias is confirmed live, move Role Radar and Energy Scanner pages to the template order, then Hearth/Charlie/Crew Clock with their owners' facts
+now: WEB-M13.1 new home page (preview v41) PR open; Chase approved v41 "we can refine later" (Nov 14)
+next: Chase sends a test email to hello@chaseholroyd.com and says merge; then bring the other pages (About, product pages) into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
@@ -13,11 +13,28 @@ blockers: []
 - Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
 - Next: Chase said merge when green.
 
+## WEB-M13.1 home page v41 (Nov 14, PR open)
+- Chase (Nov 14): "41 good we can refine later." `index.html` now holds preview v41 instead of v30. Changes from v30: no "Say hello" button (mail, LinkedIn and GitHub icons; the mail icon copies hello@chaseholroyd.com with a toast), products (Hearth, ccwatts) sit right after the hero and before Career, slimmer product cards (problem headline, one-line value, green impact number with its basis, 3 chips, Demo, Case study and Code), green marks impact numbers only, fun About tiles. The Hearth demo link is /Hearth/ (capital H). The head (noindex, canonical, share card) is unchanged.
+- check_site.py: HOME-1 order is now hero, ai, career, about, contact; HOME-3 allows at most one primary hero button (v41 has none); the deploy-allowlist check skips links built in page script. All checks pass; Playwright at 390 and 1366: no horizontal scroll, case-study dialog opens, no console errors.
+- Not run: ux-reviewer and qa-tdd on v41 (cloud thread). Bigfoot dates stay off, indexing stays off.
+
+## WEB-M13.1 home page v30 (Nov 13, history)
+- Chase (Nov 13): "Go with that version... Build it and publish." The home page is now preview v30, hand-built (`index.html`); `tools/build.py` no longer writes it (home() kept, not deleted). Hero: 128px round photo, "Hey there, I'm Chase.", h1 "I turn slow, manual work into software your team actually uses.", one green Say hello (mailto hello@) plus LinkedIn and GitHub icons, three career cards (Palmetto, ADT Solar, Patter) that open case-study dialogs, a Now bar (Hearth, ccwatts). Then every role as tiles, side projects, About, Contact. Name always top left, photo docks on scroll, one sun/moon button (OS default, remembers choice). Emerald accent, Atkinson 400/500, white base, no nav line. Fits on load at 1366x768.
+- Facts checked against the career master (atlas-portfolio facts/): Palmetto proposal "about an hour to minutes" (PALP-01, qualitative), 75% surveys, ADT 35,000+ a month (ADTS-01) and training 6 to 2 weeks (ADTP-04), Patter 2 weeks to 48 hours (PAT-01). Bigfoot dates still [CONFIRM] (Oct vs Jul 2019).
+- check_site.py: HOME-1..6 rewritten for the new page; hello@chaseholroyd.com is the one allowed address. New asset `assets/chase-hero.jpg` (same headshot). The hero-bg canvas was hidden in the preview and is not shipped.
+- Agents: ux-reviewer designed and reviewed v24 to v30 (no open P0/P1); qa-tdd not run (cloud thread).
+- Blocker before merge: confirm the Porkbun forward for hello@chaseholroyd.com delivers mail.
+
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.2 home v60 (Nov 16, PR into PR 65's branch)
+- Chase (Nov 16): "push the latest version with the I've led AI and ML headline". Done: `index.html` is preview v60 (photo, "Hey there, I'm Chase.", headline "I'm a staff product manager who has led AI and ML work at startups and large companies, building agents that automate manual work.", two journey lines that scroll to the case studies and to what's being built, Built/Building product board with no product names on the cards, name fades in with the photo on scroll, light mode by default). New `building.html` (in-progress products, demo pictures in `assets/building/`, sitemap entry). Photos are files (`assets/chase-hero.jpg`, `assets/chase-400.webp`), not inlined. `check_site.py` HOME rules rewritten for the v60 order (hero, impact, cases, ai, career, about, contact; h1 up to 25 words). Hearth demo link is lowercase /hearth/ (capital /Hearth/ 404s).
+- Not run: ux-reviewer and qa-tdd (cloud thread). Verified by build, `check_site.py` and Playwright screenshots at 1280 and 390 wide, light mode.
+- Next: this PR merges into PR 65's branch; PR 65 merges to main only on Chase's go after the hello@ email test (a merge to main deploys the live site). Portfolio / public presence: dated line owed to Hearth and ccwatts HANDOFFs once live.
 
 ## WEB-M12.1 natural palette (Nov 10, PR open)
 - Chase (Nov 10): the dark green base is too heavy, gradients are an AI tell; wants whites and greys with natural clays, sage and sand, light by default and a warm-charcoal dark mode. Done: `assets/site.css` tokens only. Light base #FAF9F6 with white cards, text #2B2620, sage accent #4A6B4C, clay #A24A2A; dark #1E1B18 base, text #EDE6D8, sage #A9C4A6, clay #DE9772. The old dark-green "deep" bands (hero, closing, bridge, divider) are now flat sage tint (#E3E8D9) in light and flat warm charcoal in dark. Every gradient, glow and grid overlay is gone (hero, feature, product hero, product feature). ccwatts no longer sets its own amber accent (`accent=` removed in build.py), so the whole site has one sage accent and one clay highlight. Contrast computed for every text pairing (all 4.5:1 or better; lowest 4.7:1). Font and copy unchanged; `check_site.py` passes.

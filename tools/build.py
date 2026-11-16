@@ -802,9 +802,15 @@ PAGES = [
 
 if __name__ == "__main__":
     for slug, title, desc, body in PAGES:
+        # The home page is hand-built from portfolio preview v30 (Chase, Nov 13). It stays in PAGES
+        # for the sitemap; home() is kept, not deleted, so the old page can come back.
+        if slug == "index.html":
+            continue
         (ROOT / slug).write_text(page(slug, title, desc, body), encoding="utf-8")
     urls = "".join(f"<url><loc>{SITE}/{'' if s == 'index.html' else s}</loc></url>\n"
                    for s, *_ in PAGES if s != "404.html")
+    # building.html is hand-built from portfolio preview v60 (Chase, Nov 16); it is not in PAGES but belongs in the sitemap.
+    urls += f"<url><loc>{SITE}/building.html</loc></url>\n"
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       f"{urls}</urlset>\n", encoding="utf-8")
