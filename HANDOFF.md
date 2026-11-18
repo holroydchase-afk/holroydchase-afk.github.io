@@ -3,7 +3,7 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.3 home v64 PR open; v60 is live (merged Nov 16)
+now: WEB-M13.5/13.6 Studio hidden and home v67 PR open; v64 and the new share card are live
 next: Chase says merge on the v64 PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
@@ -30,6 +30,10 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.6 home v67 (Nov 18, same PR as the Studio hide)
+- Chase (Nov 18, "and go live when ready"): `index.html` and `building.html` are preview v67 from the copy review (review notes in the private PMO folder). The photo stays a file, the building pictures use `assets/building/`, and the link-preview tags from WEB-M13.4 are kept. The old commented-out Studio Console demo link was removed from `building.html`. `check_site.py` HOME rules pass unchanged.
+- Open for Chase: Charlie, Role Radar and Energy Scanner say stage live in their own repos but sit under Building on the page. Not asked yet.
 
 ## WEB-M13.5 Studio hidden (Nov 18, PR open)
 - Chase (Nov 18): the Studio uses his real data and is weak; keep the agent team work, don't show the Studio yet. Done: `studio.html` and `pm-tools.html` now serve a "moved" stub (noindex, back to the work page after 3 s) instead of the Studio and Studio Console pages; the "Studio" nav link is gone from every page; both are out of the sitemap. Their content stays in `tools/build.py` (`PAGES`, with `HIDDEN` listing the two) so they can come back. `check_site.py` treats the two as not indexed and skips the scoreboard check while the Studio page is hidden (data stays in `tools/scoreboard.json`). The home page and building page still show the agent team work and link the public studio-agents repo.
