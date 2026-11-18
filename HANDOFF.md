@@ -31,6 +31,10 @@ Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Eng
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
+## WEB-M13.4 link preview (Nov 18, PR open)
+- Chase (Nov 18): the iMessage preview is old. Cause: the share card (`assets/share-card.png`) and the title, description and alt text still said "Pricing, payments and point-of-sale lending". New card `assets/share-card-v2.png` (Atkinson, white, ink and emerald, photo, the AI and ML headline); a new file name so iMessage and other apps fetch it fresh. `index.html` meta description, og:title, og:description, og:image alt and the schema.org description now match the v64 headline; `tools/build.py` points every page at the new card. The old card file stays for already-sent links.
+- Note: apps cache previews per link. After this deploys, send the link with a trailing `?v=2` (or in a new thread) to see the new one.
+
 ## WEB-M13.3 home v64 (Nov 18, PR open)
 - Chase (Nov 18): "Remove the emoji and publish." `index.html` and `building.html` are preview v64 (light/dark/system theme menu, building page linked from the journey line, tiles in Career with case-study dialogs, seven products so far) with the five About-tile emoji removed. Photos stay files (`assets/chase-hero.jpg`, `assets/chase-400.webp`); building pictures use `assets/building/`. `check_site.py` HOME-2 now accepts `href="building.html"` or `#ai` for the second journey link.
 - v60 went live Nov 16 (PR 65 merged on Chase's word; the hello@ test email was never confirmed). Not run: ux-reviewer and qa-tdd (cloud thread). Bigfoot dates stay off, indexing stays off.
