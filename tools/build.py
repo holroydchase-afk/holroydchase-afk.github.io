@@ -52,7 +52,6 @@ HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contribut
 
 NAV = [
     ("index.html", "Work"),
-    ("studio.html", "Studio"),
     ("resume.html", "Resume"),
     ("about.html", "About"),
 ]
@@ -800,15 +799,27 @@ PAGES = [
     ("404.html", "Not found", "Page not found.", notfound),
 ]
 
+# Hidden pages (Chase, Nov 18: the Studio and its console use real data and aren't ready to show). Their content
+# stays in PAGES below, so they can come back; the site serves a "moved" stub at the old address instead, keeps
+# them out of the nav and the sitemap, and never links to them.
+HIDDEN = ("studio.html", "pm-tools.html")
+HIDDEN_STUB = """<div class="read"><p class="eyebrow">Moved</p><h1>This page isn't public right now.</h1>
+<p class="lede">It will be back. In the meantime the <a href="index.html">work page</a> has everything I'm showing.</p></div>"""
+
 if __name__ == "__main__":
     for slug, title, desc, body in PAGES:
         # The home page is hand-built from portfolio preview v30 (Chase, Nov 13). It stays in PAGES
         # for the sitemap; home() is kept, not deleted, so the old page can come back.
         if slug == "index.html":
             continue
+        if slug in HIDDEN:
+            stub = page(slug, "Moved", "This page isn't public right now.", HIDDEN_STUB)
+            stub = stub.replace('<meta name="robots" content="noindex">', '<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="3;url=index.html">', 1)
+            (ROOT / slug).write_text(stub, encoding="utf-8")
+            continue
         (ROOT / slug).write_text(page(slug, title, desc, body), encoding="utf-8")
     urls = "".join(f"<url><loc>{SITE}/{'' if s == 'index.html' else s}</loc></url>\n"
-                   for s, *_ in PAGES if s != "404.html")
+                   for s, *_ in PAGES if s != "404.html" and s not in HIDDEN)
     # building.html is hand-built from portfolio preview v60 (Chase, Nov 16); it is not in PAGES but belongs in the sitemap.
     urls += f"<url><loc>{SITE}/building.html</loc></url>\n"
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
