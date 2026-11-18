@@ -146,11 +146,12 @@ def check_home(failures):
     order = [html.find(f'id="{sid}"') for sid in ("hero", "impact", "cases", "ai", "career", "about", "contact")]
     if -1 in order or order != sorted(order):
         failures.append("index.html: sections must run hero, impact, cases, ai, career, about, contact (HOME-1)")
-    # HOME-2 The journey lines link down to the case studies and the building section.
+    # HOME-2 The journey lines link to the case studies and to the building section or page.
     impact = _section(html, "impact") or ""
-    for target in ('href="#cases"', 'href="#ai"'):
-        if target not in impact:
-            failures.append(f"index.html: the journey lines must link to {target} (HOME-2)")
+    if 'href="#cases"' not in impact:
+        failures.append('index.html: the journey lines must link to href="#cases" (HOME-2)')
+    if 'href="#ai"' not in impact and 'href="building.html"' not in impact:
+        failures.append('index.html: the journey lines must link to href="#ai" or href="building.html" (HOME-2)')
     # HOME-3 At most one primary button in the hero (v60 has none: green marks links and results only).
     hero = _section(html, "hero") or ""
     if len(re.findall(r'class="btn p"', hero)) > 1:
