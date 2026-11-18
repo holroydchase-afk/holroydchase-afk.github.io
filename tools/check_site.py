@@ -12,7 +12,8 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://chaseholroyd.com/"
 # 404 is served for missing paths and is not a page to index.
-NOT_INDEXED = {"404.html"}
+# studio.html and pm-tools.html are hidden "moved" stubs (Chase, Nov 18); they stay out of the sitemap.
+NOT_INDEXED = {"404.html", "studio.html", "pm-tools.html"}
 # Root-absolute links that point at another repo's Pages site, not a file here.
 OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/")
 
@@ -109,6 +110,8 @@ def check_scoreboard(failures):
     import json
     data = json.loads((ROOT / "tools/scoreboard.json").read_text())
     page = (ROOT / "studio.html").read_text()
+    if "http-equiv=\"refresh\"" in page:
+        return  # the Studio page is hidden for now; the scoreboard data stays in tools/scoreboard.json
     if 'class="scoreboard"' not in page:
         failures.append("studio.html: no agent scoreboard table")
     for row in data["evals"]:

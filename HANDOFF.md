@@ -31,6 +31,11 @@ Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Eng
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
+## WEB-M13.5 Studio hidden (Nov 18, PR open)
+- Chase (Nov 18): the Studio uses his real data and is weak; keep the agent team work, don't show the Studio yet. Done: `studio.html` and `pm-tools.html` now serve a "moved" stub (noindex, back to the work page after 3 s) instead of the Studio and Studio Console pages; the "Studio" nav link is gone from every page; both are out of the sitemap. Their content stays in `tools/build.py` (`PAGES`, with `HIDDEN` listing the two) so they can come back. `check_site.py` treats the two as not indexed and skips the scoreboard check while the Studio page is hidden (data stays in `tools/scoreboard.json`). The home page and building page still show the agent team work and link the public studio-agents repo.
+- Companion PR in pm-tools hides `/pm-tools/console/` (it showed his real goals and PR titles from public repos). Both need Chase's go; a merge deploys the live site.
+- To bring back: remove the slug from `HIDDEN` in `tools/build.py`, add "Studio" back to `NAV`, drop the two from `NOT_INDEXED` in `tools/check_site.py`.
+
 ## WEB-M13.4 link preview (Nov 18, PR open)
 - Chase (Nov 18): the iMessage preview is old. Cause: the share card (`assets/share-card.png`) and the title, description and alt text still said "Pricing, payments and point-of-sale lending". New card `assets/share-card-v2.png` (Atkinson, white, ink and emerald, photo, the AI and ML headline); a new file name so iMessage and other apps fetch it fresh. `index.html` meta description, og:title, og:description, og:image alt and the schema.org description now match the v64 headline; `tools/build.py` points every page at the new card. The old card file stays for already-sent links.
 - Note: apps cache previews per link. After this deploys, send the link with a trailing `?v=2` (or in a new thread) to see the new one.
