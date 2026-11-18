@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.1 new home page (preview v41) PR open; Chase approved v41 "we can refine later" (Nov 14)
-next: Chase sends a test email to hello@chaseholroyd.com and says merge; then bring the other pages (About, product pages) into the home look one PR at a time
+now: WEB-M13.3 home v64 PR open; v60 is live (merged Nov 16)
+next: Chase says merge on the v64 PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
@@ -30,6 +30,11 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.3 home v64 (Nov 18, PR open)
+- Chase (Nov 18): "Remove the emoji and publish." `index.html` and `building.html` are preview v64 (light/dark/system theme menu, building page linked from the journey line, tiles in Career with case-study dialogs, seven products so far) with the five About-tile emoji removed. Photos stay files (`assets/chase-hero.jpg`, `assets/chase-400.webp`); building pictures use `assets/building/`. `check_site.py` HOME-2 now accepts `href="building.html"` or `#ai` for the second journey link.
+- v60 went live Nov 16 (PR 65 merged on Chase's word; the hello@ test email was never confirmed). Not run: ux-reviewer and qa-tdd (cloud thread). Bigfoot dates stay off, indexing stays off.
+- Next: merge on green (Chase approved publishing), verify chaseholroyd.com, then owe a dated line to Hearth and ccwatts HANDOFFs.
 
 ## WEB-M13.2 home v60 (Nov 16, PR into PR 65's branch)
 - Chase (Nov 16): "push the latest version with the I've led AI and ML headline". Done: `index.html` is preview v60 (photo, "Hey there, I'm Chase.", headline "I'm a staff product manager who has led AI and ML work at startups and large companies, building agents that automate manual work.", two journey lines that scroll to the case studies and to what's being built, Built/Building product board with no product names on the cards, name fades in with the photo on scroll, light mode by default). New `building.html` (in-progress products, demo pictures in `assets/building/`, sitemap entry). Photos are files (`assets/chase-hero.jpg`, `assets/chase-400.webp`), not inlined. `check_site.py` HOME rules rewritten for the v60 order (hero, impact, cases, ai, career, about, contact; h1 up to 25 words). Hearth demo link is lowercase /hearth/ (capital /Hearth/ 404s).

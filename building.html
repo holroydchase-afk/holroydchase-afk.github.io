@@ -1,78 +1,79 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>In progress · Chase Holroyd</title>
+<script>/* v61 theme: light (default) | dark | system */(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get("theme"),s=null;try{s=localStorage.getItem("theme")}catch(e){}var m=q==="dark"||q==="light"||q==="system"?q:(s==="dark"||s==="light"||s==="system"?s:"light");r.dataset.mode=m;r.dataset.theme=m==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):m})()</script>
+<title>What I'm building · Chase Holroyd</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="What Chase Holroyd is building with Claude Code: the products in progress, each with the problem it solves.">
+<meta name="description" content="What Chase Holroyd has built and is building with Claude Code, each with the problem it solves and a demo you can try.">
 <link rel="canonical" href="https://chaseholroyd.com/building.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FAF9F6;--surface:#fff;--ink:#2B2620;--muted:#6A6155;--line:#DDD8CC;--cta:#0B7A4B;--f:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1E1B18;--surface:#27231F;--ink:#EDE6D8;--muted:#A79F8F;--line:#443E37;--cta:#3DDC97}}
-:root[data-theme=dark]{--bg:#1E1B18;--surface:#27231F;--ink:#EDE6D8;--muted:#A79F8F;--line:#443E37;--cta:#3DDC97}
+:root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#4A4A48;--line:#E4E4E0;--sec2:#F6F6F4;--cta:#0B7A4B;--f:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif}
+:root[data-theme=dark]{--bg:#0A0A0A;--surface:#141414;--ink:#fff;--muted:#C4C4C0;--line:#2E2E2C;--sec2:#141414;--cta:#3DDC97}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.55 var(--f)}
 .w{max-width:1120px;margin:0 auto;padding:0 20px}
-header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-header .w{display:flex;align-items:center;justify-content:space-between;min-height:64px}
-a{color:var(--ink)}a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+header{position:sticky;top:0;z-index:5;background:var(--bg)}
+header .w{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:8px}
+.hr{display:flex;align-items:center;gap:4px}
+a{color:var(--ink)}a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
 .tl{display:inline-flex;align-items:center;min-height:48px;font-weight:500;font-size:18px;text-underline-offset:5px;text-decoration-thickness:1.5px}
 .tl:hover{text-decoration-thickness:3px}.tl.g{color:var(--cta)}
-.top{padding:clamp(36px,6vw,72px) 0 clamp(20px,3vw,32px)}
-.ey{margin:0;color:var(--muted);font-size:17px;display:flex;align-items:center;gap:8px}
-.sd{display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid var(--cta);background:linear-gradient(90deg,var(--cta) 50%,transparent 50%)}
-h1{font:400 clamp(34px,5vw,54px)/1.08 var(--f);letter-spacing:-.03em;margin:8px 0 0;max-width:18ch;text-wrap:balance}
+.thm{flex:none;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}.thm:hover{background:var(--sec2)}
+.thw{position:relative;flex:none;margin:0 -12px 0 0}.thw .thm{margin:0}
+.thm svg{display:none!important}:root[data-mode=light] .thm .i-sun,:root[data-mode=dark] .thm .i-moon,:root[data-mode=system] .thm .i-sys{display:block!important}
+.tmenu{position:absolute;right:0;top:calc(100% + 4px);min-width:190px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px;z-index:40;display:grid;gap:2px}
+.tmenu[hidden]{display:none}
+.tmenu button{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:400 17px var(--f);cursor:pointer;text-align:left}
+.tmenu button:hover,.tmenu button:focus-visible{background:var(--sec2)}.tmenu button:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.tmenu button[aria-checked=true]{font-weight:500}.tmenu button[aria-checked=true]::after{content:"\2713";color:var(--cta)}
+.top{padding:clamp(28px,5vw,60px) 0 clamp(12px,2vw,20px)}
+h1{font:400 clamp(34px,5vw,54px)/1.08 var(--f);letter-spacing:-.03em;margin:0;max-width:18ch;text-wrap:balance}
 .lede{margin:14px 0 0;color:var(--muted);font-size:19px;max-width:56ch}
-.jump{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0}
-.jump a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface);text-decoration:none;font-size:17px;color:var(--muted)}
-.jump a:hover{color:var(--ink);border-color:var(--cta)}
-.it{display:grid;gap:24px clamp(28px,5vw,64px);padding:clamp(32px,5vw,60px) 0;border-top:1px solid var(--line);align-items:center;scroll-margin-top:80px}
-@media(min-width:860px){.it{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.it:nth-of-type(even) figure{order:2}.it.solo{grid-template-columns:minmax(0,1fr)}}
-.it h2{font:500 clamp(26px,3.2vw,36px)/1.15 var(--f);letter-spacing:-.025em;margin:0;text-wrap:balance}
-.it p{margin:14px 0 0;font-size:19px;line-height:1.5;max-width:56ch}
-.it .left{color:var(--muted);font-size:17px}
-.it .pl{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:10px}
-figure{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);justify-self:center;width:100%}
-figure.ph{max-width:300px}
-figure img{display:block;width:100%;height:auto}
-figcaption{padding:10px 14px;color:var(--muted);font-size:17px;border-top:1px solid var(--line)}
-footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:17px}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.fl button{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--muted);font:400 17px var(--f);cursor:pointer}
+.fl button:hover{color:var(--ink);border-color:var(--ink)}.fl button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:500}
+.bh{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font:500 19px var(--f);margin:36px 0 0;padding-bottom:10px;border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.bh .bn{margin-left:auto;color:var(--muted);font-weight:400;font-size:17px}
+.sd{flex:none;display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid var(--cta)}.sd.s1{background:var(--cta)}.sd.s2{background:linear-gradient(90deg,var(--cta) 50%,transparent 50%)}
+.bd{display:grid;gap:14px;margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.kc{border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);display:flex;flex-direction:column;padding:24px 26px 12px}
+.kc h3{font:500 clamp(22px,2.4vw,28px)/1.15 var(--f);letter-spacing:-.02em;margin:10px 0 0;text-wrap:balance}
+.kc p{margin:10px 0 0;font-size:18px;line-height:1.5;color:var(--muted)}.kc .pt{margin:0;font-size:17px;display:flex;align-items:center;gap:8px}
+.kc p.pf{color:var(--ink);font-weight:500;margin-top:14px}.kc .pl{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:auto;padding-top:6px}
+.it{display:grid;gap:24px clamp(28px,5vw,64px);padding:clamp(28px,4vw,48px) 0;border-bottom:1px solid var(--line);align-items:center;scroll-margin-top:80px}
+@media(min-width:860px){.it{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.it:nth-of-type(even) figure{order:2}}
+.it h2{font:500 clamp(24px,3vw,34px)/1.15 var(--f);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.it p{margin:14px 0 0;font-size:19px;line-height:1.5;max-width:56ch}.it .pl{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:10px}
+figure{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);justify-self:center;width:100%}figure.ph{max-width:300px}
+figure img{display:block;width:100%;height:auto}figcaption{padding:10px 14px;color:var(--muted);font-size:17px;border-top:1px solid var(--line)}
+[hidden]{display:none!important}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:17px;margin-top:24px}
 </style></head><body>
-<header><div class="w"><a class="tl" href="index.html">&larr; Chase Holroyd</a><a class="tl" href="index.html#contact">Contact</a></div></header>
+<header><div class="w"><a class="tl" href="index.html">&larr; Chase Holroyd</a><div class="hr"><a class="tl" href="index.html#contact" style="padding:0 10px">Contact</a><div class="thw"><button class="thm" id="tog" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tmenu" aria-label="Theme" title="Theme"><svg class="i-sun" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></g></svg><svg class="i-moon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><svg class="i-sys" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></g></svg></button><div class="tmenu" id="tmenu" hidden role="group" aria-label="Theme"><button type="button" data-m="light" aria-checked="false" role="menuitemradio">Light</button><button type="button" data-m="dark" aria-checked="false" role="menuitemradio">Dark</button><button type="button" data-m="system" aria-checked="false" role="menuitemradio">System</button></div></div></div></div></header>
 <main class="w">
-<div class="top"><p class="ey"><span class="sd" aria-hidden="true"></span>Building</p><h1>What I&rsquo;m building with Claude Code</h1>
-<p class="lede">Six products in progress. I scope the work, write the rules and approve every merge.</p>
-<ul class="jump"><li><a href="#crew">Time clock</a></li><li><a href="#agents">Agent team</a></li><li><a href="#console">Studio console</a></li><li><a href="#stocks">Stock ideas</a></li><li><a href="#bedtime">Bedtime scan</a></li><li><a href="#roles">Job radar</a></li></ul></div>
-
-<section class="it" id="crew"><figure class="ph"><img src="assets/building/crew-clock.jpg" alt="Phone screen of the time clock demo: pick a crew member, then clock in." width="585" height="1050" loading="lazy"><figcaption>Demo, made-up crew</figcaption></figure>
-<div><h2>A crew on a rural job site has no signal and no time clock.</h2>
-<p>A GPS time clock for a small construction crew. Clocking in takes three taps and works with no signal. It checks location only at the tap and never follows the worker. The boss sees who is at which job on a map.</p>
-<div class="pl"><a class="tl g" href="https://chaseholroyd.com/crew-clock/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/crew-clock">Code</a></div></div></section>
-
-<section class="it solo" id="agents"><div><h2>One builder can&rsquo;t also be the tester, the reviewer and the privacy check.</h2>
-<p>A shared team of Claude Code agents that every one of my projects installs: a staff PM that scopes the work, a tester that writes the failing test first, an engineer, a UX reviewer, and a privacy and security reviewer. A check on each pull request fails if an agent is named but did not really run.</p>
-<div class="pl"><a class="tl" href="https://github.com/holroydchase-afk/studio-agents">Code</a></div></div></section>
-
-<section class="it" id="console"><figure><img src="assets/building/pm-tools.jpg" alt="Console screen listing each product with its stage, current work and next step." width="1800" height="1140" loading="lazy"><figcaption>Demo, read from the repos</figcaption></figure>
-<div><h2>Several products at once, and no one place to see them.</h2>
-<p>One console for everything I&rsquo;m building: each product&rsquo;s stage, what is happening now, what comes next, and the agent roster. It reads each repo&rsquo;s handoff notes, so nobody types a status update.</p>
-<div class="pl"><a class="tl g" href="https://chaseholroyd.com/pm-tools/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/pm-tools">Code</a></div></div></section>
-
-<section class="it" id="stocks"><figure><img src="assets/building/charlie.jpg" alt="Screen showing a practice trade idea with its score, chance of profit, most you could make and most you could lose." width="1800" height="1140" loading="lazy"><figcaption>Demo, fictional sample person</figcaption></figure>
-<div><h2>Most stock ideas ignore what you already know.</h2>
-<p>It reads a resume, finds the industries the person knows, scores companies with a Charlie Munger style checklist, and suggests one to three practice trades a day. Every trade shows the most you could lose. It never places a real order.</p>
-<div class="pl"><a class="tl g" href="https://chaseholroyd.com/charlie/">Demo &rarr;</a></div></div></section>
-
-<section class="it" id="bedtime"><figure class="ph"><img src="assets/building/energy-scanner.jpg" alt="Phone screen of the bedtime helper: five steps to tap, then a scan." width="585" height="1050" loading="lazy"><figcaption>Demo</figcaption></figure>
-<div><h2>Bedtime needed something the kids look forward to.</h2>
-<p>A bedtime helper for my two kids: finish the five steps, then get a scan. The photo scan draws an aura around a person with AI that runs on the device, so nothing is uploaded.</p>
-<div class="pl"><a class="tl g" href="https://chaseholroyd.com/energy-scanner/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/energy-scanner">Code</a></div></div></section>
-
-<section class="it" id="roles"><figure><img src="assets/building/role-radar.jpg" alt="Screen listing new roles, each with a score from 0 to 100." width="1800" height="1140" loading="lazy"><figcaption>Demo, made-up companies</figcaption></figure>
-<div><h2>The few roles worth applying to are spread across many job boards.</h2>
-<p>A radar I built for my own search. It reads job boards every weekday and scores each role from 0 to 100 against criteria I edit, with the reasons on every card. Applying stays my call.</p>
-<div class="pl"><a class="tl g" href="https://chaseholroyd.com/role-radar/">Demo &rarr;</a></div></div></section>
+<div class="top"><h1>What I&rsquo;m building with Claude Code</h1>
+<p class="lede">Three built, four in progress. I scope the work, write the rules and approve every merge.</p>
+<ul class="fl" id="fl" aria-label="Filter"><li><button type="button" data-f="all" aria-pressed="true">All 7</button></li><li><button type="button" data-f="built" aria-pressed="false">Built 3</button></li><li><button type="button" data-f="building" aria-pressed="false">Building 4</button></li></ul></div>
+<section id="built" data-g="built"><h2 class="bh"><span class="sd s1" aria-hidden="true"></span>Built<span class="bn">Open source, with a demo you can try</span></h2><div class="bd"><article class="kc big"><p class="pt"><span class="sd s1" aria-hidden="true"></span>Family beta starts Nov 22</p><h3>Split families don&rsquo;t fit one group chat.</h3><p>A private photo app where every post has an audience you pick by name. A photo you can&rsquo;t see behaves as if it doesn&rsquo;t exist. Text is 17 pt or larger and every icon has a word under it.</p><p class="pf">734 app tests, 1,029 database checks</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/hearth/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/hearth">Code</a></div></article><article class="kc big"><p class="pt"><span class="sd s1" aria-hidden="true"></span>Free to install</p><h3>Nobody can see the electricity their AI coding uses.</h3><p>A command-line tool that reads Claude Code&rsquo;s local logs and gives a range, never a single number, with a source for every assumption. Nothing leaves your machine.</p><p class="pf">One command, no runtime dependencies</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/ccwatts/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/ccwatts">Code</a></div></article><article class="kc big"><p class="pt"><span class="sd s1" aria-hidden="true"></span>Runs on every project here</p><h3>One builder can&rsquo;t also be the tester, the reviewer and the privacy check.</h3><p>A shared team of Claude Code agents, plus a console that tracks every product. A staff PM scopes the work, a tester writes the failing test first, an engineer builds, and reviewers check the screens and the privacy. A check on every pull request fails if an agent is named but did not really run.</p><p class="pf">In my written evals, the test-first agent wrote a failing test for 8 of 8 gaps. Plain Claude wrote none.</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/pm-tools/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/studio-agents">Code</a></div></article></div></section>
+<section id="building" data-g="building"><h2 class="bh"><span class="sd s2" aria-hidden="true"></span>Building<span class="bn">Four more in progress</span></h2><section class="it" id="crew"><figure class="ph"><img src="assets/building/crew-clock.jpg" alt="Phone screen of the time clock demo: pick a crew member, then clock in." width="585" height="1050" loading="lazy"><figcaption>Demo, made-up crew</figcaption></figure><div><h2>A crew on a rural job site has no signal and no time clock.</h2><p>A GPS time clock for a small construction crew. Clocking in takes three taps and works with no signal. It checks location only at the tap and never follows the worker. The boss sees who is at which job on a map.</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/crew-clock/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/crew-clock">Code</a></div></div></section><section class="it" id="stocks"><figure><img src="assets/building/charlie.jpg" alt="Screen showing a practice trade idea with its score, chance of profit, most you could make and most you could lose." width="1800" height="1140" loading="lazy"><figcaption>Demo, fictional sample person</figcaption></figure><div><h2>Most stock ideas ignore what you already know.</h2><p>It reads a resume, finds the industries the person knows, scores companies with a Charlie Munger style checklist, and suggests one to three practice trades a day. Every trade shows the most you could lose. It never places a real order.</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/charlie/">Demo &rarr;</a></div></div></section><section class="it" id="bedtime"><figure class="ph"><img src="assets/building/energy-scanner.jpg" alt="Phone screen of the bedtime helper: five steps to tap, then a scan." width="585" height="1050" loading="lazy"><figcaption>Demo</figcaption></figure><div><h2>Bedtime needed something the kids look forward to.</h2><p>A bedtime helper for my two kids: finish the five steps, then get a scan. The photo scan draws an aura around a person with AI that runs on the device, so nothing is uploaded.</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/energy-scanner/">Demo &rarr;</a><a class="tl" href="https://github.com/holroydchase-afk/energy-scanner">Code</a></div></div></section><section class="it" id="roles"><figure><img src="assets/building/role-radar.jpg" alt="Screen listing new roles, each with a score from 0 to 100." width="1800" height="1140" loading="lazy"><figcaption>Demo, made-up companies</figcaption></figure><div><h2>The few roles worth applying to are spread across many job boards.</h2><p>A radar I built for my own search. It reads job boards every weekday and scores each role from 0 to 100 against criteria I edit, with the reasons on every card. Applying stays my call.</p><div class="pl"><a class="tl g" href="https://chaseholroyd.com/role-radar/">Demo &rarr;</a></div></div></section></section>
 </main>
 <footer><div class="w"><a class="tl" href="index.html">&larr; Back to the home page</a></div></footer>
-</body></html>
+<script>
+(function(){var r=document.documentElement,b=document.getElementById('tog'),mn=document.getElementById('tmenu');if(!b||!mn)return;var mq=matchMedia('(prefers-color-scheme: dark)');
+function mark(){var m=r.dataset.mode;mn.querySelectorAll('[data-m]').forEach(function(o){o.setAttribute('aria-checked',o.dataset.m===m)});b.title='Theme: '+m;b.setAttribute('aria-label','Theme: '+m)}
+function show(v){mn.hidden=!v;b.setAttribute('aria-expanded',v)}
+function apply(m){r.dataset.mode=m;r.dataset.theme=m==='system'?(mq.matches?'dark':'light'):m;try{localStorage.setItem('theme',m)}catch(e){}mark()}
+b.addEventListener('click',function(e){e.stopPropagation();show(mn.hidden)});
+mn.addEventListener('click',function(e){var o=e.target.closest('[data-m]');if(o){apply(o.dataset.m);show(false);b.focus()}});
+document.addEventListener('click',function(e){if(!mn.hidden&&!mn.contains(e.target))show(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mn.hidden){show(false);b.focus()}});
+mq.addEventListener('change',function(){if(r.dataset.mode==='system')r.dataset.theme=mq.matches?'dark':'light'});mark()})();
+(function(){var btns=[].slice.call(document.querySelectorAll('#fl [data-f]')),secs=[].slice.call(document.querySelectorAll('[data-g]'));
+function setF(f,keep){btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.f===f)});secs.forEach(function(s){s.hidden=!(f==='all'||s.dataset.g===f)});if(!keep)history.replaceState(null,'',f==='all'?location.pathname+location.search:'#'+f)}
+btns.forEach(function(b){b.addEventListener('click',function(){setF(b.dataset.f)})});
+function fromHash(){var h=location.hash.slice(1);setF(h==='built'||h==='building'?h:'all',true);if(h==='built'||h==='building')scrollTo(0,0)}
+addEventListener('hashchange',fromHash);fromHash()})();
+</script></body></html>
