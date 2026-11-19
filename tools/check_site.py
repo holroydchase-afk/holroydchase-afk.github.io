@@ -215,8 +215,26 @@ def check_home(failures):
             failures.append(f"index.html: image {src} doesn't exist (HOME-6)")
     # HOME-7 The greeting and headline never loop an animation (Chase, Nov 19: "Hey there" kept bobbing, a recurring
     # bug). They may fade in once; no rule that targets them may use an infinite animation.
-    css = re.sub(r"<script\b.*?</script>", " ", html, flags=re.S | re.I)
-    for selector, block in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+    from html.parser import HTMLParser
+
+    class Styles(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.css, self.inside = [], False
+
+        def handle_starttag(self, tag, attrs):
+            self.inside = tag == "style"
+
+        def handle_endtag(self, tag):
+            self.inside = False
+
+        def handle_data(self, data):
+            if self.inside:
+                self.css.append(data)
+
+    styles = Styles()
+    styles.feed(html)
+    for selector, block in re.findall(r"([^{}]+)\{([^{}]*)\}", "\n".join(styles.css)):
         if re.search(r"\.pw\b|\.hey\b|\.hero\s+h1|\.l1\b|\.l2\b", selector) and re.search(r"animation[^;}]*\binfinite\b", block, flags=re.I):
             failures.append(f"index.html: {' '.join(selector.split())[-60:]} loops an animation; the greeting must stay still (HOME-7)")
 
