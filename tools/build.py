@@ -44,9 +44,9 @@ IN_PROGRESS = [
 # Hearth (WEB-M8, Oct 30): featured first on home. The rename is still pending, so it shows as a working name,
 # matching the demo's own banner (REC-R2). After the rename, change HEARTH and HEARTH_TAG here and nowhere else.
 HEARTH = "Hearth"
-HEARTH_TAG = "working name · family beta late November"
+HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("734", "app tests, counted Nov 4"), ("1,029", "database checks, counted Nov 4"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("734", "app tests"), ("1,029", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with a team of AI agents, tests first.")
 
@@ -233,8 +233,8 @@ JOURNEY = [
     ("family-photos.html", HEARTH,
      "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
-     "Family beta with about a dozen relatives, mostly grandparents, in late November", "Try the demo",
-     "a private photo app for two blended families, with a family beta in late November"),
+     "Family beta with about a dozen relatives, mostly grandparents", "Try the demo",
+     "a private photo app for two blended families, with a family beta"),
     ("crew-clock.html", "Crew Clock",
      "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
      "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
@@ -416,13 +416,13 @@ family = product(
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
-            ("Tested", "734 app tests and 1,029 database checks, counted Nov 4 with a script in the repo (scripts/test-totals.sh)."),
+            ("Tested", "734 app tests and 1,029 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
             ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
             ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
             ("Self-reviewed", "No outside security audit yet."),
         ])),
         ("Try it", "<p>Open the demo, a made-up family kept only in your browser. Switch to Grandma Jo's view from the demo bar's Details and see only what was shared with her.</p>"),
-        ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is a soft target for late November. {HEARTH_TEAM} "
+        ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is the next step. {HEARTH_TEAM} "
          "I built it with a team of nine AI agents, routed by a chief-of-staff session.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
