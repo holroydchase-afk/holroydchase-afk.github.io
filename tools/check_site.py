@@ -105,6 +105,24 @@ def check_deploy_allowlist(failures):
                 failures.append(f"{page.name}: links {href}, but pages.yml doesn't deploy {top}")
 
 
+def check_no_third_party_loads(failures):
+    """Nothing loads from another host (Chase, Nov 19: Safari showed "Reduce Protections"). Fonts are self-hosted in
+    assets/fonts; links to LinkedIn and GitHub are ordinary <a> links and fine."""
+    own = ("https://chaseholroyd.com", "http://localhost")
+    for path in list(pages()) + sorted((ROOT / "assets").glob("*.css")):
+        text = path.read_text()
+        text = re.sub(r"base64,[A-Za-z0-9+/=]+", "", text)
+        for tag in re.findall(r"<(?:link|script|img|iframe|source|video|audio)\b[^>]*>", text):
+            for url in re.findall(r'(?:href|src|srcset)="(https?://[^"\s]+)', tag):
+                if not url.startswith(own):
+                    failures.append(f"{path.name}: loads {url[:60]} from another host (self-host it or remove it)")
+        for url in re.findall(r"url\(\s*[\"']?(https?://[^)\"']+)", text):
+            if not url.startswith(own):
+                failures.append(f"{path.name}: CSS loads {url[:60]} from another host")
+        if re.search(r'rel="(?:preconnect|dns-prefetch)"', text):
+            failures.append(f"{path.name}: preconnect to another host")
+
+
 def check_scoreboard(failures):
     """The Studio page's agent scoreboard shows every row of tools/scoreboard.json, with a source and date."""
     import json
@@ -180,7 +198,7 @@ def check_home(failures):
 
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
-          check_no_contact_details, check_deploy_allowlist, check_scoreboard,
+          check_no_contact_details, check_deploy_allowlist, check_no_third_party_loads, check_scoreboard,
           check_home]
 
 

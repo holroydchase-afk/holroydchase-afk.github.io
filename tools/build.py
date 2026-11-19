@@ -56,9 +56,6 @@ NAV = [
     ("about.html", "About"),
 ]
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600"
-         "&display=swap")
-
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
@@ -100,9 +97,7 @@ def page(slug, title, description, body):
 <meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/{'' if slug == 'index.html' else slug}">
-{JSONLD if slug in ('index.html', 'about.html') else ''}<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS}">
+{JSONLD if slug in ('index.html', 'about.html') else ''}<link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
