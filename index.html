@@ -144,9 +144,9 @@ footer{background:var(--band);color:var(--bandink);opacity:1}footer .w{opacity:.
 .hg .chips2{margin:0}.help .chips2 span{background:var(--surface)}
 .hg:first-of-type .chips2 span{color:var(--ink)}
 /* greeting pop */
-.pw{display:inline-block;opacity:0;animation:pw .65s calc(.15s + var(--i)*.12s) cubic-bezier(.3,1.5,.5,1) forwards,fl 6s calc(1.4s + var(--i)*.4s) ease-in-out infinite}
+.pw{display:inline-block;opacity:0;animation:pw .65s calc(.15s + var(--i)*.12s) cubic-bezier(.3,1.5,.5,1) forwards}
 @keyframes pw{from{opacity:0;transform:translateY(22px) scale(.92)}to{opacity:1;transform:none}}
-@keyframes fl{50%{transform:translateY(-3px)}}
+
 /* twisty lines */
 .picw{position:relative;display:flex;justify-content:center}.picw .pic{position:relative;z-index:1}
 .tw{position:absolute;left:50%;top:50%;width:280%;max-width:640px;transform:translate(-50%,-50%);z-index:0;overflow:visible;pointer-events:none}

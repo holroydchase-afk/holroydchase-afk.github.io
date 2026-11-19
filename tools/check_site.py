@@ -213,6 +213,12 @@ def check_home(failures):
             failures.append("index.html: photos must be files in assets/, not inlined (HOME-6)")
         elif not src.startswith("http") and not (ROOT / src).exists():
             failures.append(f"index.html: image {src} doesn't exist (HOME-6)")
+    # HOME-7 The greeting and headline never loop an animation (Chase, Nov 19: "Hey there" kept bobbing, a recurring
+    # bug). They may fade in once; no rule that targets them may use an infinite animation.
+    css = re.sub(r"<script\b.*?</script>", " ", html, flags=re.S | re.I)
+    for selector, block in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+        if re.search(r"\.pw\b|\.hey\b|\.hero\s+h1|\.l1\b|\.l2\b", selector) and re.search(r"animation[^;}]*\binfinite\b", block, flags=re.I):
+            failures.append(f"index.html: {' '.join(selector.split())[-60:]} loops an animation; the greeting must stay still (HOME-7)")
 
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,

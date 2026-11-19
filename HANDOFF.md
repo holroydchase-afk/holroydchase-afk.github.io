@@ -3,7 +3,7 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.9 portrait reverted and fonts self-hosted (PR open); v67 home, no dates, Studio hidden and the new share card are live
+now: WEB-M13.10 greeting no longer bobs (PR open); v67 home, no dates, Studio hidden, self-hosted font and the new share card are live
 next: Chase says merge on this PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
@@ -30,6 +30,10 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.10 greeting stops bobbing (Nov 19, PR open)
+- Chase (Nov 19): "the hey there I'm Chase text continues to slowly creep up and down ... this is a recurring bug". Cause: each greeting word (`.pw`) had a second, endless animation (`fl`, a 3 px float every 6 s) on top of the one-time fade-in. Removed the endless one and the `fl` keyframes in `index.html`; the words still fade in once. Only this fix is shipped; the copy pass in previews v69 and v70 is not live and not part of this PR.
+- New rule HOME-7 in `tools/check_site.py`: fails if any rule that targets `.pw`, `.hey`, `.hero h1`, `.l1` or `.l2` carries an infinite animation (seen failing on the old CSS, passing now). Other loops on the page are not the greeting: the status dot pulse, the scroll-cue arrows, the slow drifting and rotating background shapes.
 
 ## WEB-M13.9 portrait reverted, fonts self-hosted (Nov 19, PR open)
 - Chase (Nov 19): "Revert to the image and save whatever you did for when I have a better image." `index.html` is back to the v67 hero (the 640 px headshot, small round photo); the v68 large-portrait change is saved in the project files folder `portfolio/site-v1/v68-large-portrait/` (`large-portrait-v68.patch`, `mk68.py`, two preview screenshots, README). To bring it back: add a sharper photo (1600 px or wider, saved as `assets/chase-hero-large.jpg`), point the hero `img` at it, and apply the patch. The 800 px headshot looked soft at that size.
