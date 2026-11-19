@@ -105,6 +105,42 @@ def check_deploy_allowlist(failures):
                 failures.append(f"{page.name}: links {href}, but pages.yml doesn't deploy {top}")
 
 
+def check_no_third_party_loads(failures):
+    """Nothing loads from another host (Chase, Nov 19: Safari showed "Reduce Protections"). Fonts are self-hosted in
+    assets/fonts; links to LinkedIn and GitHub are ordinary <a> links and fine."""
+    from html.parser import HTMLParser
+
+    own = ("https://chaseholroyd.com", "http://localhost")
+    loaders = {"link", "script", "img", "iframe", "source", "video", "audio", "embed", "object", "track"}
+
+    class Loads(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.urls = []
+
+        def handle_starttag(self, tag, attrs):
+            for name, value in attrs:
+                value = (value or "").strip()
+                if tag in loaders and name in ("href", "src", "srcset", "data") and value.startswith(("http://", "https://", "//")):
+                    self.urls.append(value)
+                if tag == "link" and name == "rel" and value.lower() in ("preconnect", "dns-prefetch"):
+                    self.urls.append("preconnect")
+
+    for path in list(pages()) + sorted((ROOT / "assets").glob("*.css")):
+        text = re.sub(r"base64,[A-Za-z0-9+/=]+", "", path.read_text())
+        if path.suffix == ".html":
+            parser = Loads()
+            parser.feed(text)
+            for url in parser.urls:
+                if url == "preconnect":
+                    failures.append(f"{path.name}: preconnect to another host")
+                elif not url.startswith(own):
+                    failures.append(f"{path.name}: loads {url[:60]} from another host (self-host it or remove it)")
+        for url in re.findall(r"url\(\s*[\"']?((?:https?:)?//[^)\"']+)", text, flags=re.I):
+            if not url.startswith(own):
+                failures.append(f"{path.name}: CSS loads {url[:60]} from another host")
+
+
 def check_scoreboard(failures):
     """The Studio page's agent scoreboard shows every row of tools/scoreboard.json, with a source and date."""
     import json
@@ -180,7 +216,7 @@ def check_home(failures):
 
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
-          check_no_contact_details, check_deploy_allowlist, check_scoreboard,
+          check_no_contact_details, check_deploy_allowlist, check_no_third_party_loads, check_scoreboard,
           check_home]
 
 
