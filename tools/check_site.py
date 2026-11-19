@@ -108,19 +108,37 @@ def check_deploy_allowlist(failures):
 def check_no_third_party_loads(failures):
     """Nothing loads from another host (Chase, Nov 19: Safari showed "Reduce Protections"). Fonts are self-hosted in
     assets/fonts; links to LinkedIn and GitHub are ordinary <a> links and fine."""
+    from html.parser import HTMLParser
+
     own = ("https://chaseholroyd.com", "http://localhost")
+    loaders = {"link", "script", "img", "iframe", "source", "video", "audio", "embed", "object", "track"}
+
+    class Loads(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.urls = []
+
+        def handle_starttag(self, tag, attrs):
+            for name, value in attrs:
+                value = (value or "").strip()
+                if tag in loaders and name in ("href", "src", "srcset", "data") and value.startswith(("http://", "https://", "//")):
+                    self.urls.append(value)
+                if tag == "link" and name == "rel" and value.lower() in ("preconnect", "dns-prefetch"):
+                    self.urls.append("preconnect")
+
     for path in list(pages()) + sorted((ROOT / "assets").glob("*.css")):
-        text = path.read_text()
-        text = re.sub(r"base64,[A-Za-z0-9+/=]+", "", text)
-        for tag in re.findall(r"<(?:link|script|img|iframe|source|video|audio)\b[^>]*>", text):
-            for url in re.findall(r'(?:href|src|srcset)="(https?://[^"\s]+)', tag):
-                if not url.startswith(own):
+        text = re.sub(r"base64,[A-Za-z0-9+/=]+", "", path.read_text())
+        if path.suffix == ".html":
+            parser = Loads()
+            parser.feed(text)
+            for url in parser.urls:
+                if url == "preconnect":
+                    failures.append(f"{path.name}: preconnect to another host")
+                elif not url.startswith(own):
                     failures.append(f"{path.name}: loads {url[:60]} from another host (self-host it or remove it)")
-        for url in re.findall(r"url\(\s*[\"']?(https?://[^)\"']+)", text):
+        for url in re.findall(r"url\(\s*[\"']?((?:https?:)?//[^)\"']+)", text, flags=re.I):
             if not url.startswith(own):
                 failures.append(f"{path.name}: CSS loads {url[:60]} from another host")
-        if re.search(r'rel="(?:preconnect|dns-prefetch)"', text):
-            failures.append(f"{path.name}: preconnect to another host")
 
 
 def check_scoreboard(failures):
