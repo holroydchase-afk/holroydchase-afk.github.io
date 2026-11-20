@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.12 v70 copy, skills filter and share-card-v3 (PR open); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
-next: merge the v70 PR on Chase's go (given Nov 20), then re-scrape the LinkedIn Post Inspector for the new card; confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
+now: WEB-M13.12 v70 copy, skills filter and share-card-v3 (live); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
+next: re-scrape the LinkedIn Post Inspector for the new card; confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
@@ -34,6 +34,9 @@ Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Eng
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
+## LIC-1 license audit, portfolio (Nov 20, PR open)
+- Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
+- Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
 ## WEB-M13.12 v70 release (Nov 20, PR open)
 - Chase (Nov 20): "go v70" (relayed). One release: the Fable v70 copy pass (hero "I led product for AI agents that took over manual lending and sales work. Three-time founding product manager.", Patter and ADT tile edits, Role Radar one-liner no longer says weekday), a skills filter on `building.html` (chips with counts, AND logic, `?skill=` deep links, stage buttons All/Built/Building/Tools) plus a Tools section of three text cards, a "See my work by skill" chip strip on the home page, and `assets/share-card-v3.png` (new file name so link previews refresh; all page tags point to it).
 - Skill tags are in `data-sk` on each card. Placeholder cards from the preview (Nudge, prototype docs) and products not on the site (Pace, Ask about Chase, shared messenger, Build Slate) are not shipped.
