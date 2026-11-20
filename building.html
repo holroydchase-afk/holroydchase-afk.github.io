@@ -87,9 +87,9 @@ function paint(){btns.forEach(function(b){b.setAttribute('aria-pressed',b.datase
  st.textContent='';if(sel.length){st.appendChild(document.createTextNode('Showing '+shown+' of '+items.length+' with '+sel.join(' + ')+'. '));var c=document.createElement('button');c.type='button';c.textContent='Clear skills';c.onclick=function(){sel=[];paint();sync()};st.appendChild(c)}}
 function sync(){try{history.replaceState(null,'',url())}catch(e){}}
 ORDER.forEach(function(k){var n=count(k);if(!n)return;var li=document.createElement('li'),b=document.createElement('button');b.type='button';b.dataset.k=k;b.setAttribute('aria-pressed','false');b.innerHTML=k+' <span class="n">'+n+'</span>';
- b.addEventListener('click',function(){var i=sel.indexOf(k);if(i>-1)sel.splice(i,1);else sel.push(k);paint();sync()});li.appendChild(b);sk.appendChild(li)});
+ b.addEventListener('click',function(){sel=sel.indexOf(k)>-1?[]:[k];paint();sync()});li.appendChild(b);sk.appendChild(li)});
 skw.hidden=false;
 btns.forEach(function(b){b.addEventListener('click',function(){f=b.dataset.f;paint();sync()})});
-function fromUrl(){var h=location.hash.slice(1);f=(h==='built'||h==='building'||h==='tools')?h:'all';var m=/[?&]skill=([^&]*)/.exec(location.search);sel=m?decodeURIComponent(m[1]).split(',').filter(function(k){return ORDER.indexOf(k)>-1}):[];paint();if(f!=='all')scrollTo(0,0)}
+function fromUrl(){var h=location.hash.slice(1);f=(h==='built'||h==='building'||h==='tools')?h:'all';var m=/[?&]skill=([^&]*)/.exec(location.search);sel=m?decodeURIComponent(m[1]).split(',').filter(function(k){return ORDER.indexOf(k)>-1}).slice(0,1):[];paint();if(f!=='all')scrollTo(0,0)}
 addEventListener('hashchange',fromUrl);fromUrl()})();
 </script></body></html>
