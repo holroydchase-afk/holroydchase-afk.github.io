@@ -5,9 +5,14 @@ goal: portfolio
 milestone: PMT-M3.5
 now: WEB-M13.10 greeting no longer bobs (PR open); v67 home, no dates, Studio hidden, self-hosted font and the new share card are live
 next: Chase says merge on this PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
-waiting_on_chase: []
+waiting_on_chase: [Umami setup steps (WEB-M13.11), then say merge]
 blockers: []
 -->
+
+## WEB-M13.11 Umami analytics (Nov 19, draft PR)
+- Chase (Nov 19): "can i use umami on my site?" and earlier decision: Umami Cloud, not self-hosted. Every page now has one Umami script tag served from `stats.chaseholroyd.com` (script and data both first-party), with do-not-track on. `check_no_third_party_loads` allows that one host. `stats-proxy/` is a two-line Vercel rewrite config that forwards to Umami Cloud; it is not deployed by Pages. Demos get no analytics yet.
+- Not done, needs Chase: Umami Cloud account and website id, Vercel project with root `stats-proxy`, the `stats` CNAME at Porkbun. The real website id is in the tag (Nov 19). Do not merge until stats.chaseholroyd.com serves the proxy.
+- Nov 19 PM: `stats-proxy/vercel.json` now matches Umami's official Vercel guide (one catch-all rewrite to cloud.umami.is) instead of a guessed gateway host. Still not tested end to end (Umami hosts are blocked from the cloud session); test with a real pageview after setup. If visitor countries look wrong, the proxy may not pass the visitor IP; pageview counts are unaffected.
 
 ## WEB-M11.5 proof strip (Nov 6)
 - Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
