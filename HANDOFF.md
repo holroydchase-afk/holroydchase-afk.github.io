@@ -34,6 +34,11 @@ Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Eng
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
+## WEB-M13.13 tools section and skill filter, v71 (Nov 20, PR open)
+- Chase (Nov 20, new thread): ship the v71 preview. Skill filter now sits above the lists on home (`#skf`) and building (`#skw`); 12 tools in a Tools group, tagged Live, Repo or Coming soon; links use the GitHub mark ("Demo → · GitHub" or "GitHub →"), no "Fork it".
+- Checked here: `tools/check_site.py` all ok; Playwright at 390 and 1366 on home and building: no horizontal scroll, filter chips work, no console errors, no third-party hosts, greeting does not move. Not run: ux-reviewer, qa-tdd (cloud thread).
+- Next: Chase says go. It changes the live page, so it waits for his go; then merge and confirm the Pages deploy. Umami (PR 76) is a separate thread.
+
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
 - Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
 - Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
