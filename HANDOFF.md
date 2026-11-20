@@ -39,6 +39,12 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - Checked here: `tools/check_site.py` all ok; Playwright at 390 and 1366 on home and building: no horizontal scroll, filter chips work, no console errors, no third-party hosts, greeting does not move. Not run: ux-reviewer, qa-tdd (cloud thread).
 - Next: Chase says go. It changes the live page, so it waits for his go; then merge and confirm the Pages deploy. Umami (PR 76) is a separate thread.
 
+## WEB-M13.14 one Live / Repo / Coming soon signal on every card (Nov 20, PR open)
+- Chase (Nov 20): the portfolio shows inconsistent live, demo and repo signals. v71 (PR 80) is merged. Now one rule on home and building: a badge first in each card's link row. Live = a demo opens in the browser; Repo = code on GitHub only; Coming soon = nothing published. Links: green "Demo →" only for demos; every repo link is the GitHub mark plus "GitHub" (no "Code", no arrows). Role Radar gains a GitHub link (repo is public); Charlie keeps demo only (repo private).
+- Stakeholder twins is now "Coming soon" with no link: the persona-twins repo could not be checked from here, and the site only claims what a repo backs. Put the link back when the repo is public.
+- Checked: check_site.py ok; Playwright 390/1366 no horizontal scroll, no console errors, greeting still. Demo URLs returned 200 from this session. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page).
+
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
 - Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
 - Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
