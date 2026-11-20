@@ -9,6 +9,9 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## WEB-M13.11a Umami proxy folder (Nov 20)
+- `stats-proxy/` (Vercel rewrite to Umami Cloud, Root Directory for the Vercel project) lands on main first so Vercel can see it on import. Pages does not deploy it (not in the pages.yml copy list); the live site does not change. The script tag itself is in PR #76.
+
 ## WEB-M11.5 proof strip (Nov 6)
 - Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
 - Next: Chase said merge when green.
