@@ -11,7 +11,7 @@ blockers: []
 
 ## WEB-M13.11 Umami analytics (Nov 19, draft PR)
 - Chase (Nov 19): "can i use umami on my site?" and earlier decision: Umami Cloud, not self-hosted. Every page now has one Umami script tag served from `stats.chaseholroyd.com` (script and data both first-party), with do-not-track on. `check_no_third_party_loads` allows that one host. `stats-proxy/` is a two-line Vercel rewrite config that forwards to Umami Cloud; it is not deployed by Pages. Demos get no analytics yet.
-- Not done, needs Chase: Umami Cloud account and website id, Vercel project with root `stats-proxy`, the `stats` CNAME at Porkbun. The tag holds the placeholder `REPLACE-WITH-UMAMI-WEBSITE-ID`; do not merge until it is the real id.
+- Not done, needs Chase: Umami Cloud account and website id, Vercel project with root `stats-proxy`, the `stats` CNAME at Porkbun. The real website id is in the tag (Nov 19). Do not merge until stats.chaseholroyd.com serves the proxy.
 - Nov 19 PM: `stats-proxy/vercel.json` now matches Umami's official Vercel guide (one catch-all rewrite to cloud.umami.is) instead of a guessed gateway host. Still not tested end to end (Umami hosts are blocked from the cloud session); test with a real pageview after setup. If visitor countries look wrong, the proxy may not pass the visitor IP; pageview counts are unaffected.
 
 ## WEB-M11.5 proof strip (Nov 6)
