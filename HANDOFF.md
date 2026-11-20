@@ -31,6 +31,10 @@ Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Eng
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
 
+## LIC-1 license audit, portfolio (Nov 20, PR open)
+- Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
+- Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
+
 ## WEB-M13.10 greeting stops bobbing (Nov 19, PR open)
 - Chase (Nov 19): "the hey there I'm Chase text continues to slowly creep up and down ... this is a recurring bug". Cause: each greeting word (`.pw`) had a second, endless animation (`fl`, a 3 px float every 6 s) on top of the one-time fade-in. Removed the endless one and the `fl` keyframes in `index.html`; the words still fade in once. Only this fix is shipped; the copy pass in previews v69 and v70 is not live and not part of this PR.
 - New rule HOME-7 in `tools/check_site.py`: fails if any rule that targets `.pw`, `.hey`, `.hero h1`, `.l1` or `.l2` carries an infinite animation (seen failing on the old CSS, passing now). Other loops on the page are not the greeting: the status dot pulse, the scroll-cue arrows, the slow drifting and rotating background shapes.
