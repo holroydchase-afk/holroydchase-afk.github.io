@@ -47,7 +47,7 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 
 ## WEB-M13.15 home block, single-select skills, headline (Nov 20, PR open)
 - Chase (Nov 20): home "What I'm building with Claude Code" block (heading, intro, skill chips, no stage pickers; "See the agent team" removed); the skills filter is single-select on home and building (tap one to select, tap it again to clear; ?skill= takes the first); hero headline back to the AI/ML wording ("I'm a staff product manager who has led AI and ML work at startups and large companies, building agents that automate manual work.") until he picks a new one. Two alternates were sent in the thread. Hero grid was tried and dropped at his request.
-- Checked: check_site.py ok; Playwright 390/1366 no horizontal scroll, no console errors, greeting still; single-select verified on both pages. Not run: ux-reviewer, qa-tdd.
+- Also: the home journey links ("See the Patter case study ↓", "See what I built →") now underline through the space and the arrow (one continuous line). Checked: check_site.py ok; Playwright 390/1366 no horizontal scroll, no console errors, greeting still; single-select verified on both pages. Not run: ux-reviewer, qa-tdd.
 - Deploy note: the Pages deploy failed 3 times on "Multiple artifacts named github-pages" after re-runs; a fresh workflow_dispatch worked. Never re-run a failed Pages run; trigger a fresh one.
 
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
