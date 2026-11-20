@@ -3,8 +3,8 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.10 greeting no longer bobs (PR open); v67 home, no dates, Studio hidden, self-hosted font and the new share card are live
-next: Chase says merge on this PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
+now: WEB-M13.12 v70 copy, skills filter and share-card-v3 (PR open); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
+next: merge the v70 PR on Chase's go (given Nov 20), then re-scrape the LinkedIn Post Inspector for the new card; confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
@@ -30,6 +30,14 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.12 v70 release (Nov 20, PR open)
+- Chase (Nov 20): "go v70" (relayed). One release: the Fable v70 copy pass (hero "I led product for AI agents that took over manual lending and sales work. Three-time founding product manager.", Patter and ADT tile edits, Role Radar one-liner no longer says weekday), a skills filter on `building.html` (chips with counts, AND logic, `?skill=` deep links, stage buttons All/Built/Building/Tools) plus a Tools section of three text cards, a "See my work by skill" chip strip on the home page, and `assets/share-card-v3.png` (new file name so link previews refresh; all page tags point to it).
+- Skill tags are in `data-sk` on each card. Placeholder cards from the preview (Nudge, prototype docs) and products not on the site (Pace, Ask about Chase, shared messenger, Build Slate) are not shipped.
+- Decisions to review: the Stakeholder twins "Fork it" link points to holroydchase-afk/persona-twins and could not be checked from the cloud session (make sure the repo is public). Hero backgrounds shows only a Demo link; its repo address was a guess.
+- Resume and email check: the home page has no resume link (the PDF at assets/chase-holroyd-resume.pdf and resume.html both load); the mail icon copies hello@chaseholroyd.com, it is not a mailto link.
+- Tests: check_site.py passes; Playwright on building.html (filter on/off, two skills, empty state, clear, deep link, stage buttons) and home strip at 390 and 1280.
+- Agents: qa-tdd skipped: cloud thread, static pages covered by check_site.py plus the Playwright run above; ux-reviewer not run.
 
 ## WEB-M13.10 greeting stops bobbing (Nov 19, PR open)
 - Chase (Nov 19): "the hey there I'm Chase text continues to slowly creep up and down ... this is a recurring bug". Cause: each greeting word (`.pw`) had a second, endless animation (`fl`, a 3 px float every 6 s) on top of the one-time fade-in. Removed the endless one and the `fl` keyframes in `index.html`; the words still fade in once. Only this fix is shipped; the copy pass in previews v69 and v70 is not live and not part of this PR.

@@ -91,7 +91,7 @@ def page(slug, title, description, body):
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE}/{'' if slug == 'index.html' else slug}">
 <meta property="og:type" content="{'profile' if slug == 'about.html' else 'website'}">
-<meta property="og:image" content="{SITE}/assets/share-card-v2.png">
+<meta property="og:image" content="{SITE}/assets/share-card-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
