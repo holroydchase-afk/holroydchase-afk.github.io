@@ -178,6 +178,31 @@ def _text(html):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html)).strip()
 
 
+def check_make_your_own(failures):
+    """Make your own (Nov 21): each tool card's copy button carries the exact prompt stored in prompts/<slug>.txt;
+    prompts stay under 120 words and end with 'or something'; the button loads nothing from anywhere."""
+    import html as H
+    for slug in ("fruit-palettes", "share-start-tester"):
+        f = ROOT / "prompts" / f"{slug}.txt"
+        if not f.exists():
+            failures.append(f"prompts/{slug}.txt is missing")
+            continue
+        text = f.read_text().strip()
+        if len(text.split()) > 120:
+            failures.append(f"prompts/{slug}.txt is over 120 words")
+        if not text.rstrip(".").endswith("or something"):
+            failures.append(f"prompts/{slug}.txt should end with 'or something'")
+        for page in ("index.html", "building.html"):
+            h = (ROOT / page).read_text()
+            if h.count('data-mk="%s"' % slug) > 1:
+                failures.append(f"{page}: more than one Make your own button for {slug}")
+            m = re.search(r'data-mk="%s" data-prompt="([^"]*)"' % slug, h)
+            if not m:
+                failures.append(f"{page}: no Make your own button for {slug}")
+            elif H.unescape(m.group(1)) != text:
+                failures.append(f"{page}: {slug} button prompt differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
+
+
 def check_home(failures):
     """Home page v60 (Chase, Nov 16): photo, greeting, one headline, two journey lines, case studies, building, career."""
     html = (ROOT / "index.html").read_text()
@@ -241,7 +266,7 @@ def check_home(failures):
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
           check_no_contact_details, check_deploy_allowlist, check_no_third_party_loads, check_scoreboard,
-          check_home]
+          check_home, check_make_your_own]
 
 
 def main():

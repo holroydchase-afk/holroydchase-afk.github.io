@@ -54,6 +54,12 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - Chase (Nov 20): "Remove all the screenshots from the portfolio, at least for the ones in building." The four screenshot figures (Crew Clock, Charlie, Energy Scanner, Role Radar) are removed from `building.html`; the image files stay in `assets/building/` (hidden, not deleted) so they can come back. The in-progress items are now text only, one column. Home has no screenshots (only the portrait). Checked: check_site.py ok; Playwright 390/1100 no horizontal scroll, no images, no console errors. Not run: ux-reviewer, qa-tdd.
 - Next: Chase says go (changes the live page); merge, which starts its own deploy. Never re-run a failed Pages run.
 
+## WEB-M13.18 "Make your own" prompts on tool cards (Nov 21, PR open, preview only)
+- Chase (Nov 20): small UI tools aren't installed, visitors want their own. Each small tool card keeps its Live demo and gets a "Make your own" button that copies a ready prompt (copy only, no third-party hosts, same font). First two: Share start tester and Cut-open palettes (Fruit Palettes). Prompts live in `prompts/<slug>.txt` (under 120 words, end "or something"); `python3 tools/sync_prompts.py` copies them into the buttons on home and building; check_site.py fails on drift, duplicates or a long prompt.
+- Checked: check_site.py ok; Playwright 390/1366 on home and building: no horizontal scroll, no console errors, clipboard holds the exact prompt, button says "Prompt copied. Paste it into Claude." for about 3 seconds. Not run: ux-reviewer, qa-tdd (cloud thread); the prompts were not yet pasted into Claude to compare output.
+- Decision to review: the Fruit Palettes card is still "Coming soon" with no demo on the site, so its button is the only action for now. Repos stay for real libraries only.
+- Next: Chase says go (changes the live page); merge starts its own deploy. Then roll the button to the other tool cards one PR at a time.
+
 ## WEB-M13.17 Persona Twins card (Nov 21, PR open)
 - Chase (Nov 20): the Stakeholder twins card is now "Persona Twins", with his copy word for word, the Repo badge and a GitHub link to holroydchase-afk/persona-twins only (the demo page is private). Home and building both updated. Checked: check_site.py ok; Playwright no horizontal scroll, no console errors. Not verified: that the repo is public (outside this session's GitHub scope, so the check returned 403); taken from Chase's word. Not run: ux-reviewer, qa-tdd.
 - Next: Chase says go (changes the live page); merge starts its own deploy.
