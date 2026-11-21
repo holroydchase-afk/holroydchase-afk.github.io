@@ -11,6 +11,7 @@ CARDS = {
     "hero-backgrounds": "Hero backgrounds",
     "build-slate-roadmap": "Build Slate and Roadmap",
     "share-start-tester": "Share start tester",
+    "hearth-font-tester": "Hearth font tester",
     "interview-flashcards": "Interview flashcards",
     "studio-agents-kit": "Studio agents kit",
     "screenshot-design-checker": "Screenshot and design-rule checker",
