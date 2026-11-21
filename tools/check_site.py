@@ -179,28 +179,34 @@ def _text(html):
 
 
 def check_make_your_own(failures):
-    """Make your own (Nov 21): each tool card's copy button carries the exact prompt stored in prompts/<slug>.txt;
-    prompts stay under 120 words and end with 'or something'; the button loads nothing from anywhere."""
+    """Make your own (Nov 21): every Tools card's copy button carries the exact prompt stored in prompts/<slug>.txt;
+    prompts stay under 120 words and end with 'or something'; one button per card."""
     import html as H
-    for slug in ("fruit-palettes", "share-start-tester"):
-        f = ROOT / "prompts" / f"{slug}.txt"
-        if not f.exists():
-            failures.append(f"prompts/{slug}.txt is missing")
-            continue
+    files = sorted((ROOT / "prompts").glob("*.txt"))
+    for f in files:
         text = f.read_text().strip()
         if len(text.split()) > 120:
-            failures.append(f"prompts/{slug}.txt is over 120 words")
+            failures.append(f"{f.name} is over 120 words")
         if not text.rstrip(".").endswith("or something"):
-            failures.append(f"prompts/{slug}.txt should end with 'or something'")
-        for page in ("index.html", "building.html"):
-            h = (ROOT / page).read_text()
-            if h.count('data-mk="%s"' % slug) > 1:
-                failures.append(f"{page}: more than one Make your own button for {slug}")
-            m = re.search(r'data-mk="%s" data-prompt="([^"]*)"' % slug, h)
-            if not m:
-                failures.append(f"{page}: no Make your own button for {slug}")
-            elif H.unescape(m.group(1)) != text:
-                failures.append(f"{page}: {slug} button prompt differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
+            failures.append(f"{f.name} should end with 'or something'")
+    for page in ("index.html", "building.html"):
+        h = (ROOT / page).read_text()
+        found = re.findall(r'data-mk="([a-z-]+)" data-prompt="([^"]*)"', h)
+        slugs = [s for s, _ in found]
+        if len(set(slugs)) != len(slugs):
+            failures.append(f"{page}: a Make your own button appears twice")
+        for slug, prompt in found:
+            f = ROOT / "prompts" / f"{slug}.txt"
+            if not f.exists():
+                failures.append(f"{page}: {slug} has no prompts/{slug}.txt")
+            elif H.unescape(prompt) != f.read_text().strip():
+                failures.append(f"{page}: {slug} differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
+        missing = {f.stem for f in files} - set(slugs)
+        if missing:
+            failures.append(f"{page}: no button for {sorted(missing)}")
+        cards = len(re.findall(r'class="kc"', h.split("Small tools with code on GitHub", 1)[-1].split("</section>", 1)[0]))
+        if cards != len(slugs):
+            failures.append(f"{page}: {cards} Tools cards but {len(slugs)} Make your own buttons")
 
 
 def check_home(failures):
