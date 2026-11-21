@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hearth font tester</title>
+<link rel="stylesheet" href="../../assets/fonts.css">
+<style>
+/* Layout: controls on the left, one phone-sized mock beside it (stacked on narrow screens). Tokens = Hearth's Paper theme. */
+:root{
+  --page:#ECEBE6; --panel:#FFFFFF; --pink:#1E1B17; --pmuted:#5C564E; --pline:#DAD6CC; --paccent:#AD371D;
+  --ui:"Atkinson Hyperlegible Next",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--page:#0E0D0B;--panel:#1C1A17;--pink:#F1EEE8;--pmuted:#B2ACA2;--pline:#2E2B27;--paccent:#FF8A65;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--pink);font-family:var(--ui);font-size:16px}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start}
+.ctl{flex:1 1 300px;max-width:400px;min-width:0;background:var(--panel);border:1px solid var(--pline);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.ctl h1{font-size:20px;margin:0;font-weight:600;text-wrap:balance}
+.ctl p{margin:0;color:var(--pmuted);line-height:1.4}
+.back{color:var(--pink);min-height:44px;display:inline-flex;align-items:center}
+.lbl{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--pmuted)}
+.fonts{display:flex;flex-direction:column;gap:6px}
+.fonts button,.seg button{font:inherit;color:var(--pink);background:transparent;border:1px solid var(--pline);border-radius:10px;min-height:48px;padding:6px 12px;text-align:left;cursor:pointer}
+.fonts button[aria-pressed="true"],.seg button[aria-pressed="true"]{border:2px solid var(--paccent);padding:5px 11px}
+.fonts button small{display:block;color:var(--pmuted);font-family:var(--ui);font-size:13px}
+.fonts button span{font-size:19px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1 1 auto;text-align:center}
+.row{display:flex;gap:8px;align-items:center}
+input[type=text]{flex:1;min-width:0;font:inherit;min-height:44px;padding:0 10px;border:1px solid var(--pline);border-radius:10px;background:transparent;color:var(--pink)}
+input[type=range]{width:100%;accent-color:var(--paccent);min-height:36px}
+.go{font:inherit;min-height:44px;padding:0 14px;border-radius:10px;border:0;background:var(--paccent);color:#fff;font-weight:600;cursor:pointer}
+.msg{font-size:13px;color:var(--pmuted);min-height:1em}
+:focus-visible{outline:2px solid var(--paccent);outline-offset:2px}
+.phone{--bg:#F7F7F4;--surface:#FFFFFF;--ink:#1E1B17;--muted:#5C564E;--line:#E3DED4;--fill:#EFECE5;--accent:#AD371D;
+  --f:-apple-system,BlinkMacSystemFont,system-ui,sans-serif; --base:17px;
+  flex:0 1 390px;width:100%;max-width:390px;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:var(--base);line-height:1.3;
+  border:1px solid var(--pline);border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+.scr{padding:16px;display:flex;flex-direction:column;gap:16px}
+.hello{font-size:calc(var(--base)*2);font-weight:600;letter-spacing:-.01em;line-height:1.1;margin:8px 0 0}
+.top{display:flex;justify-content:flex-end;gap:16px;color:var(--accent);font-weight:600}
+.month{font-size:calc(var(--base)*1.4);font-weight:600;margin:0}
+.mosaic{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:90px 90px;gap:4px}
+.mosaic div{border-radius:16px;box-shadow:0 2px 12px rgba(30,27,23,.1)}
+.mosaic div:first-child{grid-row:span 2}
+.p1{background:linear-gradient(150deg,#E9B872,#C0703F 60%,#6E4B3A)}
+.p2{background:linear-gradient(160deg,#9CC5D8,#4C7FA0)}
+.p3{background:linear-gradient(140deg,#B7CE8E,#5E7D45)}
+.post{display:flex;flex-direction:column;gap:10px}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--fill);display:grid;place-items:center;font-weight:600;font-size:15px;color:var(--muted)}
+.name{font-weight:500}
+.time{color:var(--muted)}
+.photo{height:170px;border-radius:16px;background:linear-gradient(135deg,#F2C6A0,#D0805C 55%,#7A5146);box-shadow:0 2px 12px rgba(30,27,23,.1)}
+.reacts{display:flex;gap:8px}
+.reacts span{min-height:44px;min-width:56px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:999px;padding:0 10px;border:2px solid transparent}
+.reacts span.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+.note{margin:0}
+.field{border-radius:12px;background:var(--fill);min-height:48px;display:flex;align-items:center;padding:0 14px;color:var(--muted)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.cap{border-radius:999px;min-height:48px;padding:0 18px;display:inline-flex;align-items:center;font-weight:600}
+.tint{background:color-mix(in srgb,var(--accent) 12%,var(--bg));color:var(--accent)}
+.gray{background:var(--fill);color:var(--ink)}
+.list{background:var(--surface);border-radius:12px;overflow:hidden}
+.list div{min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line)}
+.list div:last-child{border-bottom:0}
+.list em{font-style:normal;color:var(--muted)}
+.glyph{background:var(--surface);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.glyph b{font-size:calc(var(--base)*1.5);font-weight:400;letter-spacing:.04em}
+.w{color:var(--muted)}
+.tabs{display:flex;justify-content:space-around;border-top:1px solid var(--line);background:var(--surface);padding:6px 4px 10px;margin-top:auto}
+.tab{min-width:64px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted)}
+.tab.on{color:var(--accent)}
+.tab i{font-style:normal;font-size:22px;line-height:1}
+.tab span{font-size:var(--base);font-weight:500}
+.phone:not(.easy) .tab span{display:none}
+@media (prefers-reduced-motion:no-preference){.phone *{transition:font-size .15s}}
+</style></head><body>
+<div class="wrap">
+  <section class="ctl" aria-label="Font controls">
+    <a class="back" href="../../building.html">&larr; Back to what I&rsquo;m building</a>
+    <h1>Try a font for Hearth</h1>
+    <p>Tap a font and the phone screen changes. Everything uses Hearth&rsquo;s real sizes, colors and weights. A prototype with made-up names and nothing sent anywhere.</p>
+
+    <div class="lbl" id="fl">Font</div>
+    <div class="fonts" role="group" aria-labelledby="fl" id="fonts"></div>
+
+    <div class="lbl"><label for="custom">A font on your device (by name)</label></div>
+    <div class="row">
+      <input type="text" id="custom" placeholder="e.g. Helvetica Neue" autocomplete="off">
+      <button type="button" class="go" id="load">Try it</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+
+    <div class="lbl"><label for="size">Text size: <span id="sz">17</span> pt</label></div>
+    <input type="range" id="size" min="15" max="28" step="1" value="17">
+
+    <div class="lbl" id="el">Easy view</div>
+    <div class="seg" role="group" aria-labelledby="el" id="easy">
+      <button type="button" data-v="off" aria-pressed="true">Off (parents)</button>
+      <button type="button" data-v="on" aria-pressed="false">On (grandparents)</button>
+    </div>
+
+    <div class="lbl" id="tl">Theme</div>
+    <div class="seg" role="group" aria-labelledby="tl" id="theme">
+      <button type="button" data-v="paper" aria-pressed="true">Paper</button>
+      <button type="button" data-v="avocado" aria-pressed="false">Avocado</button>
+      <button type="button" data-v="pomegranate" aria-pressed="false">Pomegranate</button>
+    </div>
+    <div class="seg" role="group" aria-label="Light or dark" id="mode">
+      <button type="button" data-v="light" aria-pressed="true">Light</button>
+      <button type="button" data-v="dark" aria-pressed="false">Dark</button>
+    </div>
+    <p id="pick"></p>
+  </section>
+
+  <section class="phone" id="phone" aria-label="Hearth preview">
+    <div class="scr">
+      <div class="top"><span>Search</span></div>
+      <h2 class="hello">Good evening, Nana</h2>
+      <h3 class="month">November</h3>
+      <div class="mosaic"><div class="p1"></div><div class="p2"></div><div class="p3"></div></div>
+
+      <div class="post">
+        <div class="who"><div class="av">M</div><div><div class="name">Mia</div><div class="time">2 hours ago</div></div></div>
+        <div class="photo"></div>
+        <div class="reacts"><span class="on">&#10084;&#65039; 3</span><span>&#128514;</span><span>&#128077; 1</span></div>
+        <p class="note">First time on the big slide. She went down eleven times before dinner.</p>
+        <div class="field">Write a comment</div>
+      </div>
+
+      <div class="btns"><span class="cap tint">Send to family</span><span class="cap gray">Not now</span></div>
+
+      <div class="list"><div>Easy view <em>On</em></div><div>Light or dark <em>Same as my phone</em></div><div>Help</div></div>
+
+      <div class="glyph">
+        <span class="w">Letters people mix up</span>
+        <b>Il1 O0 rn m 8B 5S</b>
+        <span><span style="font-weight:400">Regular</span> &middot; <span style="font-weight:500">Medium</span> &middot; <span style="font-weight:600">Semibold</span></span>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Tabs">
+      <div class="tab on"><i>&#9638;</i><span>Gallery</span></div>
+      <div class="tab"><i>&#65291;</i><span>Share</span></div>
+      <div class="tab"><i>&#9776;</i><span>Feed</span></div>
+      <div class="tab"><i>&#8943;</i><span>More</span></div>
+    </nav>
+  </section>
+</div>
+
+<script>
+/* Only fonts that ship with this page, or that the device already has: nothing loads from another host. */
+const FONTS=[
+  {n:"The phone's own font",f:'-apple-system,BlinkMacSystemFont,system-ui,Roboto,sans-serif',d:'What Hearth uses today. Looks different on iPhone and Android.'},
+  {n:'Atkinson Hyperlegible Next',f:'"Atkinson Hyperlegible Next",system-ui,sans-serif',d:'Recommended. Made for low-vision readers; same on every phone.'},
+  {n:'Verdana',f:'Verdana,Geneva,sans-serif',d:'Wide, open letters. Shows only if your device has it.'},
+  {n:'Rounded',f:'ui-rounded,"SF Pro Rounded","Hiragino Maru Gothic ProN",system-ui,sans-serif',d:'Soft and friendly. Shows on Apple devices.'},
+  {n:'Georgia',f:'Georgia,"Times New Roman",serif',d:'A serif, for contrast.'}
+];
+const THEMES={
+  paper:{light:['#F7F7F4','#FFFFFF','#1E1B17','#5C564E','#E3DED4','#EFECE5','#AD371D'],dark:['#131210','#1C1A17','#F1EEE8','#B2ACA2','#2E2B27','#24221E','#FF8A65']},
+  avocado:{light:['#F6F5E4','#EFF1D5','#1F1A1B','#4F4A42','#DCDBCC','#E7ECC6','#2F5419'],dark:['#2A2426','#322C2E','#F3F1DA','#C2BDA8','#4A4543','#3A3335','#7ED69B']},
+  pomegranate:{light:['#F5EADF','#F0E4D8','#22161A','#62504F','#DDCDBE','#EBDDD0','#A3172F'],dark:['#170D10','#1E1215','#F5E9E6','#BBA7A6','#3A272B','#24171A','#FF8597']}
+};
+const K=['bg','surface','ink','muted','line','fill','accent'];
+const ph=document.getElementById('phone');
+const st={font:1,custom:null,size:17,easy:'off',theme:'paper',mode:'light'};
+try{Object.assign(st,JSON.parse(localStorage.getItem('hft')||'{}'))}catch(e){}
+if(!(st.font>=0&&st.font<FONTS.length))st.font=1;
+const fb=document.getElementById('fonts');
+FONTS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';const s=document.createElement('span');s.style.fontFamily=x.f;s.textContent=x.n;const m=document.createElement('small');m.textContent=x.d;b.append(s,m);b.onclick=()=>{st.font=i;st.custom=null;document.getElementById('msg').textContent='';render()};fb.appendChild(b)});
+function seg(id,key,after){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{st[key]=b.dataset.v;if(after)after();render()})}
+seg('easy','easy',()=>{st.size=st.easy==='on'?Math.max(st.size,21):17});seg('theme','theme');seg('mode','mode');
+const sz=document.getElementById('size');sz.oninput=()=>{st.size=+sz.value;render()};
+const msg=document.getElementById('msg');
+function installed(name){
+  const c=document.createElement('canvas').getContext('2d'),t='mmmmmmmmmmlliWW 0123';
+  return ['monospace','serif','sans-serif'].some(b=>{c.font='40px '+b;const w=c.measureText(t).width;c.font='40px "'+name+'",'+b;return c.measureText(t).width!==w});
+}
+function loadCustom(name){
+  name=name.trim().replace(/[^A-Za-z0-9 ]/g,'');if(!name)return;
+  if(installed(name)){st.custom=name;msg.textContent=name+' found on this device.';render()}
+  else{msg.textContent='This device doesn\u2019t have "'+name+'". Check the spelling, or pick a font from the list.'}
+}
+document.getElementById('load').onclick=()=>loadCustom(document.getElementById('custom').value);
+document.getElementById('custom').onkeydown=e=>{if(e.key==='Enter')loadCustom(e.target.value)};
+function render(){
+  const fam=st.custom?`"${st.custom}",system-ui,sans-serif`:FONTS[st.font].f;
+  ph.style.setProperty('--f',fam);ph.style.setProperty('--base',st.size+'px');
+  THEMES[st.theme][st.mode].forEach((v,i)=>ph.style.setProperty('--'+K[i],v));
+  ph.querySelectorAll('.mosaic div,.photo').forEach(e=>e.style.boxShadow=st.mode==='dark'?'none':'');
+  ph.classList.toggle('easy',st.easy==='on');
+  [...fb.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(!st.custom&&i===st.font)));
+  for(const [id,key] of [['easy','easy'],['theme','theme'],['mode','mode']])document.querySelectorAll('#'+id+' button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===st[key])));
+  sz.value=st.size;document.getElementById('sz').textContent=st.size;
+  document.getElementById('pick').textContent='Showing: '+(st.custom||FONTS[st.font].n)+', '+st.size+' pt, Easy view '+st.easy+', '+st.theme+' '+st.mode+'.';
+  try{localStorage.setItem('hft',JSON.stringify(st))}catch(e){}
+}
+if(st.custom&&!installed(st.custom))st.custom=null;
+render();
+</script>
+</body></html>
