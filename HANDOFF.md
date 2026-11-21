@@ -54,6 +54,10 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - Chase (Nov 20): "Remove all the screenshots from the portfolio, at least for the ones in building." The four screenshot figures (Crew Clock, Charlie, Energy Scanner, Role Radar) are removed from `building.html`; the image files stay in `assets/building/` (hidden, not deleted) so they can come back. The in-progress items are now text only, one column. Home has no screenshots (only the portrait). Checked: check_site.py ok; Playwright 390/1100 no horizontal scroll, no images, no console errors. Not run: ux-reviewer, qa-tdd.
 - Next: Chase says go (changes the live page); merge, which starts its own deploy. Never re-run a failed Pages run.
 
+## WEB-M13.17 Persona Twins card (Nov 21, PR open)
+- Chase (Nov 20): the Stakeholder twins card is now "Persona Twins", with his copy word for word, the Repo badge and a GitHub link to holroydchase-afk/persona-twins only (the demo page is private). Home and building both updated. Checked: check_site.py ok; Playwright no horizontal scroll, no console errors. Not verified: that the repo is public (outside this session's GitHub scope, so the check returned 403); taken from Chase's word. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page); merge starts its own deploy.
+
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
 - Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
 - Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
