@@ -63,6 +63,11 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 - Checked: check_site.py ok; Playwright: the demo reaches the postcard step, no console errors, no requests to other hosts; no horizontal scroll on home or building. Not run: ux-reviewer, privacy-security, qa-tdd. Hearth's own HANDOFF.md "Portfolio / public presence" has not been updated (outside this repo).
 - Next: Chase says go (new public page and a changed live page); merge starts its own deploy.
 
+## WEB-M13.19 three skill chips on home plus View all (Nov 21, PR open)
+- Chase (Nov 21): too many filter chips on the portfolio; show 3 and a way to view all that goes to the building page. Home now shows Product strategy, AI and LLMs, Front end and UX (my pick for a senior PM search; swap any of the three in `SHOW` in index.html) plus a "View all →" chip that links to `building.html`, which keeps the full skill list and the stage filters. Single-select unchanged; `?skill=` on home only accepts the three.
+- Checked: check_site.py ok; Playwright 390/1100: 4 chips, filter works, View all lands on building.html, no horizontal scroll, no console errors, greeting still. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page); merge starts its own deploy.
+
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
 - Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
 - Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
