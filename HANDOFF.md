@@ -66,6 +66,7 @@ Studio-wide status (what's done across every project and what's waiting on Chase
 ## WEB-M13.19 three skill chips on home plus View all (Nov 21, PR open)
 - Chase (Nov 21): too many filter chips on the portfolio; show 3 and a way to view all that goes to the building page. Home now shows Product strategy, AI and LLMs, Front end and UX (my pick for a senior PM search; swap any of the three in `SHOW` in index.html) plus a "View all →" chip that links to `building.html`, which keeps the full skill list and the stage filters. Single-select unchanged; `?skill=` on home only accepts the three.
 - Checked: check_site.py ok; Playwright 390/1100: 4 chips, filter works, View all lands on building.html, no horizontal scroll, no console errors, greeting still. Not run: ux-reviewer, qa-tdd.
+- Same PR: the Persona Twins card is renamed **Stakeholder Twins** (Chase's intake, Nov 21): new one-liner (seven AI stakeholder twins, runs on your own Claude account, no API key or install, "Twin answers are guesses, not research."), Repo badge, link to github.com/holroydchase-afk/stakeholder-twins only. No demo link until Chase shares the artifact. One card, the old one replaced. Repo visibility not verified from here (outside this session's GitHub scope).
 - Next: Chase says go (changes the live page); merge starts its own deploy.
 
 ## LIC-1 license audit, portfolio (Nov 20, PR open)
