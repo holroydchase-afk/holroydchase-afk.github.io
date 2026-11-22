@@ -48,7 +48,7 @@ HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
 HEARTH_FACTS = [("734", "app tests"), ("1,029", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
-               "I ran the build with a team of AI agents, tests first.")
+               "I ran the build with Claude Code and a set of role prompts, tests first.")
 
 NAV = [
     ("index.html", "Work"),
@@ -59,7 +59,7 @@ NAV = [
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
-"jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
+"jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI tools.",
 "url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/chase-800.jpg",
 "address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
 "alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
@@ -418,7 +418,7 @@ family = product(
         ])),
         ("Try it", "<p>Open the demo, a made-up family kept only in your browser. Switch to Grandma Jo's view from the demo bar's Details and see only what was shared with her.</p>"),
         ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is the next step. {HEARTH_TEAM} "
-         "I built it with a team of nine AI agents, routed by a chief-of-staff session.</p>"),
+         "I built it with Claude Code and nine role prompts (staff PM, QA, engineer, designer and more), routed by a chief-of-staff session.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
@@ -726,7 +726,7 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 # (company, [(title, dates)], [paragraphs]); a company with several roles gets one paragraph per stage.
 JOBS = [
     ("Career break", [("Family caregiving", "Jan 2026 – present")], [
-        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with a team of AI agents, tests first. Both are on this site with the code public."]),
+        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with Claude Code and a set of role prompts, tests first. Both are on this site with the code public."]),
     ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
         "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "

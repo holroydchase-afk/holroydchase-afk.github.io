@@ -9,6 +9,11 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## WEB-M13.20 honest agent wording (Nov 22, PR open, waits for Chase's go)
+- Chase (Nov 22): the site said he has agents when only the UX reviewer works as a tool loop (studio-agents PR 87 has the gap table). Replaced "team of agents" and "Claude agents write the code" with Claude Code plus role prompts on home, building, Hearth, resume and About; the studio card now says only the UX reviewer is a tool loop and quotes 11 to 14 of 24 real screen problems (about 54%), not the in-sample 92%. The old "8 real bugs, both setups spotted every gap" line is gone. Patter agent claims are career facts (master) and stay.
+- Not run: ux-reviewer, qa-tdd (copy only). check_site.py ok.
+- Next: Chase says go; merge. Hidden Studio and Console pages in tools/build.py still hold old agent wording and must be fixed before they are shown again.
+
 ## WEB-M13.19 Energy Scanner demo UX fixes (Nov 22, PR open, waits for Chase's go)
 - From the UX agent's first real run (UX-R1 P0, R2 to R6, R10, R11; 5/10, bar is 8). Demo bar now dark with full-strength text and 48px; a plain "Scan my energy" button (the hold still works, no scolding text); steps, labels and Grown-ups controls at 17px / 48px; accessible name matches the visible words. Demo-only: styles and the tap script are in `tools/demo-fixes/`, text edits in `tools/make_demos.py`. The app itself is owned by the energy-scanner repo, so an intake should carry the same fixes there.
 - Tests: `node tools/test_energy_demo.mjs` 16/16, three runs (red first at 4/16). check_site.py ok. Not fixed: UX-R7 and R8 wording (Grown-ups copy, what-is-this line), R9.
