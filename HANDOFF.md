@@ -9,6 +9,11 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## WEB-M13.19 Energy Scanner demo UX fixes (Nov 22, PR open, waits for Chase's go)
+- From the UX agent's first real run (UX-R1 P0, R2 to R6, R10, R11; 5/10, bar is 8). Demo bar now dark with full-strength text and 48px; a plain "Scan my energy" button (the hold still works, no scolding text); steps, labels and Grown-ups controls at 17px / 48px; accessible name matches the visible words. Demo-only: styles and the tap script are in `tools/demo-fixes/`, text edits in `tools/make_demos.py`. The app itself is owned by the energy-scanner repo, so an intake should carry the same fixes there.
+- Tests: `node tools/test_energy_demo.mjs` 16/16, three runs (red first at 4/16). check_site.py ok. Not fixed: UX-R7 and R8 wording (Grown-ups copy, what-is-this line), R9.
+- Next: Chase says go (changes the live demo); merge, then re-run the agent's recheck on the live demo.
+
 ## WEB-M13.11a Umami proxy folder (Nov 20)
 - `stats-proxy/` (Vercel rewrite to Umami Cloud, Root Directory for the Vercel project) lands on main first so Vercel can see it on import. Pages does not deploy it (not in the pages.yml copy list); the live site does not change. The script tag itself is in PR #76.
 

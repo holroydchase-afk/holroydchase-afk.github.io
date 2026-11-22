@@ -68,6 +68,26 @@ summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.08em;text-trans
 @media (prefers-reduced-motion:reduce){.pad.scanning .beam{animation:none;top:50%}*{transition:none!important}}
 </style>
 
+<style>/* Demo-only UX fixes (UX-R1, R2, R4, R5, R6). Mirrored to the app by an intake, not edited in the app here. */
+:root{--demo-bg:#1B2250;--demo-fg:#EEF0FF;--demo-muted:#D5D9F5;--demo-line:#6B76C4;--demo-badge-fg:#EEF0FF}
+.demo-bar .demo-bar__home,.demo-bar .demo-bar__toggle{min-height:48px}
+.demo-bar{font-size:16px}
+.steplbl{font-size:17px;color:var(--ink);letter-spacing:.04em}
+.steps{gap:6px}
+.step{font-size:17px;min-height:72px;min-width:48px;border-color:#6B76C4;color:var(--ink);padding:8px 2px}
+.step .ic{opacity:.8}
+.step[aria-pressed="true"]::after{content:"\2713";color:var(--glow);font-size:17px;line-height:1}
+.scanbtn{min-height:56px;min-width:min(100%,260px);padding:0 28px;border:0;border-radius:999px;background:var(--glow);color:#0F1430;font:800 20px var(--f-body);cursor:pointer}
+.again{min-height:48px;font-size:17px}
+summary{display:flex;align-items:center;min-height:48px;font-size:17px;letter-spacing:.02em;text-transform:none;color:var(--ink)}
+details{font-size:17px}
+.parent label{min-height:48px}
+.parent input[type=time]{min-height:48px;font-size:17px}
+.parent input[type=range]{min-height:48px;width:100%}
+.parent input[type=checkbox]{width:24px;height:24px;margin:12px}
+.parent button{min-height:48px;padding:0 16px;font-size:17px;color:var(--ink)}
+.parent .row{min-height:48px}
+</style>
 <canvas id="stars" aria-hidden="true"></canvas>
 <div class="wrap">
   <header>
@@ -81,7 +101,7 @@ summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.08em;text-trans
   </section>
 
   <section class="pad-zone">
-    <button class="pad" id="pad" type="button" aria-label="Press and hold to scan your energy">
+    <button class="pad" id="pad" type="button" aria-label="Scan my energy">
       <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
         <circle cx="50" cy="50" r="47" fill="none" stroke="#2E3670" stroke-width="3"/>
         <circle id="prog" cx="50" cy="50" r="47" fill="none" stroke="var(--energy)" stroke-width="3" stroke-linecap="round" stroke-dasharray="295.3" stroke-dashoffset="295.3"/>
@@ -89,7 +109,8 @@ summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.08em;text-trans
       <div class="beam"></div>
       <div class="hand" aria-hidden="true">✋</div>
     </button>
-    <div class="hint" id="hint">Put your hand on the scanner and hold</div>
+    <button class="scanbtn" id="scanBtn" type="button">Scan my energy</button>
+    <div class="hint" id="hint">Tap Scan my energy, or hold your hand on the circle</div>
   </section>
 
   <section class="reading" id="reading" hidden aria-live="polite">
@@ -103,7 +124,7 @@ summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.08em;text-trans
   </section>
 
   <details>
-    <summary>Grown-ups</summary>
+    <summary>Grown-ups: bedtime and settings</summary>
     <div class="parent">
       <label for="bed">Bedtime <input type="time" id="bed" value="20:00"></label>
       <div>Pretend it's a different time (for testing)</div>
@@ -171,7 +192,7 @@ function show(e){
   $("rText").textContent=L.t[Math.floor(Math.random()*L.t.length)];
   const left=STEPS.filter(s=>!done.has(s.id)).map(s=>s.l);
   $("rTodo").textContent=left.length?`To drain the battery: ${left.join(", ")}. Then scan again.`:"All steps done. Lights out, recharge all night. ⭐";
-  $("reading").hidden=false;
+  $("reading").hidden=false;$("reading").scrollIntoView({block:"nearest"});
   $("hint").textContent=L.name+" detected";
 }
 
@@ -180,14 +201,14 @@ const HOLD=2600, C=295.3; let t0=0,raf=0,holding=false;
 const pad=$("pad"), prog=$("prog");
 function start(e){if(e)e.preventDefault();if(holding)return;holding=true;t0=performance.now();pad.classList.remove("done");pad.classList.add("scanning");document.documentElement.style.setProperty("--energy","#7CF2E0");$("hint").textContent="Scanning… keep holding";$("reading").hidden=true;loop()}
 function loop(){const p=Math.min(1,(performance.now()-t0)/HOLD);prog.style.strokeDashoffset=C*(1-p);if(p>=1){finish();return}raf=requestAnimationFrame(loop)}
-function stop(){if(!holding)return;holding=false;cancelAnimationFrame(raf);pad.classList.remove("scanning");prog.style.strokeDashoffset=C;$("hint").textContent="Too fast! Hold until the circle fills"}
+function stop(){if(!holding)return;holding=false;cancelAnimationFrame(raf);pad.classList.remove("scanning");prog.style.strokeDashoffset=C;$("hint").textContent="Keep your hand on the circle"}
 function finish(){holding=false;pad.classList.remove("scanning");pad.classList.add("done");prog.style.strokeDashoffset=0;try{navigator.vibrate&&navigator.vibrate([40,40,80])}catch{}show(reading())}
 pad.addEventListener("pointerdown",start);
 ["pointerup","pointerleave","pointercancel"].forEach(ev=>pad.addEventListener(ev,stop));
 pad.addEventListener("contextmenu",e=>e.preventDefault());
 pad.addEventListener("keydown",e=>{if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();start()}});
 pad.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter")stop()});
-$("again").addEventListener("click",()=>{$("reading").hidden=true;pad.classList.remove("done");prog.style.strokeDashoffset=C;document.documentElement.style.setProperty("--energy","#7CF2E0");$("hint").textContent="Put your hand on the scanner and hold";pad.focus()});
+$("again").addEventListener("click",()=>{$("reading").hidden=true;pad.classList.remove("done");prog.style.strokeDashoffset=C;document.documentElement.style.setProperty("--energy","#7CF2E0");$("hint").textContent="Tap Scan my energy, or hold your hand on the circle";pad.focus()});
 
 // grown-ups
 $("bed").addEventListener("change",e=>{bed=e.target.value||"20:00";store.set("bed",bed);tick()});
@@ -200,6 +221,14 @@ const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function draw(t){x.clearRect(0,0,c.width,c.height);for(const a of s){x.globalAlpha=.35+.35*Math.sin(t/900+a.p);x.fillStyle="#EEF0FF";x.beginPath();x.arc(a.x,a.y,a.r,0,7);x.fill()}if(!still)requestAnimationFrame(draw)}
 addEventListener("resize",size);size();requestAnimationFrame(draw)})();
 
+// Demo-only: a one-tap Scan button next to the press-and-hold pad (UX-R2).
+$("scanBtn").addEventListener("click",()=>{
+  if(holding)return;
+  holding=true;pad.classList.remove("done");pad.classList.add("scanning");
+  $("hint").textContent="Scanning…";$("reading").hidden=true;
+  const t=performance.now();
+  (function go(){const p=Math.min(1,(performance.now()-t)/900);prog.style.strokeDashoffset=C*(1-p);if(p<1)requestAnimationFrame(go);else finish()})();
+});
 renderSteps();tick();setInterval(tick,15000);
 </script>
 
