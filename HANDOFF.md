@@ -9,6 +9,9 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## UX agent pilot: flows file for the Energy Scanner demo (Nov 21, PR open)
+- `docs/design/flows.json` lists three flows (Home, Scan, Steps) for `demo/energy-scanner/`; the studio's `ux-flows` tool shoots them and the ux-reviewer reviews them. A first local run scored the demo 5/10 with one P0 (the demo bar's pale text on white hides the way back to the portfolio) and 7 P1s. Nothing on the live site changes and no demo file was edited; merging this only adds the flows file (a push to main redeploys Pages, so it waits for Chase's go). Next: Chase picks which findings to fix; the agent files issues only after promotion from Advisory.
+
 ## WEB-M13.11a Umami proxy folder (Nov 20)
 - `stats-proxy/` (Vercel rewrite to Umami Cloud, Root Directory for the Vercel project) lands on main first so Vercel can see it on import. Pages does not deploy it (not in the pages.yml copy list); the live site does not change. The script tag itself is in PR #76.
 

@@ -1,0 +1,10 @@
+{
+  "product": "Energy Scanner demo",
+  "target": "demo/energy-scanner/index.html",
+  "cost_cap_usd": 1,
+  "flows": [
+    { "name": "Home", "wait": "#pad" },
+    { "name": "Scan", "wait": "#pad", "clicks": ["#pad"] },
+    { "name": "Steps", "wait": "#steps", "clicks": [".step"] }
+  ]
+}
