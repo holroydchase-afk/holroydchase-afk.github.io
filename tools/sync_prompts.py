@@ -7,7 +7,7 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CARDS = {
-    "persona-twins": "Persona Twins",
+    "stakeholder-twins": "Stakeholder Twins",
     "hero-backgrounds": "Hero backgrounds",
     "build-slate-roadmap": "Build Slate and Roadmap",
     "share-start-tester": "Share start tester",
