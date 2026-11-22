@@ -46,7 +46,7 @@ IN_PROGRESS = [
 HEARTH = "Hearth"
 HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("734", "app tests"), ("1,029", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("1,291", "app tests"), ("1,199", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with Claude Code and a set of role prompts, tests first.")
 
@@ -411,7 +411,7 @@ family = product(
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
-            ("Tested", "734 app tests and 1,029 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
+            ("Tested", "1,291 app tests and 1,199 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
             ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
             ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
             ("Self-reviewed", "No outside security audit yet."),
@@ -446,7 +446,7 @@ role_radar = product(
             ("Open", "Code on GitHub, with a README case study."),
         ])),
         ("Try it", "<p>The demo runs the real app in your browser on made-up jobs. Try anything: it resets when you reload.</p>"),
-        ("Status and what's next", "<p>The radar runs for me every weekday. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
+        ("Status and what's next", "<p>The radar runs when I ask it to. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
     ],
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,

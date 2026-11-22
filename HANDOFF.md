@@ -9,6 +9,10 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## WEB-M13.21 claim fixes: Hearth totals, Role Radar cadence (Nov 22, PR open, waits for Chase's go)
+- Hearth page now quotes the repo's current totals (1,291 app tests, 1,199 database checks, from its README and scripts/test-totals.sh); the old 734 / 1,029 were stale. Role Radar says it runs when asked, not every weekday (scheduled task has been off since Oct 24). The "about 190 boards" line is still open with Chase. Verdicts: project files claims-audit/2026-11-22-claim-verdicts.md.
+- Next: Chase says go; merge, confirm the deploy.
+
 ## WEB-M13.20 honest agent wording (Nov 22, PR open, waits for Chase's go)
 - Chase (Nov 22): the site said he has agents when only the UX reviewer works as a tool loop (studio-agents PR 87 has the gap table). Replaced "team of agents" and "Claude agents write the code" with Claude Code plus role prompts on home, building, Hearth, resume and About; the studio card now says only the UX reviewer is a tool loop and quotes 11 to 14 of 24 real screen problems (about 54%), not the in-sample 92%. The old "8 real bugs, both setups spotted every gap" line is gone. Patter agent claims are career facts (master) and stay.
 - Not run: ux-reviewer, qa-tdd (copy only). check_site.py ok.
