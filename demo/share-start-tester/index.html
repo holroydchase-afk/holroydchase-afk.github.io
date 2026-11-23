@@ -1,6 +1,11 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Share start tester</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Share Start Tester</title>
+<!-- Hearth design tester: Share start, round 2. One file, no build, no data leaves the page.
+     About it: docs/design/testers/README.md in github.com/holroydchase-afk/hearth -->
 <link rel="stylesheet" href="../../assets/fonts.css">
 <style>
 /* Layout: control column beside one live 393pt phone, Hearth's Paper theme (Linen). */
@@ -117,11 +122,15 @@ button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 @media (max-width:440px){.phone{border-radius:36px;box-shadow:0 0 0 6px #1C1C1E;height:780px}}
 </style>
 
+<style>*{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
 <div class="wrap">
  <div>
   <p style="margin:0 0 12px"><a href="../../building.html" style="color:var(--pgink)">&larr; Back to what I&rsquo;m building</a></p>
   <h1>A better Share start, round 2</h1>
-  <p class="lede">Today, tapping Share shows a page of words with two text links and a big empty space. Three ways to fix that, live in the phone. Tap the Share tab or the big target to see what happens next. A prototype for Hearth with made-up names and gradient photos, nothing is saved or sent.</p>
+  <p class="lede">Today, tapping Share shows a page of words with two text links and a big empty space. Three ways to fix that, live in the phone. Tap the Share tab or the big target to see what happens next.</p>
+  <div class="notes" style="margin:0 0 20px"><p><i>How to use:</i> pick an option below, then use the phone on the right like a real phone. Tap the big "Add photos" box or the Share tab, pick a few photos, and see where you land. Switch "Who is sharing" to see a parent and a grandparent (Easy view). Nothing is saved or sent anywhere. A prototype for Hearth with made-up names and gradient photos.</p><p><i>Decided:</i> Chase picked B+, the postcard first for everyone.</p></div>
   <div class="lbl">What's weak today</div>
   <ul class="weak">
    <li>It's a page of instructions, not a place to start sharing.</li>
@@ -223,5 +232,5 @@ function setT(t){if(t==='system')root.removeAttribute('data-theme');else root.se
 tb.forEach(b=>b.addEventListener('click',()=>setT(b.dataset.t)));let t0='system';try{t0=localStorage.getItem('ss-theme')||'system'}catch(e){}setT(t0);
 render();
 </script>
-
-</body></html>
+</body>
+</html>
