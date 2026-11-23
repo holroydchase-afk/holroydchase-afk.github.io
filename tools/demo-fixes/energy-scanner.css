@@ -1,0 +1,19 @@
+/* Demo-only UX fixes (UX-R1, R2, R4, R5, R6). Mirrored to the app by an intake, not edited in the app here. */
+:root{--demo-bg:#1B2250;--demo-fg:#EEF0FF;--demo-muted:#D5D9F5;--demo-line:#6B76C4;--demo-badge-fg:#EEF0FF}
+.demo-bar .demo-bar__home,.demo-bar .demo-bar__toggle{min-height:48px}
+.demo-bar{font-size:16px}
+.steplbl{font-size:17px;color:var(--ink);letter-spacing:.04em}
+.steps{gap:6px}
+.step{font-size:17px;min-height:72px;min-width:48px;border-color:#6B76C4;color:var(--ink);padding:8px 2px}
+.step .ic{opacity:.8}
+.step[aria-pressed="true"]::after{content:"\2713";color:var(--glow);font-size:17px;line-height:1}
+.scanbtn{min-height:56px;min-width:min(100%,260px);padding:0 28px;border:0;border-radius:999px;background:var(--glow);color:#0F1430;font:800 20px var(--f-body);cursor:pointer}
+.again{min-height:48px;font-size:17px}
+summary{display:flex;align-items:center;min-height:48px;font-size:17px;letter-spacing:.02em;text-transform:none;color:var(--ink)}
+details{font-size:17px}
+.parent label{min-height:48px}
+.parent input[type=time]{min-height:48px;font-size:17px}
+.parent input[type=range]{min-height:48px;width:100%}
+.parent input[type=checkbox]{width:24px;height:24px;margin:12px}
+.parent button{min-height:48px;padding:0 16px;font-size:17px;color:var(--ink)}
+.parent .row{min-height:48px}

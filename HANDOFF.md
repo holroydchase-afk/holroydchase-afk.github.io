@@ -3,9 +3,9 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.10 greeting no longer bobs (PR open); v67 home, no dates, Studio hidden, self-hosted font and the new share card are live
-next: Chase says merge on this PR; then confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
-waiting_on_chase: [Umami setup steps (WEB-M13.11), then say merge]
+now: WEB-M13.12 v70 copy, skills filter and share-card-v3 (live); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
+next: re-scrape the LinkedIn Post Inspector for the new card; confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
+waiting_on_chase: []
 blockers: []
 -->
 
@@ -13,6 +13,30 @@ blockers: []
 - Chase (Nov 19): "can i use umami on my site?" and earlier decision: Umami Cloud, not self-hosted. Every page now has one Umami script tag served from `stats.chaseholroyd.com` (script and data both first-party), with do-not-track on. `check_no_third_party_loads` allows that one host. `stats-proxy/` is a two-line Vercel rewrite config that forwards to Umami Cloud; it is not deployed by Pages. Demos get no analytics yet.
 - Not done, needs Chase: Umami Cloud account and website id, Vercel project with root `stats-proxy`, the `stats` CNAME at Porkbun. The real website id is in the tag (Nov 19). Do not merge until stats.chaseholroyd.com serves the proxy.
 - Nov 19 PM: `stats-proxy/vercel.json` now matches Umami's official Vercel guide (one catch-all rewrite to cloud.umami.is) instead of a guessed gateway host. Still not tested end to end (Umami hosts are blocked from the cloud session); test with a real pageview after setup. If visitor countries look wrong, the proxy may not pass the visitor IP; pageview counts are unaffected.
+
+## WEB-M13.21 Share tester round 2 (Nov 22, PR open, waits for Chase's go)
+- Issue 93 (Hearth intake, hearth#151): the Share start tester was already live at `demo/share-start-tester/` with a Tools card, but it was the older version. Replaced it with Hearth's packaged round 2 (the "How to use" note and Chase's pick, B+). Same scrubs as before: self-hosted Atkinson instead of Google Fonts, nicknames (Mom, Gammy, Pawpaw), no date stamp, no date on the pick, made-up-data line, back link. No new card needed.
+- Checked: check_site.py ok; Playwright at 390 and 1366: no console errors, no requests to any host, no horizontal scroll, Add photos and the Who is sharing switch work. Not run: ux-reviewer, qa-tdd (static copy of a page).
+- Next: Chase says go; merge (deploys the live site); then comment the live URL on issue 93 and add the Hearth HANDOFF line. Live URL after deploy: https://chaseholroyd.com/demo/share-start-tester/
+
+## WEB-M13.22 claim fixes: Hearth totals, Role Radar boards (Nov 22, PR open)
+- Hearth page quotes the repo's current totals (1,291 app tests, 1,199 database checks, from its README and scripts/test-totals.sh); the old 734 / 1,029 were stale.
+- Role Radar: read the live app's database and scheduled tasks. The weekday 2:15am scan is enabled (last fired Nov 20), so "runs every weekday" is true and stays. The last full scan checked 290 company boards (284 read, 6 failed), so "about 190" became "about 290". Project memory that said the scan was off since Oct 24 was wrong.
+- Next: merge on green; confirm the deploy.
+
+
+## WEB-M13.20 honest agent wording (Nov 22, PR open, waits for Chase's go)
+- Chase (Nov 22): the site said he has agents when only the UX reviewer works as a tool loop (studio-agents PR 87 has the gap table). Replaced "team of agents" and "Claude agents write the code" with Claude Code plus role prompts on home, building, Hearth, resume and About; the studio card now says only the UX reviewer is a tool loop and quotes 11 to 14 of 24 real screen problems (about 54%), not the in-sample 92%. The old "8 real bugs, both setups spotted every gap" line is gone. Patter agent claims are career facts (master) and stay.
+- Not run: ux-reviewer, qa-tdd (copy only). check_site.py ok.
+- Next: Chase says go; merge. Hidden Studio and Console pages in tools/build.py still hold old agent wording and must be fixed before they are shown again.
+
+## WEB-M13.19 Energy Scanner demo UX fixes (Nov 22, PR open, waits for Chase's go)
+- From the UX agent's first real run (UX-R1 P0, R2 to R6, R10, R11; 5/10, bar is 8). Demo bar now dark with full-strength text and 48px; a plain "Scan my energy" button (the hold still works, no scolding text); steps, labels and Grown-ups controls at 17px / 48px; accessible name matches the visible words. Demo-only: styles and the tap script are in `tools/demo-fixes/`, text edits in `tools/make_demos.py`. The app itself is owned by the energy-scanner repo, so an intake should carry the same fixes there.
+- Tests: `node tools/test_energy_demo.mjs` 16/16, three runs (red first at 4/16). check_site.py ok. Not fixed: UX-R7 and R8 wording (Grown-ups copy, what-is-this line), R9.
+- Next: Chase says go (changes the live demo); merge, then re-run the agent's recheck on the live demo.
+
+## WEB-M13.11a Umami proxy folder (Nov 20)
+- `stats-proxy/` (Vercel rewrite to Umami Cloud, Root Directory for the Vercel project) lands on main first so Vercel can see it on import. Pages does not deploy it (not in the pages.yml copy list); the live site does not change. The script tag itself is in PR #76.
 
 ## WEB-M11.5 proof strip (Nov 6)
 - Done: hero proof strip now 8+ years, 14+ lender integrations, 2 wks to 48 hrs (PAT-01), 60% faster contract review (ADTP-01), all from the career master impact bank. 3-5 pts and $6M removed from the strip; the prose mentions are gone too (Chase, Nov 6).
@@ -35,6 +59,59 @@ _Read this before starting work on this repo. Update it in the same commit whene
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
 
 Studio-wide status (what's done across every project and what's waiting on Chase): https://github.com/holroydchase-afk/pm-tools/blob/main/STUDIO-STATUS.md. Product repos record portfolio facts in their own HANDOFF.md "Portfolio / public presence" section.
+
+## WEB-M13.13 tools section and skill filter, v71 (Nov 20, PR open)
+- Chase (Nov 20, new thread): ship the v71 preview. Skill filter now sits above the lists on home (`#skf`) and building (`#skw`); 12 tools in a Tools group, tagged Live, Repo or Coming soon; links use the GitHub mark ("Demo → · GitHub" or "GitHub →"), no "Fork it".
+- Checked here: `tools/check_site.py` all ok; Playwright at 390 and 1366 on home and building: no horizontal scroll, filter chips work, no console errors, no third-party hosts, greeting does not move. Not run: ux-reviewer, qa-tdd (cloud thread).
+- Next: Chase says go. It changes the live page, so it waits for his go; then merge and confirm the Pages deploy. Umami (PR 76) is a separate thread.
+
+## WEB-M13.14 one Live / Repo / Coming soon signal on every card (Nov 20, PR open)
+- Chase (Nov 20): the portfolio shows inconsistent live, demo and repo signals. v71 (PR 80) is merged. Now one rule on home and building: a badge first in each card's link row. Live = a demo opens in the browser; Repo = code on GitHub only; Coming soon = nothing published. Links: green "Demo →" only for demos; every repo link is the GitHub mark plus "GitHub" (no "Code", no arrows). Role Radar gains a GitHub link (repo is public); Charlie keeps demo only (repo private).
+- Stakeholder twins is now "Coming soon" with no link: the persona-twins repo could not be checked from here, and the site only claims what a repo backs. Put the link back when the repo is public.
+- Checked: check_site.py ok; Playwright 390/1366 no horizontal scroll, no console errors, greeting still. Demo URLs returned 200 from this session. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page).
+
+## WEB-M13.15 home block, single-select skills, headline (Nov 20, PR open)
+- Chase (Nov 20): home "What I'm building with Claude Code" block (heading, intro, skill chips, no stage pickers; "See the agent team" removed); the skills filter is single-select on home and building (tap one to select, tap it again to clear; ?skill= takes the first); hero headline back to the AI/ML wording ("I'm a staff product manager who has led AI and ML work at startups and large companies, building agents that automate manual work.") until he picks a new one. Two alternates were sent in the thread. Hero grid was tried and dropped at his request.
+- Also: the home journey links ("See the Patter case study ↓", "See what I built →") now underline through the space and the arrow (one continuous line). Checked: check_site.py ok; Playwright 390/1366 no horizontal scroll, no console errors, greeting still; single-select verified on both pages. Not run: ux-reviewer, qa-tdd.
+- Deploy note: the Pages deploy failed 3 times on "Multiple artifacts named github-pages" after re-runs; a fresh workflow_dispatch worked. Never re-run a failed Pages run; trigger a fresh one.
+
+## WEB-M13.16 no screenshots on the Building page (Nov 20, PR open)
+- Chase (Nov 20): "Remove all the screenshots from the portfolio, at least for the ones in building." The four screenshot figures (Crew Clock, Charlie, Energy Scanner, Role Radar) are removed from `building.html`; the image files stay in `assets/building/` (hidden, not deleted) so they can come back. The in-progress items are now text only, one column. Home has no screenshots (only the portrait). Checked: check_site.py ok; Playwright 390/1100 no horizontal scroll, no images, no console errors. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page); merge, which starts its own deploy. Never re-run a failed Pages run.
+
+## WEB-M13.18 "Make your own" prompts on tool cards (Nov 21, PR open, preview only)
+- Chase (Nov 20): small UI tools aren't installed, visitors want their own. Each small tool card keeps its Live demo and gets a "Make your own" button that copies a ready prompt (copy only, no third-party hosts, same font). Chase then asked for all of them: all 13 Tools cards on home and building have the button, and Persona Twins is now first in Tools. Prompts live in `prompts/<slug>.txt` (under 120 words, end "or something"); `python3 tools/sync_prompts.py` copies them into the buttons on home and building; check_site.py fails on drift, duplicates or a long prompt.
+- Checked: check_site.py ok; Playwright 390/1366 on home and building: no horizontal scroll, no console errors, clipboard holds the exact prompt, button says "Prompt copied. Paste it into Claude." for about 3 seconds. Not run: ux-reviewer, qa-tdd (cloud thread); the prompts were not yet pasted into Claude to compare output.
+- Fruit Palettes (Chase, Nov 20: "put fruit palettes on there"): no demo existed (the repo holds only a LICENSE), so one was built from the prompt in `demo/fruit-palettes/` (four fruits, light/dark, WCAG AA checks with one-tap fix, copy hex and CSS). Its card is now Live with Demo plus Make your own. Not yet compared against the original idea; Chase to review. Repos stay for real libraries only.
+- Hearth font tester (Chase, Nov 20, artifact copy): self-hosted at `demo/font-tester/`, made-up names (Nana, Mia). The original loaded Lexend, Inter, Nunito Sans, old Atkinson and any Google font by name from Google Fonts; none of that is allowed here, and the sandbox can't download the files, so the list is now the phone's own font, Atkinson Hyperlegible Next (self-hosted), Verdana, Rounded and Georgia, plus a field for any font already on the device. To bring the others back, the woff2 files need to be added to `assets/fonts/` (OFL) from an allowed host. Card is Live in Tools, with Make your own.
+- Next: Chase says go (changes the live page); merge starts its own deploy. Then roll the button to the other tool cards one PR at a time.
+
+## WEB-M13.17 Persona Twins card (Nov 21, PR open)
+- Chase (Nov 20): the Stakeholder twins card is now "Persona Twins", with his copy word for word, the Repo badge and a GitHub link to holroydchase-afk/persona-twins only (the demo page is private). Home and building both updated. Checked: check_site.py ok; Playwright no horizontal scroll, no console errors. Not verified: that the repo is public (outside this session's GitHub scope, so the check returned 403); taken from Chase's word. Not run: ux-reviewer, qa-tdd.
+- Next: Chase says go (changes the live page); merge starts its own deploy.
+
+## WEB-M13.18 Share start tester tool (Nov 21, PR open)
+- Chase (Nov 21): the Hearth "Share start tester" artifact belongs on the site. A claude.ai artifact link can't go in this public repo (and the artifact is private), so the page is self-hosted at `demo/share-start-tester/` (already in the Pages allowlist) as a static prototype: Google Fonts swapped for the site's self-hosted Atkinson, family names replaced with nicknames (Mom, Gammy, Pawpaw), the date stamp reworded, a made-up-data line and a back link added. New Tools card "Share start tester" (Live, Demo link only) on home and building; building counts now All 20, Tools 13. Skills: Design and prototyping, Front end and UX, Inclusive design, Mobile.
+- Checked: check_site.py ok; Playwright: the demo reaches the postcard step, no console errors, no requests to other hosts; no horizontal scroll on home or building. Not run: ux-reviewer, privacy-security, qa-tdd. Hearth's own HANDOFF.md "Portfolio / public presence" has not been updated (outside this repo).
+- Next: Chase says go (new public page and a changed live page); merge starts its own deploy.
+
+## WEB-M13.19 three skill chips on home plus View all (Nov 21, PR open)
+- Chase (Nov 21): too many filter chips on the portfolio; show 3 and a way to view all that goes to the building page. Home now shows Product strategy, AI and LLMs, Front end and UX (my pick for a senior PM search; swap any of the three in `SHOW` in index.html) plus a "View all →" chip that links to `building.html`, which keeps the full skill list and the stage filters. Single-select unchanged; `?skill=` on home only accepts the three.
+- Checked: check_site.py ok; Playwright 390/1100: 4 chips, filter works, View all lands on building.html, no horizontal scroll, no console errors, greeting still. Not run: ux-reviewer, qa-tdd.
+- Same PR: the Persona Twins card is renamed **Stakeholder Twins** (Chase's intake, Nov 21): new one-liner (seven AI stakeholder twins, runs on your own Claude account, no API key or install, "Twin answers are guesses, not research."), Repo badge, link to github.com/holroydchase-afk/stakeholder-twins only. No demo link until Chase shares the artifact. One card, the old one replaced. Repo visibility not verified from here (outside this session's GitHub scope).
+- Next: Chase says go (changes the live page); merge starts its own deploy.
+
+## LIC-1 license audit, portfolio (Nov 20, PR open)
+- Chase (Nov 20): "Audit all repos ... make sure licenses are setup correctly." This repo (also reachable as holroydchase-afk.github.io, same repo) is public with an all-rights-reserved `LICENSE` for site text, photos and design, and says the demo apps stay MIT in their source repos. That is correct and stays. One gap fixed: the self-hosted Atkinson Hyperlegible Next font (SIL OFL 1.1) had no license text beside it; `assets/fonts/OFL.txt` now carries it.
+- Next: Chase says merge (it adds one static file to the live site, so it waits for his go). No other change needed here.
+## WEB-M13.12 v70 release (Nov 20, PR open)
+- Chase (Nov 20): "go v70" (relayed). One release: the Fable v70 copy pass (hero "I led product for AI agents that took over manual lending and sales work. Three-time founding product manager.", Patter and ADT tile edits, Role Radar one-liner no longer says weekday), a skills filter on `building.html` (chips with counts, AND logic, `?skill=` deep links, stage buttons All/Built/Building/Tools) plus a Tools section of three text cards, a "See my work by skill" chip strip on the home page, and `assets/share-card-v3.png` (new file name so link previews refresh; all page tags point to it).
+- Skill tags are in `data-sk` on each card. Placeholder cards from the preview (Nudge, prototype docs) and products not on the site (Pace, Ask about Chase, shared messenger, Build Slate) are not shipped.
+- Fork links: hero-backgrounds and persona-twins repos confirmed public by Chase (via coordinator, Nov 20); not checkable from the cloud session.
+- Resume and email check: the home page has no resume link (the PDF at assets/chase-holroyd-resume.pdf and resume.html both load); the mail icon copies hello@chaseholroyd.com, it is not a mailto link.
+- Tests: check_site.py passes; Playwright on building.html (filter on/off, two skills, empty state, clear, deep link, stage buttons) and home strip at 390 and 1280.
+- Agents: qa-tdd skipped: cloud thread, static pages covered by check_site.py plus the Playwright run above; ux-reviewer not run.
 
 ## WEB-M13.10 greeting stops bobbing (Nov 19, PR open)
 - Chase (Nov 19): "the hey there I'm Chase text continues to slowly creep up and down ... this is a recurring bug". Cause: each greeting word (`.pw`) had a second, endless animation (`fl`, a 3 px float every 6 s) on top of the one-time fade-in. Removed the endless one and the `fl` keyframes in `index.html`; the words still fade in once. Only this fix is shipped; the copy pass in previews v69 and v70 is not live and not part of this PR.
@@ -172,6 +249,7 @@ Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Portfolio / public presence
+- 2026-11-22, Share tester round 2 (issue 93): the Hearth Share start tester at /demo/share-start-tester/ is updated to Hearth's packaged version (how-to note, Chase's pick). Waits for Chase's go to deploy. Log it in Hearth HANDOFF.md.
 - 2026-11-06, one font site wide (Chase): every page now loads only Atkinson Hyperlegible Next (Regular, Medium, SemiBold) from Google Fonts, the same font as Hearth's DS-12. Public Sans, the older Atkinson Hyperlegible (incl. Bold 700) and IBM Plex Mono are gone. No bold (700 became 600; `b`/`strong` pinned to 600), no italics, no all caps (eyebrow and tag text is now sentence case). Monospace stays only for `pre.code`, as a system stack with no webfont. Checked in a browser: every text element on Home, Role Radar, Resume, Studio and About computes to Next at 400/500/600, normal style, no transform. Share-card source (`tools/share-card.html`) updated too; its PNG was not re-rendered. Before/after shots in /mnt/project-files/portfolio/font-switch/. Not live until Chase merges.
 - 2026-11-02, Hearth re-host: home and family-photos.html "Try the demo" open https://chaseholroyd.com/Hearth/ (Hearth's own Pages build) instead of the copied /demo/hearth/, which is deleted. check_site.py knows /Hearth/ is another repo's site. Both URLs answered 200 before the change. Screenshots still show the older build.
 - 2026-10-31, WEB-M8.3 (Chase: "yes" to a "built for a cause" card): home gets a text-only band after the AI work, "Built for a cause: Open Arms Foundation", linking to /websites/ (Chase's site for the Medellín children's home, served from its own repo, so never add a top-level `websites/` folder here; added to `OTHER_REPO_SITES` in check_site.py). No screenshot on purpose: the site's hero shows identifiable children, so it isn't copied into this repo. Not live until Chase merges.

@@ -46,9 +46,9 @@ IN_PROGRESS = [
 HEARTH = "Hearth"
 HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("734", "app tests"), ("1,029", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("1,291", "app tests"), ("1,199", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
-               "I ran the build with a team of AI agents, tests first.")
+               "I ran the build with Claude Code and a set of role prompts, tests first.")
 
 NAV = [
     ("index.html", "Work"),
@@ -59,7 +59,7 @@ NAV = [
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Chase Holroyd",
-"jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI agents.",
+"jobTitle":"Staff Product Manager","description":"Staff product manager in pricing, payments and point-of-sale lending, building products with AI tools.",
 "url":"https://chaseholroyd.com","image":"https://chaseholroyd.com/assets/chase-800.jpg",
 "address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
 "alumniOf":{"@type":"CollegeOrUniversity","name":"West Virginia University"},
@@ -91,7 +91,7 @@ def page(slug, title, description, body):
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE}/{'' if slug == 'index.html' else slug}">
 <meta property="og:type" content="{'profile' if slug == 'about.html' else 'website'}">
-<meta property="og:image" content="{SITE}/assets/share-card-v2.png">
+<meta property="og:image" content="{SITE}/assets/share-card-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
@@ -215,7 +215,7 @@ JOURNEY = [
      "[check] Who uses it today, e.g. my kids every night", "Try the app",
      "a bedtime routine for my kids that ends in an on-device energy scan"),
     ("role-radar.html", "Role Radar",
-     "A job search is mostly triage. An agent reads about 190 company boards on request and scores every role with a stated reason, so my time goes to the few worth pursuing.",
+     "A job search is mostly triage. An agent reads about 290 company boards on request and scores every role with a stated reason, so my time goes to the few worth pursuing.",
      "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
      "[check] Who uses it besides me", "Try the demo", ""),
     ("ccwatts.html", "ccwatts",
@@ -412,14 +412,14 @@ family = product(
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
-            ("Tested", "734 app tests and 1,029 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
+            ("Tested", "1,291 app tests and 1,199 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
             ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
             ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
             ("Self-reviewed", "No outside security audit yet."),
         ])),
         ("Try it", "<p>Open the demo, a made-up family kept only in your browser. Switch to Grandma Jo's view from the demo bar's Details and see only what was shared with her.</p>"),
         ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is the next step. {HEARTH_TEAM} "
-         "I built it with a team of nine AI agents, routed by a chief-of-staff session.</p>"),
+         "I built it with Claude Code and nine role prompts (staff PM, QA, engineer, designer and more), routed by a chief-of-staff session.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
@@ -429,7 +429,7 @@ role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is triage. Role Radar reads the boards when I run a scan and explains which roles merit my time, so I can say no faster and focus on the few that fit.",
-    [("~190", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
+    [("~290", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("The problem", "<p>Most of a job search is triage: dozens of boards, repeat postings, and a pull to apply to everything. The scarce thing is my attention, so the tool's job is to say no faster.</p>"),
@@ -447,11 +447,11 @@ role_radar = product(
             ("Open", "Code on GitHub, with a README case study."),
         ])),
         ("Try it", "<p>The demo runs the real app in your browser on made-up jobs. Try anything: it resets when you reload.</p>"),
-        ("Status and what's next", "<p>The radar runs for me every weekday. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
+        ("Status and what's next", "<p>The radar runs for me every weekday morning. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
     ],
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
-          "The demo reads 9 sample boards. The real radar watches about 190."),
+          "The demo reads 9 sample boards. The real radar watches about 290."),
 )
 
 ccwatts = product(
@@ -727,7 +727,7 @@ about = f"""<div class="intro">{HEADSHOT}<div class="read">
 # (company, [(title, dates)], [paragraphs]); a company with several roles gets one paragraph per stage.
 JOBS = [
     ("Career break", [("Family caregiving", "Jan 2026 – present")], [
-        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with a team of AI agents, tests first. Both are on this site with the code public."]),
+        "Stepped back from employment for family caregiving. Shipped ccwatts (open source) and am building Hearth, a private family photo app, with Claude Code and a set of role prompts, tests first. Both are on this site with the code public."]),
     ("Patter AI", [("Staff Product Manager", "Jan 2023 – Jan 2026 · Remote")], [
         "Patter's clients sell solar and home services, and their reps had to price loans, leases and PPAs on the spot. "
         "I led one real-time pricing engine across all three for 4 clients, and a rep-guided checkout that shows the payment impact of each add-on. "
@@ -783,7 +783,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
     ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
-    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 190 company boards on request.", role_radar),
+    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 290 company boards on request.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),

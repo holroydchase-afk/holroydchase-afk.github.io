@@ -178,6 +178,37 @@ def _text(html):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html)).strip()
 
 
+def check_make_your_own(failures):
+    """Make your own (Nov 21): every Tools card's copy button carries the exact prompt stored in prompts/<slug>.txt;
+    prompts stay under 120 words and end with 'or something'; one button per card."""
+    import html as H
+    files = sorted((ROOT / "prompts").glob("*.txt"))
+    for f in files:
+        text = f.read_text().strip()
+        if len(text.split()) > 120:
+            failures.append(f"{f.name} is over 120 words")
+        if not text.rstrip(".").endswith("or something"):
+            failures.append(f"{f.name} should end with 'or something'")
+    for page in ("index.html", "building.html"):
+        h = (ROOT / page).read_text()
+        found = re.findall(r'data-mk="([a-z-]+)" data-prompt="([^"]*)"', h)
+        slugs = [s for s, _ in found]
+        if len(set(slugs)) != len(slugs):
+            failures.append(f"{page}: a Make your own button appears twice")
+        for slug, prompt in found:
+            f = ROOT / "prompts" / f"{slug}.txt"
+            if not f.exists():
+                failures.append(f"{page}: {slug} has no prompts/{slug}.txt")
+            elif H.unescape(prompt) != f.read_text().strip():
+                failures.append(f"{page}: {slug} differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
+        missing = {f.stem for f in files} - set(slugs)
+        if missing:
+            failures.append(f"{page}: no button for {sorted(missing)}")
+        cards = len(re.findall(r'class="kc"', h.split("Small tools with code on GitHub", 1)[-1].split("</section>", 1)[0]))
+        if cards != len(slugs):
+            failures.append(f"{page}: {cards} Tools cards but {len(slugs)} Make your own buttons")
+
+
 def check_home(failures):
     """Home page v60 (Chase, Nov 16): photo, greeting, one headline, two journey lines, case studies, building, career."""
     html = (ROOT / "index.html").read_text()
@@ -241,7 +272,7 @@ def check_home(failures):
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
           check_no_contact_details, check_deploy_allowlist, check_no_third_party_loads, check_scoreboard,
-          check_home]
+          check_home, check_make_your_own]
 
 
 def main():

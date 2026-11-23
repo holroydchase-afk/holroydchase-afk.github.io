@@ -20,8 +20,18 @@ SOURCES = {  # demo name -> artifact the snapshot came from (links live in proje
 # Demo-only changes to the app itself, as (old, new) pairs.
 EDITS = {
     # Start with a real reading; in the app a parent switch keeps every scan grey.
-    "energy-scanner": [('store.get("alwaysGrey",true)', 'store.get("alwaysGrey",false)')],
+    "energy-scanner": [
+        ('store.get("alwaysGrey",true)', 'store.get("alwaysGrey",false)'),
+        # UX agent run UX-R2/R3/R10/R11 and the Grown-ups row (UX-R6); styles and the tap button live in tools/demo-fixes/.
+        ('Press and hold to scan your energy', 'Scan my energy'),
+        ('Put your hand on the scanner and hold', 'Tap Scan my energy, or hold your hand on the circle'),
+        ('Too fast! Hold until the circle fills', 'Keep your hand on the circle'),
+        ('<summary>Grown-ups</summary>', '<summary>Grown-ups: bedtime and settings</summary>'),
+        ('<div class="hint" id="hint">', '<button class="scanbtn" id="scanBtn" type="button">Scan my energy</button>\n    <div class="hint" id="hint">'),
+        ('$("reading").hidden=false;', '$("reading").hidden=false;$("reading").scrollIntoView({block:"nearest"});'),
+    ],
 }
+FIXES = SRC.parent / "demo-fixes"
 
 
 def build(name):
@@ -30,6 +40,14 @@ def build(name):
     for old, new in EDITS.get(name, []):
         assert old in t, f"{name}: app changed, update EDITS ({old})"
         t = t.replace(old, new)
+    css, js = FIXES / f"{name}.css", FIXES / f"{name}.js"
+    if css.exists():
+        assert '<canvas id="stars"' in t, f"{name}: app changed, update the style marker"
+        t = t.replace('<canvas id="stars"', "<style>" + css.read_text(encoding="utf-8") + '</style>\n<canvas id="stars"', 1)
+    if js.exists():
+        marker = "renderSteps();tick();setInterval(tick,15000);"
+        assert marker in t, f"{name}: app changed, update the fix marker"
+        t = t.replace(marker, js.read_text(encoding="utf-8") + marker, 1)
     t = t.replace("<html>", '<html lang="en">', 1)
     t = t.replace("</head>", '<meta name="robots" content="noindex"><link rel="icon" href="../../assets/favicon.svg"></head>', 1)
     t = t.replace("<body>", '<body>\n<script src="seed.js"></script><script src="../fake-db.js"></script>\n', 1)
