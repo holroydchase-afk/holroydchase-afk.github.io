@@ -214,7 +214,7 @@ JOURNEY = [
      "[check] Who uses it today, e.g. my kids every night", "Try the app",
      "a bedtime routine for my kids that ends in an on-device energy scan"),
     ("role-radar.html", "Role Radar",
-     "A job search is mostly triage. An agent reads about 190 company boards on request and scores every role with a stated reason, so my time goes to the few worth pursuing.",
+     "A job search is mostly triage. An agent reads about 290 company boards on request and scores every role with a stated reason, so my time goes to the few worth pursuing.",
      "My first scheduled agent: it runs unattended, and I review its judgment rather than the raw feed.",
      "[check] Who uses it besides me", "Try the demo", ""),
     ("ccwatts.html", "ccwatts",
@@ -428,7 +428,7 @@ role_radar = product(
     "AI tool · beta",
     "Role Radar",
     "Most of a job search is triage. Role Radar reads the boards when I run a scan and explains which roles merit my time, so I can say no faster and focus on the few that fit.",
-    [("~190", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
+    [("~290", "company job boards watched"), ("5", "sources merged, duplicates removed"), ("0–100", "fit score, each with a one-line reason"),
      ("By hand", "every application is still my call")],
     [
         ("The problem", "<p>Most of a job search is triage: dozens of boards, repeat postings, and a pull to apply to everything. The scarce thing is my attention, so the tool's job is to say no faster.</p>"),
@@ -446,11 +446,11 @@ role_radar = product(
             ("Open", "Code on GitHub, with a README case study."),
         ])),
         ("Try it", "<p>The demo runs the real app in your browser on made-up jobs. Try anything: it resets when you reload.</p>"),
-        ("Status and what's next", "<p>The radar runs when I ask it to. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
+        ("Status and what's next", "<p>The radar runs for me every weekday morning. The public demo shows the radar only; I am confirming the board count against the repo and tightening the demo's sample data before calling it done. A single-page app on Claude with its own saved database, plus connectors for ZipRecruiter and email.</p>"),
     ],
     links=[("Try the live demo", "/role-radar/"), ("Code on GitHub", f"{GITHUB}/role-radar")],
     shot=("role-radar-phone.webp", "Role Radar on a phone, sample data: the New tab with a Senior Product Manager role scored 90, Strong, with the reason it fits.", 600,
-          "The demo reads 9 sample boards. The real radar watches about 190."),
+          "The demo reads 9 sample boards. The real radar watches about 290."),
 )
 
 ccwatts = product(
@@ -782,7 +782,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
     ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
-    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 190 company boards on request.", role_radar),
+    ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 290 company boards on request.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends with an energy scan: a palm pad, or a photo with an on-device aura.", energy),
