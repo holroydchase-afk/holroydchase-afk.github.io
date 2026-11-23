@@ -110,7 +110,7 @@ def check_no_third_party_loads(failures):
     assets/fonts; links to LinkedIn and GitHub are ordinary <a> links and fine."""
     from html.parser import HTMLParser
 
-    own = ("https://chaseholroyd.com", "http://localhost")
+    own = ("https://chaseholroyd.com", "https://stats.chaseholroyd.com", "http://localhost")  # stats. is the first-party analytics proxy (Umami)
     loaders = {"link", "script", "img", "iframe", "source", "video", "audio", "embed", "object", "track"}
 
     class Loads(HTMLParser):
