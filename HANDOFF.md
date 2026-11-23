@@ -9,6 +9,11 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## WEB-M13.21 Share tester round 2 (Nov 22, PR open, waits for Chase's go)
+- Issue 93 (Hearth intake, hearth#151): the Share start tester was already live at `demo/share-start-tester/` with a Tools card, but it was the older version. Replaced it with Hearth's packaged round 2 (the "How to use" note and Chase's pick, B+). Same scrubs as before: self-hosted Atkinson instead of Google Fonts, nicknames (Mom, Gammy, Pawpaw), no date stamp, no date on the pick, made-up-data line, back link. No new card needed.
+- Checked: check_site.py ok; Playwright at 390 and 1366: no console errors, no requests to any host, no horizontal scroll, Add photos and the Who is sharing switch work. Not run: ux-reviewer, qa-tdd (static copy of a page).
+- Next: Chase says go; merge (deploys the live site); then comment the live URL on issue 93 and add the Hearth HANDOFF line. Live URL after deploy: https://chaseholroyd.com/demo/share-start-tester/
+
 ## WEB-M13.20 honest agent wording (Nov 22, PR open, waits for Chase's go)
 - Chase (Nov 22): the site said he has agents when only the UX reviewer works as a tool loop (studio-agents PR 87 has the gap table). Replaced "team of agents" and "Claude agents write the code" with Claude Code plus role prompts on home, building, Hearth, resume and About; the studio card now says only the UX reviewer is a tool loop and quotes 11 to 14 of 24 real screen problems (about 54%), not the in-sample 92%. The old "8 real bugs, both setups spotted every gap" line is gone. Patter agent claims are career facts (master) and stay.
 - Not run: ux-reviewer, qa-tdd (copy only). check_site.py ok.
@@ -233,6 +238,7 @@ Open [check]s for Chase: Patter's site URL (Capterra lists salespatter.io; this 
 Stop rule (staff PM): after WEB-M2, stop site work. The signal is recruiter screens per 15 applications, plus asking in screens whether they saw the site.
 
 ## Portfolio / public presence
+- 2026-11-22, Share tester round 2 (issue 93): the Hearth Share start tester at /demo/share-start-tester/ is updated to Hearth's packaged version (how-to note, Chase's pick). Waits for Chase's go to deploy. Log it in Hearth HANDOFF.md.
 - 2026-11-06, one font site wide (Chase): every page now loads only Atkinson Hyperlegible Next (Regular, Medium, SemiBold) from Google Fonts, the same font as Hearth's DS-12. Public Sans, the older Atkinson Hyperlegible (incl. Bold 700) and IBM Plex Mono are gone. No bold (700 became 600; `b`/`strong` pinned to 600), no italics, no all caps (eyebrow and tag text is now sentence case). Monospace stays only for `pre.code`, as a system stack with no webfont. Checked in a browser: every text element on Home, Role Radar, Resume, Studio and About computes to Next at 400/500/600, normal style, no transform. Share-card source (`tools/share-card.html`) updated too; its PNG was not re-rendered. Before/after shots in /mnt/project-files/portfolio/font-switch/. Not live until Chase merges.
 - 2026-11-02, Hearth re-host: home and family-photos.html "Try the demo" open https://chaseholroyd.com/Hearth/ (Hearth's own Pages build) instead of the copied /demo/hearth/, which is deleted. check_site.py knows /Hearth/ is another repo's site. Both URLs answered 200 before the change. Screenshots still show the older build.
 - 2026-10-31, WEB-M8.3 (Chase: "yes" to a "built for a cause" card): home gets a text-only band after the AI work, "Built for a cause: Open Arms Foundation", linking to /websites/ (Chase's site for the Medellín children's home, served from its own repo, so never add a top-level `websites/` folder here; added to `OTHER_REPO_SITES` in check_site.py). No screenshot on purpose: the site's hero shows identifiable children, so it isn't copied into this repo. Not live until Chase merges.
