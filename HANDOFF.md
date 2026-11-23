@@ -14,6 +14,12 @@ blockers: []
 - Checked: check_site.py ok; Playwright at 390 and 1366: no console errors, no requests to any host, no horizontal scroll, Add photos and the Who is sharing switch work. Not run: ux-reviewer, qa-tdd (static copy of a page).
 - Next: Chase says go; merge (deploys the live site); then comment the live URL on issue 93 and add the Hearth HANDOFF line. Live URL after deploy: https://chaseholroyd.com/demo/share-start-tester/
 
+## WEB-M13.22 claim fixes: Hearth totals, Role Radar boards (Nov 22, PR open)
+- Hearth page quotes the repo's current totals (1,291 app tests, 1,199 database checks, from its README and scripts/test-totals.sh); the old 734 / 1,029 were stale.
+- Role Radar: read the live app's database and scheduled tasks. The weekday 2:15am scan is enabled (last fired Nov 20), so "runs every weekday" is true and stays. The last full scan checked 290 company boards (284 read, 6 failed), so "about 190" became "about 290". Project memory that said the scan was off since Oct 24 was wrong.
+- Next: merge on green; confirm the deploy.
+
+
 ## WEB-M13.20 honest agent wording (Nov 22, PR open, waits for Chase's go)
 - Chase (Nov 22): the site said he has agents when only the UX reviewer works as a tool loop (studio-agents PR 87 has the gap table). Replaced "team of agents" and "Claude agents write the code" with Claude Code plus role prompts on home, building, Hearth, resume and About; the studio card now says only the UX reviewer is a tool loop and quotes 11 to 14 of 24 real screen problems (about 54%), not the in-sample 92%. The old "8 real bugs, both setups spotted every gap" line is gone. Patter agent claims are career facts (master) and stay.
 - Not run: ux-reviewer, qa-tdd (copy only). check_site.py ok.
