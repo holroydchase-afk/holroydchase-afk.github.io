@@ -548,7 +548,7 @@ crew_clock = product(
             ("Tested", "40+ test files, run in CI."),
             ("Privacy contract", "A written privacy contract in the repo, with consent records that are never edited."),
             ("Open", "MIT-licensed code on GitHub."),
-            ("Built to be cheap", "The setup doc says every service used has a free tier that covers a beta."),
+            ("Built to be cheap", "The setup doc says every service used has a free tier that covers a beta. One catch: Supabase pauses an idle free project after a week."),
         ])),
         ("Try it", "<p>Open the demo and tap Travis K. to clock in as a worker. Turn on No signal to see the offline queue, then tap Not you? and choose Sam W. to see the boss's view.</p>"),
         ("Status and what's next", "<p>The demo runs the real app on a made-up crew. The crew's own app is getting ready for a two-week beta with five workers; it has not started.</p>"),

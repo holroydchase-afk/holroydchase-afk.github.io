@@ -12,6 +12,10 @@ blockers: []
 ## Dark mode decision on record (Nov 23, docs only)
 Home defaults to light on purpose (Chase's standing call, "Light mode default"): `index.html` reads `?theme=` or the saved choice and falls back to light, with a sun toggle, so it does not follow the system dark setting. That is not a defect (studio-agents dark audit D-1, rule DARK-1 deliberately not followed on home). Open small note: the home dark theme's page color is #0A0A0A, darker than the usual dark grey (about #121212, DARK-4); text contrast passes (0 failures in 213 text elements) and no shadows. Leave it unless Chase wants it softened.
 
+## WEB-M13.23 Crew Clock page: Supabase idle-pause caveat (Nov 24, PR open)
+- Chase (Nov 24): "Yes" to adding the caveat from the claims audit. The "Built to be cheap" line now says Supabase pauses an idle free project after a week (docs/SETUP.md in crew-clock). Copy only; check_site.py ok. Rides the nightly release train; merge on Chase's go.
+- Also from the audit: ccwatts intake #117 (how the 8.5 kWh sample numbers are produced); Charlie is meant to be public (Chase, Nov 24), recorded through a Charlie intake.
+
 ## WEB-M13.21 Share tester round 2 (Nov 22, PR open, waits for Chase's go)
 - Issue 93 (Hearth intake, hearth#151): the Share start tester was already live at `demo/share-start-tester/` with a Tools card, but it was the older version. Replaced it with Hearth's packaged round 2 (the "How to use" note and Chase's pick, B+). Same scrubs as before: self-hosted Atkinson instead of Google Fonts, nicknames (Mom, Gammy, Pawpaw), no date stamp, no date on the pick, made-up-data line, back link. No new card needed.
 - Checked: check_site.py ok; Playwright at 390 and 1366: no console errors, no requests to any host, no horizontal scroll, Add photos and the Who is sharing switch work. Not run: ux-reviewer, qa-tdd (static copy of a page).
