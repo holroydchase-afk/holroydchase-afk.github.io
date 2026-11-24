@@ -299,3 +299,6 @@ The real apps are Claude artifacts. The demos are snapshots of them, so they dri
 - Chase: a single review pass of the pages.
 - Hearth rename, then update `family-photos.html` copy.
 - Optional: a "portfolio: feature / list / hidden" field in Build Slate so the site follows the slate (tracked in pm-tools PLAN.md).
+
+## Done
+- Community files (2026-11-24, Chase: will engineers see an amateur repo): added CONTRIBUTING, CODE_OF_CONDUCT, issue templates and a PR template (plus SECURITY.md where missing), per `studio-agents` docs/repo-standards.md. Next: set the repo description and topics in GitHub settings, add a CI badge.
