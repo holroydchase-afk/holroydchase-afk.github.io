@@ -1,0 +1,18 @@
+/* Shared demo header: see demo-bar.js */
+@font-face{font-family:"Atkinson Hyperlegible Next";font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/atkinson-hyperlegible-next-latin.woff2) format("woff2")}
+#site-bar{--sb-bg:#fff;--sb-ink:#14161A;--sb-muted:#5B6068;--sb-line:#E4E6E2;--sb-cta:#0B7A4B;position:fixed;top:0;left:0;right:0;height:52px;z-index:2147483000;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:0 max(16px,env(safe-area-inset-left));background:var(--sb-bg);color:var(--sb-ink);border-bottom:1px solid var(--sb-line);font:500 15px/1.2 "Atkinson Hyperlegible Next",system-ui,sans-serif}
+#site-bar.dk{--sb-bg:#131210;--sb-ink:#F2F0EA;--sb-muted:#A8A49A;--sb-line:#2C2A26;--sb-cta:#4CC38A}
+#site-bar a{display:inline-flex;align-items:center;min-height:44px;color:var(--sb-muted);text-decoration:none;padding:0 6px;border-radius:6px}
+#site-bar a:hover{color:var(--sb-ink)}
+#site-bar a:focus-visible{outline:2px solid var(--sb-cta);outline-offset:0}
+#site-bar .nm{color:var(--sb-ink);font-weight:700;gap:6px}
+#site-bar .nm i{font-style:normal;color:var(--sb-cta)}
+#site-bar .sp{flex:1}
+#site-bar .lb{color:var(--sb-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#site-bar .cs{color:var(--sb-cta);font-weight:700}
+@media(max-width:560px){#site-bar .hide-s{display:none}
+}
+html{--site-bar-h:52px}
+body{padding-top:52px!important;box-sizing:border-box}
+#root,body>div:first-of-type{max-height:calc(100dvh - 52px)}
+html.sb-white,html.sb-white body{background:#fff!important}

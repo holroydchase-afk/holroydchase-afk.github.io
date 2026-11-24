@@ -181,5 +181,6 @@ $("cHex").onclick=function(){var s="";[false,true].forEach(function(m){var r=rol
 $("cCss").onclick=function(){var s=":root{\n";var r=roles(cur,false);Object.keys(r).forEach(function(k){s+="  --"+k+": "+r[k]+";\n"});s+="}\n@media (prefers-color-scheme: dark){:root{\n";r=roles(cur,true);Object.keys(r).forEach(function(k){s+="  --"+k+": "+r[k]+";\n"});s+="}}";copy(s,"CSS variables copied.")};
 render();
 </script>
+<script src="/assets/demo-bar.js" data-page="white" defer></script>
 </body>
 </html>
