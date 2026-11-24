@@ -822,6 +822,8 @@ if __name__ == "__main__":
                    for s, *_ in PAGES if s != "404.html" and s not in HIDDEN)
     # building.html is hand-built from portfolio preview v60 (Chase, Nov 16); it is not in PAGES but belongs in the sitemap.
     urls += f"<url><loc>{SITE}/building.html</loc></url>\n"
+    # agents.html is hand-built (Chase, Nov 24); like building.html it is not in PAGES but belongs in the sitemap.
+    urls += f"<url><loc>{SITE}/agents.html</loc></url>\n"
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       f"{urls}</urlset>\n", encoding="utf-8")
