@@ -37,6 +37,11 @@ IN_PROGRESS = [
      "a beta with a small real crew.", "See the demo"),
     ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
      "a copy pass before I call it done.", "See the app"),
+]
+
+# Hidden, not deleted (Chase, Nov 24: remove the Open Arms Foundation work from the portfolio for now; the websites
+# repo went private, so /websites/ is a 404). Move this back into IN_PROGRESS when it is public again.
+HIDDEN_IN_PROGRESS = [
     ("/websites/", "Open Arms Foundation", "The website I built for a children's home in Medell\u00edn, Colombia.",
      "adding the sponsorship details.", "Visit the site"),
 ]
