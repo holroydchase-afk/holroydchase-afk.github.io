@@ -54,6 +54,7 @@ Home defaults to light on purpose (Chase's standing call, "Light mode default"):
 
 ## WEB-M13.23 hero arrow points down (Nov 24, branch only, rides tonight's release train)
 - Chase (Nov 24): "See what I built" arrow should point down like the Patter case study. It now reads "See what I built ↓" and jumps to the building section on the home page (`#ai`) instead of opening building.html. check_site.py ok. Not run: ux-reviewer, qa-tdd (one-line copy change).
+- Open Arms Foundation (Chase, Nov 24: remove it from the portfolio for now): checked the live site and the repo. Home, Building, About and Resume have no Open Arms card or /websites/ link (the card left the home page with v30 on Nov 13), and /websites/ is a 404 because the repo went private. The only leftover was the stale `IN_PROGRESS` entry in `tools/build.py`; it is now in `HIDDEN_IN_PROGRESS` (hidden, not deleted). The built pages are unchanged.
 - Not changed: the constellation hero background stays hidden on the live home; a preview exists, awaiting Chase's go.
 - Next: Chase's go on the release train; merge (deploys the live site).
 
