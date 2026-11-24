@@ -52,6 +52,11 @@ Home defaults to light on purpose (Chase's standing call, "Light mode default"):
 - Agents: ux-reviewer designed and reviewed v24 to v30 (no open P0/P1); qa-tdd not run (cloud thread).
 - Blocker before merge: confirm the Porkbun forward for hello@chaseholroyd.com delivers mail.
 
+## WEB-M13.23 hero arrow points down (Nov 24, branch only, rides tonight's release train)
+- Chase (Nov 24): "See what I built" arrow should point down like the Patter case study. It now reads "See what I built ↓" and jumps to the building section on the home page (`#ai`) instead of opening building.html. check_site.py ok. Not run: ux-reviewer, qa-tdd (one-line copy change).
+- Not changed: the constellation hero background stays hidden on the live home; a preview exists, awaiting Chase's go.
+- Next: Chase's go on the release train; merge (deploys the live site).
+
 _Read this before starting work on this repo. Update it in the same commit whenever you make progress._
 
 Last updated: 2026-11-05 (WEB-M9.2 career-facts alignment: scale pair split, Engine facts added; WEB-M9.1 numbers match the newest resumes; WEB-M8.3 Open Arms "built for a cause" band on home; PMT-M3.5 PM tools page becomes the Studio Console page, plus the status header (PMT-M3.4); demo banner standard DEMO-BAR copied into demo/fake-db.js; WEB-M8 homepage rebuild with Hearth featured; open-PR cleanup: #23 and #25 closed; security kit: gitleaks, privacy scan, dependency review, CodeQL, Dependabot; studio refresh: agents by default; WEB-M2.6 headshot on home, About and the share card; WEB-M7.3 ccwatts page says it's on npm; WEB-M7.2 robots.txt blocks AI crawlers; WEB-M7.1 trim for recruiters: noindex site-wide, below-bar work unlinked from home; WEB-M5.7 senior Staff-PM voice across all copy; WEB-M6.1 Studio page merged with Chase's OK, incl. the public 2:15am and 6:30 times; WEB-M5.6 resume as prose; WEB-M4.9 page checks; WEB-M5.5 home as an AI journey with Patter, ADT and Palmetto)
