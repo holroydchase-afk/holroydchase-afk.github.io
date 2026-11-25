@@ -135,7 +135,7 @@ def page(slug, title, description, body):
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-{std_header("/" + slug)}
+{std_header("/building.html" if body.lstrip().startswith('<section class="stage') or slug.startswith("try/") else "/" + slug)}
 {main_open}
 {body}
 {main_close}
@@ -186,10 +186,10 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
     acc = "".join(f'<details{" open" if i == 0 else ""}><summary>{h}</summary><div class="body">{c}</div></details>' for i, (h, c) in enumerate(secs))
     cap = status_note or GENERIC_CAP
     shown = f"chaseholroyd.com{demo}"
-    controls = (f'<div class="bar"><span class="tag">Live demo · sample data</span>'
+    controls = (f'<div class="bar"><span class="tag">Live demo</span>'
                 f'<button class="btn" type="button" data-reload>Reload</button>'
-                f'<a class="btn" href="/try/{repo}.html">Full screen</a>'
-                f'<a class="btn" href="{code_url}">Code</a></div>')
+                f'<a class="btn hide-s" href="/try/{repo}.html">Open full page</a>'
+                f'<a class="btn" href="{code_url}">Code &#8599;</a></div>')
     inner = f'<iframe title="{name} demo" loading="lazy" allow="clipboard-write"></iframe><div class="wait">Loading the demo…</div><div class="down" hidden><p>The demo isn\'t up right now.</p><p><a href="{code_url}">See the code on GitHub</a></p></div>'
     if kind == "phone":
         frame = f'<div class="phone"><div class="screen">{inner}</div></div>'
@@ -205,9 +205,9 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 </div>
 <div class="body-col">
 <ul class="facts">{facts_html}</ul>
-<div class="acc">{acc}</div>
+<div class="acc" id="story">{acc}</div>
 </div>
-<div class="view is-{kind}" data-demo="{demo}" aria-label="{name} demo">{controls}{frame}<p class="cap">{cap}</p></div>
+<div class="view is-{kind}" data-demo="{demo}" aria-label="{name} demo">{controls}{frame}<p class="cap">{cap}</p><a class="read-link" href="#story">Read the story &darr;</a></div>
 </div></section>"""
 
 
@@ -879,7 +879,7 @@ def fullscreen_page(key):
     demo, kind, repo = DEMOS[key]
     code_url = f"{GITHUB}/{repo}"
     back = PRODUCT_PAGE[repo]
-    controls = (f'<div class="bar"><a class="crumb" href="/{back}">&larr; {key}</a><span class="tag">Live demo · sample data</span>'
+    controls = (f'<div class="bar"><a class="crumb" href="/{back}">&larr; {key}</a><span class="tag">Live demo</span>'
                 f'<button class="btn" type="button" data-reload>Reload</button><a class="btn" href="{code_url}">Code</a></div>')
     inner = (f'<iframe title="{key} demo" allow="clipboard-write"></iframe><div class="wait">Loading the demo…</div>'
              f'<div class="down" hidden><p>The demo isn\'t up right now.</p><p><a href="{code_url}">See the code on GitHub</a></p></div>')

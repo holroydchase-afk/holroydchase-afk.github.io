@@ -165,7 +165,7 @@ def check_uniform(failures):
         t = (ROOT / name).read_text()
         if f'data-demo="{demo}"' not in t or "<iframe" not in t:
             failures.append(f"{name}: product page must embed its demo at {demo} (UNI-2)")
-        for control in ("data-reload", f'href="/try/{demo.strip("/")}.html">Full screen', ">Code</a>"):
+        for control in ("data-reload", f'href="/try/{demo.strip("/")}.html">Open full page', ">Code &#8599;</a>"):
             if control not in t:
                 failures.append(f"{name}: demo control missing: {control} (UNI-2)")
         want = "is-phone" if name in PHONE_PRODUCTS else "is-browser"

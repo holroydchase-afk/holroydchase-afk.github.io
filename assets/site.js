@@ -34,18 +34,12 @@
   function sendTheme() {
     try { if (frame && frame.contentWindow) frame.contentWindow.postMessage({ type: "site-theme", theme: r.dataset.theme }, location.origin); } catch (e) {}
   }
-  /* Scale the phone to the window: the app always sees a 390x800 screen. */
-  function fit() {
-    if (!view || !view.classList.contains("is-phone")) return;
-    var k = Math.max(0.62, Math.min(1, (innerHeight - 150) / 824));
-    view.style.setProperty("--k", k.toFixed(3));
-  }
-  if (view) { fit(); addEventListener("resize", fit); }
   if (frame) {
     var src = view.dataset.demo;
     /* The page the demo shows is the same site, so the wrapper owns the header: hide the product's own "Demo" bar
        inside the frame (never its working controls). Products can also read ?embed=1 and skip it themselves. */
-    var HIDE = '[aria-label="Demo"],[data-testid="demo-bar"],#site-bar{display:none!important}';
+    var mo;
+    var HIDE = '[aria-label="Demo"],[data-testid="demo-bar"],#site-bar,.demo-banner a[href*="chaseholroyd.com"]{display:none!important}';
     function tidy() {
       try {
         var d = frame.contentDocument;
@@ -63,7 +57,7 @@
     frame.addEventListener("load", function () {
       if (!frame.getAttribute("src")) return;
       wait.hidden = true; tidy(); sendTheme();
-      var mo; try { mo = new MutationObserver(tidy); mo.observe(frame.contentDocument.documentElement, { childList: true, subtree: true }); } catch (e) {}
+      try { if (mo) mo.disconnect(); mo = new MutationObserver(tidy); mo.observe(frame.contentDocument.documentElement, { childList: true, subtree: true }); } catch (e) {}
     });
     var rb = view.querySelector("[data-reload]");
     if (rb) rb.addEventListener("click", function () { frame.removeAttribute("src"); load(); });

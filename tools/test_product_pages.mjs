@@ -83,7 +83,7 @@ for (const p of PRODUCTS) {
     await page.waitForFunction(() => document.querySelector(".view .wait")?.hidden, null, { timeout: 4000 });
     const barShown = await fr.$eval("#stub-bar", e => getComputedStyle(e).display);
     ok(barShown === "none", "the product's Demo bar still shows in the frame");
-    for (const t of ["Reload", "Full screen", "Code"]) ok(await page.isVisible(`.view .bar >> text=${t}`), "missing control " + t);
+    for (const t of ["Reload", "Open full page", "Code"]) ok(await page.isVisible(`.view .bar >> text=${t}`), "missing control " + t);
     ok(external.length === 0, "external hosts: " + external);
     ok(errors.length === 0, "console errors: " + errors);
     await ctx.close();
@@ -96,7 +96,11 @@ for (const p of PRODUCTS) {
       const w = await page.frames().find(f => f.url().includes(p.demo)).evaluate(() => innerWidth);
       ok(w === 390, "the app sees a " + w + "px wide screen, want 390");
       const box = await page.locator(".view .phone").boundingBox();
-      ok(box.y + box.height < 900, "phone is taller than the window plus its bar");
+      ok(box.y + box.height <= LAPTOP.height, `phone bottom at ${box.y + box.height}, window is ${LAPTOP.height} (WEB14-R3)`);
+      const cap = await page.locator(".view .cap").boundingBox();
+      ok(cap.y + cap.height <= LAPTOP.height + 40, "caption below the fold (WEB14-R3)");
+      const sc = await page.locator(".phone .screen iframe").evaluate(e => getComputedStyle(e).transform);
+      ok(sc === "none", "the app is scaled: " + sc + " (WEB14-R2)");
     }
     await ctx.close();
   });
@@ -113,6 +117,14 @@ for (const p of PRODUCTS) {
     const demoY = (await page.locator(".view").boundingBox()).y;
     const factsY = (await page.locator(".facts").boundingBox()).y;
     ok(demoY < factsY, `demo at ${demoY}, facts at ${factsY}`);
+    await ctx.close();
+  });
+  await check(`UNI-11 ${p.page}: at 390 the controls share one row, 48px tall; Building is the current nav item`, async () => {
+    const { ctx, page } = await open("/" + p.page, PHONE);
+    const bs = await page.$$eval(".view .bar .btn", els => els.filter(e => e.offsetParent).map(e => { const r = e.getBoundingClientRect(); return [Math.round(r.top), Math.round(r.height)]; }));
+    ok(bs.length >= 2 && new Set(bs.map(b => b[0])).size === 1, "controls wrap: " + JSON.stringify(bs));
+    ok(bs.every(b => b[1] >= 48), "controls under 48px: " + JSON.stringify(bs));
+    ok(await page.locator('header.site nav a[aria-current=page]').innerText() === "Building", "Building not marked current");
     await ctx.close();
   });
   await check(`UNI-6 try/${p.repo}.html: full screen keeps the header and the demo fills the window`, async () => {
