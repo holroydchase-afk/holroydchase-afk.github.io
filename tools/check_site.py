@@ -13,9 +13,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://chaseholroyd.com/"
 # 404 is served for missing paths and is not a page to index.
 # studio.html and pm-tools.html are hidden "moved" stubs (Chase, Nov 18); they stay out of the sitemap.
-NOT_INDEXED = {"404.html", "studio.html", "pm-tools.html"}
+NOT_INDEXED = {"404.html", "studio.html", "pm-tools.html", "about.html"}
 # Root-absolute links that point at another repo's Pages site, not a file here.
-OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/")
+OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/", "/hearth/")
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
 # The one public address (Chase, Nov 4 and Nov 13): it may appear on pages; no others.
@@ -139,6 +139,59 @@ def check_no_third_party_loads(failures):
         for url in re.findall(r"url\(\s*[\"']?((?:https?:)?//[^)\"']+)", text, flags=re.I):
             if not url.startswith(own):
                 failures.append(f"{path.name}: CSS loads {url[:60]} from another host")
+
+
+PRODUCT_PAGES = {"family-photos.html": "/hearth/", "energy-scanner.html": "/energy-scanner/", "crew-clock.html": "/crew-clock/",
+                 "charlie.html": "/charlie/", "role-radar.html": "/role-radar/", "ccwatts.html": "/ccwatts/"}
+PHONE_PRODUCTS = {"family-photos.html", "energy-scanner.html", "crew-clock.html", "charlie.html"}
+HEADER_LINKS = ["Case studies", "Building", "Agents", "Resume", "Contact"]
+
+
+def check_uniform(failures):
+    """WEB-M14: one page system. Every page carries the standard header; every product page is the one template."""
+    for page in pages():
+        if page.name == "404.html":
+            continue
+        t = page.read_text()
+        if 'http-equiv="refresh"' in t:
+            continue  # a moved-page stub
+        nav = re.search(r'<nav aria-label="Main">(.*?)</nav>', t, re.S)
+        labels = re.findall(r">([^<]+)</a>", nav.group(1)) if nav else []
+        if labels != HEADER_LINKS:
+            failures.append(f"{page.name}: header nav must be {HEADER_LINKS}, found {labels} (UNI-1)")
+        if 'id="tog"' not in t:
+            failures.append(f"{page.name}: the standard header's theme button is missing (UNI-1)")
+    for name, demo in PRODUCT_PAGES.items():
+        t = (ROOT / name).read_text()
+        if f'data-demo="{demo}"' not in t or "<iframe" not in t:
+            failures.append(f"{name}: product page must embed its demo at {demo} (UNI-2)")
+        for control in ("data-reload", f'href="/try/{demo.strip("/")}.html">Full screen', ">Code</a>"):
+            if control not in t:
+                failures.append(f"{name}: demo control missing: {control} (UNI-2)")
+        want = "is-phone" if name in PHONE_PRODUCTS else "is-browser"
+        if want not in t:
+            failures.append(f"{name}: demo must sit in a {'phone' if name in PHONE_PRODUCTS else 'browser'} frame (UNI-3)")
+        if 'href="/building.html"' not in t:
+            failures.append(f"{name}: needs the one back link to Building (UNI-4)")
+    for name, demo in PRODUCT_PAGES.items():
+        f = ROOT / "try" / f"{demo.strip('/')}.html"
+        t = f.read_text() if f.exists() else ""
+        if f'data-demo="{demo}"' not in t or 'id="tog"' not in t or "noindex" not in t:
+            failures.append(f"try/{demo.strip('/')}.html: full-screen page needs the header, the demo at {demo} and noindex (UNI-7)")
+    # No page sends a visitor past the product page to a raw demo address (the demo opens inside the product page).
+    raw = re.compile(r'href="(?:https://chaseholroyd\.com)?/(hearth|energy-scanner|crew-clock|charlie|role-radar|ccwatts)/"')
+    for page in pages():
+        if page.name in PRODUCT_PAGES:
+            continue
+        if raw.search(page.read_text()):
+            failures.append(f"{page.name}: links straight to a raw demo; link the product page instead (UNI-5)")
+    # The demo header script draws the same links as the page header.
+    js = (ROOT / "assets/demo-bar.js").read_text()
+    for label in HEADER_LINKS:
+        if f">{label}</a>" not in js:
+            failures.append(f"assets/demo-bar.js: standard header link missing: {label} (UNI-6)")
+    if 'window.top !== window.self' not in js:
+        failures.append("assets/demo-bar.js: must stay out of the way inside the product page frame (UNI-6)")
 
 
 def check_scoreboard(failures):
@@ -272,7 +325,7 @@ def check_home(failures):
 
 CHECKS = [check_head, check_images, check_root_links, check_sitemap,
           check_no_contact_details, check_deploy_allowlist, check_no_third_party_loads, check_scoreboard,
-          check_home, check_make_your_own]
+          check_home, check_make_your_own, check_uniform]
 
 
 def main():

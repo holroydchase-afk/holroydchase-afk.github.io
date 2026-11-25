@@ -25,7 +25,7 @@ jobs:
       - name: Stage site files
         run: |
           mkdir _site
-          cp -r *.html assets demo robots.txt sitemap.xml CNAME LICENSE _site/
+          cp -r *.html assets demo try robots.txt sitemap.xml CNAME LICENSE _site/
           for f in HANDOFF.md CLAUDE.md tools .claude .github; do test ! -e "_site/$f"; done
       - uses: actions/upload-pages-artifact@v4
         with:

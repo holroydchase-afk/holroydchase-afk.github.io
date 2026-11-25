@@ -55,11 +55,37 @@ HEARTH_FACTS = [("1,291", "app tests"), ("1,199", "database checks"), ("US-hoste
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with Claude Code and a set of role prompts, tests first.")
 
+# The standard header (WEB-M14): the same markup on every page. Root-absolute links so it works from any depth.
+# (label, href, mobile-visible). Hand-built pages (home, Building, Agents) are patched to carry it by patch_handbuilt().
 NAV = [
-    ("index.html", "Work"),
-    ("resume.html", "Resume"),
-    ("about.html", "About"),
+    ("Case studies", "/#cases", False),
+    ("Building", "/building.html", True),
+    ("Agents", "/agents.html", False),
+    ("Resume", "/resume.html", False),
+    ("Contact", "/#contact", True),
 ]
+THEME_BUTTON = (
+    '<div class="thw"><button class="thm" id="tog" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tmenu" aria-label="Theme" title="Theme">'
+    '<svg class="i-sun" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></g></svg>'
+    '<svg class="i-moon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
+    '<svg class="i-sys" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></g></svg></button>'
+    '<div class="tmenu" id="tmenu" hidden role="group" aria-label="Theme"><button type="button" data-m="light" aria-checked="false" role="menuitemradio">Light</button>'
+    '<button type="button" data-m="dark" aria-checked="false" role="menuitemradio">Dark</button><button type="button" data-m="system" aria-checked="false" role="menuitemradio">System</button></div></div>')
+THEME_INIT = ('<script>(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get("theme"),s=null;try{s=localStorage.getItem("theme")}catch(e){}'
+              'var m=q==="dark"||q==="light"||q==="system"?q:(s==="dark"||s==="light"||s==="system"?s:"light");r.dataset.mode=m;'
+              'r.dataset.theme=m==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):m})()</script>')
+
+
+def std_header(current=None):
+    """The one site header. `current` is the href of the page being shown (marks aria-current)."""
+    links = "".join(
+        f'<a href="{href}"{" class=\"keep\"" if keep else ""}{" id=\"navb\"" if href == "/building.html" else ""}{" id=\"navc\"" if href == "/#contact" else ""}'
+        f'{" aria-current=\"page\"" if href == current else ""}>{label}</a>'
+        for label, href, keep in NAV)
+    return ('<header class="site"><div class="w"><a class="dock" id="dock" href="/" aria-label="Chase Holroyd, home">'
+            '<span class="dk-i"><img src="/assets/chase-400.webp" alt="" width="40" height="40"></span><b>Chase Holroyd</b></a>'
+            f'<div class="hr"><nav aria-label="Main">{links}</nav>{THEME_BUTTON}</div></div></header>')
+
 
 # Person markup so a search for the name can show the right profile. No email or phone, by rule.
 JSONLD = """<script type="application/ld+json">
@@ -80,80 +106,109 @@ HEADSHOT = ('<img class="headshot" src="assets/chase-400.webp" srcset="assets/ch
 
 
 def page(slug, title, description, body):
-    nav = "".join(
-        f'<a href="{href}"{" aria-current=\"page\"" if href == slug else ""}>{label}</a>'
-        for href, label in NAV
-    )
     full_title = "Chase Holroyd" if slug == "index.html" else f"{title} · Chase Holroyd"
+    staged = body.lstrip().startswith('<section class="stage')
+    main_open = '<main id="main">' if (staged or slug.startswith("try/")) else '<main id="main" class="page"><div class="w">'
+    main_close = '</main>' if (staged or slug.startswith("try/")) else '</div></main>'
     return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-{'<base href="/">' + chr(10) if slug == "404.html" else ""}{'<meta name="robots" content="noindex">' + chr(10) if NOINDEX or slug == "404.html" else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{'<base href="/">' + chr(10) if slug == "404.html" else ""}{'<meta name="robots" content="noindex">' + chr(10) if NOINDEX or slug == "404.html" or slug.startswith("try/") else ""}<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE}/{'' if slug == 'index.html' else slug}">
-<meta property="og:type" content="{'profile' if slug == 'about.html' else 'website'}">
+<meta property="og:type" content="website">
 <meta property="og:image" content="{SITE}/assets/share-card-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Chase Holroyd, staff product manager: pricing, payments and point-of-sale lending">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/{'' if slug == 'index.html' else slug}">
-{JSONLD if slug in ('index.html', 'about.html') else ''}<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/site.css">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+{THEME_INIT}
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/header.css">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site"><div class="wrap">
-<a class="mark" href="index.html"><span class="mono" aria-hidden="true">CH</span>Chase Holroyd</a>
-<nav class="top" aria-label="Main">{nav}</nav>
-</div></header>
-<main class="{"home" if slug == "index.html" or "pp-hero" in body else "wrap"}" id="main">
+{std_header("/" + slug)}
+{main_open}
 {body}
-</main>
-<footer class="site"><div class="wrap">
+{main_close}
+<footer class="site"><div class="w">
 <span>© 2026 Chase Holroyd · Staff product manager · Charlotte area</span>
 <span><a href="{LINKEDIN}">LinkedIn</a> · <a href="{GITHUB}">GitHub</a></span>
 </div></footer>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
 """
 
 
+# Where each product's live demo is hosted (its own repo's Pages site) and which frame it sits in (Chase, Nov 25: Hearth,
+# Energy Scanner, Crew Clock and Charlie in phones; ccwatts and Role Radar are laptop tools, so a browser frame).
+DEMOS = {
+    "Hearth": ("/hearth/", "phone", "hearth"),
+    "Energy Scanner": ("/energy-scanner/", "phone", "energy-scanner"),
+    "Crew Clock": ("/crew-clock/", "phone", "crew-clock"),
+    "Charlie": ("/charlie/", "phone", "charlie"),
+    "Role Radar": ("/role-radar/", "browser", "role-radar"),
+    "ccwatts": ("/ccwatts/", "browser", "ccwatts"),
+}
+GENERIC_CAP = "The real app on made-up sample data. Anything you change stays in this browser and is never sent anywhere."
+
+
 def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None, feature=None, accent=None):
-    """The shared product-page template (docs/product/PAGE-GUIDELINES.md): dark hero band with the phone shot,
-    a proof row of four facts, then one band per section (number, title, body), then a back link."""
-    facts_html = "".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in facts)
-    links_html = ""
-    if links:
-        links_html = '<div class="cta">' + "".join(
-            f'<a class="btn{" primary" if i == 0 else ""}" href="{u}">{t}</a>' for i, (t, u) in enumerate(links)
-        ) + "</div>"
-    # shot = (file, alt, height at 300px wide, optional caption). Sample data only; above the fold, so eager.
-    shot_html = ""
-    if shot:
-        cap = f'<figcaption class="shot-cap">{shot[3]}</figcaption>' if len(shot) > 3 else ""
-        shot_html = f'<div class="pp-art">{phone("assets/shots/" + shot[0], shot[1], 300, shot[2], eager=True)}{cap}</div>'
-    secs = "".join(
-        f'<section class="psec"><div class="wrap psec-grid"><h2>{h}</h2><div class="pbody">{c}</div></div></section>'
-        for h, c in sections)
-    note = f'<section class="psec"><div class="wrap psec-grid"><h2>A note on the demo</h2><div class="pbody"><p>{status_note}</p></div></div></section>' if status_note else ""
-    feat = f'<section class="pfeature"><div class="wrap">{feature}</div></section>' if feature else ""
-    style = f' style="--pp:{accent}"' if accent else ""
-    return f"""<section class="hero-band pp-hero"{style}><div class="wrap">
-<div class="hero-grid{" has-art" if shot else ""}"><div>
+    """The one product template (WEB-M14). Left: a panel with the name, one line, four facts and the story in closed
+    sections. Right: the live demo in a phone or browser frame with the same three controls on every product
+    (Reload, Full screen, Code). The old case-study layout (dark hero band, numbered bands) is gone: one layer deep."""
+    key = next((k for k in DEMOS if name.startswith(k)), None)
+    if key is None:  # hidden pages (Studio, Console) have no demo: a plain reading block
+        body = "".join(f"<h2>{h}</h2>{c}" for h, c in sections)
+        return f'<div class="read"><p class="eyebrow">{eyebrow}</p><h1>{name}</h1><p class="lede">{lede}</p>{body}</div>'
+    demo, kind, repo = DEMOS[key]
+    tagline = name.partition(": ")[2]
+    if tagline:
+        lede = f"{tagline[0].upper()}{tagline[1:]}. {lede}"
+    name = key
+    code_url = f"{GITHUB}/{repo}"
+    facts_html = "".join(f'<li class="fact"><b>{v}</b><span>{k}</span></li>' for v, k in facts)
+    secs = [(h, c) for h, c in sections if not (h == "Try it" and "<pre" not in c)]
+    if feature:
+        import re as _re
+        h2 = _re.search(r"<h2>(.*?)</h2>", feature).group(1)
+        rest = _re.sub(r'<p class="eyebrow">.*?</p>|<h2>.*?</h2>', "", feature)
+        secs.insert(0, ("The check", f"<p><b>{h2}</b></p>{rest}"))
+    acc = "".join(f'<details{" open" if i == 0 else ""}><summary>{h}</summary><div class="body">{c}</div></details>' for i, (h, c) in enumerate(secs))
+    cap = status_note or GENERIC_CAP
+    shown = f"chaseholroyd.com{demo}"
+    controls = (f'<div class="bar"><span class="tag">Live demo · sample data</span>'
+                f'<button class="btn" type="button" data-reload>Reload</button>'
+                f'<a class="btn" href="/try/{repo}.html">Full screen</a>'
+                f'<a class="btn" href="{code_url}">Code</a></div>')
+    inner = f'<iframe title="{name} demo" loading="lazy" allow="clipboard-write"></iframe><div class="wait">Loading the demo…</div><div class="down" hidden><p>The demo isn\'t up right now.</p><p><a href="{code_url}">See the code on GitHub</a></p></div>'
+    if kind == "phone":
+        frame = f'<div class="phone"><div class="screen">{inner}</div></div>'
+    else:
+        frame = f'<div class="browser"><div class="chrome"><i></i><i></i><i></i><span>{shown}</span></div><div class="screen" style="position:relative">{inner}</div></div>'
+    wide = " wide" if kind == "browser" else ""
+    return f"""<section class="stage{wide}"><div class="w stage-grid">
+<div class="head">
+<a class="crumb" href="/building.html">&larr; Building</a>
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
-{links_html}
-</div>{shot_html}</div>
-<div class="facts proof">{facts_html}</div></div></section>
-{feat}{secs}{note}
-<section class="psec back"><div class="wrap"><a class="btn" href="index.html">← All work</a></div></section>"""
+</div>
+<div class="body-col">
+<ul class="facts">{facts_html}</ul>
+<div class="acc">{acc}</div>
+</div>
+<div class="view is-{kind}" data-demo="{demo}" aria-label="{name} demo">{controls}{frame}<p class="cap">{cap}</p></div>
+</div></section>"""
 
 
 # ---- Product-page template (docs/product/PAGE-GUIDELINES.md) -------------------------------------------------
@@ -802,9 +857,68 @@ PAGES = [
 # Hidden pages (Chase, Nov 18: the Studio and its console use real data and aren't ready to show). Their content
 # stays in PAGES below, so they can come back; the site serves a "moved" stub at the old address instead, keeps
 # them out of the nav and the sitemap, and never links to them.
-HIDDEN = ("studio.html", "pm-tools.html")
+HIDDEN = ("studio.html", "pm-tools.html", "about.html")
 HIDDEN_STUB = """<div class="read"><p class="eyebrow">Moved</p><h1>This page isn't public right now.</h1>
-<p class="lede">It will be back. In the meantime the <a href="index.html">work page</a> has everything I'm showing.</p></div>"""
+<p class="lede">It will be back. In the meantime the <a href="/">work page</a> has everything I'm showing.</p></div>"""
+# About folded into the home page (Chase, Nov 25: keep the navigation shallow). Its content stays in PAGES, not deleted.
+HIDDEN_TARGET = {"about.html": "/#about"}
+
+
+# ---- Hand-built pages (home, Building, Agents) carry the standard header too ---------------------------------------
+# Their bodies are hand-written, so this step rewrites only the header nav (and Building's whole header) and points
+# product links at the product pages instead of the raw demos. It is idempotent: running it twice changes nothing.
+import re
+
+PRODUCT_PAGE = {"hearth": "family-photos.html", "energy-scanner": "energy-scanner.html", "crew-clock": "crew-clock.html",
+                "charlie": "charlie.html", "role-radar": "role-radar.html", "ccwatts": "ccwatts.html"}
+
+
+def fullscreen_page(key):
+    """try/<slug>.html: the product's own demo at full size under the standard header (what "Full screen" opens).
+    A direct visit to a product's own demo address has no site header until that repo adds demo-bar.js; this page always does."""
+    demo, kind, repo = DEMOS[key]
+    code_url = f"{GITHUB}/{repo}"
+    back = PRODUCT_PAGE[repo]
+    controls = (f'<div class="bar"><a class="crumb" href="/{back}">&larr; {key}</a><span class="tag">Live demo · sample data</span>'
+                f'<button class="btn" type="button" data-reload>Reload</button><a class="btn" href="{code_url}">Code</a></div>')
+    inner = (f'<iframe title="{key} demo" allow="clipboard-write"></iframe><div class="wait">Loading the demo…</div>'
+             f'<div class="down" hidden><p>The demo isn\'t up right now.</p><p><a href="{code_url}">See the code on GitHub</a></p></div>')
+    body = f'<section class="fullview"><div class="view" data-demo="{demo}" aria-label="{key} demo">{controls}<div class="screen">{inner}</div></div></section>'
+    return page(f"try/{repo}.html", f"{key} demo", f"The {key} demo at full size, on made-up sample data.", body)
+
+
+def patch_handbuilt():
+    for fname in ("index.html", "building.html", "agents.html"):
+        p = ROOT / fname
+        t = p.read_text(encoding="utf-8")
+        o = t
+        pre = "" if fname == "index.html" else "index.html"
+        home = {"#cases": "#cases", "#contact": "#contact"} if fname == "index.html" else {"#cases": "index.html#cases", "#contact": "index.html#contact"}
+        nav = ('<nav aria-label="Main">'
+               f'<a href="{home["#cases"]}">Case studies</a><a href="building.html" id="navb">Building</a>'
+               '<a href="agents.html">Agents</a><a href="resume.html">Resume</a>'
+               f'<a href="{home["#contact"]}" id="navc">Contact</a></nav>')
+        if fname == "building.html":
+            hdr = std_header("/building.html").replace('href="/"', 'href="index.html"').replace('href="/#', 'href="index.html#') \
+                .replace('href="/building.html"', 'href="building.html"').replace('href="/agents.html"', 'href="agents.html"') \
+                .replace('href="/resume.html"', 'href="resume.html"').replace('src="/assets/', 'src="assets/')
+            t = re.sub(r"<header>.*?</header>", lambda m: hdr, t, count=1, flags=re.S)
+            t = t.replace('<header class="site">', '<header class="site">', 1)
+            if "assets/header.css" not in t:
+                t = t.replace('<link rel="stylesheet" href="assets/fonts.css">', '<link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="assets/header.css">', 1)
+            if "assets/site.js" not in t and "id=\"tog\"" in t and "getElementById('tog')" not in t:
+                t = t.replace("</body>", '<script src="assets/site.js" defer></script></body>', 1)
+        else:
+            t = re.sub(r'<nav aria-label="Main">.*?</nav>', lambda m: nav, t, count=1, flags=re.S)
+            # the hand-built CSS shows only #navc and #navk on phones; Building (#navb) is the other link that stays
+            t = t.replace("header nav a:not(#navc):not(#navk)", "header nav a:not(#navc):not(#navb)")
+            t = t.replace("header nav a#navc,header nav a#navk{display:inline-flex}", "header nav a#navc,header nav a#navb{display:inline-flex}")
+        # product links: the raw demo address becomes the product page (the demo opens inside it)
+        for slug, pg in PRODUCT_PAGE.items():
+            t = t.replace(f'href="https://chaseholroyd.com/{slug}/"', f'href="{pg}"')
+        if t != o:
+            p.write_text(t, encoding="utf-8")
+
 
 if __name__ == "__main__":
     for slug, title, desc, body in PAGES:
@@ -814,7 +928,10 @@ if __name__ == "__main__":
             continue
         if slug in HIDDEN:
             stub = page(slug, "Moved", "This page isn't public right now.", HIDDEN_STUB)
-            stub = stub.replace('<meta name="robots" content="noindex">', '<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="3;url=index.html">', 1)
+            target = HIDDEN_TARGET.get(slug, "/")
+            if slug in HIDDEN_TARGET:
+                stub = stub.replace("It will be back. In the meantime the", "This moved to the home page. The").replace("This page isn't public right now.", "This page moved.")
+            stub = stub.replace('<meta name="robots" content="noindex">', f'<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="{0 if slug in HIDDEN_TARGET else 3};url={target}">', 1)
             (ROOT / slug).write_text(stub, encoding="utf-8")
             continue
         (ROOT / slug).write_text(page(slug, title, desc, body), encoding="utf-8")
@@ -832,4 +949,8 @@ if __name__ == "__main__":
     # AI training and answer bots are shut out (Chase, Oct 26). Well-behaved bots obey; it isn't a lock.
     ai_block = "".join(f"User-agent: {bot}\n" for bot in AI_BOTS) + "Disallow: /\n\n"
     (ROOT / "robots.txt").write_text(f"{ai_block}User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
+    (ROOT / "try").mkdir(exist_ok=True)
+    for key in DEMOS:
+        (ROOT / "try" / f"{DEMOS[key][2]}.html").write_text(fullscreen_page(key), encoding="utf-8")
+    patch_handbuilt()
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
