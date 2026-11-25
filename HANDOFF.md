@@ -69,7 +69,7 @@ Home defaults to light on purpose (Chase's standing call, "Light mode default"):
 
 ## WEB-M13.27 equal Built cards and a current agents card (Nov 25, PR open)
 - Chase (Nov 24, screenshot of building.html "Built"): the three cards look awkward, should be the same height and width. Fix: the proof line and links now pin to the bottom of every `.kc` card (`margin-top:auto` on `.pf`), so the three cards line up; the grid already gave equal widths (351 x 666 at 1280).
-- Third card ("Runs on every project here") rewritten to match today's decisions and the claims register: three agents (staff PM, QA agent, UX reviewer), Claude builds inside the QA agent's gates (no separate engineer), the PR check that fails when a named agent did not run; proof line is the QA 18 of 20 vs 3 of 20 on held-out cases, "mostly because of the report format". The old "only the UX reviewer works as a tool loop" and 11 to 14 of 24 lines are gone. New "Results" link to agents.html.
+- Chase (Nov 24, late): "way too much text", "not my brand", "a teaser header then some stats". Each Built card is now the teaser headline, two stats and the links, no paragraph. Stats are numbers already on the site: Hearth 1,291 app tests and 1,199 database checks (family-photos page), ccwatts 30+ test files and 0 network calls (tested), agents 18 of 20 QA criteria vs plain Claude 3 and UX 5 to 7 of 10 on one demo (agents page, claims register). Old "engineer builds" and "only the UX reviewer is a tool loop" wording is gone.
 - Checked: check_site.py ok; Playwright at 1280, 820 and 390: no sideways scroll, no console errors. Preview: Built Cards Preview artifact. Not run: ux-reviewer, qa-tdd.
 - Next: ships on the nightly release train (Chase, Nov 23) or when he says "run the release train".
 
