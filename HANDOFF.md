@@ -3,11 +3,26 @@
 stage: live
 goal: portfolio
 milestone: PMT-M3.5
-now: WEB-M13.12 v70 copy, skills filter and share-card-v3 (live); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
+now: WEB-M14 one page system (PR open, preview, waits for Chase's go); earlier WEB-M13.12 v70 copy, skills filter and share-card-v3 (live); v67 home, no dates, Studio hidden, self-hosted font and the greeting fix are live
 next: re-scrape the LinkedIn Post Inspector for the new card; confirm the hello@chaseholroyd.com test email; then bring About and product pages into the home look one PR at a time
 waiting_on_chase: []
 blockers: []
 -->
+
+## WEB-M14 one page system: product template, standard header, full-screen demos (Nov 25, PR open, rides the release train)
+
+**Mobile smoothness fixes (Nov 25, Chase's phone report):** hero canvas no longer takes touch (`pointer-events:none; touch-action:pan-y`) and parallax only follows a mouse, so touching the constellation scrolls the page; hero resize only reseeds when the width changes (address-bar height changes no longer redraw stars); the name in the top bar fades in with a throttled scroll handler instead of animating width; the headshot is a preloaded 400px webp (18 KB) with a srcset. Tested: iPhone 13 emulation in Chromium, swipe from the hero scrolled the page 300px, no sideways scroll, one 18 KB image fetched, mobile header shows Building and Contact by design. NOT tested: a real phone.
+- Chase (Nov 25, overnight): the product pages and demos were not uniform; keep navigation shallow; Hearth, Energy Scanner, Crew Clock and Charlie belong in phones; the standard header bar should be on every product and demo page on a laptop; no case-study detours.
+- Done: one `product()` template in `tools/build.py` for all six products: left panel (name, one line, four facts, the story in closed sections), right the live demo in a phone (Hearth, Energy Scanner, Crew Clock, Charlie) or browser frame (ccwatts, Role Radar), the same three controls on each (Reload, Full screen, Code), one back link to Building. Demos load from each product's own address in an iframe; the product's own "Demo" bar is hidden inside the frame (same origin; `?embed=1` is also sent so a product can skip it itself). Old case-study layout deleted from the page (content kept in the closed sections).
+- Standard header: one markup on every page (`std_header()`, `assets/header.css`), including home, Building and Agents (nav patched by `patch_handbuilt()`): Case studies, Building, Agents, Resume, Contact, theme. `assets/demo-bar.js` now draws that same header on any demo visited directly (it stays out of the way inside the frame). `try/<product>.html` is the full-screen page (header + demo at full size, noindex).
+- Shallow navigation: Home to Building to product is two clicks; Building and home product links now open the product page, not the raw demo. Building's "Building" section uses the same cards as "Built" (PR 105's Built cards are folded in; close PR 105 as superseded).
+- Purged (hidden, not deleted): `about.html` now redirects to the home About section (content stays in build.py); Studio and Console stubs unchanged. Nav no longer has About.
+- Tests: `node tools/test_product_pages.mjs` 40/40, three runs; `python3 tools/check_site.py` ok (new UNI-1..7 checks); `node tools/test_energy_demo.mjs` 16/16. Written after the build in a cloud thread, not red first. Demos in the tests are stand-ins; only Crew Clock and the legacy Energy Scanner copy were looked at for real.
+- UX review (ux-reviewer, showcase mode, 6/10 first pass): fixed WEB14-R2..R14 (phone never scaled, one-row 48px controls, "Open full page", Code marked as leaving the site, skill chips folded on Building, Building marked current, dark overlays, observer leak). R1 (stand-in demos) is a test-only artifact: the repo ships no stubs, and a missing demo shows a plain "isn't up" message. R15 (scroll trap in the frame on a real phone) needs a real-phone check. Tests now 46/46.
+- Link map: `docs/link-map.md` (`python3 scripts/link-map.py --external`): 284 links, 24 pages, 0 broken; stakeholder-twins links now point at persona-twins. Raw demo addresses (other repos) are listed, not checked.
+- pages.yml now also copies `try/`.
+- Next: Chase looks at the preview and says go; then merge (deploys). Product repos still need the one-line `demo-bar.js` tag so a direct visit to /hearth/ etc. shows the header (intakes below); until then Full screen (try/) is the path with the header. Close hearth 183, role-radar 95, charlie 64, crew-clock 57, energy-scanner 60, ccwatts 127 or rewrite them to this.
+- Decisions to review: About folded into home; phone frame for Charlie (Chase's call, it is a web app); Crew Clock keeps its own banner because it holds the offline toggle.
 
 ## Dark mode decision on record (Nov 23, docs only)
 Home defaults to light on purpose (Chase's standing call, "Light mode default"): `index.html` reads `?theme=` or the saved choice and falls back to light, with a sun toggle, so it does not follow the system dark setting. That is not a defect (studio-agents dark audit D-1, rule DARK-1 deliberately not followed on home). Open small note: the home dark theme's page color is #0A0A0A, darker than the usual dark grey (about #121212, DARK-4); text contrast passes (0 failures in 213 text elements) and no shadows. Leave it unless Chase wants it softened.

@@ -1,0 +1,36 @@
+/* The standard site header: one markup, one look, on every page (WEB-M14). Needs the page's own tokens (--bg, --ink,
+   --muted, --line); falls back to the white / ink / emerald defaults. */
+/* ---- The standard header (same markup and look on every page, including the hand-built ones) ---- */
+header.site{position:sticky;top:0;z-index:30;background:var(--bg,#fff);border-bottom:1px solid var(--line,#E4E4E0)}
+header.site .w{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:64px}
+header.site .dock{display:inline-flex;align-items:center;gap:12px;color:var(--ink,#111);text-decoration:none;min-height:48px;flex:none}
+header.site .dk-i{display:inline-flex;width:40px;height:40px}
+header.site .dock img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center 20%;display:block}
+header.site .dock b{font-weight:500;font-size:18px;white-space:nowrap}
+header.site .dock:hover b{text-decoration:underline;text-underline-offset:5px}
+header.site .hr{display:flex;align-items:center;gap:4px;min-width:0}
+header.site nav{display:flex;align-items:center;gap:0}
+header.site nav a{padding:0 10px;min-height:48px;display:inline-flex;align-items:center;color:var(--muted,#4A4A48);text-decoration:none;font-size:17px;white-space:nowrap}
+header.site nav a:hover,header.site nav a[aria-current=page]{color:var(--ink,#111)}
+header.site nav a[aria-current=page]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
+@media(max-width:699px){
+  header.site nav a:not(.keep){display:none}
+  header.site nav a{padding:0 8px}
+  header.site .dock b{font-size:17px}
+}
+@media(max-width:439px){header.site .dock b{display:none}}
+.thw{position:relative;flex:none;margin:0 -12px 0 0}
+.thm{flex:none;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink,#111);cursor:pointer}
+.thm:hover{background:var(--band,var(--sec2,#F6F6F4))}
+.thm svg{display:none}
+.thm .i-sun{display:block}
+:root[data-mode=dark] .thm .i-sun,:root[data-mode=system] .thm .i-sun{display:none}
+:root[data-mode=dark] .thm .i-moon{display:block}
+:root[data-mode=system] .thm .i-sys{display:block}
+.tmenu{position:absolute;right:0;top:calc(100% + 4px);min-width:190px;background:var(--surface,#fff);border:1px solid var(--line,#E4E4E0);border-radius:16px;padding:6px;z-index:40;display:grid;gap:2px}
+.tmenu[hidden]{display:none}
+.tmenu button{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--ink,#111);font:400 17px var(--f,system-ui,sans-serif);cursor:pointer;text-align:left}
+.tmenu button:hover,.tmenu button:focus-visible{background:var(--band,var(--sec2,#F6F6F4))}
+.tmenu button[aria-checked=true]{font-weight:500}
+.tmenu button[aria-checked=true]::after{content:"\2713";color:var(--cta,var(--accent,#0B7A4B))}
+
