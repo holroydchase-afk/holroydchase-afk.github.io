@@ -67,6 +67,12 @@ Home defaults to light on purpose (Chase's standing call, "Light mode default"):
 - In progress: PR 100 (the down arrow) is merged to main but NOT live until a deploy succeeds.
 - Next: merge this PR on green, watch the deploy once; if it still fails, revert the pin and try again later, or ask Chase to check githubstatus.com.
 
+## WEB-M13.27 equal Built cards and a current agents card (Nov 25, PR open)
+- Chase (Nov 24, screenshot of building.html "Built"): the three cards look awkward, should be the same height and width. Fix: the proof line and links now pin to the bottom of every `.kc` card (`margin-top:auto` on `.pf`), so the three cards line up; the grid already gave equal widths (351 x 666 at 1280).
+- Third card ("Runs on every project here") rewritten to match today's decisions and the claims register: three agents (staff PM, QA agent, UX reviewer), Claude builds inside the QA agent's gates (no separate engineer), the PR check that fails when a named agent did not run; proof line is the QA 18 of 20 vs 3 of 20 on held-out cases, "mostly because of the report format". The old "only the UX reviewer works as a tool loop" and 11 to 14 of 24 lines are gone. New "Results" link to agents.html.
+- Checked: check_site.py ok; Playwright at 1280, 820 and 390: no sideways scroll, no console errors. Preview: Built Cards Preview artifact. Not run: ux-reviewer, qa-tdd.
+- Next: ships on the nightly release train (Chase, Nov 23) or when he says "run the release train".
+
 ## WEB-M13.26 one site header on every demo (Nov 24, PR open)
 - Chase (Nov 24, with a Hearth demo screenshot): the demos look different from the site (warm beige, not white/ink/emerald) and have no nav, so visitors get stuck. New shared `assets/demo-bar.js` + `assets/demo-bar.css`: a slim sticky header (back to Chase Holroyd, Building, Agents, the demo's name, Case study), site theme, self-hosted font. One script tag per demo; `data-page="white"` also whitens the page behind the demo.
 - Done here: the three demos hosted in this repo (font-tester, fruit-palettes, share-start-tester) carry the tag. Checked at 390 and 1280: bar shows, no sideways scroll, no console errors.
