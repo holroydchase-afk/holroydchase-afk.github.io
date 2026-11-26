@@ -15,16 +15,14 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | demo/share-start-tester/index.html | 1 | index.html → demo/share-start-tester/index.html |
 | family-photos.html | 1 | index.html → family-photos.html |
 | resume.html | 1 | index.html → resume.html |
-| charlie.html | 2 | index.html → building.html → charlie.html |
-| crew-clock.html | 2 | index.html → building.html → crew-clock.html |
 | role-radar.html | 2 | index.html → building.html → role-radar.html |
 | try/ccwatts.html | 2 | index.html → ccwatts.html → try/ccwatts.html |
 | try/hearth.html | 2 | index.html → family-photos.html → try/hearth.html |
-| try/charlie.html | 3 | index.html → building.html → charlie.html → try/charlie.html |
-| try/crew-clock.html | 3 | index.html → building.html → crew-clock.html → try/crew-clock.html |
 | try/role-radar.html | 3 | index.html → building.html → role-radar.html → try/role-radar.html |
 | 404.html | - | not linked from anywhere |
 | about.html | - | not linked from anywhere |
+| charlie.html | - | not linked from anywhere |
+| crew-clock.html | - | not linked from anywhere |
 | demo/energy-scanner/index.html | - | not linked from anywhere |
 | energy-scanner.html | - | not linked from anywhere |
 | pm-tools.html | - | not linked from anywhere |
@@ -95,17 +93,11 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
 | Results → | `agents.html` | ok |
 | GitHub | `https://github.com/holroydchase-afk/studio-agents` | external (not checked) |
-| Demo → | `crew-clock.html` | ok |
-| GitHub | `https://github.com/holroydchase-afk/crew-clock` | external (not checked) |
-| Demo → | `charlie.html` | ok |
-| GitHub | `https://github.com/holroydchase-afk/charlie` | external (not checked) |
 | Demo → | `role-radar.html` | ok |
 | GitHub | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/persona-twins` | external (not checked) |
 | Demo → | `https://chaseholroyd.com/hero-backgrounds/` | other repo (not checked here) |
 | GitHub | `https://github.com/holroydchase-afk/hero-backgrounds` | external (not checked) |
-| Demo → | `https://chaseholroyd.com/pm-tools/` | other repo (not checked here) |
-| GitHub | `https://github.com/holroydchase-afk/pm-tools` | external (not checked) |
 | Demo → | `demo/share-start-tester/` | ok |
 | Demo → | `demo/font-tester/` | ok |
 | GitHub | `https://github.com/holroydchase-afk/pm-tools/tree/main/templates/interview-flashcards` | external (not checked) |
@@ -149,11 +141,7 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | Agents | `/agents.html` | ok |
 | Resume | `/resume.html` | ok |
 | Contact | `/#contact` | ok |
-| ← Building | `/building.html` | ok |
-| Open full page | `/try/charlie.html` | ok |
-| Code ↗ | `https://github.com/holroydchase-afk/charlie` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/charlie` | external (not checked) |
-| Read the story ↓ | `#story` | ok |
+| work page | `/` | ok |
 | LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
 
@@ -168,11 +156,7 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | Agents | `/agents.html` | ok |
 | Resume | `/resume.html` | ok |
 | Contact | `/#contact` | ok |
-| ← Building | `/building.html` | ok |
-| Open full page | `/try/crew-clock.html` | ok |
-| Code ↗ | `https://github.com/holroydchase-afk/crew-clock` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/crew-clock` | external (not checked) |
-| Read the story ↓ | `#story` | ok |
+| work page | `/` | ok |
 | LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
 
@@ -247,14 +231,10 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/hearth` | external (not checked) |
 | Demo → | `ccwatts.html` | ok |
 | GitHub | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
-| A crew on a rural job site has no signal and no ti | `building.html#crew` | ok |
-| Most stock ideas ignore what you already know.Pape | `building.html#stocks` | ok |
 | The few roles worth applying to are spread across  | `building.html#roles` | ok |
 | GitHub | `https://github.com/holroydchase-afk/persona-twins` | external (not checked) |
 | Demo → | `https://chaseholroyd.com/hero-backgrounds/` | other repo (not checked here) |
 | GitHub | `https://github.com/holroydchase-afk/hero-backgrounds` | external (not checked) |
-| Demo → | `https://chaseholroyd.com/pm-tools/` | other repo (not checked here) |
-| GitHub | `https://github.com/holroydchase-afk/pm-tools` | external (not checked) |
 | Demo → | `demo/share-start-tester/` | ok |
 | Demo → | `demo/font-tester/` | ok |
 | GitHub | `https://github.com/holroydchase-afk/pm-tools/tree/main/templates/interview-flashcards` | external (not checked) |
@@ -347,40 +327,6 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | ← ccwatts | `/ccwatts.html` | ok |
 | Code | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
 | See the code on GitHub | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
-| LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
-| GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
-
-### try/charlie.html
-
-| Link text | Goes to | Status |
-|---|---|---|
-| Skip to content | `#main` | ok |
-| Chase Holroyd | `/` | ok |
-| Case studies | `/#cases` | ok |
-| Building | `/building.html` | ok |
-| Agents | `/agents.html` | ok |
-| Resume | `/resume.html` | ok |
-| Contact | `/#contact` | ok |
-| ← Charlie | `/charlie.html` | ok |
-| Code | `https://github.com/holroydchase-afk/charlie` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/charlie` | external (not checked) |
-| LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
-| GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
-
-### try/crew-clock.html
-
-| Link text | Goes to | Status |
-|---|---|---|
-| Skip to content | `#main` | ok |
-| Chase Holroyd | `/` | ok |
-| Case studies | `/#cases` | ok |
-| Building | `/building.html` | ok |
-| Agents | `/agents.html` | ok |
-| Resume | `/resume.html` | ok |
-| Contact | `/#contact` | ok |
-| ← Crew Clock | `/crew-clock.html` | ok |
-| Code | `https://github.com/holroydchase-afk/crew-clock` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/crew-clock` | external (not checked) |
 | LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
 

@@ -14,8 +14,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".jpg": "image/jpeg" };
 const PRODUCTS = [
   { page: "family-photos.html", demo: "/hearth/", repo: "hearth", phone: true },
-  { page: "crew-clock.html", demo: "/crew-clock/", repo: "crew-clock", phone: true },
-  { page: "charlie.html", demo: "/charlie/", repo: "charlie", phone: true },
   { page: "role-radar.html", demo: "/role-radar/", repo: "role-radar", phone: false },
   { page: "ccwatts.html", demo: "/ccwatts/", repo: "ccwatts", phone: false },
 ];
@@ -137,39 +135,41 @@ for (const p of PRODUCTS) {
 }
 
 await check("UNI-7 a demo that is down shows a plain message and a link to the code", async () => {
-  missing = new Set(["/charlie/"]);
-  const { ctx, page } = await open("/charlie.html", LAPTOP);
+  missing = new Set(["/ccwatts/"]);
+  const { ctx, page } = await open("/ccwatts.html", LAPTOP);
   ok(await page.isVisible(".view .down"), "no fallback message");
-  ok(await page.locator('.view .down a[href*="github.com/holroydchase-afk/charlie"]').count() === 1, "no code link");
+  ok(await page.locator('.view .down a[href*="github.com/holroydchase-afk/ccwatts"]').count() === 1, "no code link");
   await ctx.close(); missing = new Set();
 });
 
 await check("UNI-8 demo-bar.js draws the standard header on a direct visit, and nothing inside the product page frame", async () => {
-  const { ctx, page } = await open("/crew-clock/?bar=1", LAPTOP);
+  const { ctx, page } = await open("/hearth/?bar=1", LAPTOP);
   ok(await page.isVisible("#site-bar"), "no header on a direct visit");
   const labels = await page.$$eval("#site-bar nav a", as => as.filter(a => a.offsetParent).map(a => a.textContent.trim()));
   ok(JSON.stringify(labels) === JSON.stringify(["Case studies", "Building", "Agents", "Resume", "Contact"]), "links: " + labels);
   await ctx.close();
-  const b = await open("/crew-clock.html", LAPTOP);
+  const b = await open("/family-photos.html", LAPTOP);
   ok(b.page.frames().length > 1, "no frame");
   await b.ctx.close();
 });
 
-await check("UNI-12 Energy Scanner is off the portfolio: stub redirects to Building, no try page, no links, not in the sitemap", async () => {
+await check("UNI-12 Energy Scanner, Charlie and Crew Clock are off the portfolio: stubs redirect to Building, no try pages, no links, not in the sitemap", async () => {
   const fs = await import("node:fs");
-  const stub = fs.readFileSync(path.join(ROOT, "energy-scanner.html"), "utf8");
-  ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), "stub should redirect to /building.html and be noindex");
-  ok(!fs.existsSync(path.join(ROOT, "try/energy-scanner.html")), "try page should be gone");
-  for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "charlie.html", "crew-clock.html", "role-radar.html", "ccwatts.html", "family-photos.html"]) {
+  for (const slug of ["energy-scanner", "charlie", "crew-clock"]) {
+    const stub = fs.readFileSync(path.join(ROOT, slug + ".html"), "utf8");
+    ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), slug + " stub should redirect to /building.html and be noindex");
+    ok(!fs.existsSync(path.join(ROOT, "try/" + slug + ".html")), slug + " try page should be gone");
+  }
+  for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "role-radar.html", "ccwatts.html", "family-photos.html"]) {
     // drop HTML comments with a plain scan (the hidden cards live in comments)
     const parts = fs.readFileSync(path.join(ROOT, f), "utf8").split("<!--");
     const t = parts[0] + parts.slice(1).map(p => p.slice(p.indexOf("-->") + 3)).join("");
-    ok(!/energy-scanner/.test(t), f + " still links to energy-scanner");
+    for (const slug of ["energy-scanner", "charlie", "crew-clock"]) ok(!t.includes(slug), f + " still mentions " + slug);
   }
 });
 
 await check("UNI-9 the theme choice carries into the page, and dark has no unreadable header", async () => {
-  const { ctx, page } = await open("/charlie.html?theme=dark", LAPTOP);
+  const { ctx, page } = await open("/ccwatts.html?theme=dark", LAPTOP);
   ok(await page.evaluate(() => document.documentElement.dataset.theme) === "dark", "dark not applied");
   const bg = await page.$eval("header.site", e => getComputedStyle(e).backgroundColor);
   ok(bg === "rgb(10, 10, 10)", "header background " + bg);
