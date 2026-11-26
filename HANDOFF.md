@@ -9,6 +9,10 @@ waiting_on_chase: []
 blockers: []
 -->
 
+## README rewrite and CODEOWNERS (Nov 26, PR open, waits for Chase's go)
+- Gap check against a lean repo bar (Chase, Nov 26): README now says what, why, how to run, how to test and how the repo is laid out (it had no section headings); added `.github/CODEOWNERS`. No Node tooling here, so no ESLint, `.nvmrc` or `engines` apply; the only JS is the demo tests and the share-card script.
+- Not run: ux-reviewer, qa-tdd (docs and config only). The generated pages are unchanged, so the deploy a merge triggers publishes an identical site. Next: Chase says go, or it rides the nightly release train.
+
 ## WEB-M14 one page system: product template, standard header, full-screen demos (Nov 25, PR open, rides the release train)
 
 **Mobile smoothness fixes (Nov 25, Chase's phone report):** hero canvas no longer takes touch (`pointer-events:none; touch-action:pan-y`) and parallax only follows a mouse, so touching the constellation scrolls the page; hero resize only reseeds when the width changes (address-bar height changes no longer redraw stars); the name in the top bar fades in with a throttled scroll handler instead of animating width; the headshot is a preloaded 400px webp (18 KB) with a srcset. Tested: iPhone 13 emulation in Chromium, swipe from the hero scrolled the page 300px, no sideways scroll, one 18 KB image fetched, mobile header shows Building and Contact by design. NOT tested: a real phone.
