@@ -13,7 +13,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://chaseholroyd.com/"
 # 404 is served for missing paths and is not a page to index.
 # studio.html and pm-tools.html are hidden "moved" stubs (Chase, Nov 18); they stay out of the sitemap.
-NOT_INDEXED = {"404.html", "studio.html", "pm-tools.html", "about.html", "energy-scanner.html", "charlie.html", "crew-clock.html"}
+NOT_INDEXED = {"404.html", "studio.html", "pm-tools.html", "about.html", "energy-scanner.html", "charlie.html", "crew-clock.html", "role-radar.html"}
 # Root-absolute links that point at another repo's Pages site, not a file here.
 OTHER_REPO_SITES = ("/ccwatts/", "/energy-scanner/", "/role-radar/", "/pm-tools/", "/crew-clock/", "/charlie/", "/websites/", "/Hearth/", "/hearth/")
 
@@ -142,7 +142,7 @@ def check_no_third_party_loads(failures):
 
 
 PRODUCT_PAGES = {"family-photos.html": "/hearth/",
-                 "role-radar.html": "/role-radar/", "ccwatts.html": "/ccwatts/"}
+                 "ccwatts.html": "/ccwatts/"}
 PHONE_PRODUCTS = {"family-photos.html"}
 HEADER_LINKS = ["Case studies", "Building", "Agents", "Resume", "Contact"]
 
@@ -255,7 +255,7 @@ def check_make_your_own(failures):
             elif H.unescape(prompt) != f.read_text().strip():
                 failures.append(f"{page}: {slug} differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
         # Hidden cards have no button on the page (Chase, Nov 25); their prompt files stay in the repo, which is not served.
-        missing = {f.stem for f in files} - set(slugs) - {"build-slate-roadmap"}
+        missing = {f.stem for f in files} - set(slugs) - {"build-slate-roadmap", "job-board-readers"}
         if missing:
             failures.append(f"{page}: no button for {sorted(missing)}")
         cards = len(re.findall(r'class="kc"', h.split("Small tools with code on GitHub", 1)[-1].split("</section>", 1)[0]))

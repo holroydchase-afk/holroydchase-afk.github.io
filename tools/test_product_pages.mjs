@@ -14,7 +14,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".jpg": "image/jpeg" };
 const PRODUCTS = [
   { page: "family-photos.html", demo: "/hearth/", repo: "hearth", phone: true },
-  { page: "role-radar.html", demo: "/role-radar/", repo: "role-radar", phone: false },
   { page: "ccwatts.html", demo: "/ccwatts/", repo: "ccwatts", phone: false },
 ];
 const STUB = `<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><body style="margin:0">
@@ -153,18 +152,18 @@ await check("UNI-8 demo-bar.js draws the standard header on a direct visit, and 
   await b.ctx.close();
 });
 
-await check("UNI-12 Energy Scanner, Charlie and Crew Clock are off the portfolio: stubs redirect to Building, no try pages, no links, not in the sitemap", async () => {
+await check("UNI-12 Energy Scanner, Charlie, Crew Clock and Role Radar are off the portfolio: stubs redirect to Building, no try pages, no links, not in the sitemap", async () => {
   const fs = await import("node:fs");
-  for (const slug of ["energy-scanner", "charlie", "crew-clock"]) {
+  for (const slug of ["energy-scanner", "charlie", "crew-clock", "role-radar"]) {
     const stub = fs.readFileSync(path.join(ROOT, slug + ".html"), "utf8");
     ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), slug + " stub should redirect to /building.html and be noindex");
     ok(!fs.existsSync(path.join(ROOT, "try/" + slug + ".html")), slug + " try page should be gone");
   }
-  for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "role-radar.html", "ccwatts.html", "family-photos.html"]) {
+  for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "ccwatts.html", "family-photos.html"]) {
     // drop HTML comments with a plain scan (the hidden cards live in comments)
     const parts = fs.readFileSync(path.join(ROOT, f), "utf8").split("<!--");
     const t = parts[0] + parts.slice(1).map(p => p.slice(p.indexOf("-->") + 3)).join("");
-    for (const slug of ["energy-scanner", "charlie", "crew-clock"]) ok(!t.includes(slug), f + " still mentions " + slug);
+    for (const slug of ["energy-scanner", "charlie", "crew-clock", "role-radar"]) ok(!t.includes(slug), f + " still mentions " + slug);
   }
 });
 
