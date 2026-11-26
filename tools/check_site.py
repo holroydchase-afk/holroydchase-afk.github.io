@@ -254,7 +254,8 @@ def check_make_your_own(failures):
                 failures.append(f"{page}: {slug} has no prompts/{slug}.txt")
             elif H.unescape(prompt) != f.read_text().strip():
                 failures.append(f"{page}: {slug} differs from prompts/{slug}.txt (run tools/sync_prompts.py)")
-        missing = {f.stem for f in files} - set(slugs)
+        # Hidden cards have no button on the page (Chase, Nov 25); their prompt files stay in the repo, which is not served.
+        missing = {f.stem for f in files} - set(slugs) - {"build-slate-roadmap", "job-board-readers"}
         if missing:
             failures.append(f"{page}: no button for {sorted(missing)}")
         cards = len(re.findall(r'class="kc"', h.split("Small tools with code on GitHub", 1)[-1].split("</section>", 1)[0]))
