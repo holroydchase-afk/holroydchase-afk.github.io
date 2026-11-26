@@ -155,7 +155,7 @@ await check("UNI-8 demo-bar.js draws the standard header on a direct visit, and 
   await b.ctx.close();
 });
 
-await check("UNI-11 Energy Scanner is off the portfolio: stub redirects to Building, no try page, no links, not in the sitemap", async () => {
+await check("UNI-12 Energy Scanner is off the portfolio: stub redirects to Building, no try page, no links, not in the sitemap", async () => {
   const fs = await import("node:fs");
   const stub = fs.readFileSync(path.join(ROOT, "energy-scanner.html"), "utf8");
   ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), "stub should redirect to /building.html and be noindex");
