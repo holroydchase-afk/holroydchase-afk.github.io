@@ -161,7 +161,9 @@ await check("UNI-11 Energy Scanner is off the portfolio: stub redirects to Build
   ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), "stub should redirect to /building.html and be noindex");
   ok(!fs.existsSync(path.join(ROOT, "try/energy-scanner.html")), "try page should be gone");
   for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "charlie.html", "crew-clock.html", "role-radar.html", "ccwatts.html", "family-photos.html"]) {
-    const t = fs.readFileSync(path.join(ROOT, f), "utf8").replace(/<!--[\s\S]*?-->/g, "");
+    // drop HTML comments with a plain scan (the hidden cards live in comments)
+    const parts = fs.readFileSync(path.join(ROOT, f), "utf8").split("<!--");
+    const t = parts[0] + parts.slice(1).map(p => p.slice(p.indexOf("-->") + 3)).join("");
     ok(!/energy-scanner/.test(t), f + " still links to energy-scanner");
   }
 });
