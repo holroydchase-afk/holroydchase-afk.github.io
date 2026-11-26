@@ -287,10 +287,10 @@ JOURNEY = [
      "Research first, safety rules enforced in code and tests rather than copy, and one tested Python engine that runs on a server and in the browser.",
      "Built for a new investor learning options by paper trading companies inside their own circle of competence", "Try the demo", ""),
     ("family-photos.html", HEARTH,
-     "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
+     "A distributed family, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents", "Try the demo",
-     "a private photo app for two blended families, with a family beta"),
+     "a private photo app for a distributed family, with a family beta"),
     ("crew-clock.html", "Crew Clock",
      "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
      "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
@@ -396,8 +396,8 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
 <div class="feature-copy reveal">
 <p class="eyebrow">Featured · {HEARTH_TAG}</p>
-<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
-<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
+<h2 id="hearth-h">{HEARTH}: one private place for a distributed family's photos</h2>
+<p class="lede">A distributed family, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
 <ul class="ticks">
 <li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
 <li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
@@ -449,12 +449,12 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObse
 family = product(
     f"Mobile app · {HEARTH_TAG}",
     f"{HEARTH}: a private family photo app",
-    "Two blended families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
+    "A distributed family, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
     [
-        ("The problem", "<p>Families with divorces, remarriages and step-relatives don't fit one group chat. Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
+        ("The problem", "<p>Distributed families, spread across homes, states and phone types, don't fit one group chat. Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
          "Existing family apps assume one household, and we don't post our kids publicly.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event. One person can be in several groups.</li>'
          "<li><b>No social pressure:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
@@ -468,7 +468,7 @@ family = product(
         ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is built on MLS (RFC 9420) end-to-end encryption, which has not been audited or tested by hand on two phones yet, "
          "and access rules live in the database with Postgres row-level security, so a post you can't see behaves as if it doesn't exist.</p>"
          "<p><b>The limit:</b> today Hearth's server still holds the photo keys. A family vault, where only family phones hold the keys, is planned and not built.</p>"),
-        ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in two households, so it was replaced by plain named groups anyone can be in more than once.</li>'
+        ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in more than one group, so it was replaced by plain named groups anyone can be in more than once.</li>'
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
@@ -692,7 +692,7 @@ studio = product(
          '<ul class="clean">' + "".join(f"<li><b>{n}:</b> {d}</li>" for n, d in STUDIO_AGENTS) + "</ul>"
          "<p>None is tied to a product. Each reads the repo it's working in first: its hard rules, its story and its current state. "
          "The same staff PM agent works on a kids' bedtime app and an energy CLI, and an improvement to one agent lands everywhere. "
-         "On the family photo app, this review loop caught a co-parent data leak before any real user saw it.</p>"),
+         "On the family photo app, this review loop caught a data leak between groups before any real user saw it.</p>"),
         ("A coordinator, not another builder", "<p>The more important decision was that one project should build nothing. "
          "Each product has its own project that owns its code. Above them, a coordinator, the product studio, holds the view across all of them: "
          "what moved, what stalled, what needs my decision, and where the portfolio stands.</p>"
@@ -842,7 +842,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
-    ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
+    ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for distributed families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 290 company boards on request.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
