@@ -26,6 +26,8 @@ jobs:
         run: |
           mkdir _site
           cp -r *.html assets demo try robots.txt sitemap.xml CNAME LICENSE _site/
+          # Energy Scanner is off the portfolio (Chase, Nov 25): keep its source, do not serve it
+          rm -rf _site/demo/energy-scanner
           for f in HANDOFF.md CLAUDE.md tools .claude .github; do test ! -e "_site/$f"; done
       - uses: actions/upload-pages-artifact@v4
         with:

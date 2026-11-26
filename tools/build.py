@@ -29,19 +29,20 @@ IN_DEVELOPMENT = {"energy-scanner.html"}
 FEATURED_WORK = {"ccwatts.html"}
 # (page, name, what it is, what's left before it moves up, link label)
 IN_PROGRESS = [
-    ("role-radar.html", "Role Radar", "A scheduled agent that scans company boards and scores every role 0-100 with a stated reason. The demo runs on made-up data.",
-     "confirming the board count and tightening the demo's sample data.", "See the demo"),
-    ("charlie.html", "Charlie", "Paper-trading ideas that start from companies you already understand, with max loss and breakeven on each. Paper trading only.",
-     "publishing its test results.", "See the demo"),
-    ("crew-clock.html", "Crew Clock", "A phone time clock for small crews: three taps to clock in, even with no signal.",
-     "a beta with a small real crew.", "See the demo"),
-    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
-     "a copy pass before I call it done.", "See the app"),
 ]
 
-# Hidden, not deleted (Chase, Nov 24: remove the Open Arms Foundation work from the portfolio for now; the websites
+# Hidden, not deleted (Chase, Nov 25: Energy Scanner is off the portfolio, a quick thing for his kids; it sits here with
+# Open Arms). Hidden, not deleted (Chase, Nov 24: remove the Open Arms Foundation work from the portfolio for now; the websites
 # repo went private, so /websites/ is a 404). Move this back into IN_PROGRESS when it is public again.
 HIDDEN_IN_PROGRESS = [
+    ("role-radar.html", "Role Radar", "A scheduled agent that scans company boards and scores every role 0-100 with a stated reason. The demo runs on made-up data.",
+     "confirming the board count and tightening the demo's sample data.", "See the demo"),
+    ("crew-clock.html", "Crew Clock", "A phone time clock for small crews: three taps to clock in, even with no signal.",
+     "a beta with a small real crew.", "See the demo"),
+    ("charlie.html", "Charlie", "Paper-trading ideas that start from companies you already understand, with max loss and breakeven on each. Paper trading only.",
+     "publishing its test results.", "See the demo"),
+    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
+     "a copy pass before I call it done.", "See the app"),
     ("/websites/", "Open Arms Foundation", "The website I built for a children's home in Medell\u00edn, Colombia.",
      "adding the sponsorship details.", "Visit the site"),
 ]
@@ -51,7 +52,7 @@ HIDDEN_IN_PROGRESS = [
 HEARTH = "Hearth"
 HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("1,291", "app tests"), ("1,199", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("1,000+", "app tests"), ("1,000+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with Claude Code and a set of role prompts, tests first.")
 
@@ -286,10 +287,10 @@ JOURNEY = [
      "Research first, safety rules enforced in code and tests rather than copy, and one tested Python engine that runs on a server and in the browser.",
      "Built for a new investor learning options by paper trading companies inside their own circle of competence", "Try the demo", ""),
     ("family-photos.html", HEARTH,
-     "Two blended families, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
+     "A distributed family, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents", "Try the demo",
-     "a private photo app for two blended families, with a family beta"),
+     "a private photo app for a distributed family, with a family beta"),
     ("crew-clock.html", "Crew Clock",
      "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
      "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
@@ -395,12 +396,12 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <section class="band feature" id="hearth" aria-labelledby="hearth-h"><div class="wrap feature-grid">
 <div class="feature-copy reveal">
 <p class="eyebrow">Featured · {HEARTH_TAG}</p>
-<h2 id="hearth-h">{HEARTH}: one private place for a blended family's photos</h2>
-<p class="lede">Two blended families, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
+<h2 id="hearth-h">{HEARTH}: one private place for a distributed family's photos</h2>
+<p class="lede">A distributed family, five group texts and grandparents on Android. {HEARTH} lets a parent choose exactly who sees each post, and keeps it simple enough for a grandparent who stays off social media.</p>
 <ul class="ticks">
 <li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
 <li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
-<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
+<li><b>Private underneath.</b> Photos encrypted before upload, group chat built on end-to-end encryption (MLS, not yet audited), access enforced in the database, no ads or AI training.</li>
 </ul>
 <div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
 <div class="cta"><a class="btn" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
@@ -448,12 +449,12 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObse
 family = product(
     f"Mobile app · {HEARTH_TAG}",
     f"{HEARTH}: a private family photo app",
-    "Two blended families, five family group texts, and grandparents on Android while everyone else is on iPhone. "
+    "A distributed family, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
     [
-        ("The problem", "<p>Families with divorces, remarriages and step-relatives don't fit one group chat. Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
+        ("The problem", "<p>Distributed families, spread across homes, states and phone types, don't fit one group chat. Photos of our kids arrived late, compressed, or not at all, and every send carried the worry of who might feel left out. "
          "Existing family apps assume one household, and we don't post our kids publicly.</p>"),
         ("What I built", '<ul class="clean"><li><b>Groups you name:</b> share with Everyone, one side of the family, or an event. One person can be in several groups.</li>'
          "<li><b>No social pressure:</b> no \"Seen by 3 of 8\" count. A returned heart shows the photo arrived.</li>"
@@ -464,14 +465,14 @@ family = product(
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
-        ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is end-to-end encrypted with MLS (RFC 9420), "
+        ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is built on MLS (RFC 9420) end-to-end encryption, which has not been audited or tested by hand on two phones yet, "
          "and access rules live in the database with Postgres row-level security, so a post you can't see behaves as if it doesn't exist.</p>"
          "<p><b>The limit:</b> today Hearth's server still holds the photo keys. A family vault, where only family phones hold the keys, is planned and not built.</p>"),
-        ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in two households, so it was replaced by plain named groups anyone can be in more than once.</li>'
+        ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in more than one group, so it was replaced by plain named groups anyone can be in more than once.</li>'
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
-            ("Tested", "1,291 app tests and 1,199 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
+            ("Tested", "Over 1,000 app tests and over 1,000 database checks, counted with a script in the repo (scripts/test-totals.sh). Run it for the current totals."),
             ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
             ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
             ("Self-reviewed", "No outside security audit yet."),
@@ -691,7 +692,7 @@ studio = product(
          '<ul class="clean">' + "".join(f"<li><b>{n}:</b> {d}</li>" for n, d in STUDIO_AGENTS) + "</ul>"
          "<p>None is tied to a product. Each reads the repo it's working in first: its hard rules, its story and its current state. "
          "The same staff PM agent works on a kids' bedtime app and an energy CLI, and an improvement to one agent lands everywhere. "
-         "On the family photo app, this review loop caught a co-parent data leak before any real user saw it.</p>"),
+         "On the family photo app, this review loop caught a data leak between groups before any real user saw it.</p>"),
         ("A coordinator, not another builder", "<p>The more important decision was that one project should build nothing. "
          "Each product has its own project that owns its code. Above them, a coordinator, the product studio, holds the view across all of them: "
          "what moved, what stalled, what needs my decision, and where the portfolio stands.</p>"
@@ -841,7 +842,7 @@ notfound = """<div class="read"><p class="eyebrow">404</p><h1>That page isn't he
 
 PAGES = [
     ("index.html", "Work", "Chase Holroyd, staff product manager for pricing, payments and point-of-sale lending. Open to remote senior and staff PM roles.", home),
-    ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for split families and grandparents, with a chosen audience on every post.", family),
+    ("family-photos.html", HEARTH, f"{HEARTH} (working name): a private family photo app for distributed families and grandparents, with a chosen audience on every post.", family),
     ("role-radar.html", "Role Radar", "An AI job-search radar that scans about 290 company boards on request.", role_radar),
     ("ccwatts.html", "ccwatts", "Estimate the electricity your Claude Code usage consumes, as an honest range.", ccwatts),
     ("charlie.html", "Charlie", "Learn options by paper trading the companies you already understand, with max loss, breakeven and an exit plan on every idea.", charlie),
@@ -857,11 +858,15 @@ PAGES = [
 # Hidden pages (Chase, Nov 18: the Studio and its console use real data and aren't ready to show). Their content
 # stays in PAGES below, so they can come back; the site serves a "moved" stub at the old address instead, keeps
 # them out of the nav and the sitemap, and never links to them.
-HIDDEN = ("studio.html", "pm-tools.html", "about.html")
+HIDDEN = ("studio.html", "pm-tools.html", "about.html", "energy-scanner.html", "charlie.html", "crew-clock.html", "role-radar.html")
 HIDDEN_STUB = """<div class="read"><p class="eyebrow">Moved</p><h1>This page isn't public right now.</h1>
 <p class="lede">It will be back. In the meantime the <a href="/">work page</a> has everything I'm showing.</p></div>"""
 # About folded into the home page (Chase, Nov 25: keep the navigation shallow). Its content stays in PAGES, not deleted.
-HIDDEN_TARGET = {"about.html": "/#about"}
+HIDDEN_TARGET = {"about.html": "/#about", "energy-scanner.html": "/building.html",
+                 "charlie.html": "/building.html", "crew-clock.html": "/building.html",
+                 "role-radar.html": "/building.html"}
+# Energy Scanner is off the portfolio (Chase, Nov 25): no product page, no try/ page. Its DEMOS row stays so it can return.
+HIDDEN_DEMOS = {"Energy Scanner", "Charlie", "Crew Clock", "Role Radar"}  # Charlie and Crew Clock too (Chase, Nov 25: hide for now)
 
 
 # ---- Hand-built pages (home, Building, Agents) carry the standard header too ---------------------------------------
@@ -951,6 +956,8 @@ if __name__ == "__main__":
     (ROOT / "robots.txt").write_text(f"{ai_block}User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
     (ROOT / "try").mkdir(exist_ok=True)
     for key in DEMOS:
+        if key in HIDDEN_DEMOS:
+            continue
         (ROOT / "try" / f"{DEMOS[key][2]}.html").write_text(fullscreen_page(key), encoding="utf-8")
     patch_handbuilt()
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
