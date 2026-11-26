@@ -15,10 +15,8 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | demo/share-start-tester/index.html | 1 | index.html → demo/share-start-tester/index.html |
 | family-photos.html | 1 | index.html → family-photos.html |
 | resume.html | 1 | index.html → resume.html |
-| role-radar.html | 2 | index.html → building.html → role-radar.html |
 | try/ccwatts.html | 2 | index.html → ccwatts.html → try/ccwatts.html |
 | try/hearth.html | 2 | index.html → family-photos.html → try/hearth.html |
-| try/role-radar.html | 3 | index.html → building.html → role-radar.html → try/role-radar.html |
 | 404.html | - | not linked from anywhere |
 | about.html | - | not linked from anywhere |
 | charlie.html | - | not linked from anywhere |
@@ -26,6 +24,7 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | demo/energy-scanner/index.html | - | not linked from anywhere |
 | energy-scanner.html | - | not linked from anywhere |
 | pm-tools.html | - | not linked from anywhere |
+| role-radar.html | - | not linked from anywhere |
 | studio.html | - | not linked from anywhere |
 
 ## Broken or stale
@@ -93,8 +92,6 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
 | Results → | `agents.html` | ok |
 | GitHub | `https://github.com/holroydchase-afk/studio-agents` | external (not checked) |
-| Demo → | `role-radar.html` | ok |
-| GitHub | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/persona-twins` | external (not checked) |
 | Demo → | `https://chaseholroyd.com/hero-backgrounds/` | other repo (not checked here) |
 | GitHub | `https://github.com/holroydchase-afk/hero-backgrounds` | external (not checked) |
@@ -104,7 +101,6 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/studio-agents` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/studio-agents/tree/main/tools` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/pm-tools/blob/main/scripts/check-persona-checks.sh` | external (not checked) |
-| GitHub | `https://github.com/holroydchase-afk/role-radar/blob/main/plugin/scripts/fetch-boards.py` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/hearth/blob/main/.github/workflows/demo-site.yml` | external (not checked) |
 | Demo → | `demo/fruit-palettes/` | ok |
 | ← Back to the home page | `index.html` | ok |
@@ -231,7 +227,6 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/hearth` | external (not checked) |
 | Demo → | `ccwatts.html` | ok |
 | GitHub | `https://github.com/holroydchase-afk/ccwatts` | external (not checked) |
-| The few roles worth applying to are spread across  | `building.html#roles` | ok |
 | GitHub | `https://github.com/holroydchase-afk/persona-twins` | external (not checked) |
 | Demo → | `https://chaseholroyd.com/hero-backgrounds/` | other repo (not checked here) |
 | GitHub | `https://github.com/holroydchase-afk/hero-backgrounds` | external (not checked) |
@@ -241,10 +236,9 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | GitHub | `https://github.com/holroydchase-afk/studio-agents` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/studio-agents/tree/main/tools` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/pm-tools/blob/main/scripts/check-persona-checks.sh` | external (not checked) |
-| GitHub | `https://github.com/holroydchase-afk/role-radar/blob/main/plugin/scripts/fetch-boards.py` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk/hearth/blob/main/.github/workflows/demo-site.yml` | external (not checked) |
 | Demo → | `demo/fruit-palettes/` | ok |
-| See everything in progress → | `building.html` | ok |
+| See everything I’ve built → | `building.html` | ok |
 | (icon) | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | (icon) | `https://github.com/holroydchase-afk` | external (not checked) |
 
@@ -290,11 +284,7 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | Agents | `/agents.html` | ok |
 | Resume | `/resume.html` | ok |
 | Contact | `/#contact` | ok |
-| ← Building | `/building.html` | ok |
-| Open full page | `/try/role-radar.html` | ok |
-| Code ↗ | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
-| Read the story ↓ | `#story` | ok |
+| work page | `/` | ok |
 | LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
 
@@ -344,22 +334,5 @@ Built from the files in this repo. Click depth counts clicks from the home page 
 | ← Hearth | `/family-photos.html` | ok |
 | Code | `https://github.com/holroydchase-afk/hearth` | external (not checked) |
 | See the code on GitHub | `https://github.com/holroydchase-afk/hearth` | external (not checked) |
-| LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
-| GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
-
-### try/role-radar.html
-
-| Link text | Goes to | Status |
-|---|---|---|
-| Skip to content | `#main` | ok |
-| Chase Holroyd | `/` | ok |
-| Case studies | `/#cases` | ok |
-| Building | `/building.html` | ok |
-| Agents | `/agents.html` | ok |
-| Resume | `/resume.html` | ok |
-| Contact | `/#contact` | ok |
-| ← Role Radar | `/role-radar.html` | ok |
-| Code | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
-| See the code on GitHub | `https://github.com/holroydchase-afk/role-radar` | external (not checked) |
 | LinkedIn | `https://www.linkedin.com/in/chase-holroyd` | external (not checked) |
 | GitHub | `https://github.com/holroydchase-afk` | external (not checked) |
