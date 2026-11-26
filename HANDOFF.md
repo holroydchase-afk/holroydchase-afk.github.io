@@ -9,6 +9,8 @@ waiting_on_chase: []
 blockers: []
 -->
 
+**Building = building-blocks + EvalPM (Chase, Nov 26; stacked on PR 111, rides the release train):** Building on home and on `building.html` now shows two cards, the shared React Native component library (`building-blocks`) and the EvalPM evaluation kit (`studio-agents/evalpm`), both linking to GitHub only. Role Radar's card is replaced (its page and repo are untouched), and Crew Clock stays off. Copy uses only README facts: ten themes, thirteen components, MIT, not on npm; plain Node, no dependencies, demo needs no API key. `check_site.py` ok, 27/27, no console errors at 1280 and 390. Not run: ux-reviewer and positioning (see PR). Next: Chase's go on the release train.
+
 **Scrub the last traces of the hidden products (Chase, Nov 25: no trace except the redirect addresses; stacked on PR 110, rides the release train):** the commented-out cards are removed from home and Building, the Agents-page result no longer names Energy Scanner ("A product demo, before and after one fix PR"), and the hidden products' images moved out of the served folders to `hidden/` (not deployed; kept in the repo). `check_site.py` no longer requires a Make-your-own button for the hidden Build Slate prompt. New test UNI-13: no served page, comment or sitemap names a hidden product, and no served folder holds their files; 27/27 and `check_site.py` ok. The redirect stubs stay. Still serving until each repo unpublishes: `/energy-scanner/`, `/charlie/`, `/crew-clock/` (own Pages sites). Source for the cards stays in git history and the `build.py` rows. Next: Chase's go on the release train.
 
 ## WEB-M14 one page system: product template, standard header, full-screen demos (Nov 25, PR open, rides the release train)
