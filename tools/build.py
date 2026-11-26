@@ -52,7 +52,7 @@ HIDDEN_IN_PROGRESS = [
 HEARTH = "Hearth"
 HEARTH_TAG = "working name · family beta"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
-HEARTH_FACTS = [("1,291", "app tests"), ("1,199", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
+HEARTH_FACTS = [("1,000+", "app tests"), ("1,000+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
                "I ran the build with Claude Code and a set of role prompts, tests first.")
 
@@ -401,7 +401,7 @@ home = f"""<section class="band hero-band"><div class="wrap hero-grid">
 <ul class="ticks">
 <li><b>Audience on every post.</b> Share with everyone, one side of the family, or a group you name.</li>
 <li><b>Built for grandparents.</b> Large text, words under every icon, no passwords.</li>
-<li><b>Private underneath.</b> Photos encrypted before upload, group chat end-to-end encrypted, access enforced in the database, no ads or AI training.</li>
+<li><b>Private underneath.</b> Photos encrypted before upload, group chat built on end-to-end encryption (MLS, not yet audited), access enforced in the database, no ads or AI training.</li>
 </ul>
 <div class="facts">{"".join(f'<div class="fact"><b>{v}</b><span>{k}</span></div>' for v, k in HEARTH_FACTS)}</div>
 <div class="cta"><a class="btn" href="/Hearth/">Try the demo</a><a class="btn" href="family-photos.html">Read the case study</a></div>
@@ -465,14 +465,14 @@ family = product(
          '<img src="assets/family/iphone-03-posted.webp" width="390" height="844" loading="lazy" alt="Photos as the parent: the new post says who it was shared with">'
          '<img src="assets/family/iphone-05-grandparent.webp" width="390" height="844" loading="lazy" alt="Photos as a grandparent: bigger text, only what was shared with her">'
          '</div><p class="note">A made-up family with drawn sample pictures. No real people.</p>'),
-        ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is end-to-end encrypted with MLS (RFC 9420), "
+        ("How it works", "<p>Photos are encrypted on the phone (AES-256-GCM) before upload, location and camera data are stripped and checked on the phone, group chat is built on MLS (RFC 9420) end-to-end encryption, which has not been audited or tested by hand on two phones yet, "
          "and access rules live in the database with Postgres row-level security, so a post you can't see behaves as if it doesn't exist.</p>"
          "<p><b>The limit:</b> today Hearth's server still holds the photo keys. A family vault, where only family phones hold the keys, is planned and not built.</p>"),
         ("Product calls", '<ul class="clean"><li><b>Delete the model built yesterday.</b> A fixed family tree was specced, built and deployed. One real relative belonged in two households, so it was replaced by plain named groups anyone can be in more than once.</li>'
          "<li><b>Measure feelings, not just engagement.</b> \"Seen by 3 of 8\" is a guilt meter in a family, so it was cut.</li>"
          "<li><b>Claim only what's true today.</b> The app says \"stored in the US\", not \"never leaves the US\", because push notifications and vendor support cross borders.</li></ul>"),
         ("Proof", proof_grid([
-            ("Tested", "1,291 app tests and 1,199 database checks, counted with a script in the repo (scripts/test-totals.sh)."),
+            ("Tested", "Over 1,000 app tests and over 1,000 database checks, counted with a script in the repo (scripts/test-totals.sh). Run it for the current totals."),
             ("Test-first", "Every change starts with a failing test, and every product decision gets a persona check that CI enforces."),
             ("Open", "The code is public on GitHub, with architecture and threat-model docs."),
             ("Self-reviewed", "No outside security audit yet."),
