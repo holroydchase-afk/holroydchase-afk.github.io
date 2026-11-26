@@ -168,6 +168,17 @@ await check("UNI-12 Energy Scanner, Charlie and Crew Clock are off the portfolio
   }
 });
 
+await check("UNI-13 apart from the three redirect addresses, no trace of the hidden products is served: no names in any page (comments included), no images", async () => {
+  const fs = await import("node:fs");
+  const stubs = new Set(["energy-scanner.html", "charlie.html", "crew-clock.html"]);
+  const names = /energy[ -]scanner|charlie|crew[ -]clock|build slate/i;
+  const pages = fs.readdirSync(ROOT).filter(f => f.endsWith(".html") && !stubs.has(f));
+  for (const f of pages) ok(!names.test(fs.readFileSync(path.join(ROOT, f), "utf8")), f + " still names a hidden product");
+  ok(!names.test(fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8")), "sitemap names a hidden product");
+  const served = d => fs.readdirSync(path.join(ROOT, d), { recursive: true }).map(String);
+  for (const f of [...served("assets"), ...served("try")]) ok(!/charlie|crew-clock|energy-scanner/i.test(f), f + " is a hidden product's file in a served folder");
+});
+
 await check("UNI-9 the theme choice carries into the page, and dark has no unreadable header", async () => {
   const { ctx, page } = await open("/ccwatts.html?theme=dark", LAPTOP);
   ok(await page.evaluate(() => document.documentElement.dataset.theme) === "dark", "dark not applied");
