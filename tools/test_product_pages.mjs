@@ -14,7 +14,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".jpg": "image/jpeg" };
 const PRODUCTS = [
   { page: "family-photos.html", demo: "/hearth/", repo: "hearth", phone: true },
-  { page: "energy-scanner.html", demo: "/energy-scanner/", repo: "energy-scanner", phone: true },
   { page: "crew-clock.html", demo: "/crew-clock/", repo: "crew-clock", phone: true },
   { page: "charlie.html", demo: "/charlie/", repo: "charlie", phone: true },
   { page: "role-radar.html", demo: "/role-radar/", repo: "role-radar", phone: false },
@@ -146,14 +145,25 @@ await check("UNI-7 a demo that is down shows a plain message and a link to the c
 });
 
 await check("UNI-8 demo-bar.js draws the standard header on a direct visit, and nothing inside the product page frame", async () => {
-  const { ctx, page } = await open("/energy-scanner/?bar=1", LAPTOP);
+  const { ctx, page } = await open("/crew-clock/?bar=1", LAPTOP);
   ok(await page.isVisible("#site-bar"), "no header on a direct visit");
   const labels = await page.$$eval("#site-bar nav a", as => as.filter(a => a.offsetParent).map(a => a.textContent.trim()));
   ok(JSON.stringify(labels) === JSON.stringify(["Case studies", "Building", "Agents", "Resume", "Contact"]), "links: " + labels);
   await ctx.close();
-  const b = await open("/energy-scanner.html", LAPTOP);
+  const b = await open("/crew-clock.html", LAPTOP);
   ok(b.page.frames().length > 1, "no frame");
   await b.ctx.close();
+});
+
+await check("UNI-11 Energy Scanner is off the portfolio: stub redirects to Building, no try page, no links, not in the sitemap", async () => {
+  const fs = await import("node:fs");
+  const stub = fs.readFileSync(path.join(ROOT, "energy-scanner.html"), "utf8");
+  ok(/http-equiv="refresh"[^>]*url=\/building\.html/.test(stub) && /noindex/.test(stub), "stub should redirect to /building.html and be noindex");
+  ok(!fs.existsSync(path.join(ROOT, "try/energy-scanner.html")), "try page should be gone");
+  for (const f of ["index.html", "building.html", "agents.html", "resume.html", "sitemap.xml", "charlie.html", "crew-clock.html", "role-radar.html", "ccwatts.html", "family-photos.html"]) {
+    const t = fs.readFileSync(path.join(ROOT, f), "utf8").replace(/<!--[\s\S]*?-->/g, "");
+    ok(!/energy-scanner/.test(t), f + " still links to energy-scanner");
+  }
 });
 
 await check("UNI-9 the theme choice carries into the page, and dark has no unreadable header", async () => {

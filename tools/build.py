@@ -35,13 +35,14 @@ IN_PROGRESS = [
      "publishing its test results.", "See the demo"),
     ("crew-clock.html", "Crew Clock", "A phone time clock for small crews: three taps to clock in, even with no signal.",
      "a beta with a small real crew.", "See the demo"),
-    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
-     "a copy pass before I call it done.", "See the app"),
 ]
 
-# Hidden, not deleted (Chase, Nov 24: remove the Open Arms Foundation work from the portfolio for now; the websites
+# Hidden, not deleted (Chase, Nov 25: Energy Scanner is off the portfolio, a quick thing for his kids; it sits here with
+# Open Arms). Hidden, not deleted (Chase, Nov 24: remove the Open Arms Foundation work from the portfolio for now; the websites
 # repo went private, so /websites/ is a 404). Move this back into IN_PROGRESS when it is public again.
 HIDDEN_IN_PROGRESS = [
+    ("energy-scanner.html", "Energy Scanner", "A bedtime routine for kids that ends in an energy scan, on-device only.",
+     "a copy pass before I call it done.", "See the app"),
     ("/websites/", "Open Arms Foundation", "The website I built for a children's home in Medell\u00edn, Colombia.",
      "adding the sponsorship details.", "Visit the site"),
 ]
@@ -857,11 +858,13 @@ PAGES = [
 # Hidden pages (Chase, Nov 18: the Studio and its console use real data and aren't ready to show). Their content
 # stays in PAGES below, so they can come back; the site serves a "moved" stub at the old address instead, keeps
 # them out of the nav and the sitemap, and never links to them.
-HIDDEN = ("studio.html", "pm-tools.html", "about.html")
+HIDDEN = ("studio.html", "pm-tools.html", "about.html", "energy-scanner.html")
 HIDDEN_STUB = """<div class="read"><p class="eyebrow">Moved</p><h1>This page isn't public right now.</h1>
 <p class="lede">It will be back. In the meantime the <a href="/">work page</a> has everything I'm showing.</p></div>"""
 # About folded into the home page (Chase, Nov 25: keep the navigation shallow). Its content stays in PAGES, not deleted.
-HIDDEN_TARGET = {"about.html": "/#about"}
+HIDDEN_TARGET = {"about.html": "/#about", "energy-scanner.html": "/building.html"}
+# Energy Scanner is off the portfolio (Chase, Nov 25): no product page, no try/ page. Its DEMOS row stays so it can return.
+HIDDEN_DEMOS = {"Energy Scanner"}
 
 
 # ---- Hand-built pages (home, Building, Agents) carry the standard header too ---------------------------------------
@@ -951,6 +954,8 @@ if __name__ == "__main__":
     (ROOT / "robots.txt").write_text(f"{ai_block}User-agent: *\nAllow: /\n{sitemap_line}", encoding="utf-8")
     (ROOT / "try").mkdir(exist_ok=True)
     for key in DEMOS:
+        if key in HIDDEN_DEMOS:
+            continue
         (ROOT / "try" / f"{DEMOS[key][2]}.html").write_text(fullscreen_page(key), encoding="utf-8")
     patch_handbuilt()
     print(f"Wrote {len(PAGES)} pages to {ROOT}")
