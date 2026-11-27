@@ -3,7 +3,10 @@
    It draws the same header as every page on chaseholroyd.com (name, Case studies, Building, Agents, Resume, Contact, theme).
    Inside the portfolio's own demo frame (a product page) it does nothing, because the frame's page already has the header.
    Add data-page="white" to also turn the page behind the demo white (light theme only). Same theme choice as the site
-   (localStorage "theme"), self-hosted font, no third-party hosts. Never touches the demo's own screens. */
+   (localStorage "theme"), self-hosted font, no third-party hosts. Never touches the demo's own screens.
+   Hearth demo only (path /hearth/): a centered "Demo" chip that asks the demo to toggle its bottom drawer. Click fires
+   window event "hearth-demo-drawer"; the demo answers with documentElement.dataset.hearthDemoDrawer = open|closed and
+   a "hearth-demo-drawer-state" CustomEvent ({detail:{open}}) on window, which keeps aria-expanded in step. */
 (function () {
   if (window.__demoBar) return;
   window.__demoBar = 1;
@@ -47,6 +50,16 @@
       '<div class="thw"><button class="thm" id="sb-tog" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="sb-menu" aria-label="Theme" title="Theme">' + SUN + MOON + SYS + '</button>' +
       '<div class="tmenu" id="sb-menu" hidden role="group" aria-label="Theme"><button type="button" data-m="light" role="menuitemradio" aria-checked="false">Light</button><button type="button" data-m="dark" role="menuitemradio" aria-checked="false">Dark</button><button type="button" data-m="system" role="menuitemradio" aria-checked="false">System</button></div></div></div></div>';
     document.body.insertBefore(b, document.body.firstChild);
+    if (/^\/hearth(\/|$)/.test(location.pathname)) {
+      var chip = document.createElement("button");
+      chip.type = "button"; chip.className = "demo-chip";
+      chip.setAttribute("aria-label", "Demo info"); chip.setAttribute("aria-haspopup", "dialog");
+      chip.setAttribute("aria-expanded", html.dataset.hearthDemoDrawer === "open" ? "true" : "false");
+      chip.innerHTML = '<span>Demo</span><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><path d="M2 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      chip.addEventListener("click", function () { window.dispatchEvent(new Event("hearth-demo-drawer")); });
+      window.addEventListener("hearth-demo-drawer-state", function (e) { chip.setAttribute("aria-expanded", e && e.detail && e.detail.open ? "true" : "false"); });
+      b.querySelector(".w").insertBefore(chip, b.querySelector(".hr"));
+    }
     var tog = b.querySelector("#sb-tog"), mn = b.querySelector("#sb-menu");
     function mark() { mn.querySelectorAll("[data-m]").forEach(function (o) { o.setAttribute("aria-checked", o.dataset.m === mode); }); tog.title = "Theme: " + mode; tog.setAttribute("aria-label", "Theme: " + mode); }
     function show(v) { mn.hidden = !v; tog.setAttribute("aria-expanded", v); }

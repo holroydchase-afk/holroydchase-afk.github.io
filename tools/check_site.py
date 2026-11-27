@@ -192,6 +192,11 @@ def check_uniform(failures):
             failures.append(f"assets/demo-bar.js: standard header link missing: {label} (UNI-6)")
     if 'window.top !== window.self' not in js:
         failures.append("assets/demo-bar.js: must stay out of the way inside the product page frame (UNI-6)")
+    # Hearth demo chip (Hearth PR 229): Hearth path only, accessible, talks to the demo by the agreed events.
+    for needle in ('/^\\/hearth(\\/|$)/', 'aria-label", "Demo info"', 'aria-haspopup", "dialog"', 'aria-expanded',
+                   'Event("hearth-demo-drawer")', '"hearth-demo-drawer-state"', 'e.detail.open'):
+        if needle not in js:
+            failures.append(f"assets/demo-bar.js: Hearth demo chip contract missing {needle} (UNI-14)")
 
 
 def check_scoreboard(failures):
