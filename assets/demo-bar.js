@@ -50,7 +50,7 @@
       '<div class="thw"><button class="thm" id="sb-tog" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="sb-menu" aria-label="Theme" title="Theme">' + SUN + MOON + SYS + '</button>' +
       '<div class="tmenu" id="sb-menu" hidden role="group" aria-label="Theme"><button type="button" data-m="light" role="menuitemradio" aria-checked="false">Light</button><button type="button" data-m="dark" role="menuitemradio" aria-checked="false">Dark</button><button type="button" data-m="system" role="menuitemradio" aria-checked="false">System</button></div></div></div></div>';
     document.body.insertBefore(b, document.body.firstChild);
-    if (/^\/hearth(\/|$)/.test(location.pathname)) {
+    if (/^\/hearth(\/|$)/i.test(location.pathname)) {
       var chip = document.createElement("button");
       chip.type = "button"; chip.className = "demo-chip";
       chip.setAttribute("aria-label", "Demo info"); chip.setAttribute("aria-haspopup", "dialog");
