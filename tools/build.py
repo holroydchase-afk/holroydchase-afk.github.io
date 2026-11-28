@@ -50,7 +50,7 @@ HIDDEN_IN_PROGRESS = [
 # Hearth (WEB-M8, Oct 30): featured first on home. The rename is still pending, so it shows as a working name,
 # matching the demo's own banner (REC-R2). After the rename, change HEARTH and HEARTH_TAG here and nowhere else.
 HEARTH = "Hearth"
-HEARTH_TAG = "working name · family beta"
+HEARTH_TAG = "working name · proof of concept"
 # Test counts from the Hearth repo (release M1.1, Oct 28): 664 app tests, 960+ database checks.
 HEARTH_FACTS = [("1,000+", "app tests"), ("1,000+", "database checks"), ("US-hosted", "photo storage"), ("0", "ads, trackers or AI training")]
 HEARTH_TEAM = ("I'm the founder and product lead, with my two brothers contributing on security and on marketing and communications. "
@@ -163,7 +163,7 @@ DEMOS = {
 GENERIC_CAP = "The real app on made-up sample data. Anything you change stays in this browser and is never sent anywhere."
 
 
-def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None, feature=None, accent=None):
+def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, shot=None, feature=None, accent=None, case=None, unproven=None):
     """The one product template (WEB-M14). Left: a panel with the name, one line, four facts and the story in closed
     sections. Right: the live demo in a phone or browser frame with the same three controls on every product
     (Reload, Full screen, Code). The old case-study layout (dark hero band, numbered bands) is gone: one layer deep."""
@@ -184,7 +184,12 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
         h2 = _re.search(r"<h2>(.*?)</h2>", feature).group(1)
         rest = _re.sub(r'<p class="eyebrow">.*?</p>|<h2>.*?</h2>', "", feature)
         secs.insert(0, ("The check", f"<p><b>{h2}</b></p>{rest}"))
-    acc = "".join(f'<details{" open" if i == 0 else ""}><summary>{h}</summary><div class="body">{c}</div></details>' for i, (h, c) in enumerate(secs))
+    if case:  # Chase, Nov 28: a case a hiring manager can scan in two minutes, then what is not proven yet
+        rows = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in case)
+        secs.insert(0, ("In two minutes", f'<dl class="case">{rows}</dl>'))
+        secs.insert(1, ("What I haven&rsquo;t proven", '<ul class="clean">' + "".join(f"<li>{u}</li>" for u in unproven) + "</ul>"))
+    n_open = 2 if case else 1
+    acc = "".join(f'<details{" open" if i < n_open else ""}><summary>{h}</summary><div class="body">{c}</div></details>' for i, (h, c) in enumerate(secs))
     cap = status_note or GENERIC_CAP
     shown = f"chaseholroyd.com{demo}"
     controls = (f'<div class="bar"><span class="tag">Live demo</span>'
@@ -290,7 +295,7 @@ JOURNEY = [
      "A distributed family, five group texts and grandparents on Android. I'm building one private place for our photos, where every post reaches exactly the people it's meant for.",
      "I ran AI agents as a product team: a spec, tests first, a privacy review and a usability pass for grandparents.",
      "Family beta with about a dozen relatives, mostly grandparents", "Try the demo",
-     "a private photo app for a distributed family, with a family beta"),
+     "a private photo app for a distributed family, built as a proof of concept"),
     ("crew-clock.html", "Crew Clock",
      "A small rural crew tracked hours on paper and memory, so pay disputes came down to whose story you believed. Crew Clock signs every punch on the phone, works with no signal, and costs nothing to run.",
      "Built with the agent team from day one: tests first, then four rounds of UX review before the demo went public.",
@@ -478,11 +483,18 @@ family = product(
             ("Self-reviewed", "No outside security audit yet."),
         ])),
         ("Try it", "<p>Open the demo, a made-up family kept only in your browser. Switch to Grandma Jo's view from the demo bar's Details and see only what was shared with her.</p>"),
-        ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, is the next step. {HEARTH_TEAM} "
+        ("Status and what's next", f"<p>The core flow works end to end on a phone. A private beta with about a dozen family members, mostly grandparents, has not started and has no date. {HEARTH_TEAM} "
          "I built it with Claude Code and nine role prompts (staff PM, QA, engineer, designer and more), routed by a chief-of-staff session.</p>"),
     ],
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
+    case=[("Problem", "A distributed family: five group texts, grandparents on Android, and photos of our kids that arrive late, squashed or not at all. Every send risks leaving someone out."),
+          ("My call", "One audience per post, picked by name, and no &ldquo;Seen by&rdquo; count, because in a family that count is a guilt meter. I also deleted a family-tree model I had already built when one real relative didn&rsquo;t fit it."),
+          ("Result", "A working app on iPhone and the web, and a public demo with a made-up family. Built by me with Claude Code and role prompts, test-first: over 1,000 app tests and over 1,000 database checks, with the code public.")],
+    unproven=["<b>Not yet tested with relatives.</b> The private beta is next, with no date.",
+              "<b>No outside security review.</b> The group chat is built on MLS but has not been audited or tested by hand on two phones, and key verification is not built.",
+              "<b>Hearth&rsquo;s server still holds the photo keys.</b> A family vault, where only family phones hold keys, is planned and not built.",
+              "<b>Speed on a phone has not been measured.</b> The speed budgets are tested on a laptop."],
 )
 
 role_radar = product(
@@ -544,7 +556,7 @@ ccwatts = product(
         ("Try it", code_block("npx ccwatts --demo", label="Sample data, no logs needed (Node 22+):")
          + code_block("npx ccwatts", label="Your own Claude Code logs:")
          + code_block("/plugin marketplace add holroydchase-afk/ccwatts", label="As a Claude Code plugin:")),
-        ("Status and what's next", "<p>The CLI and the playground are live. 0.2.0 is finished and waiting on my npm publishing setup. It adds an opt-in view of your own work rhythm and an opt-in bedtime nudge, both counts only and local.</p>"),
+        ("Status and what's next", "<p>The CLI and the playground are live. 0.2.0 is on npm. It adds an opt-in view of your own work rhythm and an opt-in bedtime nudge, both counts only and local.</p>"),
     ],
     links=[("Try the live playground", "/ccwatts/"), ("View on GitHub", f"{GITHUB}/ccwatts")],
     feature='<p class="eyebrow">The check</p><h2>Same question as a climate scientist, and the ranges overlap.</h2>'
@@ -554,6 +566,13 @@ ccwatts = product(
             + '<p class="go"><a class="btn" href="https://github.com/holroydchase-afk/ccwatts/blob/main/METHODOLOGY.md">Read the methodology</a></p>',
     shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600,
           "Sample data: 8.5 kWh over 30 days, range 1.3 to 30.5."),
+    case=[("Problem", "Developers run AI agents all day and almost nobody can see the electricity behind it. Providers publish no energy per token, public estimates disagree by about 10x, and existing log tools count tokens and cost, not energy."),
+          ("My call", "Always show a sourced range, never one number, and keep it private by design: no network calls, no telemetry, counts only. I started on enterprise carbon, then chose the individual developer once I saw an established player already publishing a method."),
+          ("Result", "Live on npm as a CLI, a Claude Code plugin and a browser playground. For one published heavy-use case its range overlaps a climate scientist&rsquo;s hand estimate, and a test confirms the web page makes zero network requests.")],
+    unproven=["<b>The numbers are sourced estimates, shown as ranges, not measurements.</b> They rest on published figures and my assumptions, each with a low, a high and a source.",
+              "<b>The least certain assumption is what a cache read costs, and it has had no outside review.</b> The method uses 10% of fresh input and tests 1% to 25%, and cache reads are roughly 90% or more of an agent&rsquo;s tokens.",
+              "<b>The overlap with the climate scientist&rsquo;s estimate uses an illustrative token mix,</b> because his exact counts aren&rsquo;t published. It is one case, not a validation.",
+              "<b>Early and solo:</b> no user feedback yet, and it reads Claude Code logs only."],
 )
 
 energy = product(
