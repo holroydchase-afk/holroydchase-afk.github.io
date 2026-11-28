@@ -603,6 +603,7 @@ header nav{gap:0}
 .ag td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 .ag .tot td{font-weight:500;color:var(--sage)}
 .ag .note{border-left:4px solid var(--clay);padding:2px 0 2px 16px;margin:22px 0 0;max-width:60ch}
+.ag dl.case{margin:18px 0 0;max-width:68ch;display:grid;gap:14px}.ag dl.case dt{font:600 15px var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}.ag dl.case dd{margin:2px 0 0}
 .ag ul.l{margin:18px 0 0;padding-left:22px;max-width:62ch}.ag ul.l li{margin-bottom:8px}
 @media(max-width:600px){.ag .agst{grid-template-columns:1fr}}
 </style>
@@ -612,6 +613,12 @@ header nav{gap:0}
 <h1>Three agents I built and measured</h1>
 <p class="agl">A UX reviewer, a QA engineer and a staff PM. Each has a written job, a run log and an eval against a plain Claude session. This page shows what the runs support and where they don&rsquo;t.</p>
 </div></div></section>
+
+<section class="scr" id="case"><div class="w"><h2 class="co">In two minutes</h2>
+<dl class="case"><dt>Problem</dt><dd>Claude Code is only as good as the process around it. I was running it across several products faster than I could review, and I could not tell which prompts actually helped.</dd>
+<dt>My call</dt><dd>Give each role a written job, a done test and a stop rule, then score it against a plain Claude session where I have a comparison. Claim only what the run logs show, including where the agent is no better.</dd>
+<dt>Result</dt><dd>Logged runs for all three, held-out scores for QA-TDD and Staff PM, and one demo run for UX (5 to 7 of 10). QA-TDD is far more dependable on its report contract but finds about as many bugs as plain Claude. Staff PM&rsquo;s lift is small and not consistent.</dd></dl>
+<p class="sub"><a href="#limits">What I haven&rsquo;t proven &darr;</a></p></div></section>
 
 <section class="scr" id="ux"><div class="w"><p class="dates">UX agent</p><h2 class="co">Reviews, files, rechecks</h2>
 <p class="job">Reviews a live product screen by screen, files the problems and checks again after the fix.</p>
@@ -649,11 +656,12 @@ header nav{gap:0}
 <ul class="l"><li><b>Stakeholder agent.</b> Simulated readers (recruiter, hiring manager, staff engineer) guess where they would stop on a page, and a checker rejects any finding whose quote is not in the source text. Packaged as a plugin. No eval yet, and its findings are hypotheses to check with real people.</li>
 <li><b>Pipeline runner.</b> A ledger with stop rules that chains spec, tests, build and review. Built with tests. No end-to-end run scored yet.</li></ul></div></section>
 
-<section class="scr" id="limits"><div class="w"><p class="dates">Limits</p><h2 class="co">What these numbers are</h2>
+<section class="scr" id="limits"><div class="w"><p class="dates">Limits</p><h2 class="co">What I haven&rsquo;t proven</h2>
 <ul class="l"><li>The cases are mine, built from real misses in my own products, and most were run once per arm.</li>
 <li>Graders are Claude Opus models, blind to which arm wrote the answer.</li>
 <li>Dev scores are not claims. Only held-out sets are in the tables.</li>
-<li>Cost per run and accepted-finding rate are not measured.</li></ul>
+<li>Cost per run and accepted-finding rate are not measured.</li>
+<li>The UX gain is one demo and one run. The pipeline runner and stakeholder agent have no scored run yet.</li></ul>
 <p class="sub" style="margin-top:22px">The agents, eval cases, run logs and scorecard tool are in the <a href="https://github.com/holroydchase-afk/studio-agents">studio-agents repo</a>. Running <code>node tools/agent-scorecard.mjs</code> regenerates every number above.</p></div></section>
 </main>
 

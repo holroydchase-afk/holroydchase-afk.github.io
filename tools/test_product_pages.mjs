@@ -193,6 +193,55 @@ await check("UNI-10 About, Studio and Console are moved stubs, not pages", async
   }
 });
 
+// CASE-1..4 (Nov 28, Chase: case studies a hiring manager can scan in two minutes): each storefront page opens with
+// Problem, My call, Result and a "What I haven't proven" list, both open without a click; no stale status claims.
+for (const p of PRODUCTS) {
+  await check(`CASE-1 ${p.page}: "In two minutes" is open first, with Problem, My call and Result`, async () => {
+    const { ctx, page } = await open("/" + p.page, LAPTOP);
+    const first = page.locator(".acc details").first();
+    ok((await first.locator("summary").innerText()).trim() === "In two minutes", "first section is not 'In two minutes'");
+    ok(await first.evaluate(d => d.open), "'In two minutes' is closed");
+    const terms = await first.locator("dt").allInnerTexts();
+    ok(JSON.stringify(terms.map(t => t.trim().toLowerCase())) === JSON.stringify(["problem", "my call", "result"]), "rows: " + terms);
+    for (const dd of await first.locator("dd").all()) ok((await dd.innerText()).trim().length > 40, "an answer is empty or too short");
+    await ctx.close();
+  });
+  await check(`CASE-2 ${p.page}: "What I haven't proven" is open second, with at least three plain items`, async () => {
+    const { ctx, page } = await open("/" + p.page, LAPTOP);
+    const second = page.locator(".acc details").nth(1);
+    ok((await second.locator("summary").innerText()).trim() === "What I haven\u2019t proven", "second section is not the unproven list");
+    ok(await second.evaluate(d => d.open), "the unproven list is closed");
+    ok(await second.locator("li").count() >= 3, "fewer than three items");
+    await ctx.close();
+  });
+}
+for (const p of PRODUCTS) {
+  await check(`CASE-5 ${p.page}: at 390 a "Read the 2-minute case" link sits above the demo; labels 15px+`, async () => {
+    const { ctx, page } = await open("/" + p.page, PHONE);
+    const link = page.locator(".head a.read-link.top");
+    ok(await link.isVisible(), "no jump link in the header");
+    ok((await link.boundingBox()).y < (await page.locator(".view").boundingBox()).y, "link is below the demo");
+    const fs = await page.locator("dl.case dt").first().evaluate(e => parseFloat(getComputedStyle(e).fontSize));
+    ok(fs >= 15, "label font " + fs);
+    await ctx.close();
+  });
+}
+await check("CASE-3 stale status claims are gone (Hearth beta 'next step', ccwatts 0.2.0 'waiting on npm')", async () => {
+  const h = fs.readFileSync(path.join(ROOT, "family-photos.html"), "utf8");
+  ok(!/is the next step/.test(h), "Hearth still calls the private beta the next step");
+  ok(/has not started|hasn.t started|not started/.test(h), "Hearth does not say the beta has not started");
+  const c = fs.readFileSync(path.join(ROOT, "ccwatts.html"), "utf8");
+  ok(!/waiting on my npm/.test(c), "ccwatts still says 0.2.0 waits on npm publishing");
+});
+await check("CASE-4 agents page has a two-minute case block and a 'What I haven't proven' limits section", async () => {
+  const { ctx, page } = await open("/agents.html", LAPTOP);
+  const terms = await page.locator("#case dt").allInnerTexts();
+  ok(JSON.stringify(terms.map(t => t.trim().toLowerCase())) === JSON.stringify(["problem", "my call", "result"]), "case rows: " + terms);
+  ok((await page.locator("#limits h2").innerText()).includes("What I haven\u2019t proven"), "limits heading not renamed");
+  ok(await page.isVisible("#case"), "case block hidden");
+  await ctx.close();
+});
+
 await browser.close();
 server.close();
 const failed = results.filter(r => !r[1]);
