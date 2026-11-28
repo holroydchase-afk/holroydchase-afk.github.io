@@ -5,3 +5,12 @@ html{--site-bar-h:65px}
 body{padding-top:65px!important;box-sizing:border-box}
 #root,body>div:first-of-type{max-height:calc(100dvh - 65px)}
 html.sb-white,html.sb-white body{background:#fff!important}
+/* Hearth demo chip: outlined pill, 32px tall inside a 48px tap target, same ink as the bar. Centered on wide screens. */
+#site-bar .demo-chip{display:inline-flex;align-items:center;gap:6px;position:relative;min-height:48px;padding:0 4px;background:none;border:0;color:var(--ink,#111);font:500 15px "Atkinson Hyperlegible Next",system-ui,sans-serif;cursor:pointer;flex:none}
+#site-bar .demo-chip::before{content:"";position:absolute;left:0;right:0;top:50%;height:32px;margin-top:-16px;border:1.5px solid currentColor;border-radius:16px;pointer-events:none}
+#site-bar .demo-chip span,#site-bar .demo-chip svg{position:relative;margin:0 0 0 10px}
+#site-bar .demo-chip svg{margin:0 12px 0 0;transition:transform .15s}
+#site-bar .demo-chip[aria-expanded="true"] svg{transform:rotate(180deg)}
+#site-bar .demo-chip:focus-visible{outline:2px solid var(--accent,#0B7A4B);outline-offset:2px;border-radius:16px}
+@media(min-width:760px){#site-bar .demo-chip{position:absolute;left:50%;top:50%;margin:-24px 0 0 -40px}}
+@media(prefers-reduced-motion:reduce){#site-bar .demo-chip svg{transition:none}}
