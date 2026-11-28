@@ -208,6 +208,7 @@ def product(eyebrow, name, lede, facts, sections, status_note=None, links=None, 
 <p class="eyebrow">{eyebrow}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
+{'<a class="read-link top" href="#story">Read the 2-minute case &darr;</a>' if case else ''}
 </div>
 <div class="body-col">
 <ul class="facts">{facts_html}</ul>
@@ -454,7 +455,6 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObse
 family = product(
     f"Mobile app · {HEARTH_TAG}",
     f"{HEARTH}: a private family photo app",
-    "A distributed family, five family group texts, and grandparents on Android while everyone else is on iPhone. "
     "I set out to build one private place where each photo reaches exactly the people it's meant for.",
     [("Per post", "audience you choose"), ("US", "where photos are stored"), ("0", "ads, trackers or AI training"),
      ("Test-first", "every fix starts as a failing test")],
@@ -489,8 +489,8 @@ family = product(
     status_note="The demo is a made-up family kept only in your browser: no sign-in, no backend.",
     links=[("Try the demo", "/Hearth/")],
     case=[("Problem", "A distributed family: five group texts, grandparents on Android, and photos of our kids that arrive late, squashed or not at all. Every send risks leaving someone out."),
-          ("My call", "One audience per post, picked by name, and no &ldquo;Seen by&rdquo; count, because in a family that count is a guilt meter. I also deleted a family-tree model I had already built when one real relative didn&rsquo;t fit it."),
-          ("Result", "A working app on iPhone and the web, and a public demo with a made-up family. Built by me with Claude Code and role prompts, test-first: over 1,000 app tests and over 1,000 database checks, with the code public.")],
+          ("My call", "<b>One audience per post</b>, picked by name, and no &ldquo;Seen by&rdquo; count, because in a family that count is a guilt meter. I also deleted a family-tree model I had already built when one real relative didn&rsquo;t fit it."),
+          ("Result", "<b>A working app</b> on iPhone and the web, and a public demo with a made-up family. Built by me with Claude Code and role prompts, test-first: over 1,000 app tests and over 1,000 database checks, with the code public.")],
     unproven=["<b>Not yet tested with relatives.</b> The private beta is next, with no date.",
               "<b>No outside security review.</b> The group chat is built on MLS but has not been audited or tested by hand on two phones, and key verification is not built.",
               "<b>Hearth&rsquo;s server still holds the photo keys.</b> A family vault, where only family phones hold keys, is planned and not built.",
@@ -567,12 +567,12 @@ ccwatts = product(
     shot=("ccwatts-phone.webp", "The ccwatts playground on a phone, sample data: 8.5 kWh over 30 days, with a plausible range of 1.3 to 30.5 kWh.", 600,
           "Sample data: 8.5 kWh over 30 days, range 1.3 to 30.5."),
     case=[("Problem", "Developers run AI agents all day and almost nobody can see the electricity behind it. Providers publish no energy per token, public estimates disagree by about 10x, and existing log tools count tokens and cost, not energy."),
-          ("My call", "Always show a sourced range, never one number, and keep it private by design: no network calls, no telemetry, counts only. I started on enterprise carbon, then chose the individual developer once I saw an established player already publishing a method."),
-          ("Result", "Live on npm as a CLI, a Claude Code plugin and a browser playground. For one published heavy-use case its range overlaps a climate scientist&rsquo;s hand estimate, and a test confirms the web page makes zero network requests.")],
+          ("My call", "<b>Always a sourced range</b>, never one number, and keep it private by design: no network calls, no telemetry, counts only. I started on enterprise carbon, then chose the individual developer once I saw an established player already publishing a method."),
+          ("Result", "<b>Live on npm</b> as a CLI, a Claude Code plugin and a browser playground. For one published heavy-use case its range overlaps a climate scientist&rsquo;s hand estimate.")],
     unproven=["<b>The numbers are sourced estimates, shown as ranges, not measurements.</b> They rest on published figures and my assumptions, each with a low, a high and a source.",
               "<b>The least certain assumption is what a cache read costs, and it has had no outside review.</b> The method uses 10% of fresh input and tests 1% to 25%, and cache reads are roughly 90% or more of an agent&rsquo;s tokens.",
               "<b>The overlap with the climate scientist&rsquo;s estimate uses an illustrative token mix,</b> because his exact counts aren&rsquo;t published. It is one case, not a validation.",
-              "<b>Early and solo:</b> no user feedback yet, and it reads Claude Code logs only."],
+              "<b>No users yet.</b> It reads Claude Code logs only, and no other tool is supported."],
 )
 
 energy = product(

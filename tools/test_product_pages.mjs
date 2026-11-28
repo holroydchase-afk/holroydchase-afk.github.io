@@ -215,6 +215,17 @@ for (const p of PRODUCTS) {
     await ctx.close();
   });
 }
+for (const p of PRODUCTS) {
+  await check(`CASE-5 ${p.page}: at 390 a "Read the 2-minute case" link sits above the demo; labels 15px+`, async () => {
+    const { ctx, page } = await open("/" + p.page, PHONE);
+    const link = page.locator(".head a.read-link.top");
+    ok(await link.isVisible(), "no jump link in the header");
+    ok((await link.boundingBox()).y < (await page.locator(".view").boundingBox()).y, "link is below the demo");
+    const fs = await page.locator("dl.case dt").first().evaluate(e => parseFloat(getComputedStyle(e).fontSize));
+    ok(fs >= 15, "label font " + fs);
+    await ctx.close();
+  });
+}
 await check("CASE-3 stale status claims are gone (Hearth beta 'next step', ccwatts 0.2.0 'waiting on npm')", async () => {
   const h = fs.readFileSync(path.join(ROOT, "family-photos.html"), "utf8");
   ok(!/is the next step/.test(h), "Hearth still calls the private beta the next step");

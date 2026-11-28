@@ -77,7 +77,7 @@ footer.site a{color:var(--muted);display:inline-flex;align-items:center;min-heig
 .acc .body{padding:0 0 22px;max-width:68ch}
 .acc .body>:first-child{margin-top:0}
 .acc dl.case{margin:0;display:grid;gap:14px}
-.acc dl.case dt{font:500 13px var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--accent,#0B7A4B);margin:0}
+.acc dl.case dt{font:600 15px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--accent,#0B7A4B);margin:0}
 .acc dl.case dd{margin:2px 0 0;font-size:17px;line-height:1.5}
 
 /* The demo area */
